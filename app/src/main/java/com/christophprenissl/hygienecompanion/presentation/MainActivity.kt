@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.presentation.covering_letter_basis.CoveringLetterBasisView
 import com.christophprenissl.hygienecompanion.presentation.covering_letters.CoveringLettersView
 import com.christophprenissl.hygienecompanion.presentation.lab_works.LabWorksView
+import com.christophprenissl.hygienecompanion.presentation.profile.ProfileView
 import com.christophprenissl.hygienecompanion.presentation.reports.ReportsView
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.HygieneCompanionTheme
 import com.christophprenissl.hygienecompanion.util.Routes
@@ -43,6 +44,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(Routes.REPORTS) {
                         ReportsView()
+                    }
+                    composable(Routes.PROFILE) {
+                        ProfileView()
                     }
                 }
             }
