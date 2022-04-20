@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.ui.theme
+package com.christophprenissl.hygienecompanion.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
