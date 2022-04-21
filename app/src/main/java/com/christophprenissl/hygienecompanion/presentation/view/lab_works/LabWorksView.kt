@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.lab_works
+package com.christophprenissl.hygienecompanion.presentation.view.lab_works
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
