@@ -6,10 +6,10 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.christophprenissl.hygienecompanion.util.Screen
+import com.christophprenissl.hygienecompanion.presentation.util.HOME_ROUTE
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 @Composable
 fun BottomNavBar(
@@ -22,11 +22,11 @@ fun BottomNavBar(
             val currentDestination = navBackStackEntry?.destination
             navItems.forEach { screen ->
                 BottomNavigationItem(
-                    icon = { Icon(screen.icon, contentDescription = screen.name) },
+                    icon = { screen.icon?.let { Icon(it, contentDescription = screen.name) } },
                     selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                     onClick = {
                         navController.navigate(screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
+                            popUpTo(HOME_ROUTE) {
                                 saveState = true
                             }
                             launchSingleTop = true
