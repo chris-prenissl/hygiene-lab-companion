@@ -1,4 +1,6 @@
-package com.christophprenissl.hygienecompanion.domain.model
+package com.christophprenissl.hygienecompanion.domain.model.entity
+
+import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 
 data class SampleLocation(
     val id: String? = null,
