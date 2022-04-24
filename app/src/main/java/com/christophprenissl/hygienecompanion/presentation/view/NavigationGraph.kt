@@ -10,7 +10,6 @@ import com.christophprenissl.hygienecompanion.presentation.util.LOGGED_OUT_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisView
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.coveringLettersGraph
-import com.christophprenissl.hygienecompanion.presentation.view.lab_works.labWorksNavGraph
 import com.christophprenissl.hygienecompanion.presentation.view.logged_out.loggedOutGraph
 import com.christophprenissl.hygienecompanion.presentation.view.profile.ProfileView
 import com.christophprenissl.hygienecompanion.presentation.view.reports.ReportsView
@@ -25,7 +24,6 @@ fun NavigationGraph(loggedIn: Boolean, navController: NavHostController, onClick
         loggedOutGraph(navController = navController, onClick = onClick)
 
         coveringLettersGraph(navController = navController)
-        labWorksNavGraph(navController = navController)
 
         composable(Screen.CoveringLetterBasis.route) {
             CoveringLetterBasisView()

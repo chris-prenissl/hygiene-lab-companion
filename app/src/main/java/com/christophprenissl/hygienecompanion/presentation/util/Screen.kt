@@ -10,11 +10,9 @@ sealed class Screen(val name: String, val route: String, val icon: ImageVector?)
 
     object CoveringLetters: Screen("Begleitscheine", "covering_letters", Icons.Rounded.Inventory)
     object CoveringLetterBasis: Screen("Basisdaten", "covering_letter_basis", Icons.Rounded.BackupTable)
-    object LabWorks: Screen("Labor", "lab_works", Icons.Rounded.Science)
     object Reports: Screen("Befunde", "reports", Icons.Rounded.Summarize)
 
     object Profile: Screen("Profil", "profile", Icons.Rounded.AccountCircle)
 
     object CoveringLetterDetail: Screen("Begleitschein", "covering_letter_detail", null)
-    object LabWorkDetail: Screen("Labor Aufgabe", "lab_work", null)
 }
