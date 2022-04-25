@@ -1,6 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.InternalComposeApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,7 +14,9 @@ import com.christophprenissl.hygienecompanion.presentation.view.covering_letters
 import com.christophprenissl.hygienecompanion.presentation.view.logged_out.loggedOutGraph
 import com.christophprenissl.hygienecompanion.presentation.view.profile.ProfileView
 import com.christophprenissl.hygienecompanion.presentation.view.reports.ReportsView
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@OptIn(InternalComposeApi::class, ExperimentalCoroutinesApi::class)
 @Composable
 fun NavigationGraph(loggedIn: Boolean, navController: NavHostController, onClick: () -> Unit) {
     NavHost(

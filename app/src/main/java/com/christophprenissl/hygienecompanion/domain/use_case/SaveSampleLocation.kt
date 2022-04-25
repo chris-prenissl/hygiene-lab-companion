@@ -6,8 +6,6 @@ import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRe
 class SaveSampleLocation(
     private val repository: SampleLocationRepo) {
 
-    suspend operator fun invoke(sampleLocation: SampleLocation) {
-        repository.saveSampleLocationToFireStore(sampleLocation)
-    }
+    suspend operator fun invoke(sampleLocation: SampleLocation) = repository.saveSampleLocationToFireStore(sampleLocation)
 
 }
