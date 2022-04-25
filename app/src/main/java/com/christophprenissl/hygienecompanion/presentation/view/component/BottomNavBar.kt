@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.christophprenissl.hygienecompanion.presentation.util.HOME_ROUTE
+import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 @Composable

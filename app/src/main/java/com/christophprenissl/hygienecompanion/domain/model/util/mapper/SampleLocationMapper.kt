@@ -4,7 +4,7 @@ import com.christophprenissl.hygienecompanion.domain.model.dto.SampleLocationDto
 import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 
-class SampleLocationMapper(private val address: Address): DataMapper<SampleLocation, SampleLocationDto> {
+class SampleLocationMapper(private val address: Address?): DataMapper<SampleLocation, SampleLocationDto> {
 
     override fun fromEntity(entity: SampleLocationDto): SampleLocation {
         return SampleLocation(

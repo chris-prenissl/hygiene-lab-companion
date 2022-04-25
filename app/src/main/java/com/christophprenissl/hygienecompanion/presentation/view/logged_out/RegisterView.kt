@@ -5,8 +5,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import com.christophprenissl.hygienecompanion.presentation.util.HOME_ROUTE
+import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 @Composable

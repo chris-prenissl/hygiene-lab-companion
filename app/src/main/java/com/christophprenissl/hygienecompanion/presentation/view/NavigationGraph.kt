@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.christophprenissl.hygienecompanion.presentation.util.COVERING_LETTERS_ROUTE
-import com.christophprenissl.hygienecompanion.presentation.util.HOME_ROUTE
-import com.christophprenissl.hygienecompanion.presentation.util.LOGGED_OUT_ROUTE
+import com.christophprenissl.hygienecompanion.util.COVERING_LETTERS_ROUTE
+import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
+import com.christophprenissl.hygienecompanion.util.LOGGED_OUT_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisView
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.coveringLettersGraph

@@ -9,8 +9,12 @@ import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.HygieneCompanionTheme
 import com.christophprenissl.hygienecompanion.presentation.view.MainView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 
 @AndroidEntryPoint
+@InternalCoroutinesApi
+@ExperimentalCoroutinesApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
