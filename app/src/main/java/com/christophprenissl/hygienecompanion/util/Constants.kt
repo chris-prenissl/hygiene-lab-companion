@@ -14,5 +14,24 @@ const val COVERING_LETTER_BASIS_ROUTE = "covering_letter_basis_route"
 const val REPORTS_ROUTE = "reports_route"
 const val PROFILE_ROUTE = "profile_route"
 
+//string resources
+const val NAME = "Name"
+const val ADDRESS = "Adresse"
+const val ZIP = "Postleitzahl"
+const val STREET = "Straße"
+const val CITY_NAME = "Stadtname"
+
+const val COVERING_LETTER_BASIS_DATA = "Begleitschein-Basis-Daten"
+const val ADD_ADDRESS = "Adresse hinzufügen"
+const val SAVE_ADDRESS = "Adresse speichern"
+
+//communication UI
+const val LOADING = "Lädt gerade"
+const val ERROR = "Fehler"
+const val SUCCESS = "Aktion war erfolgreich"
+const val ACCEPT = "Ok"
+const val CANCEL = "Abbrechen"
+
 //firebase
-const val SAMPLE_LOCATIONS_ROUTE = "sample_locations"
+const val SAMPLE_LOCATIONS_FIRESTORE = "sample_locations"
+const val ADDRESSES_FIRESTORE = "addresses"

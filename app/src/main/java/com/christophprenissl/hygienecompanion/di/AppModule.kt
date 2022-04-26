@@ -1,10 +1,16 @@
 package com.christophprenissl.hygienecompanion.di
 
+import com.christophprenissl.hygienecompanion.data.repository.AddressRepoImpl
 import com.christophprenissl.hygienecompanion.data.repository.SampleLocationRepoImpl
+import com.christophprenissl.hygienecompanion.di.util.*
+import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
+import com.christophprenissl.hygienecompanion.domain.use_case.GetAddresses
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
+import com.christophprenissl.hygienecompanion.domain.use_case.SaveAddress
 import com.christophprenissl.hygienecompanion.domain.use_case.SaveSampleLocation
-import com.christophprenissl.hygienecompanion.util.SAMPLE_LOCATIONS_ROUTE
+import com.christophprenissl.hygienecompanion.util.ADDRESSES_FIRESTORE
+import com.christophprenissl.hygienecompanion.util.SAMPLE_LOCATIONS_FIRESTORE
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -20,23 +26,47 @@ object AppModule {
     @Provides
     fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()
 
+    @SampleLocationRefFireStore
     @Provides
-    fun provideSampleLocationsRef(db: FirebaseFirestore) = db.collection(SAMPLE_LOCATIONS_ROUTE)
+    fun provideSampleLocationsRef(db: FirebaseFirestore) = db.collection(SAMPLE_LOCATIONS_FIRESTORE)
 
+    @SampleLocationQueryFireStore
     @Provides
-    fun provideSampleLocationQuery(sampleLocationsRef: CollectionReference) = sampleLocationsRef.orderBy("id")
+    fun provideSampleLocationQuery(@SampleLocationRefFireStore sampleLocationsRef: CollectionReference) = sampleLocationsRef.orderBy("id")
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Provides
     fun provideSampleLocationRepoImpl(
-        sampleLocationsRef: CollectionReference,
-        sampleLocationsQuery: Query
+        @SampleLocationRefFireStore sampleLocationsRef: CollectionReference,
+        @SampleLocationQueryFireStore sampleLocationsQuery: Query
     ): SampleLocationRepo = SampleLocationRepoImpl(
         sampleLocationsRef = sampleLocationsRef,
         sampleLocationsQuery = sampleLocationsQuery)
 
+    @AddressRefFireStore
     @Provides
-    fun provideUseCases(sampleLocationRepo: SampleLocationRepo) = HygieneCompanionUseCases(
+    fun provideAddressesRef(db: FirebaseFirestore) = db.collection(ADDRESSES_FIRESTORE)
+
+    @AddressQueryFireStore
+    @Provides
+    fun provideAddressesQuery(@AddressRefFireStore addressesRef: CollectionReference) = addressesRef.orderBy("name")
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Provides
+    fun provideAddressRepoImpl(
+        @AddressRefFireStore addressesRef: CollectionReference,
+        @AddressQueryFireStore addressesQuery: Query
+    ): AddressRepo = AddressRepoImpl(
+        addressesRef = addressesRef,
+        addressesQuery = addressesQuery)
+
+    @Provides
+    fun provideUseCases(
+        sampleLocationRepo: SampleLocationRepo,
+        addressRepo: AddressRepo
+    ) = HygieneCompanionUseCases(
+        saveAddress = SaveAddress(addressRepo),
+        getAddresses = GetAddresses(addressRepo),
         saveSampleLocation = SaveSampleLocation(sampleLocationRepo)
     )
 }

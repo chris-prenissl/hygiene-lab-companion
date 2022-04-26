@@ -11,7 +11,7 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 fun MainView() {
     val isLabWorker = false
     val navController = rememberNavController()
-    var loggedIn by remember { mutableStateOf(false) }
+    var loggedIn by remember { mutableStateOf(true) }
     val bottomNavItems = listOf(
         if (isLabWorker) Screen.LabWorks else Screen.CoveringLetters,
         Screen.CoveringLetterBasis,

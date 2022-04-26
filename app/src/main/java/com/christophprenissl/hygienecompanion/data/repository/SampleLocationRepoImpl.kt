@@ -1,6 +1,5 @@
 package com.christophprenissl.hygienecompanion.data.repository
 
-import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.Response.Error
 import com.christophprenissl.hygienecompanion.domain.model.Response.Success
 import com.christophprenissl.hygienecompanion.domain.model.Response.Loading

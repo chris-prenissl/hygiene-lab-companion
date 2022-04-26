@@ -4,8 +4,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
 
 class SaveSampleLocation(
-    private val repository: SampleLocationRepo) {
+    private val sampleLocationRepo: SampleLocationRepo) {
 
-    suspend operator fun invoke(sampleLocation: SampleLocation) = repository.saveSampleLocationToFireStore(sampleLocation)
-
+    suspend operator fun invoke(sampleLocation: SampleLocation) = sampleLocationRepo.saveSampleLocationToFireStore(sampleLocation)
 }
