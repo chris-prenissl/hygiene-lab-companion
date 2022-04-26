@@ -3,7 +3,13 @@ package com.christophprenissl.hygienecompanion.util
 import androidx.compose.ui.unit.dp
 
 //sizes
+const val halfSize = 0.5f
+val cardPadding = 4.dp
 val standardPadding = 8.dp
+val standardElevation = 4.dp
+
+//dismiss
+const val dismissalThreshold = 0.8f
 
 //views
 const val HOME_ROUTE = "home_route"
@@ -31,6 +37,7 @@ const val ERROR = "Fehler"
 const val SUCCESS = "Aktion war erfolgreich"
 const val ACCEPT = "Ok"
 const val CANCEL = "Abbrechen"
+const val DELETE = "Löschen"
 
 //firebase
 const val SAMPLE_LOCATIONS_FIRESTORE = "sample_locations"

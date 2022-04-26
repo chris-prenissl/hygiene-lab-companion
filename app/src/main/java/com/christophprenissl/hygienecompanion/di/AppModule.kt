@@ -5,10 +5,7 @@ import com.christophprenissl.hygienecompanion.data.repository.SampleLocationRepo
 import com.christophprenissl.hygienecompanion.di.util.*
 import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
-import com.christophprenissl.hygienecompanion.domain.use_case.GetAddresses
-import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
-import com.christophprenissl.hygienecompanion.domain.use_case.SaveAddress
-import com.christophprenissl.hygienecompanion.domain.use_case.SaveSampleLocation
+import com.christophprenissl.hygienecompanion.domain.use_case.*
 import com.christophprenissl.hygienecompanion.util.ADDRESSES_FIRESTORE
 import com.christophprenissl.hygienecompanion.util.SAMPLE_LOCATIONS_FIRESTORE
 import com.google.firebase.firestore.CollectionReference
@@ -66,6 +63,7 @@ object AppModule {
         addressRepo: AddressRepo
     ) = HygieneCompanionUseCases(
         saveAddress = SaveAddress(addressRepo),
+        deleteAddress = DeleteAddress(addressRepo),
         getAddresses = GetAddresses(addressRepo),
         saveSampleLocation = SaveSampleLocation(sampleLocationRepo)
     )

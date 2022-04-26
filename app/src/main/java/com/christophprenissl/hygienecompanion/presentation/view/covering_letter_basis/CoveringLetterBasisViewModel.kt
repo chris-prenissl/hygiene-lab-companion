@@ -29,6 +29,9 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private val _savedAddressState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedLocationState: State<Response<Void?>> = _savedAddressState
 
+    private val _deleteAddressState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val deleteAddressState: State<Response<Void?>> = _deleteAddressState
+
     private val _gotAddressesState = mutableStateOf<Response<List<Address>>>(Response.Success(listOf()))
     val gotAddressState: State<Response<List<Address>>> = _gotAddressesState
 
@@ -79,6 +82,14 @@ class CoveringLetterBasisViewModel @Inject constructor(
             useCases.saveAddress(newAddress).collect() { response ->
                 _savedAddressState.value = response
                 _openAddressDialogState.value = false
+            }
+        }
+    }
+
+    fun deleteAddress(address: Address) {
+        viewModelScope.launch {
+            useCases.deleteAddress(address).collect() { response ->
+                _deleteAddressState.value = response
             }
         }
     }
