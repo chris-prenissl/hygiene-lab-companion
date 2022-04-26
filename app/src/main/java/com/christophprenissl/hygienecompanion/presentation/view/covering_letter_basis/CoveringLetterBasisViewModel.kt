@@ -17,6 +17,9 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private val useCases: HygieneCompanionUseCases
 ): ViewModel() {
 
+    private var _chosenAddress = mutableStateOf<Address?>(null)
+    val chosenAddress = _chosenAddress
+
     private val _savedSampleLocationState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedSampleLocationState: State<Response<Void?>> = _savedSampleLocationState
 
@@ -49,6 +52,13 @@ class CoveringLetterBasisViewModel @Inject constructor(
         }
     }
 
+    fun chooseAddress(address: Address) {
+        _chosenAddress.value = address
+    }
+
+    fun unChooseAddress() {
+        _chosenAddress.value = null
+    }
 
     fun saveSampleLocation(description: String) {
         val sampleLocation = SampleLocation(

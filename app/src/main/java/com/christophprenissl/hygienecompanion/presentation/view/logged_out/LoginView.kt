@@ -5,15 +5,13 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 @Composable
-fun LoginView(
-    onClick: () -> Unit
-) {
+fun LoginView(navController: NavController) {
     Column {
         Text("login")
-        Button(onClick = onClick) {
+        Button(onClick = { navController.navigate(Screen.CoveringLetters.graphRoute) }) {
             Text("login")
         }
     }

@@ -18,7 +18,7 @@ import com.christophprenissl.hygienecompanion.util.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddressCard(address: Address, onDelete: () -> Unit) {
+fun AddressCard(address: Address, onClick: () -> Unit, onDelete: () -> Unit) {
     val dismissState = rememberDismissState (
         confirmStateChange =  {
             if (it == DismissValue.DismissedToStart) {
@@ -60,7 +60,8 @@ fun AddressCard(address: Address, onDelete: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth(halfSize)
                 .padding(cardPadding),
-            elevation = if (dismissState.direction != 0f) 0.dp else standardElevation
+            elevation = if (dismissState.direction != 0f) 0.dp else standardElevation,
+            onClick = onClick
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

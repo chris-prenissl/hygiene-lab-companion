@@ -11,8 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.InternalComposeApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.AddressCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.AddressDialog
 import com.christophprenissl.hygienecompanion.util.*
@@ -23,8 +24,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @InternalComposeApi
 @ExperimentalCoroutinesApi
 fun CoveringLetterBasisView(
-    viewModel: CoveringLetterBasisViewModel = hiltViewModel()
+    navController: NavController,
+    viewModel: CoveringLetterBasisViewModel
 ) {
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -46,9 +49,14 @@ fun CoveringLetterBasisView(
                 LazyColumn {
                     val addresses = addressesResponse.data
                     items(addresses) { address ->
-                        AddressCard(address = address) {
-                            viewModel.deleteAddress(address)
-                        }
+                        AddressCard(
+                            address = address,
+                            onClick = {
+                                viewModel.chooseAddress(address)
+                                navController.navigate(Screen.SampleLocationsView.route)
+                            },
+                            onDelete = { viewModel.deleteAddress(address) }
+                        )
                     }
                 }
             }

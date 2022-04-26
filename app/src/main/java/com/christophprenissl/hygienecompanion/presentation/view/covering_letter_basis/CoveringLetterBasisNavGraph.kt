@@ -10,10 +10,19 @@ import com.christophprenissl.hygienecompanion.util.COVERING_LETTER_BASIS_ROUTE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @OptIn(InternalComposeApi::class, ExperimentalCoroutinesApi::class)
-fun NavGraphBuilder.coveringLetterBasisNavGraph(navController: NavController, onClick: () -> Unit) {
+fun NavGraphBuilder.coveringLetterBasisNavGraph(
+    navController: NavController,
+    viewModel: CoveringLetterBasisViewModel
+) {
     navigation(startDestination = Screen.CoveringLetterBasis.route, route = Screen.CoveringLetterBasis.graphRoute) {
         composable(Screen.CoveringLetterBasis.route) {
-            CoveringLetterBasisView()
+            CoveringLetterBasisView(
+                navController = navController,
+                viewModel = viewModel
+            )
+        }
+        composable(Screen.SampleLocationsView.route) {
+            SampleLocationsView(viewModel = viewModel)
         }
     }
 }
