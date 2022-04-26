@@ -1,0 +1,19 @@
+package com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis
+
+import androidx.compose.runtime.InternalComposeApi
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.util.COVERING_LETTER_BASIS_ROUTE
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+
+@OptIn(InternalComposeApi::class, ExperimentalCoroutinesApi::class)
+fun NavGraphBuilder.coveringLetterBasisNavGraph(navController: NavController, onClick: () -> Unit) {
+    navigation(startDestination = Screen.CoveringLetterBasis.route, route = Screen.CoveringLetterBasis.graphRoute) {
+        composable(Screen.CoveringLetterBasis.route) {
+            CoveringLetterBasisView()
+        }
+    }
+}

@@ -4,16 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.InternalComposeApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import com.christophprenissl.hygienecompanion.util.COVERING_LETTERS_ROUTE
 import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 import com.christophprenissl.hygienecompanion.util.LOGGED_OUT_ROUTE
-import com.christophprenissl.hygienecompanion.presentation.util.Screen
-import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisView
+import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.coveringLetterBasisNavGraph
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.coveringLettersGraph
 import com.christophprenissl.hygienecompanion.presentation.view.logged_out.loggedOutGraph
-import com.christophprenissl.hygienecompanion.presentation.view.profile.ProfileView
-import com.christophprenissl.hygienecompanion.presentation.view.reports.ReportsView
+import com.christophprenissl.hygienecompanion.presentation.view.profile.profileNavGraph
+import com.christophprenissl.hygienecompanion.presentation.view.reports.reportsNavGraph
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @OptIn(InternalComposeApi::class, ExperimentalCoroutinesApi::class)
@@ -28,16 +26,10 @@ fun NavigationGraph(loggedIn: Boolean, navController: NavHostController, onClick
 
         coveringLettersGraph(navController = navController)
 
-        composable(Screen.CoveringLetterBasis.route) {
-            CoveringLetterBasisView()
-        }
-        composable(Screen.Reports.route) {
-            ReportsView()
-        }
-        composable(Screen.Profile.route) {
-            ProfileView()
-        }
+        coveringLetterBasisNavGraph(navController = navController, onClick = onClick)
+
+        reportsNavGraph(navController = navController)
+
+        profileNavGraph(navController = navController)
     }
 }
-
-

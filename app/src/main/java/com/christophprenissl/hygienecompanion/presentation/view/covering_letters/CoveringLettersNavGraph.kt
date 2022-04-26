@@ -8,7 +8,7 @@ import com.christophprenissl.hygienecompanion.util.COVERING_LETTERS_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 fun NavGraphBuilder.coveringLettersGraph(navController: NavController) {
-    navigation(startDestination = Screen.CoveringLetters.route, route = COVERING_LETTERS_ROUTE) {
+    navigation(startDestination = Screen.CoveringLetters.route, route = Screen.CoveringLetters.graphRoute) {
         composable(Screen.CoveringLetters.route) {
             CoveringLettersView(navController = navController)
         }

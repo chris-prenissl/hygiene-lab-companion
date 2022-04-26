@@ -8,7 +8,7 @@ import com.christophprenissl.hygienecompanion.util.LOGGED_OUT_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 fun NavGraphBuilder.loggedOutGraph(navController: NavController, onClick: () -> Unit) {
-    navigation(startDestination = Screen.Login.route, route = LOGGED_OUT_ROUTE) {
+    navigation(startDestination = Screen.Login.route, route = Screen.Login.graphRoute) {
         composable(Screen.Login.route) {
             LoginView(onClick = onClick)
         }

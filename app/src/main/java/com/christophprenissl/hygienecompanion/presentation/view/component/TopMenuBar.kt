@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.util.standardPadding
+import org.intellij.lang.annotations.JdkConstants
 
 @Composable
 fun TopMenuBar(navController: NavController) {
@@ -19,10 +21,16 @@ fun TopMenuBar(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    navController.navigate(Screen.Profile.route)
+                    navController.navigate(Screen.Profile.graphRoute)
                 }
             ) {
-                Screen.Profile.icon?.let { Icon(it, Screen.Profile.name) }
+                Screen.Profile.let {
+                    Text(it.name)
+                    Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                    it.icon?.let { icon ->
+                        Icon(icon, Screen.Profile.name)
+                    }
+                }
             }
         }
     }

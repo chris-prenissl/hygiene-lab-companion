@@ -3,6 +3,7 @@ package com.christophprenissl.hygienecompanion.presentation.view.component
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -24,8 +25,9 @@ fun BottomNavBar(
                 BottomNavigationItem(
                     icon = { screen.icon?.let { Icon(it, contentDescription = screen.name) } },
                     selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                    label = { Text(screen.name) },
                     onClick = {
-                        navController.navigate(screen.route) {
+                        navController.navigate(screen.graphRoute) {
                             popUpTo(HOME_ROUTE) {
                                 saveState = true
                             }

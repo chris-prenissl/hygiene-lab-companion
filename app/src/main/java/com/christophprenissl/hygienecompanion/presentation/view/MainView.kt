@@ -9,10 +9,11 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 @Composable
 fun MainView() {
+    val isLabWorker = false
     val navController = rememberNavController()
     var loggedIn by remember { mutableStateOf(false) }
     val bottomNavItems = listOf(
-        Screen.CoveringLetters,
+        if (isLabWorker) Screen.LabWorks else Screen.CoveringLetters,
         Screen.CoveringLetterBasis,
         Screen.Reports
     )
