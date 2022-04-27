@@ -1,11 +1,12 @@
 package com.christophprenissl.hygienecompanion.domain.repository
 
 import com.christophprenissl.hygienecompanion.domain.model.Response
+import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import kotlinx.coroutines.flow.Flow
 
 interface SampleLocationRepo {
-    fun getSampleLocationsFromFireStore(): Flow<Response<List<SampleLocation>>>
+    fun getSampleLocationsFromFireStore(fromAddress: Address): Flow<Response<List<SampleLocation>>>
 
     suspend fun saveSampleLocationToFireStore(sampleLocation: SampleLocation): Flow<Response<Void?>>
 

@@ -29,7 +29,7 @@ object AppModule {
 
     @SampleLocationQueryFireStore
     @Provides
-    fun provideSampleLocationQuery(@SampleLocationRefFireStore sampleLocationsRef: CollectionReference) = sampleLocationsRef.orderBy("id")
+    fun provideSampleLocationQuery(@SampleLocationRefFireStore sampleLocationsRef: CollectionReference) = sampleLocationsRef.orderBy("description")
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Provides
@@ -65,6 +65,7 @@ object AppModule {
         saveAddress = SaveAddress(addressRepo),
         deleteAddress = DeleteAddress(addressRepo),
         getAddresses = GetAddresses(addressRepo),
+        getSampleLocations = GetSampleLocations(sampleLocationRepo),
         saveSampleLocation = SaveSampleLocation(sampleLocationRepo)
     )
 }

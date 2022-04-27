@@ -4,9 +4,11 @@ import com.christophprenissl.hygienecompanion.domain.model.Response.Error
 import com.christophprenissl.hygienecompanion.domain.model.Response.Success
 import com.christophprenissl.hygienecompanion.domain.model.Response.Loading
 import com.christophprenissl.hygienecompanion.domain.model.dto.SampleLocationDto
+import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import com.christophprenissl.hygienecompanion.domain.model.util.mapper.SampleLocationMapper
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
+import com.christophprenissl.hygienecompanion.util.ADDRESS_ID
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,11 +25,11 @@ class SampleLocationRepoImpl @Inject constructor(
     private val sampleLocationsRef: CollectionReference,
     private val sampleLocationsQuery: Query,
 ): SampleLocationRepo {
-    override fun getSampleLocationsFromFireStore() = callbackFlow {
-        val snapshotListener = sampleLocationsQuery.addSnapshotListener { snapshot, e ->
+    override fun getSampleLocationsFromFireStore(fromAddress: Address) = callbackFlow {
+        val snapshotListener = sampleLocationsRef.whereEqualTo(ADDRESS_ID, fromAddress.id).addSnapshotListener { snapshot, e ->
             val response = if (snapshot != null) {
                 val sampleLocationsDto = snapshot.toObjects(SampleLocationDto::class.java)
-                val mapper = SampleLocationMapper(address = null)
+                val mapper = SampleLocationMapper(address = fromAddress)
                 val samplesLocation = sampleLocationsDto.map {
                     mapper.fromEntity(it)
                 }

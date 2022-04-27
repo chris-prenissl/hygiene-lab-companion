@@ -39,3 +39,4 @@ const val DELETE = "Löschen"
 //firebase
 const val SAMPLE_LOCATIONS_FIRESTORE = "sample_locations"
 const val ADDRESSES_FIRESTORE = "addresses"
+const val ADDRESS_ID = "addressId"

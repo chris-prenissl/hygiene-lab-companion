@@ -52,8 +52,17 @@ class CoveringLetterBasisViewModel @Inject constructor(
         }
     }
 
+    private fun getSampleLocations(fromAddress: Address) {
+        viewModelScope.launch {
+            useCases.getSampleLocations(fromAddress).collect() { response ->
+                _gotSampleLocationsState.value = response
+            }
+        }
+    }
+
     fun chooseAddress(address: Address) {
         _chosenAddress.value = address
+        getSampleLocations(address)
     }
 
     fun unChooseAddress() {
