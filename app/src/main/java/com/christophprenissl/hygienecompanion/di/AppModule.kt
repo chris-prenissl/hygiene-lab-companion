@@ -66,6 +66,7 @@ object AppModule {
         deleteAddress = DeleteAddress(addressRepo),
         getAddresses = GetAddresses(addressRepo),
         getSampleLocations = GetSampleLocations(sampleLocationRepo),
-        saveSampleLocation = SaveSampleLocation(sampleLocationRepo)
+        saveSampleLocation = SaveSampleLocation(sampleLocationRepo),
+        deleteSampleLocation = DeleteSampleLocation(sampleLocationRepo)
     )
 }

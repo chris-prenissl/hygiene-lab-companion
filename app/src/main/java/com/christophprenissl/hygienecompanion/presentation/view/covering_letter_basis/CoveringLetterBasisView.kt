@@ -38,7 +38,10 @@ fun CoveringLetterBasisView(
 
         when (viewModel.openAddressDialogState.value) {
             true -> AddressDialog(
-                viewModel = viewModel
+                viewModel = viewModel,
+                onDismissRequest = {
+                    viewModel.closeAddressDialog()
+                }
             )
             false -> Unit
         }

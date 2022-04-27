@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.christophprenissl.hygienecompanion.util.SWIPE_THRESHOLD
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -31,6 +32,7 @@ fun SwipeToDelete(
     SwipeToDismiss(
         state = deleteState,
         directions = setOf(DismissDirection.EndToStart),
+        dismissThresholds = { FractionalThreshold(SWIPE_THRESHOLD) },
         background = {
             val color by animateColorAsState(
                 targetValue = when(deleteState.dismissDirection) {

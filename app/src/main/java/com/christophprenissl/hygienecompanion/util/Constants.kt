@@ -17,6 +17,9 @@ const val COVERING_LETTER_BASIS_ROUTE = "covering_letter_basis_route"
 const val REPORTS_ROUTE = "reports_route"
 const val PROFILE_ROUTE = "profile_route"
 
+//swipe to delete
+const val SWIPE_THRESHOLD = 0.8f
+
 //string resources
 const val NAME = "Name"
 const val ADDRESS = "Adresse"
@@ -27,6 +30,12 @@ const val CITY_NAME = "Stadtname"
 const val COVERING_LETTER_BASIS_DATA = "Begleitschein-Basis-Daten"
 const val ADD_ADDRESS = "Adresse hinzufügen"
 const val SAVE_ADDRESS = "Adresse speichern"
+const val ADD_SAMPLE_LOCATION = "Neue Probeentnahmestelle"
+const val SAMPLE_LOCATION = "Probeentnahmestelle"
+const val DESCRIPTION = "Beschreibung"
+const val EXTRA_INFO = "Zusätzliche Information"
+const val NEXT_HEATER = "Nächste Heizung"
+const val SAVE_SAMPLE_LOCATION = "Speichern"
 
 //communication UI
 const val LOADING = "Lädt gerade"

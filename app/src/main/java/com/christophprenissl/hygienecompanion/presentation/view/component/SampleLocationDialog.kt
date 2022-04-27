@@ -12,14 +12,13 @@ import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
-fun AddressDialog(
+fun SampleLocationDialog(
     viewModel: CoveringLetterBasisViewModel,
     onDismissRequest: () -> Unit
 ) {
-    var name by remember { mutableStateOf(TextFieldValue("")) }
-    var cityName by remember { mutableStateOf(TextFieldValue("")) }
-    var zip by remember { mutableStateOf(TextFieldValue("")) }
-    var street by remember { mutableStateOf(TextFieldValue("")) }
+    var description by remember { mutableStateOf(TextFieldValue("")) }
+    var extraInfo by remember { mutableStateOf(TextFieldValue("")) }
+    var nextHeater by remember { mutableStateOf(TextFieldValue("")) }
 
     Dialog(onDismissRequest =  onDismissRequest) {
         Surface(
@@ -29,34 +28,27 @@ fun AddressDialog(
                 contentAlignment = Alignment.Center
             ) {
                 Column(modifier = Modifier.align(Alignment.TopCenter)) {
-                    Text(ADDRESS)
+                    Text(SAMPLE_LOCATION)
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                    Text(NAME)
+                    Text(DESCRIPTION)
                     OutlinedTextField(
-                        value = name,
+                        value = description,
                         onValueChange = {
-                            name = it
+                            description = it
                         }
                     )
-                    Text(CITY_NAME)
+                    Text(EXTRA_INFO)
                     OutlinedTextField(
-                        value = cityName,
+                        value = extraInfo,
                         onValueChange = {
-                            cityName = it
+                            extraInfo = it
                         }
                     )
-                    Text(ZIP)
+                    Text(NEXT_HEATER)
                     OutlinedTextField(
-                        value = zip,
+                        value = nextHeater,
                         onValueChange = {
-                            zip = it
-                        }
-                    )
-                    Text(STREET)
-                    OutlinedTextField(
-                        value = street,
-                        onValueChange = {
-                            street = it
+                            nextHeater = it
                         }
                     )
                     Button(
@@ -72,11 +64,10 @@ fun AddressDialog(
                     Button(
                         modifier = Modifier.padding(standardPadding),
                         onClick = {
-                            viewModel.saveAddress(
-                                name = name.text,
-                                zip = zip.text,
-                                city = cityName.text,
-                                street = street.text)
+                            viewModel.saveSampleLocation(
+                                description = description.text,
+                                extraInfo = extraInfo.text,
+                                nextHeater = nextHeater.text)
                             onDismissRequest()
                         }) {
                         Text(SAVE_ADDRESS)

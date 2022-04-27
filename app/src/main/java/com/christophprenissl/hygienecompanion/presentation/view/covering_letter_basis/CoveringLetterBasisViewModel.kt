@@ -23,11 +23,17 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private val _savedSampleLocationState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedSampleLocationState: State<Response<Void?>> = _savedSampleLocationState
 
+    private val _deletedSampleLocationState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val deletedSampleLocationState: State<Response<Void?>> = _deletedSampleLocationState
+
     private val _gotSampleLocationsState = mutableStateOf<Response<List<SampleLocation>>>(Response.Success(listOf()))
     val gotSampleLocationsState: State<Response<List<SampleLocation>>> = _gotSampleLocationsState
 
-    private val _openAddressDialogState = mutableStateOf<Boolean>(false)
+    private val _openAddressDialogState = mutableStateOf(false)
     val openAddressDialogState: State<Boolean> = _openAddressDialogState
+
+    private val _openSampleLocationDialogState = mutableStateOf(false)
+    val openSampleLocationState: State<Boolean> = _openSampleLocationDialogState
 
     private val _savedAddressState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedAddressState: State<Response<Void?>> = _savedAddressState
@@ -60,6 +66,14 @@ class CoveringLetterBasisViewModel @Inject constructor(
         }
     }
 
+    fun deleteSampleLocation(sampleLocation: SampleLocation) {
+        viewModelScope.launch {
+            useCases.deleteSampleLocation(sampleLocation).collect() { response ->
+                _deletedSampleLocationState.value = response
+            }
+        }
+    }
+
     fun chooseAddress(address: Address) {
         _chosenAddress.value = address
         getSampleLocations(address)
@@ -69,9 +83,16 @@ class CoveringLetterBasisViewModel @Inject constructor(
         _chosenAddress.value = null
     }
 
-    fun saveSampleLocation(description: String) {
+    fun saveSampleLocation(
+        description: String?,
+        extraInfo: String?,
+        nextHeater: String?
+    ) {
         val sampleLocation = SampleLocation(
-            description = description
+            description = description,
+            extraInfo = extraInfo,
+            nextHeater = nextHeater,
+            address = chosenAddress.value
         )
 
         viewModelScope.launch {
@@ -83,6 +104,18 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     fun openAddressDialog() {
         _openAddressDialogState.value = true
+    }
+
+    fun openSampleLocationDialog() {
+        _openSampleLocationDialogState.value = true
+    }
+
+    fun closeAddressDialog() {
+        _openAddressDialogState.value = false
+    }
+
+    fun closeSampleLocationDialog() {
+        _openSampleLocationDialogState.value = false
     }
 
     fun saveAddress(
@@ -111,9 +144,5 @@ class CoveringLetterBasisViewModel @Inject constructor(
                 _deleteAddressState.value = response
             }
         }
-    }
-
-    fun closeAddressDialog() {
-       _openAddressDialogState.value = false
     }
 }
