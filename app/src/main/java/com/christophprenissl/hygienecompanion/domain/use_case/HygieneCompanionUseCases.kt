@@ -6,5 +6,8 @@ data class HygieneCompanionUseCases(
     val getAddresses: GetAddresses,
     val getSampleLocations: GetSampleLocations,
     val saveSampleLocation: SaveSampleLocation,
-    val deleteSampleLocation: DeleteSampleLocation
+    val deleteSampleLocation: DeleteSampleLocation,
+    val getBases: GetBases,
+    val saveBasis: SaveBasis,
+    val deleteBasis: DeleteBasis
 )

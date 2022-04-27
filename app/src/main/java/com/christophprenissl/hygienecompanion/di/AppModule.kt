@@ -1,12 +1,15 @@
 package com.christophprenissl.hygienecompanion.di
 
 import com.christophprenissl.hygienecompanion.data.repository.AddressRepoImpl
+import com.christophprenissl.hygienecompanion.data.repository.BasisRepoImpl
 import com.christophprenissl.hygienecompanion.data.repository.SampleLocationRepoImpl
 import com.christophprenissl.hygienecompanion.di.util.*
 import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
+import com.christophprenissl.hygienecompanion.domain.repository.BasisRepo
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
 import com.christophprenissl.hygienecompanion.domain.use_case.*
 import com.christophprenissl.hygienecompanion.util.ADDRESSES_FIRESTORE
+import com.christophprenissl.hygienecompanion.util.BASES_FIRESTORE
 import com.christophprenissl.hygienecompanion.util.SAMPLE_LOCATIONS_FIRESTORE
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,16 +60,30 @@ object AppModule {
         addressesRef = addressesRef,
         addressesQuery = addressesQuery)
 
+    @BasisRefFireStore
+    @Provides
+    fun provideBasisRef(db: FirebaseFirestore) = db.collection(BASES_FIRESTORE)
+
+    @Provides
+    fun provideBasisRepoImpl(
+        @BasisRefFireStore basisRef: CollectionReference
+    ): BasisRepo = BasisRepoImpl(
+        basisRef = basisRef)
+
     @Provides
     fun provideUseCases(
         sampleLocationRepo: SampleLocationRepo,
-        addressRepo: AddressRepo
+        addressRepo: AddressRepo,
+        basisRepo: BasisRepo
     ) = HygieneCompanionUseCases(
         saveAddress = SaveAddress(addressRepo),
         deleteAddress = DeleteAddress(addressRepo),
         getAddresses = GetAddresses(addressRepo),
         getSampleLocations = GetSampleLocations(sampleLocationRepo),
         saveSampleLocation = SaveSampleLocation(sampleLocationRepo),
-        deleteSampleLocation = DeleteSampleLocation(sampleLocationRepo)
+        deleteSampleLocation = DeleteSampleLocation(sampleLocationRepo),
+        getBases = GetBases(basisRepo),
+        saveBasis = SaveBasis(basisRepo),
+        deleteBasis = DeleteBasis(basisRepo)
     )
 }

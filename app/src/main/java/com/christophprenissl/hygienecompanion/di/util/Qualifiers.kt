@@ -17,3 +17,7 @@ annotation class AddressRefFireStore
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class AddressQueryFireStore
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class BasisRefFireStore
