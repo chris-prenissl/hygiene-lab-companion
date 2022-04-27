@@ -61,7 +61,10 @@ fun AddressDialog(viewModel: CoveringLetterBasisViewModel) {
                         modifier = Modifier.padding(standardPadding),
                         onClick = { viewModel.closeAddressDialog() }
                     ) {
-                        Text(CANCEL)
+                        Text(
+                            CANCEL,
+                            color = MaterialTheme.colors.onPrimary
+                        )
                     }
                     Button(
                         modifier = Modifier.padding(standardPadding),

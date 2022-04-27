@@ -8,9 +8,6 @@ val cardPadding = 4.dp
 val standardPadding = 8.dp
 val standardElevation = 4.dp
 
-//dismiss
-const val dismissalThreshold = 0.8f
-
 //views
 const val HOME_ROUTE = "home_route"
 const val LOGGED_OUT_ROUTE = "logged_out_route"

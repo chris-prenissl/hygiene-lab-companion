@@ -30,7 +30,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
     val openAddressDialogState: State<Boolean> = _openAddressDialogState
 
     private val _savedAddressState = mutableStateOf<Response<Void?>>(Response.Success(null))
-    val savedLocationState: State<Response<Void?>> = _savedAddressState
+    val savedAddressState: State<Response<Void?>> = _savedAddressState
 
     private val _deleteAddressState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val deleteAddressState: State<Response<Void?>> = _deleteAddressState
