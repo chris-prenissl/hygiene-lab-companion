@@ -78,11 +78,5 @@ fun CoveringLetterBasisView(
         }) {
             Text(ADD_ADDRESS)
         }
-
-        when(viewModel.savedAddressState.value) {
-            is Response.Loading -> Text(LOADING)
-            is Response.Error -> Text(ERROR)
-            is Response.Success -> Text(SUCCESS)
-        }
     }
 }
