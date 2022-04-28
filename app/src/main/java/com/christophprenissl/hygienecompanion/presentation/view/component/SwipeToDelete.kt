@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +30,11 @@ fun SwipeToDelete(
             }
             true
         })
+    if (deleteState.currentValue != DismissValue.Default) {
+        LaunchedEffect(Unit) {
+            deleteState.reset()
+        }
+    }
     SwipeToDismiss(
         state = deleteState,
         directions = setOf(DismissDirection.EndToStart),
