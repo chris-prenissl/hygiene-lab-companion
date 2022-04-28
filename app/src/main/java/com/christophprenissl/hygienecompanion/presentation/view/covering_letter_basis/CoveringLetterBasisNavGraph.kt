@@ -24,7 +24,7 @@ fun NavGraphBuilder.coveringLetterBasisNavGraph(
             SampleLocationsView(viewModel = viewModel)
         }
         composable(Screen.BasisDetail.route) {
-            BasisDetailView()
+            BasisDetailView(viewModel = viewModel)
         }
     }
 }

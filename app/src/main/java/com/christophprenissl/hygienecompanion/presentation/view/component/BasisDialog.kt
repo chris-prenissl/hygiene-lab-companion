@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.window.Dialog
 import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterBasis
+import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 
@@ -61,6 +62,7 @@ fun BasisDialog(
                                 }
                             )
                             Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+                            Text(BASIC_PARAMETERS)
                         }
 
                         items(coveringParameters) { item ->
@@ -73,7 +75,9 @@ fun BasisDialog(
                         }
 
                         item {
-                            Button(onClick = { coveringParameters.add(ParameterBasis()) }) {
+                            Button(onClick = {
+                                coveringParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                            }) {
                                 Text(ADD_PARAMETER)
                             }
                             Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -88,7 +92,9 @@ fun BasisDialog(
                         }
 
                         item {
-                            Button(onClick = { coveringSampleParameters.add(ParameterBasis()) }) {
+                            Button(onClick = {
+                                coveringSampleParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                            }) {
                                 Text(ADD_PARAMETER)
                             }
                             Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -103,7 +109,9 @@ fun BasisDialog(
                         }
 
                         item {
-                            Button(onClick = { labSampleParameters.add(ParameterBasis()) }) {
+                            Button(onClick = {
+                                labSampleParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                            }) {
                                 Text(ADD_PARAMETER)
                             }
                             Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -118,7 +126,9 @@ fun BasisDialog(
                         }
 
                         item {
-                            Button(onClick = { labReportParameters.add(ParameterBasis()) }) {
+                            Button(onClick = {
+                                labReportParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                            }) {
                                 Text(ADD_PARAMETER)
                             }
                             Spacer(modifier = Modifier.padding(vertical = standardPadding))
