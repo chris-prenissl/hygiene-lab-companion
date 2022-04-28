@@ -6,7 +6,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
-import com.christophprenissl.hygienecompanion.util.COVERING_LETTER_BASIS_ROUTE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @OptIn(InternalComposeApi::class, ExperimentalCoroutinesApi::class)
@@ -23,6 +22,9 @@ fun NavGraphBuilder.coveringLetterBasisNavGraph(
         }
         composable(Screen.SampleLocationsView.route) {
             SampleLocationsView(viewModel = viewModel)
+        }
+        composable(Screen.BasisDetail.route) {
+            BasisDetailView()
         }
     }
 }

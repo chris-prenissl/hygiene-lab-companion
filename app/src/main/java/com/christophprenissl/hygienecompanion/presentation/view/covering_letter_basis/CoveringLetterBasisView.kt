@@ -11,9 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
-import com.christophprenissl.hygienecompanion.presentation.view.component.AddressCard
-import com.christophprenissl.hygienecompanion.presentation.view.component.AddressDialog
-import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
+import com.christophprenissl.hygienecompanion.presentation.view.component.*
 import com.christophprenissl.hygienecompanion.util.*
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,10 +29,6 @@ fun CoveringLetterBasisView(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            modifier = Modifier.padding(standardPadding),
-            text = COVERING_LETTER_BASIS_DATA
-        )
 
         when (viewModel.openAddressDialogState.value) {
             true -> AddressDialog(
@@ -45,6 +39,21 @@ fun CoveringLetterBasisView(
             )
             false -> Unit
         }
+
+        when (viewModel.openBasisDialogState.value) {
+            true -> BasisDialog(
+                viewModel = viewModel,
+                onDismissRequest = {
+                    viewModel.closeBasisDialog()
+                }
+            )
+            false -> Unit
+        }
+
+        Text(
+            modifier = Modifier.padding(standardPadding),
+            text = COVERING_LETTER_BASIS_DATA
+        )
 
         when (val addressesResponse = viewModel.gotAddressState.value) {
             is Response.Success -> {
@@ -77,6 +86,44 @@ fun CoveringLetterBasisView(
             viewModel.openAddressDialog()
         }) {
             Text(ADD_ADDRESS)
+        }
+
+        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+
+        Text(
+            modifier = Modifier.padding(vertical = standardPadding),
+            text = COVERING_BASIS
+        )
+        when (val basesResponse = viewModel.gotBasesState.value) {
+            is Response.Success -> {
+                LazyColumn {
+                    val bases = basesResponse.data
+                    items(bases) { basis ->
+                        SwipeToDelete(
+                            onDelete = { viewModel.deleteBasis(basis) }
+                        ) {
+                            BasisCard(
+                                basis = basis,
+                                onClick = {
+                                    viewModel.chooseBasis(basis)
+                                    navController.navigate(Screen.BasisDetail.route)
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+            is Response.Loading -> {
+                Text(LOADING)
+            }
+            is Response.Error -> {
+                Text(ERROR)
+            }
+        }
+        Button(onClick = {
+            viewModel.openBasisDialog()
+        }) {
+            Text(ADD_COVERING_BASIS)
         }
     }
 }

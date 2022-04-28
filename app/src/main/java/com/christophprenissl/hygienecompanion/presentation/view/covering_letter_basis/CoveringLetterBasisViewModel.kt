@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.Address
+import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
+import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterBasis
 import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,9 +46,25 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private val _gotAddressesState = mutableStateOf<Response<List<Address>>>(Response.Success(listOf()))
     val gotAddressState: State<Response<List<Address>>> = _gotAddressesState
 
+    private val _openBasisDialogState = mutableStateOf(false)
+    val openBasisDialogState: State<Boolean> = _openBasisDialogState
+
+    private val _gotBasesState = mutableStateOf<Response<List<Basis>>>(Response.Success(listOf()))
+    val gotBasesState: State<Response<List<Basis>>> = _gotBasesState
+
+    private val _savedBasisState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val savedBasisState: State<Response<Void?>> = _savedBasisState
+
+    private val _deletedBasisState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val deletedBasisState: State<Response<Void?>> = _deletedBasisState
+
+    private var _chosenBasis = mutableStateOf<Basis?>(null)
+    val chosenBasis = _chosenBasis
+
 
     init {
         getAddresses()
+        getBases()
     }
 
 
@@ -60,7 +78,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     private fun getSampleLocations(fromAddress: Address) {
         viewModelScope.launch {
-            useCases.getSampleLocations(fromAddress).collect() { response ->
+            useCases.getSampleLocations(fromAddress).collect { response ->
                 _gotSampleLocationsState.value = response
             }
         }
@@ -68,7 +86,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     fun deleteSampleLocation(sampleLocation: SampleLocation) {
         viewModelScope.launch {
-            useCases.deleteSampleLocation(sampleLocation).collect() { response ->
+            useCases.deleteSampleLocation(sampleLocation).collect { response ->
                 _deletedSampleLocationState.value = response
             }
         }
@@ -77,10 +95,6 @@ class CoveringLetterBasisViewModel @Inject constructor(
     fun chooseAddress(address: Address) {
         _chosenAddress.value = address
         getSampleLocations(address)
-    }
-
-    fun unChooseAddress() {
-        _chosenAddress.value = null
     }
 
     fun saveSampleLocation(
@@ -116,6 +130,57 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     fun closeSampleLocationDialog() {
         _openSampleLocationDialogState.value = false
+    }
+
+    private fun getBases() {
+        viewModelScope.launch {
+            useCases.getBases().collect { response ->
+                _gotBasesState.value = response
+            }
+        }
+    }
+
+    fun saveBasis(
+        norm: String,
+        description: String,
+        coveringParameters: List<ParameterBasis>,
+        coveringSampleParameters: List<ParameterBasis>,
+        labSampleParameters: List<ParameterBasis>,
+        labReportParameters: List<ParameterBasis>
+    ) {
+        val basis = Basis(
+            norm = norm,
+            description = description,
+            coveringParameters = coveringParameters,
+            coveringSampleParameters = coveringSampleParameters,
+            labSampleParameters = labSampleParameters,
+            labReportParameters = labReportParameters
+        )
+        viewModelScope.launch {
+            useCases.saveBasis(basis).collect { response ->
+                _savedBasisState.value = response
+            }
+        }
+    }
+
+    fun deleteBasis(basis: Basis) {
+        viewModelScope.launch {
+            useCases.deleteBasis(basis).collect { response ->
+                _deletedBasisState.value = response
+            }
+        }
+    }
+
+    fun chooseBasis(basis: Basis) {
+        _chosenBasis.value = basis
+    }
+
+    fun openBasisDialog() {
+        _openBasisDialogState.value = true
+    }
+
+    fun closeBasisDialog() {
+        _openBasisDialogState.value = false
     }
 
     fun saveAddress(

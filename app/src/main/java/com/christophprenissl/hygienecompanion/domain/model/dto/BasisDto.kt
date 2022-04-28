@@ -6,8 +6,8 @@ data class BasisDto(
     @DocumentId
     val norm: String? = null,
     val description: String? = null,
-    val coveringParameters: HashMap<String, String>? = null,
-    val coveringSampleParameters: HashMap<String, String>? = null,
-    val labSampleParameters: HashMap<String, String>? = null,
-    val labReportParameters: HashMap<String, String>? = null
+    val coveringParameters: List<ParameterBasisDto>? = null,
+    val coveringSampleParameters: List<ParameterBasisDto>? = null,
+    val labSampleParameters: List<ParameterBasisDto>? = null,
+    val labReportParameters: List<ParameterBasisDto>? = null
 )

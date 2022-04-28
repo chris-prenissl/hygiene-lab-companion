@@ -14,6 +14,7 @@ sealed class Screen(val name: String, val graphRoute: String, val route: String,
     object CoveringLetterDetail: Screen("Begleitschein", COVERING_LETTERS_ROUTE, "covering_letter_detail", null)
 
     object CoveringLetterBasis: Screen("Basisdaten", COVERING_LETTER_BASIS_ROUTE, "covering_letters_basis", Icons.Rounded.BackupTable)
+    object BasisDetail: Screen(COVERING_BASIS, COVERING_LETTER_BASIS_ROUTE, COVERING_BASIS_ROUTE, null)
     object SampleLocationsView: Screen("Probestellen", COVERING_LETTER_BASIS_ROUTE, "sample_locations", null)
 
     object Reports: Screen("Befunde", REPORTS_ROUTE, "reports", Icons.Rounded.Summarize)
