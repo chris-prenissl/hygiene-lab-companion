@@ -9,7 +9,7 @@ data class SamplingSeriesDto(
     val resultToTestingProperty: Boolean? = null,
     val costLocation: String? = null,
     val laboratoryId: String? = null,
-    val basesByNorm: List<String>? = null,
+    val basesByNorm: List<String?>? = null,
     val client: AddressDto? = null,
     val sampleAddress: AddressDto? = null,
     val samplingCompany: AddressDto? = null,
