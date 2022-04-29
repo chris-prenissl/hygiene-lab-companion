@@ -30,7 +30,11 @@ fun AddressCard(
             ) {
                 Column {
                     address.name?.let { Text(it) }
-                    address.zip?.let { Text(it) }
+                    Row {
+                        Text(CONTACT)
+                        address.contactName?.let { Text(it) }
+                    }
+                    address.city?.let { Text(it) }
                     address.street?.let { Text(it) }
                 }
             }

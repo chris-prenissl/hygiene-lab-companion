@@ -187,13 +187,21 @@ class CoveringLetterBasisViewModel @Inject constructor(
         name: String,
         zip: String,
         city: String,
-        street: String
+        contactName: String,
+        street: String,
+        phone: String,
+        fax: String,
+        eMail: String
     ) {
         val newAddress = Address(
             name = name,
             zip = zip,
             city = city,
-            street = street
+            contactName = contactName,
+            street = street,
+            phone = phone,
+            fax = fax,
+            eMail = eMail
         )
         viewModelScope.launch {
             useCases.saveAddress(newAddress).collect() { response ->

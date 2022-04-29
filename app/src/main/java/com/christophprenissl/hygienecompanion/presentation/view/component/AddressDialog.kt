@@ -1,6 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,6 +21,10 @@ fun AddressDialog(
     var cityName by remember { mutableStateOf(TextFieldValue("")) }
     var zip by remember { mutableStateOf(TextFieldValue("")) }
     var street by remember { mutableStateOf(TextFieldValue("")) }
+    var contactName by remember { mutableStateOf(TextFieldValue("")) }
+    var phone by remember { mutableStateOf(TextFieldValue("")) }
+    var fax by remember { mutableStateOf(TextFieldValue("")) }
+    var eMail by remember { mutableStateOf(TextFieldValue("")) }
 
     Dialog(onDismissRequest =  onDismissRequest) {
         Surface(
@@ -28,58 +33,101 @@ fun AddressDialog(
             Box(
                 contentAlignment = Alignment.Center
             ) {
-                Column(modifier = Modifier.align(Alignment.TopCenter)) {
-                    Text(ADDRESS)
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                    Text(NAME)
-                    OutlinedTextField(
-                        value = name,
-                        onValueChange = {
-                            name = it
-                        }
-                    )
-                    Text(CITY_NAME)
-                    OutlinedTextField(
-                        value = cityName,
-                        onValueChange = {
-                            cityName = it
-                        }
-                    )
-                    Text(ZIP)
-                    OutlinedTextField(
-                        value = zip,
-                        onValueChange = {
-                            zip = it
-                        }
-                    )
-                    Text(STREET)
-                    OutlinedTextField(
-                        value = street,
-                        onValueChange = {
-                            street = it
-                        }
-                    )
-                    Button(
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
-                        modifier = Modifier.padding(standardPadding),
-                        onClick = onDismissRequest
-                    ) {
-                        Text(
-                            CANCEL,
-                            color = MaterialTheme.colors.onPrimary
+                LazyColumn(modifier = Modifier.align(Alignment.TopCenter)) {
+                    item {
+                        Text(ADDRESS)
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                        Text(ADDRESS_NAME)
+                        OutlinedTextField(
+                            value = name,
+                            onValueChange = {
+                                name = it
+                            }
+                        )
+                        Text(CITY_NAME)
+                        OutlinedTextField(
+                            value = cityName,
+                            onValueChange = {
+                                cityName = it
+                            }
+                        )
+                        Text(ZIP)
+                        OutlinedTextField(
+                            value = zip,
+                            onValueChange = {
+                                zip = it
+                            }
+                        )
+                        Text(STREET)
+                        OutlinedTextField(
+                            value = street,
+                            onValueChange = {
+                                street = it
+                            }
+                        )
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    }
+
+                    item {
+                        Text(CONTACT_DATA)
+                        Text(CONTACT_NAME)
+                        OutlinedTextField(
+                            value = contactName,
+                            onValueChange = {
+                                contactName = it
+                            }
+                        )
+                        Text(PHONE)
+                        OutlinedTextField(
+                            value = phone,
+                            onValueChange = {
+                                phone = it
+                            }
+                        )
+                        Text(FAX)
+                        OutlinedTextField(
+                            value = fax,
+                            onValueChange = {
+                                fax = it
+                            }
+                        )
+                        Text(EMAIL)
+                        OutlinedTextField(
+                            value = eMail,
+                            onValueChange = {
+                                eMail = it
+                            }
                         )
                     }
-                    Button(
-                        modifier = Modifier.padding(standardPadding),
-                        onClick = {
-                            viewModel.saveAddress(
-                                name = name.text,
-                                zip = zip.text,
-                                city = cityName.text,
-                                street = street.text)
-                            onDismissRequest()
-                        }) {
-                        Text(SAVE_ADDRESS)
+
+                    item {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+                            modifier = Modifier.padding(standardPadding),
+                            onClick = onDismissRequest
+                        ) {
+                            Text(
+                                CANCEL,
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Button(
+                            modifier = Modifier.padding(standardPadding),
+                            onClick = {
+                                viewModel.saveAddress(
+                                    name = name.text,
+                                    zip = zip.text,
+                                    city = cityName.text,
+                                    street = street.text,
+                                    phone = phone.text,
+                                    fax = fax.text,
+                                    eMail = eMail.text,
+                                    contactName = contactName.text
+                                )
+                                onDismissRequest()
+                            }) {
+                            Text(SAVE_ADDRESS)
+                        }
                     }
                 }
             }

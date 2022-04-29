@@ -10,7 +10,11 @@ class AddressMapper: DataMapper<Address, AddressDto> {
             name = entity.name,
             zip = entity.zip,
             city = entity.city,
-            street = entity.street
+            contactName = entity.contactName,
+            street = entity.street,
+            phone = entity.phone,
+            fax = entity.fax,
+            eMail = entity.eMail
         )
     }
 
@@ -20,7 +24,11 @@ class AddressMapper: DataMapper<Address, AddressDto> {
             name = domain.name,
             zip = domain.zip,
             city = domain.city,
-            street = domain.street
+            contactName = domain.contactName,
+            street = domain.street,
+            phone = domain.phone,
+            fax = domain.fax,
+            eMail = domain.eMail
         )
     }
 }

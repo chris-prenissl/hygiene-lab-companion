@@ -25,105 +25,130 @@ fun CoveringLetterBasisView(
     viewModel: CoveringLetterBasisViewModel
 ) {
 
-    Column(
+    LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        when (viewModel.openAddressDialogState.value) {
-            true -> AddressDialog(
-                viewModel = viewModel,
-                onDismissRequest = {
-                    viewModel.closeAddressDialog()
-                }
-            )
-            false -> Unit
+        item {
+            when (viewModel.openAddressDialogState.value) {
+                true -> AddressDialog(
+                    viewModel = viewModel,
+                    onDismissRequest = {
+                        viewModel.closeAddressDialog()
+                    }
+                )
+                false -> Unit
+            }
         }
 
-        when (viewModel.openBasisDialogState.value) {
-            true -> BasisDialog(
-                viewModel = viewModel,
-                onDismissRequest = {
-                    viewModel.closeBasisDialog()
-                }
-            )
-            false -> Unit
+        item {
+            when (viewModel.openBasisDialogState.value) {
+                true -> BasisDialog(
+                    viewModel = viewModel,
+                    onDismissRequest = {
+                        viewModel.closeBasisDialog()
+                    }
+                )
+                false -> Unit
+            }
         }
 
-        Text(
-            modifier = Modifier.padding(standardPadding),
-            text = COVERING_LETTER_BASIS_DATA
-        )
+        item {
+            Text(
+                modifier = Modifier.padding(standardPadding),
+                text = COVERING_LETTER_BASIS_DATA
+            )
+        }
 
         when (val addressesResponse = viewModel.gotAddressState.value) {
             is Response.Success -> {
-                LazyColumn {
-                    val addresses = addressesResponse.data
-                    items(addresses) { address ->
-                        SwipeToDelete(
-                            onDelete = { viewModel.deleteAddress(address) }
-                        ) {
-                            AddressCard(
-                                address = address,
-                                onClick = {
-                                    viewModel.chooseAddress(address)
-                                    navController.navigate(Screen.SampleLocationsView.route)
-                                }
-                            )
-                        }
+                val addresses = addressesResponse.data
+                items(addresses) { address ->
+                    SwipeToDelete(
+                        onDelete = { viewModel.deleteAddress(address) }
+                    ) {
+                        AddressCard(
+                            address = address,
+                            onClick = {
+                                viewModel.chooseAddress(address)
+                                navController.navigate(Screen.SampleLocationsView.route)
+                            }
+                        )
                     }
                 }
             }
             is Response.Loading -> {
-                Text(LOADING)
+                item {
+                    Text(LOADING)
+                }
             }
             is Response.Error -> {
-                Text(ERROR)
+                item {
+                    Text(ERROR)
+                }
             }
         }
 
-        Button (onClick = {
-            viewModel.openAddressDialog()
-        }) {
-            Text(ADD_ADDRESS)
+        item {
+            Button (onClick = {
+                viewModel.openAddressDialog()
+            }) {
+                Text(ADD_ADDRESS)
+            }
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
 
-        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+        item {
+            Text(
+                modifier = Modifier.padding(vertical = standardPadding),
+                text = COVERING_BASIS
+            )
+        }
 
-        Text(
-            modifier = Modifier.padding(vertical = standardPadding),
-            text = COVERING_BASIS
-        )
         when (val basesResponse = viewModel.gotBasesState.value) {
             is Response.Success -> {
-                LazyColumn {
-                    val bases = basesResponse.data
-                    items(bases) { basis ->
-                        SwipeToDelete(
-                            onDelete = { viewModel.deleteBasis(basis) }
-                        ) {
-                            BasisCard(
-                                basis = basis,
-                                onClick = {
-                                    viewModel.chooseBasis(basis)
-                                    navController.navigate(Screen.BasisDetail.route)
-                                }
-                            )
-                        }
+                val bases = basesResponse.data
+                items(bases) { basis ->
+                    SwipeToDelete(
+                        onDelete = { viewModel.deleteBasis(basis) }
+                    ) {
+                        BasisCard(
+                            basis = basis,
+                            onClick = {
+                                viewModel.chooseBasis(basis)
+                                navController.navigate(Screen.BasisDetail.route)
+                            }
+                        )
                     }
                 }
             }
+
             is Response.Loading -> {
-                Text(LOADING)
+                item {
+                    Text(LOADING)
+                }
             }
             is Response.Error -> {
-                Text(ERROR)
+                item {
+                    Text(ERROR)
+                }
             }
         }
-        Button(onClick = {
-            viewModel.openBasisDialog()
-        }) {
-            Text(ADD_COVERING_BASIS)
+        
+        item {
+            Button(onClick = {
+                viewModel.openBasisDialog()
+            }) {
+                Text(ADD_COVERING_BASIS)
+            }
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
+        
+        item {
+            Text(COVERING_LETTER_SERIES)
+        }
+
+
     }
 }
