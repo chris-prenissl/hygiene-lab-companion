@@ -76,7 +76,7 @@ fun BasisDialog(
 
                         item {
                             Button(onClick = {
-                                coveringParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                                coveringParameters.add(ParameterBasis(parameterType = ParameterType.Number))
                             }) {
                                 Text(ADD_PARAMETER)
                             }
@@ -93,7 +93,7 @@ fun BasisDialog(
 
                         item {
                             Button(onClick = {
-                                coveringSampleParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                                coveringSampleParameters.add(ParameterBasis(parameterType = ParameterType.Number))
                             }) {
                                 Text(ADD_PARAMETER)
                             }
@@ -110,7 +110,7 @@ fun BasisDialog(
 
                         item {
                             Button(onClick = {
-                                labSampleParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                                labSampleParameters.add(ParameterBasis(parameterType = ParameterType.Number))
                             }) {
                                 Text(ADD_PARAMETER)
                             }
@@ -127,7 +127,7 @@ fun BasisDialog(
 
                         item {
                             Button(onClick = {
-                                labReportParameters.add(ParameterBasis(parameterType = ParameterType.number))
+                                labReportParameters.add(ParameterBasis(parameterType = ParameterType.Number))
                             }) {
                                 Text(ADD_PARAMETER)
                             }
