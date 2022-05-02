@@ -64,6 +64,9 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _savedCoveringLetterSeriesState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedCoveringLetterSeriesState: State<Response<Void?>> = _savedCoveringLetterSeriesState
 
+    private var _chosenCoveringLetterSeries = mutableStateOf<CoveringLetterSeries?>(null)
+    val chosenCoveringLetterSeries = _chosenCoveringLetterSeries
+
     init {
         getAddresses()
         getBases()
@@ -230,11 +233,15 @@ class CoveringLetterBasisViewModel @Inject constructor(
         }
     }
 
-    fun getCoveringLetterSeriesNotEnded() {
+    private fun getCoveringLetterSeriesNotEnded() {
         viewModelScope.launch {
-            useCases.getCoveringLetterSeries().collect { response ->
+            useCases.getCoveringLetterSeriesNotEnded().collect { response ->
                 _gotCoveringLetterSeriesNotEndedState.value = response
             }
         }
+    }
+
+    fun chooseCoveringLetterSeries(coveringLetterSeries: CoveringLetterSeries) {
+        _chosenCoveringLetterSeries.value = coveringLetterSeries
     }
 }

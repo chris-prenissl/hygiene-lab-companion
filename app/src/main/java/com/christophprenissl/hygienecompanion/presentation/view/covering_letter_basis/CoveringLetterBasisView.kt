@@ -72,7 +72,7 @@ fun CoveringLetterBasisView(
                             address = address,
                             onClick = {
                                 viewModel.chooseAddress(address)
-                                navController.navigate(Screen.SampleLocationsView.route)
+                                navController.navigate(Screen.SampleLocations.route)
                             }
                         )
                     }
@@ -157,7 +157,10 @@ fun CoveringLetterBasisView(
                     ) {
                         CoveringLetterSeriesCard(
                             coveringLetterSeries = coveringLetterSeries,
-                            onClick = {}
+                            onClick = {
+                                viewModel.chooseCoveringLetterSeries(coveringLetterSeries)
+                                navController.navigate(Screen.CoveringLetterSeriesDetail.route)
+                            }
                         )
                     }
                 }
