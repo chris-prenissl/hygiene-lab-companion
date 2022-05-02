@@ -2,7 +2,7 @@ package com.christophprenissl.hygienecompanion.domain.model.entity
 
 import java.util.*
 
-data class SamplingSeries(
+data class CoveringLetterSeries(
     val id: String? = null,
     val created: Date? = null,
     val resultToClient: Boolean? = null,
@@ -13,5 +13,6 @@ data class SamplingSeries(
     val client: Address? = null,
     val sampleAddress: Address? = null,
     val samplingCompany: Address? = null,
+    val coveringLetters: List<CoveringLetter>? = null,
     val endedDate: Date? = null
 )

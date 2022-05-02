@@ -1,13 +1,14 @@
 package com.christophprenissl.hygienecompanion.domain.model.util.mapper
 
-import com.christophprenissl.hygienecompanion.domain.model.dto.SamplingSeriesDto
+import com.christophprenissl.hygienecompanion.domain.model.dto.CoveringLetterSeriesDto
 import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingSeries
+import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
 
-class SamplingSeriesMapper(private val bases: List<Basis>?): DataMapper<SamplingSeries, SamplingSeriesDto> {
-    override fun fromEntity(entity: SamplingSeriesDto): SamplingSeries {
+class CoveringLetterSeriesMapper(private val bases: List<Basis>?): DataMapper<CoveringLetterSeries, CoveringLetterSeriesDto> {
+    override fun fromEntity(entity: CoveringLetterSeriesDto): CoveringLetterSeries {
         val addressMapper = AddressMapper()
-        return SamplingSeries(
+        val coveringLetterMapper = CoveringLetterMapper()
+        return CoveringLetterSeries(
             id = entity.id,
             created = entity.created,
             resultToClient = entity.resultToClient,
@@ -18,13 +19,17 @@ class SamplingSeriesMapper(private val bases: List<Basis>?): DataMapper<Sampling
             client = entity.client?.let { addressMapper.fromEntity(it) },
             sampleAddress = entity.sampleAddress?.let { addressMapper.fromEntity(it) },
             samplingCompany = entity.samplingCompany?.let { addressMapper.fromEntity(it) },
+            coveringLetters = entity.coveringLetters?.map {
+                coveringLetterMapper.fromEntity(it)
+            },
             endedDate = entity.endedDate
         )
     }
 
-    override fun toEntity(domain: SamplingSeries): SamplingSeriesDto {
+    override fun toEntity(domain: CoveringLetterSeries): CoveringLetterSeriesDto {
         val addressMapper = AddressMapper()
-        return SamplingSeriesDto(
+        val coveringLetterMapper = CoveringLetterMapper()
+        return CoveringLetterSeriesDto(
             id = domain.id,
             created = domain.created,
             resultToClient = domain.resultToClient,
@@ -35,6 +40,9 @@ class SamplingSeriesMapper(private val bases: List<Basis>?): DataMapper<Sampling
             client = domain.client?.let { addressMapper.toEntity(it) },
             sampleAddress = domain.sampleAddress?.let { addressMapper.toEntity(it) },
             samplingCompany = domain.samplingCompany?.let { addressMapper.toEntity(it) },
+            coveringLetters = domain.coveringLetters?.map {
+                coveringLetterMapper.toEntity(it)
+            },
             endedDate = domain.endedDate
         )
     }

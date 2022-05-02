@@ -2,7 +2,7 @@ package com.christophprenissl.hygienecompanion.domain.model.dto
 
 import java.util.*
 
-data class SamplingSeriesDto(
+data class CoveringLetterSeriesDto(
     val id: String? = null,
     val created: Date? = null,
     val resultToClient: Boolean? = null,
@@ -13,5 +13,6 @@ data class SamplingSeriesDto(
     val client: AddressDto? = null,
     val sampleAddress: AddressDto? = null,
     val samplingCompany: AddressDto? = null,
+    val coveringLetters: List<CoveringLetterDto>? = null,
     val endedDate: Date? = null
 )

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepo {
 
-    fun getUserFromFireStore(id: String?): Flow<Response<User>>
+    fun getUserFromFireStore(id: String): Flow<Response<User>>
 
     suspend fun saveUserToFireStore(user: User): Flow<Response<Void?>>
 

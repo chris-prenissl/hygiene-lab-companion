@@ -5,10 +5,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.model.entity.User
 
-class CoveringLetterMapper(
-    private val sampler: User,
-    private val labWorker: User
-): DataMapper<CoveringLetter, CoveringLetterDto> {
+class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
     override fun fromEntity(entity: CoveringLetterDto): CoveringLetter {
         val parameterMapper = ParameterMapper()
         val sampleMapper = SampleMapper()
@@ -24,8 +21,8 @@ class CoveringLetterMapper(
             labParameters = entity.labParameters?.map {
                 parameterMapper.fromEntity(it)
             },
-            sampler = sampler,
-            labWorker = labWorker,
+            sampler = User(entity.samplerId),
+            labWorker = User(entity.labWorkerId),
             samples = entity.samples?.map {
                 sampleMapper.fromEntity(it)
             },
@@ -48,8 +45,8 @@ class CoveringLetterMapper(
             labParameters = domain.labParameters?.map {
                 parameterMapper.toEntity(it)
             },
-            samplerId = sampler.id,
-            labWorkerId = labWorker.id,
+            samplerId = domain.sampler?.id,
+            labWorkerId = domain.labWorker?.id,
             samples = domain.samples?.map {
                 sampleMapper.toEntity(it)
             },

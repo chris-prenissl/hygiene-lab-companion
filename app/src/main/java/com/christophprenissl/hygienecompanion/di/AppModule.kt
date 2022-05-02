@@ -1,16 +1,13 @@
 package com.christophprenissl.hygienecompanion.di
 
-import com.christophprenissl.hygienecompanion.data.repository.AddressRepoImpl
-import com.christophprenissl.hygienecompanion.data.repository.BasisRepoImpl
-import com.christophprenissl.hygienecompanion.data.repository.SampleLocationRepoImpl
+import com.christophprenissl.hygienecompanion.data.repository.*
 import com.christophprenissl.hygienecompanion.di.util.*
 import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
 import com.christophprenissl.hygienecompanion.domain.repository.BasisRepo
+import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterSeriesRepo
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
 import com.christophprenissl.hygienecompanion.domain.use_case.*
-import com.christophprenissl.hygienecompanion.util.ADDRESSES_FIRESTORE
-import com.christophprenissl.hygienecompanion.util.BASES_FIRESTORE
-import com.christophprenissl.hygienecompanion.util.SAMPLE_LOCATIONS_FIRESTORE
+import com.christophprenissl.hygienecompanion.util.*
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -69,6 +66,29 @@ object AppModule {
         @BasisRefFireStore basisRef: CollectionReference
     ): BasisRepo = BasisRepoImpl(
         basisRef = basisRef)
+
+    @UserRefFireStore
+    @Provides
+    fun provideUseRef(db: FirebaseFirestore) = db.collection(USERS_FIRESTORE)
+
+    @Provides
+    fun provideUserRepoImpl(
+        @UserRefFireStore userRef: CollectionReference
+    ): UserRepoImpl = UserRepoImpl(
+        userRef = userRef
+    )
+
+    @CoveringLetterSeriesRefFireStore
+    @Provides
+    fun provideCoveringLetterSeriesRef(db: FirebaseFirestore) = db.collection(
+        COVERING_LETTER_SERIES_FIRESTORE)
+
+    @Provides
+    fun provideCoveringLetterRepoImpl(
+        @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
+    ): CoveringLetterRepoImpl = CoveringLetterRepoImpl(
+        coveringLetterSeriesRef = coveringLetterSeriesRef
+    )
 
     @Provides
     fun provideUseCases(

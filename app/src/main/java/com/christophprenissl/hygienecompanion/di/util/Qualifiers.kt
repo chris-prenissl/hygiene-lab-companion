@@ -21,3 +21,11 @@ annotation class AddressQueryFireStore
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class BasisRefFireStore
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class UserRefFireStore
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CoveringLetterSeriesRefFireStore
