@@ -21,7 +21,8 @@ fun TopMenuBar(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    navController.navigate(Screen.Profile.graphRoute)
+                    navController.popBackStack()
+                    navController.navigate(Screen.Profile.route)
                 }
             ) {
                 Screen.Profile.let {

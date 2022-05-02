@@ -27,6 +27,7 @@ fun BottomNavBar(
                     selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                     label = { Text(screen.name) },
                     onClick = {
+                        navController.popBackStack()
                         navController.navigate(screen.graphRoute) {
                             popUpTo(HOME_ROUTE) {
                                 saveState = true
