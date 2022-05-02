@@ -11,7 +11,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class BasisRepoImpl @Inject constructor(
      private val basisRef: CollectionReference
 ): BasisRepo {

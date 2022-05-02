@@ -9,5 +9,6 @@ data class HygieneCompanionUseCases(
     val deleteSampleLocation: DeleteSampleLocation,
     val getBases: GetBases,
     val saveBasis: SaveBasis,
-    val deleteBasis: DeleteBasis
+    val deleteBasis: DeleteBasis,
+    val saveCoveringLetterSeries: SaveCoveringLetterSeries
 )

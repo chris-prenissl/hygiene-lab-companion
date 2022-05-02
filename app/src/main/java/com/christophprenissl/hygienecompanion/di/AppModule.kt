@@ -2,10 +2,7 @@ package com.christophprenissl.hygienecompanion.di
 
 import com.christophprenissl.hygienecompanion.data.repository.*
 import com.christophprenissl.hygienecompanion.di.util.*
-import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
-import com.christophprenissl.hygienecompanion.domain.repository.BasisRepo
-import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterSeriesRepo
-import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
+import com.christophprenissl.hygienecompanion.domain.repository.*
 import com.christophprenissl.hygienecompanion.domain.use_case.*
 import com.christophprenissl.hygienecompanion.util.*
 import com.google.firebase.firestore.CollectionReference
@@ -73,21 +70,22 @@ object AppModule {
     @Provides
     fun provideUserRepoImpl(
         @UserRefFireStore userRef: CollectionReference
-    ): UserRepoImpl = UserRepoImpl(
+    ): UserRepo = UserRepoImpl(
         userRef = userRef
     )
 
     @Provides
     fun provideCoveringLetterRepoImpl(
         @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
-    ): CoveringLetterRepoImpl = CoveringLetterRepoImpl(
+    ): CoveringLetterRepo = CoveringLetterRepoImpl(
         coveringLetterSeriesRef = coveringLetterSeriesRef
     )
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Provides
     fun provideCoveringLetterSeriesRepoImpl(
         @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
-    ): CoveringLetterSeriesRepoImpl = CoveringLetterSeriesRepoImpl(
+    ): CoveringLetterSeriesRepo = CoveringLetterSeriesRepoImpl(
         coveringLetterSeriesRef = coveringLetterSeriesRef
     )
 
@@ -95,7 +93,8 @@ object AppModule {
     fun provideUseCases(
         sampleLocationRepo: SampleLocationRepo,
         addressRepo: AddressRepo,
-        basisRepo: BasisRepo
+        basisRepo: BasisRepo,
+        coveringLetterSeriesRepo: CoveringLetterSeriesRepo
     ) = HygieneCompanionUseCases(
         saveAddress = SaveAddress(addressRepo),
         deleteAddress = DeleteAddress(addressRepo),
@@ -105,6 +104,7 @@ object AppModule {
         deleteSampleLocation = DeleteSampleLocation(sampleLocationRepo),
         getBases = GetBases(basisRepo),
         saveBasis = SaveBasis(basisRepo),
-        deleteBasis = DeleteBasis(basisRepo)
+        deleteBasis = DeleteBasis(basisRepo),
+        saveCoveringLetterSeries = SaveCoveringLetterSeries(coveringLetterSeriesRepo)
     )
 }
