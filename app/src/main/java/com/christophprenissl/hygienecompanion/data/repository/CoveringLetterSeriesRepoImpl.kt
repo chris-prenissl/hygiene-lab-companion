@@ -5,7 +5,7 @@ import com.christophprenissl.hygienecompanion.domain.model.dto.CoveringLetterSer
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.domain.model.util.mapper.CoveringLetterSeriesMapper
 import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterSeriesRepo
-import com.christophprenissl.hygienecompanion.util.ENDED_DATE
+import com.christophprenissl.hygienecompanion.util.HAS_ENDED
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
@@ -39,7 +39,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
     }
 
     override fun getCoveringLetterSeriesNotEndedFromFireStore() = callbackFlow {
-        val snapshotListener = coveringLetterSeriesRef.orderBy(ENDED_DATE)
+        val snapshotListener = coveringLetterSeriesRef.whereEqualTo(HAS_ENDED, false)
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {
                     val coveringLetterSeriesDto = snapshot.toObjects(CoveringLetterSeriesDto::class.java)

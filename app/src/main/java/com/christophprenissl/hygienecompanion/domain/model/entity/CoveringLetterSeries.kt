@@ -5,6 +5,7 @@ import java.util.*
 data class CoveringLetterSeries(
     val id: String? = null,
     val created: Date? = null,
+    val description: String? = null,
     val resultToClient: Boolean? = null,
     val resultToTestingProperty: Boolean? = null,
     val costLocation: String? = null,
@@ -14,5 +15,7 @@ data class CoveringLetterSeries(
     val sampleAddress: Address? = null,
     val samplingCompany: Address? = null,
     val coveringLetters: List<CoveringLetter>? = null,
-    val endedDate: Date? = null
+    val hasEnded: Boolean? = null,
+    val endedDate: Date? = null,
+    val samplingSeriesType: SamplingSeriesType? = null
 )

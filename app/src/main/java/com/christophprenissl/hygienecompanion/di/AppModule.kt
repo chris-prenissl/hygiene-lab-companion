@@ -105,6 +105,8 @@ object AppModule {
         getBases = GetBases(basisRepo),
         saveBasis = SaveBasis(basisRepo),
         deleteBasis = DeleteBasis(basisRepo),
-        saveCoveringLetterSeries = SaveCoveringLetterSeries(coveringLetterSeriesRepo)
+        saveCoveringLetterSeries = SaveCoveringLetterSeries(coveringLetterSeriesRepo),
+        getCoveringLetterSeries = GetCoveringLetterSeries(coveringLetterSeriesRepo),
+        getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(coveringLetterSeriesRepo)
     )
 }

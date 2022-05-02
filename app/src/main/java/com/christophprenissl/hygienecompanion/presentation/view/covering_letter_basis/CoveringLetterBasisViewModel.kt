@@ -5,10 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.entity.Address
-import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterBasis
-import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
+import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -61,10 +58,16 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _chosenBasis = mutableStateOf<Basis?>(null)
     val chosenBasis = _chosenBasis
 
+    private var _gotCoveringLetterSeriesNotEndedState = mutableStateOf<Response<List<CoveringLetterSeries>>>(Response.Success(listOf()))
+    val gotCoveringLetterSeriesNotEndedState: State<Response<List<CoveringLetterSeries>>> = _gotCoveringLetterSeriesNotEndedState
+
+    private var _savedCoveringLetterSeriesState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val savedCoveringLetterSeriesState: State<Response<Void?>> = _savedCoveringLetterSeriesState
 
     init {
         getAddresses()
         getBases()
+        getCoveringLetterSeriesNotEnded()
     }
 
 
@@ -204,7 +207,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
             eMail = eMail
         )
         viewModelScope.launch {
-            useCases.saveAddress(newAddress).collect() { response ->
+            useCases.saveAddress(newAddress).collect { response ->
                 _savedAddressState.value = response
                 _openAddressDialogState.value = false
             }
@@ -213,8 +216,24 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     fun deleteAddress(address: Address) {
         viewModelScope.launch {
-            useCases.deleteAddress(address).collect() { response ->
+            useCases.deleteAddress(address).collect { response ->
                 _deleteAddressState.value = response
+            }
+        }
+    }
+
+    fun saveCoveringLetterSeries(coveringLetterSeries: CoveringLetterSeries) {
+        viewModelScope.launch {
+            useCases.saveCoveringLetterSeries(coveringLetterSeries).collect { response ->
+                _savedCoveringLetterSeriesState.value = response
+            }
+        }
+    }
+
+    fun getCoveringLetterSeriesNotEnded() {
+        viewModelScope.launch {
+            useCases.getCoveringLetterSeries().collect { response ->
+                _gotCoveringLetterSeriesNotEndedState.value = response
             }
         }
     }

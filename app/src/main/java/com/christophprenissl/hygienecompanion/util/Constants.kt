@@ -73,4 +73,4 @@ const val ADDRESS_ID = "addressId"
 const val COVERING_LETTER_COLLECTION = "coveringLetters"
 const val SAMPLE_COLLECTION = "samples"
 //query parameter
-const val ENDED_DATE = "endedDate"
+const val HAS_ENDED = "hasEnded"

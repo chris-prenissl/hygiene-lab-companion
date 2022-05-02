@@ -3,6 +3,7 @@ package com.christophprenissl.hygienecompanion.domain.model.util.mapper
 import com.christophprenissl.hygienecompanion.domain.model.dto.CoveringLetterSeriesDto
 import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
+import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingSeriesType
 
 class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLetterSeriesDto> {
     override fun fromEntity(entity: CoveringLetterSeriesDto): CoveringLetterSeries {
@@ -15,6 +16,7 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
         return CoveringLetterSeries(
             id = entity.id,
             created = entity.created,
+            description = entity.description,
             resultToClient = entity.resultToClient,
             resultToTestingProperty = entity.resultToTestingProperty,
             costLocation = entity.costLocation,
@@ -26,7 +28,9 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
             coveringLetters = entity.coveringLetters?.map {
                 coveringLetterMapper.fromEntity(it)
             },
-            endedDate = entity.endedDate
+            hasEnded = entity.hasEnded,
+            endedDate = entity.endedDate,
+            samplingSeriesType = entity.samplingSeriesType?.let { SamplingSeriesType.valueOf(it) }
         )
     }
 
@@ -36,6 +40,7 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
         return CoveringLetterSeriesDto(
             id = domain.id,
             created = domain.created,
+            description = domain.description,
             resultToClient = domain.resultToClient,
             resultToTestingProperty = domain.resultToTestingProperty,
             costLocation = domain.costLocation,
@@ -47,7 +52,9 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
             coveringLetters = domain.coveringLetters?.map {
                 coveringLetterMapper.toEntity(it)
             },
-            endedDate = domain.endedDate
+            hasEnded = domain.hasEnded,
+            endedDate = domain.endedDate,
+            samplingSeriesType = domain.samplingSeriesType?.name
         )
     }
 }

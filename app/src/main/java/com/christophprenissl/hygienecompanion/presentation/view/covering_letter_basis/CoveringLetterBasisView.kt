@@ -149,6 +149,30 @@ fun CoveringLetterBasisView(
             Text(COVERING_LETTER_SERIES)
         }
 
+        when (val coveringLetterSeriesResponse = viewModel.gotCoveringLetterSeriesNotEndedState.value) {
+            is Response.Success -> {
+                items(coveringLetterSeriesResponse.data) { coveringLetterSeries ->
+                    SwipeToDelete(
+                        onDelete = {  }
+                    ) {
+                        CoveringLetterSeriesCard(
+                            coveringLetterSeries = coveringLetterSeries,
+                            onClick = {}
+                        )
+                    }
+                }
+            }
 
+            is Response.Loading -> {
+                item {
+                    Text(LOADING)
+                }
+            }
+            is Response.Error -> {
+                item {
+                    Text(ERROR)
+                }
+            }
+        }
     }
 }

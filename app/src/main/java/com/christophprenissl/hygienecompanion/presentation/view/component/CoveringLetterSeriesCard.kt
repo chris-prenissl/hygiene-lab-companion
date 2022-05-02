@@ -11,15 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
+import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.util.cardPadding
 import com.christophprenissl.hygienecompanion.util.halfSize
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BasisCard(
-    basis: Basis,
+fun CoveringLetterSeriesCard(
+    coveringLetterSeries: CoveringLetterSeries,
     onClick: () -> Unit
 ) {
     Card(
@@ -33,8 +33,8 @@ fun BasisCard(
             modifier = Modifier.fillMaxWidth()
         ) {
             Column {
-                basis.description?.let { Text(it) }
-                basis.norm?.let { Text(it) }
+                coveringLetterSeries.description?.let { Text(it) }
+                coveringLetterSeries.samplingSeriesType?.let { Text(it.name) }
             }
         }
         Row(
