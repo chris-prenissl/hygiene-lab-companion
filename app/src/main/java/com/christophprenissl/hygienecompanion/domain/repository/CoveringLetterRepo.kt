@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoveringLetterRepo {
 
+    suspend fun getCoveringLettersOfSeriesToFireStore(seriesId: String): Flow<Response<List<CoveringLetter>>>
+
     suspend fun saveCoveringLetterOfSeriesToFireStore(seriesId: String,
                                                       coveringLetter: CoveringLetter): Flow<Response<Void?>>
 
