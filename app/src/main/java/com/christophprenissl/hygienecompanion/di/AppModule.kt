@@ -27,19 +27,6 @@ object AppModule {
     @Provides
     fun provideSampleLocationsRef(db: FirebaseFirestore) = db.collection(SAMPLE_LOCATIONS_FIRESTORE)
 
-    @SampleLocationQueryFireStore
-    @Provides
-    fun provideSampleLocationQuery(@SampleLocationRefFireStore sampleLocationsRef: CollectionReference) = sampleLocationsRef.orderBy("description")
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Provides
-    fun provideSampleLocationRepoImpl(
-        @SampleLocationRefFireStore sampleLocationsRef: CollectionReference,
-        @SampleLocationQueryFireStore sampleLocationsQuery: Query
-    ): SampleLocationRepo = SampleLocationRepoImpl(
-        sampleLocationsRef = sampleLocationsRef,
-        sampleLocationsQuery = sampleLocationsQuery)
-
     @AddressRefFireStore
     @Provides
     fun provideAddressesRef(db: FirebaseFirestore) = db.collection(ADDRESSES_FIRESTORE)
@@ -47,6 +34,26 @@ object AppModule {
     @AddressQueryFireStore
     @Provides
     fun provideAddressesQuery(@AddressRefFireStore addressesRef: CollectionReference) = addressesRef.orderBy("name")
+
+    @BasisRefFireStore
+    @Provides
+    fun provideBasisRef(db: FirebaseFirestore) = db.collection(BASES_FIRESTORE)
+
+    @UserRefFireStore
+    @Provides
+    fun provideUseRef(db: FirebaseFirestore) = db.collection(USERS_FIRESTORE)
+
+    @CoveringLetterSeriesRefFireStore
+    @Provides
+    fun provideCoveringLetterSeriesRef(db: FirebaseFirestore) = db.collection(
+        COVERING_LETTER_SERIES_FIRESTORE)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Provides
+    fun provideSampleLocationRepoImpl(
+        @SampleLocationRefFireStore sampleLocationsRef: CollectionReference
+    ): SampleLocationRepo = SampleLocationRepoImpl(
+        sampleLocationsRef = sampleLocationsRef)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Provides
@@ -57,19 +64,11 @@ object AppModule {
         addressesRef = addressesRef,
         addressesQuery = addressesQuery)
 
-    @BasisRefFireStore
-    @Provides
-    fun provideBasisRef(db: FirebaseFirestore) = db.collection(BASES_FIRESTORE)
-
     @Provides
     fun provideBasisRepoImpl(
         @BasisRefFireStore basisRef: CollectionReference
     ): BasisRepo = BasisRepoImpl(
         basisRef = basisRef)
-
-    @UserRefFireStore
-    @Provides
-    fun provideUseRef(db: FirebaseFirestore) = db.collection(USERS_FIRESTORE)
 
     @Provides
     fun provideUserRepoImpl(
@@ -78,15 +77,17 @@ object AppModule {
         userRef = userRef
     )
 
-    @CoveringLetterSeriesRefFireStore
-    @Provides
-    fun provideCoveringLetterSeriesRef(db: FirebaseFirestore) = db.collection(
-        COVERING_LETTER_SERIES_FIRESTORE)
-
     @Provides
     fun provideCoveringLetterRepoImpl(
         @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
     ): CoveringLetterRepoImpl = CoveringLetterRepoImpl(
+        coveringLetterSeriesRef = coveringLetterSeriesRef
+    )
+
+    @Provides
+    fun provideCoveringLetterSeriesRepoImpl(
+        @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
+    ): CoveringLetterSeriesRepoImpl = CoveringLetterSeriesRepoImpl(
         coveringLetterSeriesRef = coveringLetterSeriesRef
     )
 

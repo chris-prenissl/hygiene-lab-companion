@@ -8,6 +8,8 @@ interface BasisRepo {
 
     fun getBasesFromFireStore(): Flow<Response<List<Basis>>>
 
+    suspend fun getBasisById(id: String): Flow<Response<Basis>>
+
     suspend fun saveBasisToFireStore(basis: Basis): Flow<Response<Void?>>
 
     suspend fun deleteBasisFromFireStore(basis: Basis): Flow<Response<Void?>>

@@ -22,8 +22,7 @@ import javax.inject.Singleton
 @Singleton
 @ExperimentalCoroutinesApi
 class SampleLocationRepoImpl @Inject constructor(
-    private val sampleLocationsRef: CollectionReference,
-    private val sampleLocationsQuery: Query,
+    private val sampleLocationsRef: CollectionReference
 ): SampleLocationRepo {
     override fun getSampleLocationsFromFireStore(fromAddress: Address) = callbackFlow {
         val snapshotListener = sampleLocationsRef.whereEqualTo(ADDRESS_ID, fromAddress.id).addSnapshotListener { snapshot, e ->

@@ -4,10 +4,14 @@ import com.christophprenissl.hygienecompanion.domain.model.dto.CoveringLetterSer
 import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
 
-class CoveringLetterSeriesMapper(private val bases: List<Basis>?): DataMapper<CoveringLetterSeries, CoveringLetterSeriesDto> {
+class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLetterSeriesDto> {
     override fun fromEntity(entity: CoveringLetterSeriesDto): CoveringLetterSeries {
         val addressMapper = AddressMapper()
         val coveringLetterMapper = CoveringLetterMapper()
+
+        val templateBases = entity.basesByNorm?.map {
+            Basis(norm = it)
+        }
         return CoveringLetterSeries(
             id = entity.id,
             created = entity.created,
@@ -15,7 +19,7 @@ class CoveringLetterSeriesMapper(private val bases: List<Basis>?): DataMapper<Co
             resultToTestingProperty = entity.resultToTestingProperty,
             costLocation = entity.costLocation,
             laboratoryId = entity.laboratoryId,
-            bases = bases,
+            bases = templateBases,
             client = entity.client?.let { addressMapper.fromEntity(it) },
             sampleAddress = entity.sampleAddress?.let { addressMapper.fromEntity(it) },
             samplingCompany = entity.samplingCompany?.let { addressMapper.fromEntity(it) },

@@ -72,3 +72,5 @@ const val ADDRESS_ID = "addressId"
 //collection path
 const val COVERING_LETTER_COLLECTION = "coveringLetters"
 const val SAMPLE_COLLECTION = "samples"
+//query parameter
+const val ENDED_DATE = "endedDate"

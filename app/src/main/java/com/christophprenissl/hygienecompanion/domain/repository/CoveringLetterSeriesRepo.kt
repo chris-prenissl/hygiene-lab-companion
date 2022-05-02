@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoveringLetterSeriesRepo {
 
-    fun getSamplingSeriesFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
+    fun getCoveringLetterSeriesFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
 
-    fun getSamplingSeriesNotEndedFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
+    fun getCoveringLetterSeriesNotEndedFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
 
-    suspend fun saveSamplingSeriesToFireStore(coveringLetterSeries: CoveringLetterSeries): Flow<Response<Void?>>
+    suspend fun saveCoveringLetterSeriesToFireStore(coveringLetterSeries: CoveringLetterSeries): Flow<Response<Void?>>
 
 }

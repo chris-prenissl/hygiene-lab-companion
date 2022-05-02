@@ -8,10 +8,6 @@ annotation class SampleLocationRefFireStore
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class SampleLocationQueryFireStore
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
 annotation class AddressRefFireStore
 
 @Qualifier

@@ -44,7 +44,7 @@ class CoveringLetterRepoImpl @Inject constructor(
     override suspend fun saveCoveringLetterOfSeriesToFireStore(
         seriesId: String,
         coveringLetter: CoveringLetter
-    )= flow {
+    ) = flow {
         try {
             emit(Response.Loading)
             val mapper = CoveringLetterMapper()

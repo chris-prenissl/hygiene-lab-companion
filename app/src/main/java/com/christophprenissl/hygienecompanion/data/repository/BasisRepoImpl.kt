@@ -36,6 +36,22 @@ class BasisRepoImpl @Inject constructor(
         }
     }
 
+    override suspend fun getBasisById(id: String) = flow {
+        try {
+            emit(Response.Loading)
+            val mapper = BasisMapper()
+            val basisDto = basisRef.document(id).get().await().toObject(BasisDto::class.java)
+            if (basisDto != null) {
+                val basis = mapper.fromEntity(basisDto)
+                emit(Response.Success(basis))
+            } else {
+                emit(Response.Error("basis not found"))
+            }
+        } catch (e: Exception) {
+            emit(Response.Error(e.message ?: e.toString()))
+        }
+    }
+
     override suspend fun saveBasisToFireStore(basis: Basis) = flow {
         try {
             emit(Response.Loading)
