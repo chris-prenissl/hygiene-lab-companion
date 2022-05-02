@@ -1,8 +1,10 @@
 package com.christophprenissl.hygienecompanion.domain.model.dto
 
+import com.google.firebase.firestore.DocumentId
 import java.util.*
 
 data class SampleDto(
+    @DocumentId
     val id: String? = null,
     val created: Date? = null,
     val extraInfoSampling: String? = null,

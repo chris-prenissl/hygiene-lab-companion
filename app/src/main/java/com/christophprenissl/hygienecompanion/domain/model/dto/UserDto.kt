@@ -1,7 +1,10 @@
 package com.christophprenissl.hygienecompanion.domain.model.dto
 
+import com.google.firebase.firestore.DocumentId
+
 
 data class UserDto(
+    @DocumentId
     val id: String? = null,
     val name: String? = null,
     val hasCertificate: Boolean? = null,
