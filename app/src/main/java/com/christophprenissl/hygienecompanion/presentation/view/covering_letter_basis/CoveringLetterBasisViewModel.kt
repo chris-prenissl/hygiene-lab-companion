@@ -3,6 +3,7 @@ package com.christophprenissl.hygienecompanion.presentation.view.covering_letter
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.DatePicker
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -91,8 +92,11 @@ class CoveringLetterBasisViewModel @Inject constructor(
     val openSamplingLocationsDropDown = _openSamplingLocationsDropDown
 
     //DatePicker
-    private var _startDate = mutableStateOf(Date())
-    val startDate: State<Date> = _startDate
+    private var _plannedStartDate = mutableStateOf(Date())
+    val plannedStartDate: State<Date> = _plannedStartDate
+
+    private var _plannedEndDate = mutableStateOf(Date())
+    val plannedEndDate: State<Date> = _plannedEndDate
 
     init {
         getAddresses()
@@ -358,8 +362,30 @@ class CoveringLetterBasisViewModel @Inject constructor(
     fun openStartDatePickerDialog(
         context: Context
     ) {
+        openDatePickerDialog(
+            context = context,
+            date = _plannedStartDate
+        )
+    }
+
+    fun openEndDatePickerDialog(
+        context: Context
+    ) {
+        if (_plannedStartDate.value.time > _plannedEndDate.value.time) {
+            _plannedEndDate.value.time = _plannedStartDate.value.time
+        }
+        openDatePickerDialog(
+            context = context,
+            date = _plannedEndDate
+        )
+    }
+
+    private fun openDatePickerDialog(
+        context: Context,
+        date: MutableState<Date>
+    ) {
         val currentCalendar = Calendar.getInstance()
-        currentCalendar.timeInMillis = startDate.value.time
+        currentCalendar.timeInMillis = date.value.time
         val cYear = currentCalendar.get(Calendar.YEAR)
         val cMonth = currentCalendar.get(Calendar.MONTH)
         val cDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
@@ -371,7 +397,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, day)
-                _startDate.value = Date(calendar.timeInMillis)
+                date.value = Date(calendar.timeInMillis)
             },
             cYear,
             cMonth,

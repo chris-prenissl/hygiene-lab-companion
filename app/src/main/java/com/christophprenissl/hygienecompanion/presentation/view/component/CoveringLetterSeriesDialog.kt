@@ -1,6 +1,5 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component
 
-import android.widget.DatePicker
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,9 +20,6 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
-import java.time.Year
-import java.util.*
-import java.util.Calendar.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -42,6 +38,12 @@ fun CoveringLetterSeriesDialog(
     val basesChoices = remember { mutableStateListOf<Basis>() }
     val bases = remember { mutableStateListOf<Basis>() }
 
+    var coveringParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
+    val coveringParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    val coveringSampleParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    val labSampleParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    val labReportParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+
     var client by remember { mutableStateOf<Address?>(null) }
     var sampleAddress by remember { mutableStateOf<Address?>(null) }
     var samplingCompany by remember { mutableStateOf<Address?>(null) }
@@ -50,8 +52,6 @@ fun CoveringLetterSeriesDialog(
 
     val types = SamplingSeriesType.values()
     var checkedType by remember { mutableStateOf(types[0]) }
-
-    val plannedEnd by remember { mutableStateOf<Long?>(null) }
 
     LaunchedEffect(Unit) {
         val basesResponse = viewModel.gotBasesState.value
@@ -131,6 +131,19 @@ fun CoveringLetterSeriesDialog(
                                         onClick = {
                                             bases.add(basis)
                                             basesChoices.remove(basis)
+                                            basis.coveringParameters?.forEach {
+                                                coveringParameters[it] = false
+                                            }
+                                            coveringParametersKeys = coveringParameters.keys.toMutableStateList()
+                                            basis.coveringSampleParameters?.forEach {
+                                                coveringSampleParameters[it] = false
+                                            }
+                                            basis.labSampleParameters?.forEach {
+                                                labSampleParameters[it] = false
+                                            }
+                                            basis.labReportParameters?.forEach {
+                                                labReportParameters[it] = false
+                                            }
                                         }
                                     ) {
                                         Text(text = it)
@@ -154,6 +167,25 @@ fun CoveringLetterSeriesDialog(
                                 basis = it,
                                 onClick = {}
                             )
+                        }
+                    }
+
+                    item {
+                        Text("Grundlegende Parameter")
+                    }
+
+                    items(coveringParameters.values.count()) { idx ->
+                        val key = coveringParametersKeys[idx]
+                        Row {
+                            key.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            coveringParameters[key]?.let {
+                                Checkbox(
+                                    checked = it,
+                                    onCheckedChange = { new ->
+                                        coveringParameters[key] = new
+                                    })
+                            }
                         }
                     }
 
@@ -322,7 +354,7 @@ fun CoveringLetterSeriesDialog(
                         Text("Anfangs-Datum")
                     }
                     item {
-                        Text(viewModel.startDate.value.dayMonthYearString())
+                        Text(viewModel.plannedStartDate.value.dayMonthYearString())
                     }
 
                     item {
@@ -359,6 +391,26 @@ fun CoveringLetterSeriesDialog(
                                     )
                                     Text(type.name)
                                 }
+                            }
+                        }
+                    }
+
+                    if (checkedType != SamplingSeriesType.NonPeriodic) {
+                        item {
+                            Text("End-Datum")
+                        }
+                        item {
+                            Text(viewModel.plannedEndDate.value.dayMonthYearString())
+                        }
+                        item {
+                            Button(
+                                onClick = {
+                                    viewModel.openEndDatePickerDialog(
+                                        context = context
+                                    )
+                                }
+                            ) {
+                                Text("End-Datum wählen")
                             }
                         }
                     }
