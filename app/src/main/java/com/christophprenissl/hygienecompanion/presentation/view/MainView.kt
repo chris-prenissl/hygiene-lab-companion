@@ -1,7 +1,10 @@
 package com.christophprenissl.hygienecompanion.presentation.view
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.presentation.view.component.BottomNavBar
 import com.christophprenissl.hygienecompanion.presentation.view.component.TopMenuBar
@@ -29,7 +32,9 @@ fun MainView() {
                 navItems = bottomNavItems
             )
         }
-    ) {
-        NavigationGraph(loggedIn = loggedIn, navController = navController)
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            NavigationGraph(loggedIn = loggedIn, navController = navController)
+        }
     }
 }

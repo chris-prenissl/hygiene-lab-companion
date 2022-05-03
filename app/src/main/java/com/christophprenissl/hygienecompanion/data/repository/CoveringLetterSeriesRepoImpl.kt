@@ -63,15 +63,13 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
             emit(Response.Loading)
             val mapper = CoveringLetterSeriesMapper()
             val coveringLetterSeriesDto = mapper.toEntity(coveringLetterSeries)
-            if (coveringLetterSeries.id != null) {
-                val saved = coveringLetterSeriesRef
-                    .document(coveringLetterSeries.id)
-                    .set(coveringLetterSeriesDto)
-                    .await()
-                emit(Response.Success(saved))
-            } else {
-                emit(Response.Error("No id provided"))
-            }
+            val coveringLetterSeriesId = coveringLetterSeriesRef.document().id
+            coveringLetterSeries.id = coveringLetterSeriesId
+            val saved = coveringLetterSeriesRef
+                .document(coveringLetterSeriesId)
+                .set(coveringLetterSeriesDto)
+                .await()
+            emit(Response.Success(saved))
         } catch (e: Exception) {
             emit(Response.Error(e.message ?: e.toString()))
         }

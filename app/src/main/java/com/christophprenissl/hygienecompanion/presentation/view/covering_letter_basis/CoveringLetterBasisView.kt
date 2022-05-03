@@ -55,6 +55,18 @@ fun CoveringLetterBasisView(
         }
 
         item {
+            when (viewModel.openCoveringLetterSeriesDialog.value) {
+                true -> CoveringLetterSeriesDialog(
+                    viewModel = viewModel,
+                    onDismissRequest = {
+                        viewModel.closeCoveringLetterSeriesDialog()
+                    }
+                )
+                false -> Unit
+            }
+        }
+
+        item {
             Text(
                 modifier = Modifier.padding(standardPadding),
                 text = COVERING_LETTER_BASIS_DATA
@@ -71,7 +83,7 @@ fun CoveringLetterBasisView(
                         AddressCard(
                             address = address,
                             onClick = {
-                                viewModel.chooseAddress(address)
+                                viewModel.chooseAddressForSampleLocations(address)
                                 navController.navigate(Screen.SampleLocations.route)
                             }
                         )
@@ -176,6 +188,15 @@ fun CoveringLetterBasisView(
                     Text(ERROR)
                 }
             }
+        }
+
+        item {
+            Button(onClick = {
+                viewModel.openCoveringLetterSeriesDialog()
+            }) {
+                Text("Begleitscheinserie hinzufügen")
+            }
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
     }
 }

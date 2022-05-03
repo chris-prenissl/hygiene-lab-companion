@@ -1,11 +1,13 @@
 package com.christophprenissl.hygienecompanion.domain.model.dto
 
 import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.ServerTimestamp
 import java.util.*
 
 data class CoveringLetterSeriesDto(
     @DocumentId
     val id: String? = null,
+    @ServerTimestamp
     val created: Date? = null,
     val description: String? = null,
     val resultToClient: Boolean? = null,

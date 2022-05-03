@@ -67,6 +67,25 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _chosenCoveringLetterSeries = mutableStateOf<CoveringLetterSeries?>(null)
     val chosenCoveringLetterSeries = _chosenCoveringLetterSeries
 
+    private var _openCoveringLetterSeriesDialog = mutableStateOf(false)
+    val openCoveringLetterSeriesDialog = _openCoveringLetterSeriesDialog
+
+    //CoveringLetterSeriesDialog
+    private var _openBasisDropDown = mutableStateOf(false)
+    val openBasisDropDown = _openBasisDropDown
+
+    private var _openClientAddressDropDown = mutableStateOf(false)
+    val openClientAddressDropDown = _openClientAddressDropDown
+
+    private var _openSampleAddressDropDown = mutableStateOf(false)
+    val openSampleAddressDropDown = _openSampleAddressDropDown
+
+    private var _openSamplingCompanyAddressDropDown = mutableStateOf(false)
+    val openSamplingCompanyAddressDropDown = _openSamplingCompanyAddressDropDown
+
+    private var _openSamplingLocationsDropDown = mutableStateOf(false)
+    val openSamplingLocationsDropDown = _openSamplingLocationsDropDown
+
     init {
         getAddresses()
         getBases()
@@ -98,9 +117,13 @@ class CoveringLetterBasisViewModel @Inject constructor(
         }
     }
 
-    fun chooseAddress(address: Address) {
+    fun chooseAddressForSampleLocations(address: Address) {
         _chosenAddress.value = address
         getSampleLocations(address)
+    }
+
+    fun unChooseAddressForSampleLocations() {
+        _chosenAddress.value = null
     }
 
     fun saveSampleLocation(
@@ -225,7 +248,45 @@ class CoveringLetterBasisViewModel @Inject constructor(
         }
     }
 
-    fun saveCoveringLetterSeries(coveringLetterSeries: CoveringLetterSeries) {
+    fun openCoveringLetterSeriesDialog() {
+        _openCoveringLetterSeriesDialog.value = true
+    }
+
+    fun closeCoveringLetterSeriesDialog() {
+        _openCoveringLetterSeriesDialog.value = false
+    }
+
+    fun saveCoveringLetterSeries(
+        description: String? = null,
+        resultToClient: Boolean? = null,
+        resultToTestingProperty: Boolean? = null,
+        costLocation: String? = null,
+        laboratoryId: String? = null,
+        bases: List<Basis>? = null,
+        client: Address? = null,
+        sampleAddress: Address? = null,
+        samplingCompany: Address? = null,
+        sampleLocations: List<SampleLocation>? = null,
+        samplingSeriesType: SamplingSeriesType? = null
+    ) {
+        val samples =  sampleLocations?.map { Sample(sampleLocation = it) }
+
+        val coveringLetterSeries = CoveringLetterSeries(
+            description = description,
+            resultToClient = resultToClient,
+            resultToTestingProperty = resultToTestingProperty,
+            costLocation = costLocation,
+            laboratoryId = laboratoryId,
+            bases = bases,
+            client = client,
+            sampleAddress = sampleAddress,
+            samplingCompany = samplingCompany,
+            coveringLetters = listOf(CoveringLetter(samples = samples)),
+            samplingSeriesType = samplingSeriesType,
+            hasEnded = false,
+            endedDate = null
+        )
+
         viewModelScope.launch {
             useCases.saveCoveringLetterSeries(coveringLetterSeries).collect { response ->
                 _savedCoveringLetterSeriesState.value = response
@@ -243,5 +304,46 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     fun chooseCoveringLetterSeries(coveringLetterSeries: CoveringLetterSeries) {
         _chosenCoveringLetterSeries.value = coveringLetterSeries
+    }
+
+    //CoveringLetterSeriesDialog
+    fun openBasesChoice() {
+        _openBasisDropDown.value = true
+    }
+
+    fun closeBasesChoice() {
+        _openBasisDropDown.value = false
+    }
+
+    fun openClientAddressChoice() {
+        _openClientAddressDropDown.value = true
+    }
+
+    fun closeClientAddressChoice() {
+        _openClientAddressDropDown.value = false
+    }
+
+    fun openSampleAddressChoice() {
+        _openSampleAddressDropDown.value = true
+    }
+
+    fun closeSampleAddressChoice() {
+        _openSampleAddressDropDown.value = false
+    }
+
+    fun openSamplingCompanyAddressChoice() {
+        _openSamplingCompanyAddressDropDown.value = true
+    }
+
+    fun closeSamplingCompanyAddressChoice() {
+        _openSamplingCompanyAddressDropDown.value = false
+    }
+
+    fun openSamplingLocationsChoice() {
+        _openSamplingLocationsDropDown.value = true
+    }
+
+    fun closeSamplingLocationsChoice() {
+        _openSamplingLocationsDropDown.value = false
     }
 }
