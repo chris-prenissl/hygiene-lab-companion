@@ -31,42 +31,6 @@ fun CoveringLetterBasisView(
     ) {
 
         item {
-            when (viewModel.openAddressDialogState.value) {
-                true -> AddressDialog(
-                    viewModel = viewModel,
-                    onDismissRequest = {
-                        viewModel.closeAddressDialog()
-                    }
-                )
-                false -> Unit
-            }
-        }
-
-        item {
-            when (viewModel.openBasisDialogState.value) {
-                true -> BasisDialog(
-                    viewModel = viewModel,
-                    onDismissRequest = {
-                        viewModel.closeBasisDialog()
-                    }
-                )
-                false -> Unit
-            }
-        }
-
-        item {
-            when (viewModel.openCoveringLetterSeriesDialog.value) {
-                true -> CoveringLetterSeriesDialog(
-                    viewModel = viewModel,
-                    onDismissRequest = {
-                        viewModel.closeCoveringLetterSeriesDialog()
-                    }
-                )
-                false -> Unit
-            }
-        }
-
-        item {
             Text(
                 modifier = Modifier.padding(standardPadding),
                 text = COVERING_LETTER_BASIS_DATA
@@ -99,6 +63,18 @@ fun CoveringLetterBasisView(
                 item {
                     Text(ERROR)
                 }
+            }
+        }
+
+        item {
+            when (viewModel.openAddressDialogState.value) {
+                true -> AddressDialog(
+                    viewModel = viewModel,
+                    onDismissRequest = {
+                        viewModel.closeAddressDialog()
+                    }
+                )
+                false -> Unit
             }
         }
 
@@ -147,6 +123,18 @@ fun CoveringLetterBasisView(
                 }
             }
         }
+
+        item {
+            when (viewModel.openBasisDialogState.value) {
+                true -> BasisDialog(
+                    viewModel = viewModel,
+                    onDismissRequest = {
+                        viewModel.closeBasisDialog()
+                    }
+                )
+                false -> Unit
+            }
+        }
         
         item {
             Button(onClick = {
@@ -187,6 +175,18 @@ fun CoveringLetterBasisView(
                 item {
                     Text(ERROR)
                 }
+            }
+        }
+
+        item {
+            when (viewModel.openCoveringLetterSeriesDialog.value) {
+                true -> CoveringLetterSeriesDialog(
+                    viewModel = viewModel,
+                    onDismissRequest = {
+                        viewModel.closeCoveringLetterSeriesDialog()
+                    }
+                )
+                false -> Unit
             }
         }
 

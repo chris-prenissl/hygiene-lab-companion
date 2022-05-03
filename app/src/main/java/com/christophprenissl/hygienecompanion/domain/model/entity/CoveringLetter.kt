@@ -4,7 +4,7 @@ import java.util.*
 
 data class CoveringLetter(
     val id: String? = null,
-    val created: Date? = null,
+    val date: Date? = null,
     val lotId: String? = null,
     val laboratoryIn: Date? = null,
     val resultCreated: Date? = null,

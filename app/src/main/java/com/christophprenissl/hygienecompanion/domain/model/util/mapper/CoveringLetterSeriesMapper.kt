@@ -28,6 +28,8 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
             coveringLetters = entity.coveringLetters?.map {
                 coveringLetterMapper.fromEntity(it)
             },
+            plannedStart = entity.plannedStart,
+            plannedEnd = entity.plannedEnd,
             hasEnded = entity.hasEnded,
             endedDate = entity.endedDate,
             samplingSeriesType = entity.samplingSeriesType?.let { SamplingSeriesType.valueOf(it) }
@@ -52,6 +54,8 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
             coveringLetters = domain.coveringLetters?.map {
                 coveringLetterMapper.toEntity(it)
             },
+            plannedStart = domain.plannedStart,
+            plannedEnd = domain.plannedEnd,
             hasEnded = domain.hasEnded,
             endedDate = domain.endedDate,
             samplingSeriesType = domain.samplingSeriesType?.name

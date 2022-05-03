@@ -1,5 +1,8 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis
 
+import android.app.DatePickerDialog
+import android.content.Context
+import android.widget.DatePicker
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -9,6 +12,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -85,6 +89,10 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     private var _openSamplingLocationsDropDown = mutableStateOf(false)
     val openSamplingLocationsDropDown = _openSamplingLocationsDropDown
+
+    //DatePicker
+    private var _startDate = mutableStateOf(Date())
+    val startDate: State<Date> = _startDate
 
     init {
         getAddresses()
@@ -345,5 +353,30 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     fun closeSamplingLocationsChoice() {
         _openSamplingLocationsDropDown.value = false
+    }
+
+    fun openStartDatePickerDialog(
+        context: Context
+    ) {
+        val currentCalendar = Calendar.getInstance()
+        currentCalendar.timeInMillis = startDate.value.time
+        val cYear = currentCalendar.get(Calendar.YEAR)
+        val cMonth = currentCalendar.get(Calendar.MONTH)
+        val cDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(
+            context,
+            { _: DatePicker, year: Int, month: Int, day: Int ->
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, month)
+                calendar.set(Calendar.DAY_OF_MONTH, day)
+                _startDate.value = Date(calendar.timeInMillis)
+            },
+            cYear,
+            cMonth,
+            cDay
+        )
+        datePicker.show()
     }
 }

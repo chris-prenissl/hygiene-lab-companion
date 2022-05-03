@@ -15,6 +15,8 @@ data class CoveringLetterSeries(
     val sampleAddress: Address? = null,
     val samplingCompany: Address? = null,
     val coveringLetters: List<CoveringLetter>? = null,
+    val plannedStart: Date? = null,
+    val plannedEnd: Date? = null,
     val hasEnded: Boolean? = null,
     val endedDate: Date? = null,
     val samplingSeriesType: SamplingSeriesType? = null

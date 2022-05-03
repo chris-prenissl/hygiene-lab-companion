@@ -1,23 +1,29 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component
 
+import android.widget.DatePicker
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.entity.Address
-import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
-import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingSeriesType
+import com.christophprenissl.hygienecompanion.domain.model.entity.*
+import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
+import java.time.Year
+import java.util.*
+import java.util.Calendar.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -25,6 +31,8 @@ fun CoveringLetterSeriesDialog(
     viewModel: CoveringLetterBasisViewModel,
     onDismissRequest: () -> Unit
 ) {
+    val context = LocalContext.current
+
     var description by remember { mutableStateOf(TextFieldValue("")) }
     var resultToClient by remember { mutableStateOf(false) }
     var resultToTestingProperty by remember { mutableStateOf(false) }
@@ -40,7 +48,10 @@ fun CoveringLetterSeriesDialog(
 
     val samplingLocations = remember { mutableStateListOf<SampleLocation>() }
 
-    var samplingSeriesType by remember { mutableStateOf(SamplingSeriesType.Monthly) }
+    val types = SamplingSeriesType.values()
+    var checkedType by remember { mutableStateOf(types[0]) }
+
+    val plannedEnd by remember { mutableStateOf<Long?>(null) }
 
     LaunchedEffect(Unit) {
         val basesResponse = viewModel.gotBasesState.value
@@ -304,6 +315,51 @@ fun CoveringLetterSeriesDialog(
                             samplingLocations.remove(it)
                         }) {
                             SampleLocationCard(sampleLocation = it)
+                        }
+                    }
+
+                    item {
+                        Text("Anfangs-Datum")
+                    }
+                    item {
+                        Text(viewModel.startDate.value.dayMonthYearString())
+                    }
+
+                    item {
+                        Button(
+                            onClick = {
+                                viewModel.openStartDatePickerDialog(
+                                    context = context
+                                )
+                            }
+                        ) {
+                            Text("Anfangs-Datum wählen")
+                        }
+                    }
+
+                    item {
+                        Text("Frequenz")
+                        Row {
+                            types.forEach { type ->
+                                Column(
+                                    modifier = Modifier
+                                        .width(60.dp)
+                                        .selectable(
+                                            selected = type == checkedType,
+                                            onClick = { checkedType = type },
+                                            role = Role.RadioButton
+                                        )
+                                        .padding(vertical = standardPadding)
+                                ) {
+                                    RadioButton(
+                                        selected = type == checkedType,
+                                        onClick = {
+                                            checkedType = type
+                                        }
+                                    )
+                                    Text(type.name)
+                                }
+                            }
                         }
                     }
 
