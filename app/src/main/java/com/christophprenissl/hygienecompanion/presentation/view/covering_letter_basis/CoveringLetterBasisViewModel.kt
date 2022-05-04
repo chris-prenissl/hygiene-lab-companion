@@ -98,6 +98,8 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _plannedEndDate = mutableStateOf(Date())
     val plannedEndDate: State<Date> = _plannedEndDate
 
+    private var _pickerOpen = false
+
     init {
         getAddresses()
         getBases()
@@ -384,6 +386,10 @@ class CoveringLetterBasisViewModel @Inject constructor(
         context: Context,
         date: MutableState<Date>
     ) {
+        if (_pickerOpen) {
+            return
+        }
+        _pickerOpen = true
         val currentCalendar = Calendar.getInstance()
         currentCalendar.timeInMillis = date.value.time
         val cYear = currentCalendar.get(Calendar.YEAR)
@@ -404,5 +410,6 @@ class CoveringLetterBasisViewModel @Inject constructor(
             cDay
         )
         datePicker.show()
+        _pickerOpen = false
     }
 }

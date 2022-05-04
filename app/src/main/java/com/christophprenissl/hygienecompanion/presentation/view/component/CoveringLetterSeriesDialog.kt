@@ -40,8 +40,11 @@ fun CoveringLetterSeriesDialog(
 
     var coveringParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
     val coveringParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    var coveringSampleParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
     val coveringSampleParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    var labSampleParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
     val labSampleParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    var labReportParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
     val labReportParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
 
     var client by remember { mutableStateOf<Address?>(null) }
@@ -135,15 +138,21 @@ fun CoveringLetterSeriesDialog(
                                                 coveringParameters[it] = false
                                             }
                                             coveringParametersKeys = coveringParameters.keys.toMutableStateList()
+
                                             basis.coveringSampleParameters?.forEach {
                                                 coveringSampleParameters[it] = false
                                             }
+                                            coveringSampleParametersKeys = coveringSampleParameters.keys.toMutableStateList()
+
                                             basis.labSampleParameters?.forEach {
                                                 labSampleParameters[it] = false
                                             }
+                                            labSampleParametersKeys = labSampleParameters.keys.toMutableStateList()
+
                                             basis.labReportParameters?.forEach {
                                                 labReportParameters[it] = false
                                             }
+                                            labReportParametersKeys = labReportParameters.keys.toMutableStateList()
                                         }
                                     ) {
                                         Text(text = it)
@@ -182,11 +191,84 @@ fun CoveringLetterSeriesDialog(
                             coveringParameters[key]?.let {
                                 Checkbox(
                                     checked = it,
-                                    onCheckedChange = { new ->
-                                        coveringParameters[key] = new
+                                    onCheckedChange = { checked ->
+                                        coveringParameters[key] = checked
                                     })
                             }
                         }
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    }
+
+                    item {
+                        Text("Proben Parameter")
+                    }
+
+                    items(coveringSampleParameters.values.count()) { idx ->
+                        val key = coveringSampleParametersKeys[idx]
+                        Row {
+                            key.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            coveringSampleParameters[key]?.let {
+                                Checkbox(
+                                    checked = it,
+                                    onCheckedChange = { checked ->
+                                        coveringSampleParameters[key] = checked
+                                    })
+                            }
+                        }
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    }
+
+                    item {
+                        Text("Proben Labor-Parameter")
+                    }
+
+                    items(labSampleParameters.values.count()) { idx ->
+                        val key = labSampleParametersKeys[idx]
+                        Row {
+                            key.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            labSampleParameters[key]?.let {
+                                Checkbox(
+                                    checked = it,
+                                    onCheckedChange = { checked ->
+                                        labSampleParameters[key] = checked
+                                    })
+                            }
+                        }
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    }
+
+                    item {
+                        Text("Proben Befund-Parameter")
+                    }
+
+                    items(labReportParameters.values.count()) { idx ->
+                        val key = labReportParametersKeys[idx]
+                        Row {
+                            key.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            labReportParameters[key]?.let {
+                                Checkbox(
+                                    checked = it,
+                                    onCheckedChange = { checked ->
+                                        labReportParameters[key] = checked
+                                    })
+                            }
+                        }
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
                     item {
