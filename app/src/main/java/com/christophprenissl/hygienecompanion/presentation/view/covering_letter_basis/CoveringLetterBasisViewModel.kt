@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
+import com.christophprenissl.hygienecompanion.presentation.util.createDates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -281,9 +282,101 @@ class CoveringLetterBasisViewModel @Inject constructor(
         sampleAddress: Address? = null,
         samplingCompany: Address? = null,
         sampleLocations: List<SampleLocation>? = null,
-        samplingSeriesType: SamplingSeriesType? = null
+        coveringParameters: Map<ParameterBasis, Boolean>? = null,
+        coveringSampleParameters: Map<ParameterBasis, Boolean>? = null,
+        labSampleParameters: Map<ParameterBasis, Boolean>? = null,
+        labReportParameters: Map<ParameterBasis, Boolean>? = null,
+        plannedStart: Date,
+        plannedEnd: Date,
+        samplingSeriesType: SamplingSeriesType
     ) {
-        val samples =  sampleLocations?.map { Sample(sampleLocation = it) }
+        val coveringLetterDates = createDates(plannedStart, plannedEnd, samplingSeriesType)
+        val coveringLetters = coveringLetterDates.mapIndexed { cId, cl ->
+            val coveringParametersCoveringLetter = mutableListOf<Parameter>()
+            coveringParameters?.forEach {
+                if (it.value) {
+                    coveringParametersCoveringLetter.add(
+                        Parameter(
+                            name = it.key.name,
+                            parameterType = it.key.parameterType,
+                            value = when(it.key.parameterType) {
+                                ParameterType.Bool -> false
+                                ParameterType.Note -> ""
+                                ParameterType.Number -> 0
+                                ParameterType.Temperature -> 25.0
+                                else -> ""
+                            }
+                        )
+                    )
+                }
+            }
+            val labParametersCoveringLetter = mutableListOf<Parameter>()
+            labReportParameters?.forEach {
+                if (it.value) {
+                    labParametersCoveringLetter.add(
+                        Parameter(
+                            name = it.key.name,
+                            parameterType = it.key.parameterType,
+                            value = when(it.key.parameterType) {
+                                ParameterType.Bool -> false
+                                ParameterType.Note -> ""
+                                ParameterType.Number -> 0
+                                ParameterType.Temperature -> 25.0
+                                else -> ""
+                            }
+                        )
+                    )
+                }
+            }
+            CoveringLetter(
+                id = cId.toString(),
+                date = cl,
+                coveringParameters = coveringParametersCoveringLetter,
+                labParameters = labParametersCoveringLetter,
+                samples = sampleLocations?.mapIndexed { idx, location ->
+                    val coveringSampleParametersSample = mutableListOf<Parameter>()
+                    coveringSampleParameters?.forEach {
+                        if (it.value) {
+                            coveringSampleParametersSample.add(Parameter(
+                                name = it.key.name,
+                                value = when(it.key.parameterType) {
+                                    ParameterType.Bool -> false
+                                    ParameterType.Temperature -> 0.0
+                                    ParameterType.Number -> 0
+                                    ParameterType.Note -> ""
+                                    else -> ""
+                                },
+                                parameterType = it.key.parameterType
+                            ))
+                        }
+                    }
+                    val labSampleParametersSample = mutableListOf<Parameter>()
+                    labSampleParameters?.forEach {
+                        if (it.value) {
+                            labSampleParametersSample.add(Parameter(
+                                name = it.key.name,
+                                value = when(it.key.parameterType) {
+                                    ParameterType.Bool -> false
+                                    ParameterType.Temperature -> 0.0
+                                    ParameterType.Number -> 0
+                                    ParameterType.Note -> ""
+                                    else -> ""
+                                },
+                                parameterType = it.key.parameterType
+                            ))
+                        }
+                    }
+                    Sample(
+                        id = idx.toString(),
+                        coveringSampleParameters = coveringSampleParametersSample,
+                        labSampleParameters = labSampleParametersSample,
+                        sampleLocation = location
+                    )
+
+                },
+                samplingState = SamplingState.Created
+            )
+        }
 
         val coveringLetterSeries = CoveringLetterSeries(
             description = description,
@@ -295,10 +388,12 @@ class CoveringLetterBasisViewModel @Inject constructor(
             client = client,
             sampleAddress = sampleAddress,
             samplingCompany = samplingCompany,
-            coveringLetters = listOf(CoveringLetter(samples = samples)),
-            samplingSeriesType = samplingSeriesType,
+            coveringLetters = coveringLetters,
+            plannedStart = plannedStart,
+            plannedEnd = plannedEnd,
             hasEnded = false,
-            endedDate = null
+            endedDate = null,
+            samplingSeriesType = samplingSeriesType
         )
 
         viewModelScope.launch {

@@ -74,3 +74,10 @@ const val COVERING_LETTER_COLLECTION = "coveringLetters"
 const val SAMPLE_COLLECTION = "samples"
 //query parameter
 const val HAS_ENDED = "hasEnded"
+
+//time
+const val WEEK_DAYS = 7
+const val MONTH_DAYS = 30
+const val QUARTER_YEAR_DAYS = 90
+const val HALF_YEAR_DAYS = 180
+const val YEAR_DAYS = 360

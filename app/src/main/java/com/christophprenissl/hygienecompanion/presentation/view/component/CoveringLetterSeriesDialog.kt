@@ -54,7 +54,7 @@ fun CoveringLetterSeriesDialog(
     val samplingLocations = remember { mutableStateListOf<SampleLocation>() }
 
     val types = SamplingSeriesType.values()
-    var checkedType by remember { mutableStateOf(types[0]) }
+    var samplingSeriesType by remember { mutableStateOf(types[0]) }
 
     LaunchedEffect(Unit) {
         val basesResponse = viewModel.gotBasesState.value
@@ -459,16 +459,16 @@ fun CoveringLetterSeriesDialog(
                                     modifier = Modifier
                                         .width(60.dp)
                                         .selectable(
-                                            selected = type == checkedType,
-                                            onClick = { checkedType = type },
+                                            selected = type == samplingSeriesType,
+                                            onClick = { samplingSeriesType = type },
                                             role = Role.RadioButton
                                         )
                                         .padding(vertical = standardPadding)
                                 ) {
                                     RadioButton(
-                                        selected = type == checkedType,
+                                        selected = type == samplingSeriesType,
                                         onClick = {
-                                            checkedType = type
+                                            samplingSeriesType = type
                                         }
                                     )
                                     Text(type.name)
@@ -477,7 +477,7 @@ fun CoveringLetterSeriesDialog(
                         }
                     }
 
-                    if (checkedType != SamplingSeriesType.NonPeriodic) {
+                    if (samplingSeriesType != SamplingSeriesType.NonPeriodic) {
                         item {
                             Text("End-Datum")
                         }
@@ -508,7 +508,19 @@ fun CoveringLetterSeriesDialog(
                                     resultToClient = resultToClient,
                                     resultToTestingProperty = resultToTestingProperty,
                                     costLocation = costLocation.text,
-                                    laboratoryId = laboratoryId.text
+                                    laboratoryId = laboratoryId.text,
+                                    bases = bases,
+                                    client = client,
+                                    sampleAddress = sampleAddress,
+                                    samplingCompany = samplingCompany,
+                                    sampleLocations = samplingLocations,
+                                    coveringParameters = coveringParameters,
+                                    coveringSampleParameters = coveringSampleParameters,
+                                    labSampleParameters = labSampleParameters,
+                                    labReportParameters = labReportParameters,
+                                    samplingSeriesType = samplingSeriesType,
+                                    plannedStart = viewModel.plannedStartDate.value,
+                                    plannedEnd = viewModel.plannedEndDate.value
                                 )
                                 onDismissRequest()
                             }
