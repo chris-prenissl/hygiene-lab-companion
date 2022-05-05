@@ -5,26 +5,30 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import java.lang.reflect.Modifier
 
 private val DarkColorPalette = darkColors(
-    primary = UKRBlueLight,
-    onPrimary = UKRDarkOcra,
-    secondary = UKROrangeLight,
-    onSecondary = UKRDarkOcra,
-    background = UKRUltraDark,
-    onBackground = UKRonUltraDark,
-    surface = UKRVeryDark,
-    onSurface = UKRBlue,
+    primary = UKRPrimaryDark,
+    primaryVariant = UKRPrimaryDark,
+    onPrimary = UKROnPrimaryDark,
+    secondary = UKRSecondaryDark,
+    secondaryVariant = UKRSecondaryDark,
+    onSecondary = UKROnSecondaryDark,
+    background = UKRBackgroundDark,
+    onBackground = UKROnBackgroundDark,
+    surface = UKRSurfaceDark,
+    onSurface = UKROnSurfaceDark,
 )
 
 private val LightColorPalette = lightColors(
-    primary = UKRBlue,
-    onPrimary = UKRDarkPurple,
-    secondary = UKROrangeLight,
-    onSecondary = UKROcra,
-    background = UKRWhite,
-    onBackground = UKRUltraLight,
+    primary = UKRPrimaryLight,
+    primaryVariant = UKRPrimaryLight,
+    onPrimary = UKROnPrimaryLight,
+    secondary = UKRSecondaryLight,
+    secondaryVariant = UKRSecondaryLight,
+    onSecondary = UKROnSecondaryLight,
+    background = UKRBackgroundLight,
+    onBackground = UKROnBackgroundLight
 )
 
 @Composable
