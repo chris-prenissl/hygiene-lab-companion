@@ -3,7 +3,7 @@ package com.christophprenissl.hygienecompanion.domain.model.entity
 import java.util.*
 
 data class Sample(
-    val id: String? = null,
+    var id: String? = null,
     val created: Date? = null,
     val extraInfoSampling: String? = null,
     val extraInfoLaboratory: String? = null,

@@ -33,6 +33,7 @@ fun CoveringLetterCard(
             modifier = Modifier.fillMaxWidth()
         ) {
             Column {
+                coveringLetter.description?.let { Text(it) }
                 coveringLetter.date?.let { Text(it.dayMonthYearString()) }
                 coveringLetter.samplingState?.let { Text(it.name) }
             }

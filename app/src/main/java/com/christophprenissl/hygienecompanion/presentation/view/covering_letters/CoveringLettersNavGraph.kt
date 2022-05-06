@@ -7,7 +7,8 @@ import androidx.navigation.compose.navigation
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 fun NavGraphBuilder.coveringLettersGraph(
-    navController: NavController
+    navController: NavController,
+    viewModel: CoveringLettersViewModel
 ) {
 
     navigation(
@@ -15,10 +16,13 @@ fun NavGraphBuilder.coveringLettersGraph(
         route = Screen.CoveringLetters.graphRoute
     ) {
         composable(Screen.CoveringLetters.route) {
-            CoveringLettersView(navController = navController)
+            CoveringLettersView(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
         composable(Screen.CoveringLetterDetail.route) {
-            CoveringLetterDetailView()
+            CoveringLetterDetailView(viewModel = viewModel)
         }
     }
 }

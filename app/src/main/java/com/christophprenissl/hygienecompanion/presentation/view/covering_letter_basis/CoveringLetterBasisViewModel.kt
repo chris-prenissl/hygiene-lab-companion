@@ -330,6 +330,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
             }
             CoveringLetter(
                 id = cId.toString(),
+                description = description,
                 date = cl,
                 coveringParameters = coveringParametersCoveringLetter,
                 labParameters = labParametersCoveringLetter,
