@@ -4,10 +4,15 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingSeries
 import com.christophprenissl.hygienecompanion.util.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.Calendar.DATE
+import java.util.Calendar.*
 
 fun Date.dayMonthYearString(): String {
     val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.GERMANY)
+    return formatter.format(this.time)
+}
+
+fun Date.monthYearString(): String {
+    val formatter = SimpleDateFormat("MM. yyyy", Locale.GERMANY)
     return formatter.format(this.time)
 }
 
@@ -38,8 +43,13 @@ fun createDates(startDate: Date, endDate: Date, samplingSeriesTye: SamplingSerie
 }
 
 fun MutableList<Date>.addPeriodicDays(start: Date, end: Date, period: Int) {
-    val c = Calendar.getInstance()
-    val it = Date(start.time)
+    val c = getInstance()
+    c.timeInMillis = start.time
+    c.set(HOUR_OF_DAY, 0)
+    c.set(MINUTE, 0)
+    c.set(SECOND, 0)
+    c.set(MILLISECOND, 0)
+    val it = Date(c.timeInMillis)
     while (it.time <= end.time) {
         add(Date(it.time))
         c.add(DATE, period)
