@@ -34,15 +34,24 @@ fun CoveringLettersView(
 
         when(val response = viewModel.gotCoveringLettersState.value) {
             is Response.Success -> {
-                items(response.data) { item ->
-                    CoveringLetterCard(
-                        coveringLetter = item,
-                        onClick = {
-                            viewModel.chooseCoveringLetter(item)
-                            navController.navigate(Screen.CoveringLetterDetail.route)
+                val groupedCoveringLetters = response.data
+                groupedCoveringLetters.forEach { (initial, coveringLetters) ->
+                    initial?.let {
+                        stickyHeader {
+                            Text(initial)
                         }
-                    )
+                    }
+                    items(coveringLetters) {
+                        CoveringLetterCard(
+                            coveringLetter = it,
+                            onClick = {
+                                viewModel.chooseCoveringLetter(it)
+                                navController.navigate(Screen.CoveringLetterDetail.route)
+                            }
+                        )
+                    }
                 }
+
             }
             else -> {
                 item {

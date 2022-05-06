@@ -35,6 +35,11 @@ fun CoveringLetterBasisView(
                 modifier = Modifier.padding(standardPadding),
                 text = COVERING_LETTER_BASIS_DATA
             )
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+        }
+
+        item {
+            Text("Adressen / Probeentnahme-Orte")
         }
 
         when (val addressesResponse = viewModel.gotAddressState.value) {

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
+import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +17,8 @@ class CoveringLettersViewModel @Inject constructor(
     private val useCases: HygieneCompanionUseCases
 ): ViewModel() {
 
-    private var _gotCoveringLettersState = mutableStateOf<Response<List<CoveringLetter>>>(Response.Success(listOf()))
-    val gotCoveringLettersState: State<Response<List<CoveringLetter>>> = _gotCoveringLettersState
+    private var _gotCoveringLettersState = mutableStateOf<Response<Map<String?, List<CoveringLetter>>>>(Response.Success(mapOf()))
+    val gotCoveringLettersState: State<Response<Map<String?, List<CoveringLetter>>>> = _gotCoveringLettersState
 
     private var _chosenCoveringLetter = mutableStateOf<CoveringLetter?>(null)
     val chosenCoveringLetter: State<CoveringLetter?> = _chosenCoveringLetter
@@ -40,7 +41,10 @@ class CoveringLettersViewModel @Inject constructor(
                         coveringLetters.sortBy {
                             it.date
                         }
-                        _gotCoveringLettersState.value = Response.Success(coveringLetters)
+                        val groupedCoveringLetters = coveringLetters.groupBy {
+                            it.date?.monthYearString()
+                        }
+                        _gotCoveringLettersState.value = Response.Success(groupedCoveringLetters)
                     }
                     is Response.Error -> _gotCoveringLettersState.value = Response.Error(response.message)
                     is Response.Loading -> _gotCoveringLettersState.value = Response.Loading
