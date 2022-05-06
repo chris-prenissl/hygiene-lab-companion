@@ -37,6 +37,9 @@ class CoveringLettersViewModel @Inject constructor(
                                 coveringLetters.add(it)
                             }
                         }
+                        coveringLetters.sortBy {
+                            it.date
+                        }
                         _gotCoveringLettersState.value = Response.Success(coveringLetters)
                     }
                     is Response.Error -> _gotCoveringLettersState.value = Response.Error(response.message)

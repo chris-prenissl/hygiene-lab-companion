@@ -179,8 +179,10 @@ fun CoveringLetterSeriesDialog(
                         }
                     }
 
-                    item {
-                        Text("Grundlegende Parameter")
+                    if (coveringParameters.isNotEmpty()) {
+                        item {
+                            Text("Grundlegende Parameter")
+                        }
                     }
 
                     items(coveringParameters.values.count()) { idx ->
@@ -202,8 +204,10 @@ fun CoveringLetterSeriesDialog(
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
-                    item {
-                        Text("Proben Parameter")
+                    if (coveringSampleParameters.isNotEmpty()) {
+                        item {
+                            Text("Proben Parameter")
+                        }
                     }
 
                     items(coveringSampleParameters.values.count()) { idx ->
@@ -225,8 +229,10 @@ fun CoveringLetterSeriesDialog(
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
-                    item {
-                        Text("Proben Labor-Parameter")
+                    if (labSampleParameters.isNotEmpty()) {
+                        item {
+                            Text("Proben Labor-Parameter")
+                        }
                     }
 
                     items(labSampleParameters.values.count()) { idx ->
@@ -248,8 +254,10 @@ fun CoveringLetterSeriesDialog(
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
-                    item {
-                        Text("Proben Befund-Parameter")
+                    if (labReportParameters.isNotEmpty()) {
+                        item {
+                            Text("Proben Befund-Parameter")
+                        }
                     }
 
                     items(labReportParameters.values.count()) { idx ->
@@ -413,22 +421,22 @@ fun CoveringLetterSeriesDialog(
                                     else -> Unit
                                 }
                             }
-
-                            Button(onClick = {
-                                viewModel.openSamplingLocationsChoice()
-                            }) {
-                                Text("Probeentnahmestelle hinzufügen")
-                            }
                         }
-
-
-
                     }
+
                     items(samplingLocations) {
                         SwipeToDelete(onDelete = {
                             samplingLocations.remove(it)
                         }) {
                             SampleLocationCard(sampleLocation = it)
+                        }
+                    }
+
+                    item {
+                        Button(onClick = {
+                            viewModel.openSamplingLocationsChoice()
+                        }) {
+                            Text("Probeentnahmestelle hinzufügen")
                         }
                     }
 
