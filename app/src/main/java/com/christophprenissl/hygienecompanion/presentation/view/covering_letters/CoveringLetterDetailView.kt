@@ -46,7 +46,6 @@ fun CoveringLetterDetailView(
                 onClick = {
                     coveringLetter?.seriesId?.let {
                         viewModel.saveCoveringLetter(
-                            seriesId = it,
                             coveringLetter = coveringLetter
                         )
                     }

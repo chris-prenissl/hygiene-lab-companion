@@ -56,11 +56,12 @@ class CoveringLettersViewModel @Inject constructor(
     }
 
     fun saveCoveringLetter(
-        seriesId: String,
         coveringLetter: CoveringLetter
     ) {
         viewModelScope.launch {
-            //TODO
+            useCases.saveCoveringLetter(coveringLetter).collect {
+                _savedCoveringLetterState.value = it
+            }
         }
     }
 }

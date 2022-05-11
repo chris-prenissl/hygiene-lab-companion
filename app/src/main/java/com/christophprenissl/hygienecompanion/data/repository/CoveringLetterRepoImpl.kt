@@ -2,6 +2,7 @@ package com.christophprenissl.hygienecompanion.data.repository
 
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.dto.CoveringLetterDto
+import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.model.util.mapper.CoveringLetterMapper
 import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterRepo
@@ -9,6 +10,8 @@ import com.christophprenissl.hygienecompanion.util.SAMPLING_STATE_FIELD
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,6 +39,22 @@ class CoveringLetterRepoImpl @Inject constructor(
         }
         awaitClose {
             snapshotListener.remove()
+        }
+    }
+
+    override suspend fun saveCoveringLetterToFireStore(coveringLetter: CoveringLetter) = flow {
+        try {
+            emit(Response.Loading)
+            val mapper = CoveringLetterMapper()
+            val coveringLetterDto = mapper.toEntity(coveringLetter)
+            if (coveringLetterDto.id != null) {
+                val saved = coveringLetterRef.document(coveringLetterDto.id).set(coveringLetterDto).await()
+                emit(Response.Success(saved))
+            } else {
+                emit(Response.Error("No id provided"))
+            }
+        } catch (e: Exception) {
+            emit(Response.Error(e.message ?: e.toString()))
         }
     }
 }

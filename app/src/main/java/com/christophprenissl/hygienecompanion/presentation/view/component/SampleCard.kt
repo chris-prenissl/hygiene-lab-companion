@@ -20,11 +20,11 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
 fun SampleCard(sample: Sample) {
-    var extraInfoSampling by remember { mutableStateOf(TextFieldValue("")) }
-    var extraInfoLaboratory by remember { mutableStateOf(TextFieldValue("")) }
-    var warning by remember { mutableStateOf(TextFieldValue("")) }
+    var extraInfoSampling by remember { mutableStateOf(TextFieldValue(sample.extraInfoSampling?: "")) }
+    var extraInfoLaboratory by remember { mutableStateOf(TextFieldValue(sample.extraInfoLaboratory?: "")) }
+    var warning by remember { mutableStateOf(TextFieldValue(sample.warningMessage?: "")) }
 
-    val coveringSampleValues = remember { mutableStateListOf("") }
+    val coveringSampleValues = remember { mutableStateListOf<String>() }
 
     sample.coveringSampleParameters?.let { parameters ->
         parameters.forEach { parameter ->
