@@ -1,9 +1,12 @@
 package com.christophprenissl.hygienecompanion.domain.model.dto
 
+import com.google.firebase.firestore.DocumentId
 import java.util.*
 
 data class CoveringLetterDto(
+    @DocumentId
     val id: String? = null,
+    var seriesId: String? = null,
     val description: String? = null,
     val date: Date? = null,
     val lotId: String? = null,

@@ -398,7 +398,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            useCases.saveCoveringLetterSeries(coveringLetterSeries).collect { response ->
+            useCases.createCoveringLetterSeries(coveringLetterSeries).collect { response ->
                 _savedCoveringLetterSeriesState.value = response
             }
         }

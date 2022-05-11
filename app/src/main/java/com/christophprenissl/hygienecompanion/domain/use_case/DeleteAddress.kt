@@ -5,7 +5,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
 
 class DeleteAddress(
-    private val repository: AddressRepo
+    private val addressRepo: AddressRepo
 ) {
-    suspend operator fun invoke(address: Address) = repository.deleteAddressFromFireStore(address)
+    suspend operator fun invoke(address: Address) = addressRepo.deleteAddressFromFireStore(address)
 }

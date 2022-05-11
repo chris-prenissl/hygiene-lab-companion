@@ -11,6 +11,7 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
         val sampleMapper = SampleMapper()
         return CoveringLetter(
             id = entity.id,
+            seriesId = entity.seriesId,
             description = entity.description,
             date = entity.date,
             lotId = entity.lotId,
@@ -36,6 +37,7 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
         val sampleMapper = SampleMapper()
         return CoveringLetterDto(
             id = domain.id,
+            seriesId = domain.seriesId,
             description = domain.description,
             date = domain.date,
             lotId = domain.lotId,

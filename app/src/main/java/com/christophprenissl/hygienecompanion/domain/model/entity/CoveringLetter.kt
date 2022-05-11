@@ -3,7 +3,8 @@ package com.christophprenissl.hygienecompanion.domain.model.entity
 import java.util.*
 
 data class CoveringLetter(
-    val id: String? = null,
+    var id: String? = null,
+    var seriesId: String? = null,
     val description: String? = null,
     val date: Date? = null,
     val lotId: String? = null,

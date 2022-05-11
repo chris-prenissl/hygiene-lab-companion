@@ -18,7 +18,7 @@ data class CoveringLetterSeriesDto(
     val client: AddressDto? = null,
     val sampleAddress: AddressDto? = null,
     val samplingCompany: AddressDto? = null,
-    val coveringLetters: List<CoveringLetterDto>? = null,
+    val coveringLetters: List<String>? = null,
     val plannedStart: Date? = null,
     val plannedEnd: Date? = null,
     val hasEnded: Boolean? = null,

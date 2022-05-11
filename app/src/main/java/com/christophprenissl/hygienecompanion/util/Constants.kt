@@ -68,12 +68,9 @@ const val ADDRESSES_FIRESTORE = "addresses"
 const val BASES_FIRESTORE = "bases"
 const val USERS_FIRESTORE = "user"
 const val COVERING_LETTER_SERIES_FIRESTORE = "covering_letter_series"
+const val COVERING_LETTERS_FIRESTORE = "covering_letters"
 const val ADDRESS_ID = "addressId"
-//collection path
-const val COVERING_LETTER_COLLECTION = "coveringLetters"
-const val SAMPLE_COLLECTION = "samples"
-//query parameter
-const val HAS_ENDED = "hasEnded"
+const val SAMPLING_STATE_FIELD = "samplingState"
 
 //time
 const val WEEK_DAYS = 7

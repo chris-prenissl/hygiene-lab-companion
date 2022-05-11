@@ -10,6 +10,6 @@ interface CoveringLetterSeriesRepo {
 
     fun getCoveringLetterSeriesNotEndedFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
 
-    suspend fun saveCoveringLetterSeriesToFireStore(coveringLetterSeries: CoveringLetterSeries): Flow<Response<Void?>>
+    suspend fun createCoveringLetterSeriesInFireStore(coveringLetterSeries: CoveringLetterSeries): Flow<Response<Void?>>
 
 }

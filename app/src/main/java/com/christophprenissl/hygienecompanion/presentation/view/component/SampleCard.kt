@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
 import androidx.compose.material.Checkbox
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -52,6 +51,7 @@ fun SampleCard(sample: Sample) {
             value = extraInfoSampling,
             onValueChange = {
                 extraInfoSampling = it
+                sample.extraInfoSampling = it.text
             }
         )
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -60,6 +60,7 @@ fun SampleCard(sample: Sample) {
             value = extraInfoLaboratory,
             onValueChange = {
                 extraInfoLaboratory = it
+                sample.extraInfoLaboratory = it.text
             }
         )
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -68,6 +69,7 @@ fun SampleCard(sample: Sample) {
             value = warning,
             onValueChange = {
                 warning = it
+                sample.warningMessage = it.text
             }
         )
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -81,7 +83,9 @@ fun SampleCard(sample: Sample) {
                         OutlinedTextField(
                             value = coveringSampleValues[idx], onValueChange = {
                                 coveringSampleValues[idx] = it
-                            })
+                                sample.coveringSampleParameters[idx].value = it
+                            }
+                        )
                     }
                 }
                 ParameterType.Number -> {
@@ -93,6 +97,7 @@ fun SampleCard(sample: Sample) {
                             coveringSampleValues[idx] = value.filter {
                                 it.isDigit()
                             }
+                            sample.coveringSampleParameters[idx].value = coveringSampleValues[idx].toInt()
                         })
                 }
                 ParameterType.Temperature -> {
@@ -102,6 +107,7 @@ fun SampleCard(sample: Sample) {
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                         value = coveringSampleValues[idx], onValueChange = { value ->
                             coveringSampleValues[idx] = getValidTemperature(value)
+                            sample.coveringSampleParameters[idx].value = coveringSampleValues[idx].toFloat()
                         }
                     )
                 }
@@ -112,33 +118,12 @@ fun SampleCard(sample: Sample) {
                         checked = coveringSampleValues[idx].toBoolean(),
                         onCheckedChange = {
                             coveringSampleValues[idx] = it.toString()
+                            sample.coveringSampleParameters[idx].value = it
                         }
                     )
                 }
                 else -> Unit
             }
-        }
-        Button(
-            onClick = {
-                sample.coveringSampleParameters?.forEachIndexed { idx, it ->
-                    when(it.parameterType) {
-                        ParameterType.Bool -> {
-                            it.value = coveringSampleValues[idx].toBoolean()
-                        }
-                        ParameterType.Temperature -> {
-                            it.value = coveringSampleValues[idx].toFloat()
-                        }
-                        ParameterType.Number -> {
-                            it.value = coveringSampleValues[idx].toInt()
-                        }
-                        else -> {
-                            it.value = coveringSampleValues[idx]
-                        }
-                    }
-                }
-            }
-        ) {
-            Text("Probeentnahme speichern")
         }
     }
 }

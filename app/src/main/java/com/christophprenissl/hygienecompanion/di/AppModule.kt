@@ -45,6 +45,10 @@ object AppModule {
     fun provideCoveringLetterSeriesRef(db: FirebaseFirestore) = db.collection(
         COVERING_LETTER_SERIES_FIRESTORE)
 
+    @CoveringLetterRefFireStore
+    @Provides
+    fun provideCoveringLettersRef(db: FirebaseFirestore) = db.collection(COVERING_LETTERS_FIRESTORE)
+
     @OptIn(ExperimentalCoroutinesApi::class)
     @Provides
     fun provideSampleLocationRepoImpl(
@@ -75,18 +79,21 @@ object AppModule {
     )
 
     @Provides
-    fun provideCoveringLetterRepoImpl(
+    fun provideCoveringLetterSeriesRepoImpl(
+        db: FirebaseFirestore,
+        @CoveringLetterRefFireStore coveringLettersRef: CollectionReference,
         @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
-    ): CoveringLetterRepo = CoveringLetterRepoImpl(
+    ): CoveringLetterSeriesRepo = CoveringLetterSeriesRepoImpl(
+        db = db,
+        coveringLettersRef = coveringLettersRef,
         coveringLetterSeriesRef = coveringLetterSeriesRef
     )
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Provides
-    fun provideCoveringLetterSeriesRepoImpl(
-        @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
-    ): CoveringLetterSeriesRepo = CoveringLetterSeriesRepoImpl(
-        coveringLetterSeriesRef = coveringLetterSeriesRef
+    fun provideCoveringLetterRepoImpl(
+        @CoveringLetterRefFireStore coveringLetterRef: CollectionReference
+    ): CoveringLetterRepo = CoveringLetterRepoImpl(
+        coveringLetterRef = coveringLetterRef
     )
 
     @Provides
@@ -94,7 +101,8 @@ object AppModule {
         sampleLocationRepo: SampleLocationRepo,
         addressRepo: AddressRepo,
         basisRepo: BasisRepo,
-        coveringLetterSeriesRepo: CoveringLetterSeriesRepo
+        coveringLetterSeriesRepo: CoveringLetterSeriesRepo,
+        coveringLetterRepo: CoveringLetterRepo
     ) = HygieneCompanionUseCases(
         saveAddress = SaveAddress(addressRepo),
         deleteAddress = DeleteAddress(addressRepo),
@@ -105,8 +113,9 @@ object AppModule {
         getBases = GetBases(basisRepo),
         saveBasis = SaveBasis(basisRepo),
         deleteBasis = DeleteBasis(basisRepo),
-        saveCoveringLetterSeries = SaveCoveringLetterSeries(coveringLetterSeriesRepo),
+        createCoveringLetterSeries = CreateCoveringLetterSeries(coveringLetterSeriesRepo),
         getCoveringLetterSeries = GetCoveringLetterSeries(coveringLetterSeriesRepo),
-        getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(coveringLetterSeriesRepo)
+        getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(coveringLetterSeriesRepo),
+        getCoveringLettersNotEnded = GetCoveringLettersNotEnded(coveringLetterRepo)
     )
 }

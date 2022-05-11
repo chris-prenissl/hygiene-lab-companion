@@ -25,3 +25,7 @@ annotation class UserRefFireStore
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class CoveringLetterSeriesRefFireStore
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CoveringLetterRefFireStore

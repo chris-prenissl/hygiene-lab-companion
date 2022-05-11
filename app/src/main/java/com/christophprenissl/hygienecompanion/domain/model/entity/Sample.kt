@@ -5,10 +5,10 @@ import java.util.*
 data class Sample(
     var id: String? = null,
     val created: Date? = null,
-    val extraInfoSampling: String? = null,
-    val extraInfoLaboratory: String? = null,
-    val warningMessage: String? = null,
+    var extraInfoSampling: String? = null,
+    var extraInfoLaboratory: String? = null,
+    var warningMessage: String? = null,
     val coveringSampleParameters: List<Parameter>? = null,
     val labSampleParameters: List<Parameter>? = null,
-    val sampleLocation: SampleLocation? = null
+    var sampleLocation: SampleLocation? = null
 )

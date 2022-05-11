@@ -23,25 +23,23 @@ class CoveringLettersViewModel @Inject constructor(
     private var _chosenCoveringLetter = mutableStateOf<CoveringLetter?>(null)
     val chosenCoveringLetter: State<CoveringLetter?> = _chosenCoveringLetter
 
+    private var _savedCoveringLetterState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val savedCoveringLetterState: State<Response<Void?>> = _savedCoveringLetterState
+
     init {
-        getCoveringLettersNotFinishedByTime()
+        getCoveringLettersNotFinishedByDate()
     }
 
-    private fun getCoveringLettersNotFinishedByTime() {
+    private fun getCoveringLettersNotFinishedByDate() {
         viewModelScope.launch {
-            useCases.getCoveringLetterSeriesNotEnded().collect { response ->
-                val coveringLetters = mutableListOf<CoveringLetter>()
+            useCases.getCoveringLettersNotEnded().collect { response ->
                 when (response) {
                     is Response.Success -> {
-                        response.data.forEach { cls ->
-                            cls.coveringLetters?.forEach {
-                                coveringLetters.add(it)
-                            }
-                        }
-                        coveringLetters.sortBy {
+                        val coveringLetters = response.data
+                        val coveringLettersSorted = coveringLetters.sortedBy {
                             it.date
                         }
-                        val groupedCoveringLetters = coveringLetters.groupBy {
+                        val groupedCoveringLetters = coveringLettersSorted.groupBy {
                             it.date?.monthYearString()
                         }
                         _gotCoveringLettersState.value = Response.Success(groupedCoveringLetters)
@@ -55,5 +53,14 @@ class CoveringLettersViewModel @Inject constructor(
 
     fun chooseCoveringLetter(coveringLetter: CoveringLetter) {
         _chosenCoveringLetter.value = coveringLetter
+    }
+
+    fun saveCoveringLetter(
+        seriesId: String,
+        coveringLetter: CoveringLetter
+    ) {
+        viewModelScope.launch {
+            //TODO
+        }
     }
 }
