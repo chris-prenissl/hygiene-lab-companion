@@ -22,7 +22,10 @@ fun NavGraphBuilder.coveringLettersGraph(
             )
         }
         composable(Screen.CoveringLetterDetail.route) {
-            CoveringLetterDetailView(viewModel = viewModel)
+            CoveringLetterDetailView(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
     }
 }

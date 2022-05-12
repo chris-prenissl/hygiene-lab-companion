@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
+import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -55,7 +56,7 @@ class CoveringLettersViewModel @Inject constructor(
         _chosenCoveringLetter.value = coveringLetter
     }
 
-    fun saveCoveringLetter(
+    private fun saveCoveringLetter(
         coveringLetter: CoveringLetter
     ) {
         viewModelScope.launch {
@@ -63,5 +64,40 @@ class CoveringLettersViewModel @Inject constructor(
                 _savedCoveringLetterState.value = it
             }
         }
+    }
+
+    fun sampleProgress(
+        coveringLetter: CoveringLetter
+    ) {
+        coveringLetter.samplingState = SamplingState.SamplingInProgress
+        saveCoveringLetter(coveringLetter)
+    }
+
+    fun labProgress (
+        coveringLetter: CoveringLetter
+    ) {
+        coveringLetter.samplingState = SamplingState.LabInProgress
+        saveCoveringLetter(coveringLetter)
+    }
+
+    fun giveCoveringLetterToLab(
+        coveringLetter: CoveringLetter
+    ) {
+        coveringLetter.samplingState = SamplingState.InLaboratory
+        saveCoveringLetter(coveringLetter)
+    }
+
+    fun rejectCoveringLetter(
+        coveringLetter: CoveringLetter
+    ) {
+        coveringLetter.samplingState = SamplingState.SamplesNotAccepted
+        saveCoveringLetter(coveringLetter)
+    }
+
+    fun finishCoveringLetterInLab(
+        coveringLetter: CoveringLetter
+    ) {
+        coveringLetter.samplingState = SamplingState.LaboratoryResult
+        saveCoveringLetter(coveringLetter)
     }
 }

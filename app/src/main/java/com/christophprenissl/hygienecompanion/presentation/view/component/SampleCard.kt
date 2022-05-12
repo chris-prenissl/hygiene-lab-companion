@@ -14,17 +14,34 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
+import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.util.getValidTemperature
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
-fun SampleCard(sample: Sample) {
-    var extraInfoSampling by remember { mutableStateOf(TextFieldValue(sample.extraInfoSampling?: "")) }
-    var extraInfoLaboratory by remember { mutableStateOf(TextFieldValue(sample.extraInfoLaboratory?: "")) }
-    var warning by remember { mutableStateOf(TextFieldValue(sample.warningMessage?: "")) }
+fun SampleCard(
+    sample: Sample,
+    samplingState: SamplingState
+) {
+    var extraInfoSampling by remember {
+        mutableStateOf(
+            TextFieldValue(
+                sample.extraInfoSampling ?: ""
+            )
+        )
+    }
+    var extraInfoLaboratory by remember {
+        mutableStateOf(
+            TextFieldValue(
+                sample.extraInfoLaboratory ?: ""
+            )
+        )
+    }
+    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: "")) }
 
     val coveringSampleValues = remember { mutableStateListOf<String>() }
+    val labSampleValues = remember { mutableStateListOf<String>() }
 
     sample.coveringSampleParameters?.let { parameters ->
         parameters.forEach { parameter ->
@@ -33,8 +50,21 @@ fun SampleCard(sample: Sample) {
             }
         }
     }
+    sample.labSampleParameters?.let { parameters ->
+        parameters.forEach { parameter ->
+            parameter.value.let {
+                labSampleValues.add(it.toString())
+            }
+        }
+    }
+
 
     Column {
+        Row {
+            Text("Probeentnahme-Stelle")
+            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+            sample.sampleLocation?.description?.let { Text(it) }
+        }
         Row {
             Text("Probennummer")
             Spacer(modifier = Modifier.padding(horizontal = standardPadding))
@@ -44,8 +74,8 @@ fun SampleCard(sample: Sample) {
             Text("Datum")
             Spacer(modifier = Modifier.padding(horizontal = standardPadding))
             sample.created?.let { Text(it.dayMonthYearString()) }
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
-        Spacer(modifier = Modifier.padding(vertical = standardPadding))
         Text("Zusatzinfo der probenentnehmenden Person")
         OutlinedTextField(
             value = extraInfoSampling,
@@ -55,6 +85,7 @@ fun SampleCard(sample: Sample) {
             }
         )
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
+
         Text("Zusatzinfo Laborarbeiter:in")
         OutlinedTextField(
             value = extraInfoLaboratory,
@@ -66,63 +97,134 @@ fun SampleCard(sample: Sample) {
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
         Text("Warnung")
         OutlinedTextField(
-            value = warning,
+            value = warningMessage,
             onValueChange = {
-                warning = it
+                warningMessage = it
                 sample.warningMessage = it.text
             }
         )
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
-        Text("Probeentnahme-Parameter")
-        sample.coveringSampleParameters?.forEachIndexed { idx, parameter ->
-            when(parameter.parameterType) {
-                ParameterType.Note -> {
-                    Row {
-                        parameter.name?.let { Text(it) }
-                        Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                        OutlinedTextField(
-                            value = coveringSampleValues[idx], onValueChange = {
-                                coveringSampleValues[idx] = it
-                                sample.coveringSampleParameters[idx].value = it
+
+        when (samplingState) {
+            SamplingState.InLaboratory, SamplingState.LabInProgress -> {
+                Text("Labor-Parameter")
+
+                sample.labSampleParameters?.forEachIndexed { idx, parameter ->
+                    when (parameter.parameterType) {
+                        ParameterType.Note -> {
+                            Row {
+                                parameter.name?.let { Text(it) }
+                                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                                OutlinedTextField(
+                                    value = labSampleValues[idx], onValueChange = {
+                                        labSampleValues[idx] = it
+                                        sample.labSampleParameters[idx].value = it
+                                    }
+                                )
                             }
-                        )
+                        }
+                        ParameterType.Number -> {
+                            parameter.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            OutlinedTextField(
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                value = labSampleValues[idx], onValueChange = { value ->
+                                    labSampleValues[idx] = value.filter {
+                                        it.isDigit()
+                                    }
+                                    sample.labSampleParameters[idx].value =
+                                        labSampleValues[idx].toInt()
+                                }
+                            )
+                        }
+                        ParameterType.Temperature -> {
+                            parameter.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            OutlinedTextField(
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                value = labSampleValues[idx], onValueChange = { value ->
+                                    labSampleValues[idx] = getValidTemperature(value)
+                                    sample.labSampleParameters[idx].value =
+                                        labSampleValues[idx].toFloat()
+                                }
+                            )
+                        }
+                        ParameterType.Bool -> {
+                            parameter.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            Checkbox(
+                                checked = labSampleValues[idx].toBoolean(),
+                                onCheckedChange = {
+                                    labSampleValues[idx] = it.toString()
+                                    sample.labSampleParameters[idx].value = it
+                                }
+                            )
+                        }
+                        else -> Unit
                     }
                 }
-                ParameterType.Number -> {
-                    parameter.name?.let { Text(it) }
-                    Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                    OutlinedTextField(
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        value = coveringSampleValues[idx], onValueChange = { value ->
-                            coveringSampleValues[idx] = value.filter {
-                                it.isDigit()
+                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            }
+            SamplingState.LaboratoryResult -> {
+                Text("Laborergebnisse vorhanden")
+            }
+            else -> {
+                Text("Probeentnahme-Parameter")
+                sample.coveringSampleParameters?.forEachIndexed { idx, parameter ->
+                    when (parameter.parameterType) {
+                        ParameterType.Note -> {
+                            Row {
+                                parameter.name?.let { Text(it) }
+                                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                                OutlinedTextField(
+                                    value = coveringSampleValues[idx], onValueChange = {
+                                        coveringSampleValues[idx] = it
+                                        sample.coveringSampleParameters[idx].value = it
+                                    }
+                                )
                             }
-                            sample.coveringSampleParameters[idx].value = coveringSampleValues[idx].toInt()
-                        })
-                }
-                ParameterType.Temperature -> {
-                    parameter.name?.let { Text(it) }
-                    Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                    OutlinedTextField(
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        value = coveringSampleValues[idx], onValueChange = { value ->
-                            coveringSampleValues[idx] = getValidTemperature(value)
-                            sample.coveringSampleParameters[idx].value = coveringSampleValues[idx].toFloat()
                         }
-                    )
-                }
-                ParameterType.Bool -> {
-                    parameter.name?.let { Text(it) }
-                    Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                    Checkbox(
-                        checked = coveringSampleValues[idx].toBoolean(),
-                        onCheckedChange = {
-                            coveringSampleValues[idx] = it.toString()
-                            sample.coveringSampleParameters[idx].value = it
+                        ParameterType.Number -> {
+                            parameter.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            OutlinedTextField(
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                value = coveringSampleValues[idx], onValueChange = { value ->
+                                    coveringSampleValues[idx] = value.filter {
+                                        it.isDigit()
+                                    }
+                                    sample.coveringSampleParameters[idx].value =
+                                        coveringSampleValues[idx].toInt()
+                                }
+                            )
                         }
-                    )
+                        ParameterType.Temperature -> {
+                            parameter.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            OutlinedTextField(
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                value = coveringSampleValues[idx], onValueChange = { value ->
+                                    coveringSampleValues[idx] = getValidTemperature(value)
+                                    sample.coveringSampleParameters[idx].value =
+                                        coveringSampleValues[idx].toFloat()
+                                }
+                            )
+                        }
+                        ParameterType.Bool -> {
+                            parameter.name?.let { Text(it) }
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            Checkbox(
+                                checked = coveringSampleValues[idx].toBoolean(),
+                                onCheckedChange = {
+                                    coveringSampleValues[idx] = it.toString()
+                                    sample.coveringSampleParameters[idx].value = it
+                                }
+                            )
+                        }
+                        else -> Unit
+                    }
                 }
-                else -> Unit
+                Spacer(modifier = Modifier.padding(vertical = standardPadding))
             }
         }
     }

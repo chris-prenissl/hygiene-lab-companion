@@ -2,9 +2,9 @@ package com.christophprenissl.hygienecompanion.domain.model.entity
 
 enum class SamplingState {
     Created,
-    InProgress,
-    Sampled,
-    SamplesNotAccepted,
+    SamplingInProgress,
     InLaboratory,
+    LabInProgress,
+    SamplesNotAccepted,
     LaboratoryResult
 }
