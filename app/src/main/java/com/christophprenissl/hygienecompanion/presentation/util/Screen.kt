@@ -19,6 +19,7 @@ sealed class Screen(val name: String, val graphRoute: String, val route: String,
     object CoveringLetterSeriesDetail: Screen("Begleitscheinserie", COVERING_LETTER_BASIS_ROUTE, "covering_letter_series_detail", null)
 
     object Reports: Screen("Befunde", REPORTS_ROUTE, "reports", Icons.Rounded.Summarize)
+    object ReportDetail: Screen("Befund", REPORTS_ROUTE, "report_detail", null)
 
     object Profile: Screen("Profil", PROFILE_ROUTE,  "profile", Icons.Rounded.AccountCircle)
 

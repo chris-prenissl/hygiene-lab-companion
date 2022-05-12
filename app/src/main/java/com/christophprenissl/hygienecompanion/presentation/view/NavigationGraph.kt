@@ -14,6 +14,7 @@ import com.christophprenissl.hygienecompanion.presentation.view.covering_letters
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.coveringLettersGraph
 import com.christophprenissl.hygienecompanion.presentation.view.logged_out.loggedOutGraph
 import com.christophprenissl.hygienecompanion.presentation.view.profile.profileNavGraph
+import com.christophprenissl.hygienecompanion.presentation.view.reports.ReportsViewModel
 import com.christophprenissl.hygienecompanion.presentation.view.reports.reportsNavGraph
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -23,7 +24,8 @@ fun NavigationGraph(
     loggedIn: Boolean,
     navController: NavHostController,
     coveringLetterBasisViewModel: CoveringLetterBasisViewModel = hiltViewModel(),
-    coveringLettersViewModel: CoveringLettersViewModel = hiltViewModel()
+    coveringLettersViewModel: CoveringLettersViewModel = hiltViewModel(),
+    reportsViewModel: ReportsViewModel = hiltViewModel()
 ) {
     NavHost(
         navController = navController,
@@ -42,7 +44,10 @@ fun NavigationGraph(
             viewModel = coveringLetterBasisViewModel
         )
 
-        reportsNavGraph(navController = navController)
+        reportsNavGraph(
+            navController = navController,
+            viewModel = reportsViewModel
+        )
 
         profileNavGraph(navController = navController)
     }

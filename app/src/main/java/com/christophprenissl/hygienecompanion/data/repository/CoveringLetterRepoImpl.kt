@@ -42,6 +42,28 @@ class CoveringLetterRepoImpl @Inject constructor(
         }
     }
 
+    override fun getCoveringLettersWithLabResultFromFireStore() = callbackFlow {
+        val snapshotListener = coveringLetterRef
+            .whereEqualTo(SAMPLING_STATE_FIELD, SamplingState.LaboratoryResult.name)
+            .addSnapshotListener { snapshot, e ->
+                trySend(Response.Loading)
+                val response = if (snapshot != null) {
+                    val coveringLettersDto = snapshot.toObjects(CoveringLetterDto::class.java)
+                    val mapper = CoveringLetterMapper()
+                    val coveringLetters = coveringLettersDto.map {
+                        mapper.fromEntity(it)
+                    }
+                    Response.Success(coveringLetters)
+                } else {
+                    Response.Error(e?.message ?: e.toString())
+                }
+                trySend(response).isSuccess
+            }
+        awaitClose {
+            snapshotListener.remove()
+        }
+    }
+
     override suspend fun saveCoveringLetterToFireStore(coveringLetter: CoveringLetter) = flow {
         try {
             emit(Response.Loading)

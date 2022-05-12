@@ -6,10 +6,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
-fun NavGraphBuilder.reportsNavGraph(navController: NavController) {
+fun NavGraphBuilder.reportsNavGraph(
+    navController: NavController,
+    viewModel: ReportsViewModel
+) {
     navigation(startDestination = Screen.Reports.route, route = Screen.Reports.graphRoute) {
         composable(Screen.Reports.route) {
-            ReportsView()
+            ReportsView(
+                viewModel = viewModel,
+                navController = navController
+            )
+        }
+        composable(Screen.ReportDetail.route) {
+            ReportDetailView(viewModel = viewModel)
         }
     }
 }
