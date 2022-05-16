@@ -16,7 +16,6 @@ import com.christophprenissl.hygienecompanion.util.*
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 @InternalComposeApi
 @ExperimentalCoroutinesApi

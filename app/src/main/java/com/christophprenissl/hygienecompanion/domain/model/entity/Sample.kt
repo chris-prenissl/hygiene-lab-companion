@@ -4,7 +4,7 @@ import java.util.*
 
 data class Sample(
     var id: String? = null,
-    val created: Date? = null,
+    var created: Date? = null,
     var extraInfoSampling: String? = null,
     var extraInfoLaboratory: String? = null,
     var warningMessage: String? = null,

@@ -9,6 +9,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -84,6 +85,7 @@ class CoveringLettersViewModel @Inject constructor(
         coveringLetter: CoveringLetter
     ) {
         coveringLetter.samplingState = SamplingState.InLaboratory
+        coveringLetter.laboratoryIn = Timestamp.now().toDate()
         saveCoveringLetter(coveringLetter)
     }
 
@@ -98,6 +100,7 @@ class CoveringLettersViewModel @Inject constructor(
         coveringLetter: CoveringLetter
     ) {
         coveringLetter.samplingState = SamplingState.LaboratoryResult
+        coveringLetter.resultCreated = Timestamp.now().toDate()
         saveCoveringLetter(coveringLetter)
     }
 }

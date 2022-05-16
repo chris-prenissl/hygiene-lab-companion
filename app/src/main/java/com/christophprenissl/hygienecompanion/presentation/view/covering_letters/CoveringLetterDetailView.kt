@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letters
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,8 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,7 +19,7 @@ import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
-import com.christophprenissl.hygienecompanion.presentation.view.component.SampleCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.SampleEditCard
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
@@ -32,17 +33,34 @@ fun CoveringLetterDetailView(
 
     val samplingState by remember { mutableStateOf(coveringLetter?.samplingState) }
 
+    var lotId by remember { mutableStateOf(coveringLetter?.lotId) }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         item {
             Text(title)
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
             Text("Geplante Abnahme: ${date?.dayMonthYearString()}")
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
+        }
+        item {
+            Row {
+                Text("Chargennummer")
+                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                OutlinedTextField(
+                    value = lotId?: "",
+                    onValueChange = {
+                        lotId = it
+                        if (coveringLetter != null) {
+                            coveringLetter.lotId = it
+                        }
+                    }
+                )
+            }
         }
 
         item {
@@ -50,7 +68,7 @@ fun CoveringLetterDetailView(
                 coveringLetter?.samples?.let { samples ->
                     items(samples) { sample ->
                         samplingState?.let {
-                            SampleCard(
+                            SampleEditCard(
                                 samplingState = it,
                                 sample = sample
                             )

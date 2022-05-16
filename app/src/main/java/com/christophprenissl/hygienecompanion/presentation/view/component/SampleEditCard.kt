@@ -18,9 +18,10 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.util.getValidTemperature
 import com.christophprenissl.hygienecompanion.util.standardPadding
+import com.google.firebase.Timestamp
 
 @Composable
-fun SampleCard(
+fun SampleEditCard(
     sample: Sample,
     samplingState: SamplingState
 ) {
@@ -180,6 +181,7 @@ fun SampleCard(
                                     value = coveringSampleValues[idx], onValueChange = {
                                         coveringSampleValues[idx] = it
                                         sample.coveringSampleParameters[idx].value = it
+                                        sample.created = Timestamp.now().toDate()
                                     }
                                 )
                             }
@@ -195,6 +197,7 @@ fun SampleCard(
                                     }
                                     sample.coveringSampleParameters[idx].value =
                                         coveringSampleValues[idx].toInt()
+                                    sample.created = Timestamp.now().toDate()
                                 }
                             )
                         }
@@ -218,6 +221,7 @@ fun SampleCard(
                                 onCheckedChange = {
                                     coveringSampleValues[idx] = it.toString()
                                     sample.coveringSampleParameters[idx].value = it
+                                    sample.created = Timestamp.now().toDate()
                                 }
                             )
                         }
