@@ -20,9 +20,9 @@ fun ParameterCreationItem(
     item: ParameterBasis,
     onDelete: () -> Unit
 ) {
-    var name by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf(item.name?: "") }
     val options = ParameterType.values()
-    var checkedRadioButton by remember { mutableStateOf(options[0]) }
+    var checkedRadioButton by remember { mutableStateOf(item.parameterType?: ParameterType.Number) }
 
     SwipeToDelete(onDelete = onDelete) {
         Column(Modifier.selectableGroup()) {
