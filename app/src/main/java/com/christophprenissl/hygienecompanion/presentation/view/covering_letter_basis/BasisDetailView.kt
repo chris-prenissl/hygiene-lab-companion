@@ -26,9 +26,9 @@ fun BasisDetailView(
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
-        viewModel.chosenBasis.value?.coveringParameters?.let { parameters ->
+        viewModel.chosenBasis.value?.basicCoveringParameters?.let { parameters ->
             item {
-                Text(BASIC_PARAMETERS)
+                Text(BASIC_COVERING_PARAMETERS)
             }
             items(parameters) { item ->
                 Row {
@@ -74,9 +74,9 @@ fun BasisDetailView(
             }
         }
 
-        viewModel.chosenBasis.value?.labReportParameters?.let { parameters ->
+        viewModel.chosenBasis.value?.basicLabReportParameters?.let { parameters ->
             item {
-                Text(LAB_REPORT_PARAMETERS)
+                Text(BASIC_LAB_REPORT_PARAMETERS)
             }
             items(parameters) { item ->
                 Row {

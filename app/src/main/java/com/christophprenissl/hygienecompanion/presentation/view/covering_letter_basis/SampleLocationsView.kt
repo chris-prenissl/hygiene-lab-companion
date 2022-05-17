@@ -14,7 +14,7 @@ import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.presentation.view.component.SampleLocationCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.SampleLocationDialog
 import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
-import com.christophprenissl.hygienecompanion.util.ADD_SAMPLE_LOCATION
+import com.christophprenissl.hygienecompanion.util.NEW_SAMPLE_LOCATION
 
 @Composable
 fun SampleLocationsView(
@@ -50,7 +50,7 @@ fun SampleLocationsView(
             is Response.Loading -> Unit
         }
         Button(onClick = { viewModel.openSampleLocationDialog() }) {
-            Text(ADD_SAMPLE_LOCATION)
+            Text(NEW_SAMPLE_LOCATION)
         }
     }
 }

@@ -17,10 +17,10 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
             lotId = entity.lotId,
             laboratoryIn = entity.laboratoryIn,
             resultCreated = entity.resultCreated,
-            coveringParameters = entity.coveringParameters?.map {
+            basicCoveringParameters = entity.basicCoveringParameters?.map {
                 parameterMapper.fromEntity(it)
             },
-            labParameters = entity.labParameters?.map {
+            basicLabReportParameters = entity.basicLabReportParameters?.map {
                 parameterMapper.fromEntity(it)
             },
             sampler = User(entity.samplerId),
@@ -43,10 +43,10 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
             lotId = domain.lotId,
             laboratoryIn = domain.laboratoryIn,
             resultCreated = domain.resultCreated,
-            coveringParameters = domain.coveringParameters?.map {
+            basicCoveringParameters = domain.basicCoveringParameters?.map {
                 parameterMapper.toEntity(it)
             },
-            labParameters = domain.labParameters?.map {
+            basicLabReportParameters = domain.basicLabReportParameters?.map {
                 parameterMapper.toEntity(it)
             },
             samplerId = domain.sampler?.id,

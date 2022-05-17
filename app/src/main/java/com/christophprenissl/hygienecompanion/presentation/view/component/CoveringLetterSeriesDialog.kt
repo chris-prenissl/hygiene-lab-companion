@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,6 +22,7 @@ import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearStri
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLetterSeriesDialog(
     viewModel: CoveringLetterBasisViewModel,
@@ -37,14 +39,14 @@ fun CoveringLetterSeriesDialog(
     val basesChoices = remember { mutableStateListOf<Basis>() }
     val bases = remember { mutableStateListOf<Basis>() }
 
-    var coveringParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
-    val coveringParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    var basicCoveringParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
+    val basicCoveringParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
     var coveringSampleParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
     val coveringSampleParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
     var labSampleParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
     val labSampleParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
-    var labReportParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
-    val labReportParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
+    var basicLabReportParametersKeys = remember { mutableStateListOf<ParameterBasis>() }
+    val basicLabReportParameters = remember { mutableStateMapOf<ParameterBasis, Boolean>() }
 
     var client by remember { mutableStateOf<Address?>(null) }
     var sampleAddress by remember { mutableStateOf<Address?>(null) }
@@ -74,9 +76,14 @@ fun CoveringLetterSeriesDialog(
                     state = rememberLazyListState(),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    item {
+                    stickyHeader {
                         Text(COVERING_LETTER_SERIES)
+                    }
+
+                    item {
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    }
+                    item {
                         Text(DESCRIPTION)
                         OutlinedTextField(
                             value = description,
@@ -84,45 +91,64 @@ fun CoveringLetterSeriesDialog(
                                 description = it
                             }
                         )
-                        Text("Ergebnis zum Auftraggeber?")
-                        Checkbox(
-                            checked = resultToClient,
-                            onCheckedChange = {
-                                resultToClient = it
-                            }
-                        )
+                    }
+                    item {
+                        Row {
+                            Text(RESULT_TO_CLIENT)
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            Checkbox(
+                                checked = resultToClient,
+                                onCheckedChange = {
+                                    resultToClient = it
+                                }
+                            )
+                        }
                         Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
-                        Text(BASIC_PARAMETERS)
-                        Text("Ergebnis zur Probeentnahme-Addresse?")
-                        Checkbox(
-                            checked = resultToTestingProperty,
-                            onCheckedChange = {
-                                resultToTestingProperty = it
-                            }
-                        )
+                    }
+                    item {
+                        Row {
+                            Text(RESULT_TO_COVERING_ADDRESS)
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            Checkbox(
+                                checked = resultToTestingProperty,
+                                onCheckedChange = {
+                                    resultToTestingProperty = it
+                                }
+                            )
+                        }
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                        Text("Kostenstelle")
-                        OutlinedTextField(
-                            value = costLocation,
-                            onValueChange = {
-                                costLocation = it
-                            }
-                        )
+                    }
+                    item {
+                        Row {
+                            Text(COST_LOCATION)
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            OutlinedTextField(
+                                value = costLocation,
+                                onValueChange = {
+                                    costLocation = it
+                                }
+                            )
+                        }
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                        Text("Labor-ID")
-                        OutlinedTextField(
-                            value = laboratoryId,
-                            onValueChange = {
-                                laboratoryId = it
-                            }
-                        )
+                    }
+                    item {
+                        Row {
+                            Text(LAB_ID)
+                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                            OutlinedTextField(
+                                value = laboratoryId,
+                                onValueChange = {
+                                    laboratoryId = it
+                                }
+                            )
+                        }
                     }
 
                     item {
-                        Text("Wahl der Untersuchungsgrundlagen")
+                        Text(CHOICE_OF_BASIS)
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
-
                         DropdownMenu(
+                            modifier = Modifier.fillMaxWidth(),
                             expanded = viewModel.openBasisDropDown.value,
                             onDismissRequest = {
                                 viewModel.closeBasesChoice()
@@ -133,10 +159,10 @@ fun CoveringLetterSeriesDialog(
                                         onClick = {
                                             bases.add(basis)
                                             basesChoices.remove(basis)
-                                            basis.coveringParameters?.forEach {
-                                                coveringParameters[it] = false
+                                            basis.basicCoveringParameters?.forEach {
+                                                basicCoveringParameters[it] = false
                                             }
-                                            coveringParametersKeys = coveringParameters.keys.toMutableStateList()
+                                            basicCoveringParametersKeys = basicCoveringParameters.keys.toMutableStateList()
 
                                             basis.coveringSampleParameters?.forEach {
                                                 coveringSampleParameters[it] = false
@@ -148,10 +174,10 @@ fun CoveringLetterSeriesDialog(
                                             }
                                             labSampleParametersKeys = labSampleParameters.keys.toMutableStateList()
 
-                                            basis.labReportParameters?.forEach {
-                                                labReportParameters[it] = false
+                                            basis.basicLabReportParameters?.forEach {
+                                                basicLabReportParameters[it] = false
                                             }
-                                            labReportParametersKeys = labReportParameters.keys.toMutableStateList()
+                                            basicLabReportParametersKeys = basicLabReportParameters.keys.toMutableStateList()
                                         }
                                     ) {
                                         Text(text = it)
@@ -178,37 +204,34 @@ fun CoveringLetterSeriesDialog(
                         }
                     }
 
-                    if (coveringParameters.isNotEmpty()) {
+                    if (basicCoveringParameters.isNotEmpty()) {
                         item {
-                            Text("Grundlegende Parameter")
+                            Text(BASIC_COVERING_PARAMETERS)
                         }
-                    }
-
-                    items(coveringParameters.values.count()) { idx ->
-                        val key = coveringParametersKeys[idx]
-                        Row {
-                            key.name?.let { Text(it) }
-                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                            coveringParameters[key]?.let {
-                                Checkbox(
-                                    checked = it,
-                                    onCheckedChange = { checked ->
-                                        coveringParameters[key] = checked
-                                    })
+                        items(basicCoveringParameters.values.count()) { idx ->
+                            val key = basicCoveringParametersKeys[idx]
+                            Row {
+                                key.name?.let { Text(it) }
+                                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                                basicCoveringParameters[key]?.let {
+                                    Checkbox(
+                                        checked = it,
+                                        onCheckedChange = { checked ->
+                                            basicCoveringParameters[key] = checked
+                                        })
+                                }
                             }
                         }
                     }
-
                     item {
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
                     if (coveringSampleParameters.isNotEmpty()) {
                         item {
-                            Text("Proben Parameter")
+                            Text(COVERING_SAMPLE_PARAMETERS)
                         }
                     }
-
                     items(coveringSampleParameters.values.count()) { idx ->
                         val key = coveringSampleParametersKeys[idx]
                         Row {
@@ -223,63 +246,58 @@ fun CoveringLetterSeriesDialog(
                             }
                         }
                     }
-
                     item {
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
                     if (labSampleParameters.isNotEmpty()) {
                         item {
-                            Text("Proben Labor-Parameter")
+                            Text(LAB_SAMPLE_PARAMETERS)
                         }
-                    }
-
-                    items(labSampleParameters.values.count()) { idx ->
-                        val key = labSampleParametersKeys[idx]
-                        Row {
-                            key.name?.let { Text(it) }
-                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                            labSampleParameters[key]?.let {
-                                Checkbox(
-                                    checked = it,
-                                    onCheckedChange = { checked ->
-                                        labSampleParameters[key] = checked
-                                    })
+                        items(labSampleParameters.values.count()) { idx ->
+                            val key = labSampleParametersKeys[idx]
+                            Row {
+                                key.name?.let { Text(it) }
+                                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                                labSampleParameters[key]?.let {
+                                    Checkbox(
+                                        checked = it,
+                                        onCheckedChange = { checked ->
+                                            labSampleParameters[key] = checked
+                                        })
+                                }
                             }
                         }
                     }
-
                     item {
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
-                    if (labReportParameters.isNotEmpty()) {
+                    if (basicLabReportParameters.isNotEmpty()) {
                         item {
-                            Text("Proben Befund-Parameter")
+                            Text(BASIC_LAB_REPORT_PARAMETERS)
                         }
-                    }
-
-                    items(labReportParameters.values.count()) { idx ->
-                        val key = labReportParametersKeys[idx]
-                        Row {
-                            key.name?.let { Text(it) }
-                            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                            labReportParameters[key]?.let {
-                                Checkbox(
-                                    checked = it,
-                                    onCheckedChange = { checked ->
-                                        labReportParameters[key] = checked
-                                    })
+                        items(basicLabReportParameters.values.count()) { idx ->
+                            val key = basicLabReportParametersKeys[idx]
+                            Row {
+                                key.name?.let { Text(it) }
+                                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                                basicLabReportParameters[key]?.let {
+                                    Checkbox(
+                                        checked = it,
+                                        onCheckedChange = { checked ->
+                                            basicLabReportParameters[key] = checked
+                                        })
+                                }
                             }
                         }
                     }
-
                     item {
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
 
                     item {
-                        Text("Client Addresse")
+                        Text(CLIENT_ADDRESS)
                         client?.let {
                             SwipeToDelete(onDelete = { client = null }) {
                                 AddressCard(
@@ -295,6 +313,8 @@ fun CoveringLetterSeriesDialog(
                         ) {
                             Text("Client Adresse festlegen")
                         }
+                    }
+                    item {
                         DropdownMenu(
                             expanded = viewModel.openClientAddressDropDown.value,
                             onDismissRequest = {
@@ -316,7 +336,7 @@ fun CoveringLetterSeriesDialog(
                     }
 
                     item {
-                        Text("Probeabnahme-Firma Addresse")
+                        Text(COVERING_COMPANY_ADDRESS)
                         samplingCompany?.let {
                             SwipeToDelete(onDelete = { samplingCompany = null }) {
                                 AddressCard(
@@ -325,12 +345,15 @@ fun CoveringLetterSeriesDialog(
                                 )
                             }
                         }
+                    }
+
+                    item {
                         Button(
                             onClick = {
                                 viewModel.openSamplingCompanyAddressChoice()
                             }
                         ) {
-                            Text("Probeabnahme-Firma Adresse festlegen")
+                            Text(SET_COVERING_COMPANY_ADDRESS)
                         }
                         DropdownMenu(
                             expanded = viewModel.openSamplingCompanyAddressDropDown.value,
@@ -353,7 +376,7 @@ fun CoveringLetterSeriesDialog(
                     }
 
                     item {
-                        Text("Probeentnahme Addresse")
+                        Text(COVERING_ADDRESS)
                         sampleAddress?.let {
                             SwipeToDelete(onDelete = {
                                 sampleAddress = null
@@ -365,12 +388,14 @@ fun CoveringLetterSeriesDialog(
                                 )
                             }
                         }
+                    }
+                    item {
                         Button(
                             onClick = {
                                 viewModel.openSampleAddressChoice()
                             }
                         ) {
-                            Text("Probeentname Adresse festlegen")
+                            Text(SET_COVERING_ADDRESS)
                         }
                         DropdownMenu(
                             expanded = viewModel.openSampleAddressDropDown.value,
@@ -394,7 +419,7 @@ fun CoveringLetterSeriesDialog(
                     }
 
                     item {
-                        Text("Wahl der Probeentnahmestellen")
+                        Text(CHOICES_FOR_SAMPLE_LOCATIONS)
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
                         if (viewModel.chosenAddress.value != null) {
@@ -435,12 +460,12 @@ fun CoveringLetterSeriesDialog(
                         Button(onClick = {
                             viewModel.openSamplingLocationsChoice()
                         }) {
-                            Text("Probeentnahmestelle hinzufügen")
+                            Text(ADD_SAMPLE_LOCATION)
                         }
                     }
 
                     item {
-                        Text("Anfangs-Datum")
+                        Text(PLANNED_START_DATE)
                     }
                     item {
                         Text(viewModel.plannedStartDate.value.dayMonthYearString())
@@ -454,12 +479,12 @@ fun CoveringLetterSeriesDialog(
                                 )
                             }
                         ) {
-                            Text("Anfangs-Datum wählen")
+                            Text(CHOOSE_START_DATE)
                         }
                     }
 
                     item {
-                        Text("Frequenz")
+                        Text(FREQUENCY)
                         Row {
                             types.forEach { type ->
                                 Column(
@@ -486,7 +511,7 @@ fun CoveringLetterSeriesDialog(
 
                     if (samplingSeriesType != SamplingSeriesType.NonPeriodic) {
                         item {
-                            Text("End-Datum")
+                            Text(PLANNED_END_DATE)
                         }
                         item {
                             Text(viewModel.plannedEndDate.value.dayMonthYearString())
@@ -499,7 +524,7 @@ fun CoveringLetterSeriesDialog(
                                     )
                                 }
                             ) {
-                                Text("End-Datum wählen")
+                                Text(CHOOSE_PLANNED_END)
                             }
                         }
                     }
@@ -521,10 +546,10 @@ fun CoveringLetterSeriesDialog(
                                     sampleAddress = sampleAddress,
                                     samplingCompany = samplingCompany,
                                     sampleLocations = samplingLocations,
-                                    coveringParameters = coveringParameters,
+                                    coveringParameters = basicCoveringParameters,
                                     coveringSampleParameters = coveringSampleParameters,
                                     labSampleParameters = labSampleParameters,
-                                    labReportParameters = labReportParameters,
+                                    labReportParameters = basicLabReportParameters,
                                     samplingSeriesType = samplingSeriesType,
                                     plannedStart = viewModel.plannedStartDate.value,
                                     plannedEnd = viewModel.plannedEndDate.value

@@ -49,7 +49,7 @@ fun ReportDetailView(
         item {
             Text("Labor-Eingangs-Parameter")
         }
-        report?.labParameters?.let { parameters ->
+        report?.basicLabReportParameters?.let { parameters ->
             items(parameters) { parameter ->
                 Row {
                     parameter.name?.let { Text(it) }
@@ -61,7 +61,7 @@ fun ReportDetailView(
                 Spacer(modifier = Modifier.padding(vertical = standardPadding))
             }
         }
-        report?.coveringParameters?.let { parameters ->
+        report?.basicCoveringParameters?.let { parameters ->
             items(parameters) { parameter ->
                 Row {
                     parameter.name?.let { Text(it) }

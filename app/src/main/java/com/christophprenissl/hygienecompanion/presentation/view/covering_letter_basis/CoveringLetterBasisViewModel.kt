@@ -11,7 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
-import com.christophprenissl.hygienecompanion.presentation.util.createDates
+import com.christophprenissl.hygienecompanion.util.createCoveringLettersForSeries
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -187,18 +187,18 @@ class CoveringLetterBasisViewModel @Inject constructor(
     fun saveBasis(
         norm: String,
         description: String,
-        coveringParameters: List<ParameterBasis>,
+        basicCoveringParameters: List<ParameterBasis>,
         coveringSampleParameters: List<ParameterBasis>,
         labSampleParameters: List<ParameterBasis>,
-        labReportParameters: List<ParameterBasis>
+        basicLabReportParameters: List<ParameterBasis>
     ) {
         val basis = Basis(
             norm = norm,
             description = description,
-            coveringParameters = coveringParameters,
+            basicCoveringParameters = basicCoveringParameters,
             coveringSampleParameters = coveringSampleParameters,
             labSampleParameters = labSampleParameters,
-            labReportParameters = labReportParameters
+            basicLabReportParameters = basicLabReportParameters
         )
         viewModelScope.launch {
             useCases.saveBasis(basis).collect { response ->
@@ -290,94 +290,17 @@ class CoveringLetterBasisViewModel @Inject constructor(
         plannedEnd: Date,
         samplingSeriesType: SamplingSeriesType
     ) {
-        val coveringLetterDates = createDates(plannedStart, plannedEnd, samplingSeriesType)
-        val coveringLetters = coveringLetterDates.mapIndexed { cId, cl ->
-            val coveringParametersCoveringLetter = mutableListOf<Parameter>()
-            coveringParameters?.forEach {
-                if (it.value) {
-                    coveringParametersCoveringLetter.add(
-                        Parameter(
-                            name = it.key.name,
-                            parameterType = it.key.parameterType,
-                            value = when(it.key.parameterType) {
-                                ParameterType.Bool -> false
-                                ParameterType.Note -> ""
-                                ParameterType.Number -> 0
-                                ParameterType.Temperature -> 25.0
-                                else -> ""
-                            }
-                        )
-                    )
-                }
-            }
-            val labParametersCoveringLetter = mutableListOf<Parameter>()
-            labReportParameters?.forEach {
-                if (it.value) {
-                    labParametersCoveringLetter.add(
-                        Parameter(
-                            name = it.key.name,
-                            parameterType = it.key.parameterType,
-                            value = when(it.key.parameterType) {
-                                ParameterType.Bool -> false
-                                ParameterType.Note -> ""
-                                ParameterType.Number -> 0
-                                ParameterType.Temperature -> 25.0
-                                else -> ""
-                            }
-                        )
-                    )
-                }
-            }
-            CoveringLetter(
-                id = cId.toString(),
-                description = description,
-                date = cl,
-                coveringParameters = coveringParametersCoveringLetter,
-                labParameters = labParametersCoveringLetter,
-                samples = sampleLocations?.mapIndexed { idx, location ->
-                    val coveringSampleParametersSample = mutableListOf<Parameter>()
-                    coveringSampleParameters?.forEach {
-                        if (it.value) {
-                            coveringSampleParametersSample.add(Parameter(
-                                name = it.key.name,
-                                value = when(it.key.parameterType) {
-                                    ParameterType.Bool -> false
-                                    ParameterType.Temperature -> 0.0
-                                    ParameterType.Number -> 0
-                                    ParameterType.Note -> ""
-                                    else -> ""
-                                },
-                                parameterType = it.key.parameterType
-                            ))
-                        }
-                    }
-                    val labSampleParametersSample = mutableListOf<Parameter>()
-                    labSampleParameters?.forEach {
-                        if (it.value) {
-                            labSampleParametersSample.add(Parameter(
-                                name = it.key.name,
-                                value = when(it.key.parameterType) {
-                                    ParameterType.Bool -> false
-                                    ParameterType.Temperature -> 0.0
-                                    ParameterType.Number -> 0
-                                    ParameterType.Note -> ""
-                                    else -> ""
-                                },
-                                parameterType = it.key.parameterType
-                            ))
-                        }
-                    }
-                    Sample(
-                        id = idx.toString(),
-                        coveringSampleParameters = coveringSampleParametersSample,
-                        labSampleParameters = labSampleParametersSample,
-                        sampleLocation = location
-                    )
-
-                },
-                samplingState = SamplingState.Created
-            )
-        }
+        val coveringLetters = createCoveringLettersForSeries(
+            description = description,
+            coveringParameterBasesCoveringLetter = coveringParameters,
+            labParameterBasesCoveringLetter = labReportParameters,
+            sampleLocations = sampleLocations,
+            coveringSampleParameters = coveringSampleParameters,
+            labSampleParameters = labSampleParameters,
+            startDate = plannedStart,
+            plannedEndDate = plannedEnd,
+            samplingSeriesType = samplingSeriesType
+        )
 
         val coveringLetterSeries = CoveringLetterSeries(
             description = description,
