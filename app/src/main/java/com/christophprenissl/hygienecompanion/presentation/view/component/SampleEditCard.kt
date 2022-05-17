@@ -30,22 +30,15 @@ fun SampleEditCard(
     }
     var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: "")) }
 
-    val coveringSampleValues = remember { mutableStateListOf<String>() }
-    val labSampleValues = remember { mutableStateListOf<String>() }
-
-    sample.coveringSampleParameters?.let { parameters ->
-        parameters.forEach { parameter ->
-            parameter.value.let {
-                coveringSampleValues.add(it.toString())
-            }
-        }
+    val coveringSampleValues = remember {
+        sample.coveringSampleParameters!!.map {
+            it.value.toString()
+        }.toMutableStateList()
     }
-    sample.labSampleParameters?.let { parameters ->
-        parameters.forEach { parameter ->
-            parameter.value.let {
-                labSampleValues.add(it.toString())
-            }
-        }
+    val labSampleValues = remember {
+        sample.labSampleParameters!!.map {
+            it.value.toString()
+        }.toMutableStateList()
     }
 
     Card(

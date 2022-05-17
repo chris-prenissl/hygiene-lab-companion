@@ -1,6 +1,7 @@
 package com.christophprenissl.hygienecompanion.util
 
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 //sizes
 const val halfSize = 0.5f
@@ -8,6 +9,7 @@ val cardPadding = 4.dp
 val standardPadding = 8.dp
 val doubleStandardPadding = standardPadding.times(2)
 val standardElevation = 4.dp
+val titleSize = 20.sp
 
 //views
 const val HOME_ROUTE = "home_route"
