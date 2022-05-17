@@ -1,6 +1,5 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letters
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,8 +17,10 @@ import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
+import com.christophprenissl.hygienecompanion.presentation.view.component.ParameterText
+import com.christophprenissl.hygienecompanion.presentation.view.component.ParameterTextField
 import com.christophprenissl.hygienecompanion.presentation.view.component.SampleEditCard
-import com.christophprenissl.hygienecompanion.util.standardPadding
+import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
 fun CoveringLetterDetailView(
@@ -40,26 +40,41 @@ fun CoveringLetterDetailView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Text(title)
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            ParameterText(
+                title = COVERING_LETTER,
+                value = title
+            )
         }
         item {
-            Text("Geplante Abnahme: ${date?.dayMonthYearString()}")
+            ParameterText(
+                title = PLANNED_START_DATE,
+                value = date?.dayMonthYearString()
+            )
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
-        item {
-            Row {
-                Text("Chargennummer")
-                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                OutlinedTextField(
-                    value = lotId?: "",
-                    onValueChange = {
-                        lotId = it
-                        if (coveringLetter != null) {
-                            coveringLetter.lotId = it
+
+        when(samplingState) {
+            SamplingState.LabInProgress, SamplingState.InLaboratory -> {
+                item {
+                    ParameterText(
+                        title = LOT_ID,
+                        value = lotId
+                    )
+                }
+            }
+            else -> {
+                item {
+                    ParameterTextField(
+                        labelText = LOT_ID,
+                        value = lotId?: "",
+                        onValueChange = {
+                            lotId = it
+                            if (coveringLetter != null) {
+                                coveringLetter.lotId = it
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
 
@@ -91,7 +106,7 @@ fun CoveringLetterDetailView(
                             }
                         }
                     ) {
-                        Text("Probeentnahme zurückgeben")
+                        Text(GIVE_BACK_COVERING_LETTER)
                     }
                     Button(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
@@ -103,7 +118,7 @@ fun CoveringLetterDetailView(
                             }
                         }
                     ) {
-                        Text("Laborbearbeitung beenden")
+                        Text(END_REPORT)
                     }
                 }
                 else -> {
@@ -117,7 +132,7 @@ fun CoveringLetterDetailView(
                             }
                         }
                     ) {
-                        Text("Begleitschein im Labor abgeben")
+                        Text(HAND_IN_COVERING_LETTER)
                     }
                 }
             }
@@ -143,7 +158,7 @@ fun CoveringLetterDetailView(
                     }
                 }
             ) {
-                Text("Speichern")
+                Text(SAVE)
             }
         }
     }
