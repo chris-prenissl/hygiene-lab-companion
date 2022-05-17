@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.SampleReportCard
-import com.christophprenissl.hygienecompanion.util.standardPadding
+import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
 fun ReportDetailView(
@@ -27,27 +27,27 @@ fun ReportDetailView(
     ) {
 
         item {
-            Text(report?.description?: "Probebegleitschein")
+            Text(report?.description?: COVERING_LETTER)
         }
         item {
-            Text("Geplante Abnahme: ${report?.date?.dayMonthYearString()}")
+            Text( PLANNED_START_DATE + " " + report?.date?.dayMonthYearString())
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
-            Text("Laboreingang: ${report?.laboratoryIn?.dayMonthYearString()}")
+            Text(LAB_IN_DATE + " " + report?.laboratoryIn?.dayMonthYearString())
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
-            Text("Befundet: ${report?.laboratoryIn?.dayMonthYearString()}")
+            Text(RESULT_CREATED_DATE + " " + report?.laboratoryIn?.dayMonthYearString())
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
-            Text("Chargen-nr.: ${report?.lotId ?: "---"}")
+            Text(LOT_ID + " " + report?.lotId)
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
 
         item {
-            Text("Labor-Eingangs-Parameter")
+            Text(BASIC_LAB_REPORT_PARAMETERS)
         }
         report?.basicLabReportParameters?.let { parameters ->
             items(parameters) { parameter ->
@@ -60,6 +60,10 @@ fun ReportDetailView(
             item {
                 Spacer(modifier = Modifier.padding(vertical = standardPadding))
             }
+        }
+
+        item {
+            Text(BASIC_COVERING_PARAMETERS)
         }
         report?.basicCoveringParameters?.let { parameters ->
             items(parameters) { parameter ->

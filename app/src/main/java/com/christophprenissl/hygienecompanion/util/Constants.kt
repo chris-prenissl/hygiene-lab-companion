@@ -74,6 +74,17 @@ const val NEXT_HEATER = "Nächste Heizung"
 const val SAVE_SAMPLE_LOCATION = "Speichern"
 const val ADD_PARAMETER = "Parameter hinzufügen"
 
+const val COVERING_LETTER = "Probenbegleitschein"
+const val LAB_IN_DATE = "Laboreingang:"
+const val RESULT_CREATED_DATE = "Befundet am"
+const val LOT_ID = "Chargen-Nr.:"
+
+const val SAMPLE_ID = "Probennummer"
+const val EXTRA_INFO_SAMPLING_PERSON = "Zusatzinfo der probenentnehmenden Person"
+const val EXTRA_INFO_LAB_PERSON = "Zusatzinfo der Laborarbeiter:in"
+const val SAMPLING_DATE = "Datum der Probeentnahme"
+const val WARNING = "Warnung"
+
 //communication UI
 const val LOADING = "Lädt gerade"
 const val ERROR = "Fehler"

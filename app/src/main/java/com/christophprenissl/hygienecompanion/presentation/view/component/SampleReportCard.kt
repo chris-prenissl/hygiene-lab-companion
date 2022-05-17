@@ -9,42 +9,44 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
-import com.christophprenissl.hygienecompanion.util.standardPadding
+import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
 fun SampleReportCard(
     sample: Sample
 ) {
-    Column {
+    Column(
+        Modifier.padding(standardPadding)
+    ) {
         Row {
-            Text("Probeentnahme-Stelle")
+            Text(SAMPLE_LOCATION)
             Spacer(modifier = Modifier.padding(horizontal = standardPadding))
             sample.sampleLocation?.description?.let { Text(it) }
         }
         Row {
-            Text("Probennummer")
+            Text(SAMPLE_ID)
             Spacer(modifier = Modifier.padding(horizontal = standardPadding))
             sample.id?.let { Text(it) }
         }
         Row {
-            Text("Datum")
+            Text(SAMPLING_DATE)
             Spacer(modifier = Modifier.padding(horizontal = standardPadding))
             sample.created?.let { Text(it.dayMonthYearString()) }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
-        Text("Zusatzinfo der probenentnehmenden Person")
+        Text(EXTRA_INFO_SAMPLING_PERSON)
         Text(sample.extraInfoSampling?: "---")
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
-        Text("Zusatzinfo Laborarbeiter:in")
+        Text(EXTRA_INFO_LAB_PERSON)
         Text(sample.extraInfoLaboratory?: "---")
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
-        Text("Warnung")
+        Text(WARNING)
         Text(sample.warningMessage?: "---")
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
-        Text("Labor-Parameter")
+        Text(LAB_SAMPLE_PARAMETERS)
         sample.labSampleParameters?.forEach { parameter ->
             Row {
                 parameter.name?.let { Text(it) }
@@ -54,7 +56,7 @@ fun SampleReportCard(
         }
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
-        Text("Probeentnahme-Parameter")
+        Text(COVERING_SAMPLE_PARAMETERS)
         sample.coveringSampleParameters?.forEach { parameter ->
             Row {
                 parameter.name?.let { Text(it) }
