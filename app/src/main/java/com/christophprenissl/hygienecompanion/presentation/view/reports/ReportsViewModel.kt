@@ -72,6 +72,8 @@ class ReportsViewModel @Inject constructor(
                             GroupBy.Series -> {
                                 reportsSorted.groupBy {
                                     it.seriesId
+                                }.mapKeys {
+                                    it.value[0].description
                                 }
                             }
                             GroupBy.Month -> {
