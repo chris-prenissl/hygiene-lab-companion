@@ -4,12 +4,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 fun NavGraphBuilder.loggedOutGraph(
     navController: NavController,
     viewModel: LoggedOutViewModel,
-    onLogin: () -> Unit
+    onLogin: (UserType) -> Unit
 ) {
     navigation(startDestination = Screen.Login.route, route = Screen.Login.graphRoute) {
         composable(Screen.Login.route) {

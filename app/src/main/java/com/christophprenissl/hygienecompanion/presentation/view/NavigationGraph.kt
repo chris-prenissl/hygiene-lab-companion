@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 import com.christophprenissl.hygienecompanion.util.LOGGED_OUT_ROUTE
@@ -23,7 +24,7 @@ fun NavigationGraph(
     coveringLettersViewModel: CoveringLettersViewModel = hiltViewModel(),
     reportsViewModel: ReportsViewModel = hiltViewModel(),
     loggedOutViewModel: LoggedOutViewModel = hiltViewModel(),
-    onLogin: () -> Unit
+    onLogin: (UserType) -> Unit
 ) {
     NavHost(
         navController = navController,

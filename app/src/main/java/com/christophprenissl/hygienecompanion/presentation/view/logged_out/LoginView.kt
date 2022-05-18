@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 fun LoginView(
     navController: NavController,
     viewModel: LoggedOutViewModel,
-    onLogin: () -> Unit
+    onLogin: (UserType) -> Unit
 ) {
     val userTypeStore = DataStoreUserType(LocalContext.current)
     val coroutineScope = rememberCoroutineScope()
@@ -41,8 +41,7 @@ fun LoginView(
                     loginAs(
                         userTypeStore = userTypeStore,
                         userType = UserType.HygieneWorker,
-                        onLogin = onLogin,
-                        navController = navController
+                        onLogin = onLogin
                     )
                 }
             }
@@ -55,8 +54,7 @@ fun LoginView(
                     loginAs(
                         userTypeStore = userTypeStore,
                         userType = UserType.LabWorker,
-                        onLogin = onLogin,
-                        navController = navController
+                        onLogin = onLogin
                     )
                 }
             }
@@ -69,8 +67,7 @@ fun LoginView(
                     loginAs(
                         userTypeStore = userTypeStore,
                         userType = UserType.Sampler,
-                        onLogin = onLogin,
-                        navController = navController
+                        onLogin = onLogin
                     )
                 }
             }

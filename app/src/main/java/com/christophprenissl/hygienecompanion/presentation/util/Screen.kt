@@ -9,7 +9,8 @@ sealed class Screen(val name: String, val graphRoute: String, val route: String,
     object Login: Screen("Login", LOGGED_OUT_ROUTE, "login", null)
     object Register: Screen("Registrieren", LOGGED_OUT_ROUTE, "register", null)
 
-    object CoveringLetters: Screen("Begleitscheine", COVERING_LETTERS_ROUTE, "covering_letters", Icons.Rounded.Biotech)
+    object CoveringLetters: Screen("Begleitscheine", COVERING_LETTERS_ROUTE, "covering_letters", Icons.Rounded.Plagiarism)
+    object Lab: Screen("Begleitscheine", COVERING_LETTERS_ROUTE, "covering_letters", Icons.Rounded.Biotech)
     object CoveringLetterDetail: Screen("Begleitschein", COVERING_LETTERS_ROUTE, "covering_letter_detail", null)
 
     object CoveringLetterBasis: Screen("Basisdaten", COVERING_LETTER_BASIS_ROUTE, "covering_letters_basis", Icons.Rounded.BackupTable)

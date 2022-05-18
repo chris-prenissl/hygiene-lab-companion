@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
@@ -17,11 +18,10 @@ class DataStoreUserType(private val context: Context) {
         val USER_TYPE_KEY = stringPreferencesKey(USER_TYPE)
     }
 
-    val getUserType = flow {
-        val userType = context.dataStore.data.map { preferences ->
+    val getUserType: Flow<String> = flow {
+        context.dataStore.data.map { preferences ->
             preferences[USER_TYPE_KEY] ?: UserType.Sampler.name
         }
-        emit(userType)
     }
 
     suspend fun saveUserType(type: UserType) {
