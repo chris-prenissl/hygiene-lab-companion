@@ -1,9 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis
 
-import android.app.DatePickerDialog
 import android.content.Context
-import android.widget.DatePicker
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -11,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
+import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
 import com.christophprenissl.hygienecompanion.util.createCoveringLettersForSeries
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -98,8 +96,6 @@ class CoveringLetterBasisViewModel @Inject constructor(
 
     private var _plannedEndDate = mutableStateOf(Date())
     val plannedEndDate: State<Date> = _plannedEndDate
-
-    private var _pickerOpen = false
 
     init {
         getAddresses()
@@ -399,36 +395,5 @@ class CoveringLetterBasisViewModel @Inject constructor(
             context = context,
             date = _plannedEndDate
         )
-    }
-
-    private fun openDatePickerDialog(
-        context: Context,
-        date: MutableState<Date>
-    ) {
-        if (_pickerOpen) {
-            return
-        }
-        _pickerOpen = true
-        val currentCalendar = Calendar.getInstance()
-        currentCalendar.timeInMillis = date.value.time
-        val cYear = currentCalendar.get(Calendar.YEAR)
-        val cMonth = currentCalendar.get(Calendar.MONTH)
-        val cDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePicker = DatePickerDialog(
-            context,
-            { _: DatePicker, year: Int, month: Int, day: Int ->
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, day)
-                date.value = Date(calendar.timeInMillis)
-            },
-            cYear,
-            cMonth,
-            cDay
-        )
-        datePicker.show()
-        _pickerOpen = false
     }
 }

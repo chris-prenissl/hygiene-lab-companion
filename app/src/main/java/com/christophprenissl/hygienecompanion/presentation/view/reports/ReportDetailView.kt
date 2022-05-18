@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.SampleReportCard
 import com.christophprenissl.hygienecompanion.util.*
@@ -21,6 +22,7 @@ import java.util.*
 fun ReportDetailView(
     viewModel: ReportsViewModel
 ) {
+    val context = LocalContext.current
     val report = viewModel.chosenReport.value
 
     LazyColumn(
@@ -93,7 +95,7 @@ fun ReportDetailView(
         item {
             Button(
                 onClick = {
-                    viewModel.createAdditionalCoveringLetters(listOf(Date()))
+                    viewModel.openDatePickerForNewCoveringLetter(context = context)
                 }
             ) {
                 Text(CREATE_ADDITIONAL_COVERINGS)

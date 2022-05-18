@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.reports
 
+import android.content.Context
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +9,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.GroupBy
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
+import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,6 +23,9 @@ class ReportsViewModel @Inject constructor(
 
     private var _chosenReport = mutableStateOf<CoveringLetter?>(null)
     val chosenReport: State<CoveringLetter?> = _chosenReport
+
+    private var _chosenDate = mutableStateOf(Date())
+    val chosenDate: State<Date> = _chosenDate
 
     private var _createdAdditionalCoveringLettersState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val createdAdditionalCoveringLettersState: State<Response<Void?>> = _createdAdditionalCoveringLettersState
@@ -127,7 +132,7 @@ class ReportsViewModel @Inject constructor(
         }
     }
 
-    fun createAdditionalCoveringLetters(dates: List<Date>) {
+    private fun createAdditionalCoveringLetters(dates: List<Date>) {
         viewModelScope.launch {
             useCases.createAdditionalCoveringLetters(
                 coveringLetter = chosenReport.value!!,
@@ -136,5 +141,18 @@ class ReportsViewModel @Inject constructor(
                 _createdAdditionalCoveringLettersState.value = it
             }
         }
+    }
+
+    fun openDatePickerForNewCoveringLetter(
+        context: Context
+    ) {
+        _chosenDate.value = Date()
+        openDatePickerDialog(
+            context = context,
+            date = _chosenDate,
+            onSet = {
+                createAdditionalCoveringLetters(listOf(it))
+            }
+        )
     }
 }
