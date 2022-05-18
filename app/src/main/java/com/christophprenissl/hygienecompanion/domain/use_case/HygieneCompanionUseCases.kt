@@ -15,5 +15,6 @@ data class HygieneCompanionUseCases(
     val getCoveringLetterSeriesNotEnded: GetCoveringLetterSeriesNotEnded,
     val getCoveringLettersNotEnded: GetCoveringLettersNotEnded,
     val saveCoveringLetter: SaveCoveringLetter,
-    val getReports: GetReports
+    val getReports: GetReports,
+    val createAdditionalCoveringLetters: CreateAdditionalCoveringLetters
 )

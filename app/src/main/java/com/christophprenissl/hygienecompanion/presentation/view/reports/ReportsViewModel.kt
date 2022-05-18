@@ -9,7 +9,9 @@ import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUs
 import com.christophprenissl.hygienecompanion.presentation.util.GroupBy
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +21,9 @@ class ReportsViewModel @Inject constructor(
 
     private var _chosenReport = mutableStateOf<CoveringLetter?>(null)
     val chosenReport: State<CoveringLetter?> = _chosenReport
+
+    private var _createdAdditionalCoveringLettersState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    val createdAdditionalCoveringLettersState: State<Response<Void?>> = _createdAdditionalCoveringLettersState
 
     private var _gotReportsState = mutableStateOf<Response<Map<String?, List<CoveringLetter>>>>(
         Response.Success(mapOf()))
@@ -30,6 +35,9 @@ class ReportsViewModel @Inject constructor(
             when (val reportsResponse = _gotReportsState.value) {
                 is Response.Success -> {
                     _groupByState.value = value
+                    if (reportsResponse.data.values.isEmpty()) {
+                        return
+                    }
                     val reportsGrouped = when(value) {
                         GroupBy.Series -> {
                             val reports = reportsResponse.data.values.reduce { acc, list -> acc + list }
@@ -108,5 +116,25 @@ class ReportsViewModel @Inject constructor(
 
     fun chooseReport(report: CoveringLetter) {
         _chosenReport.value = report
+    }
+
+    fun reportsIsEmpty(): Boolean {
+        return when(val state = _gotReportsState.value) {
+            is Response.Success -> {
+                state.data.isEmpty()
+            }
+            else -> true
+        }
+    }
+
+    fun createAdditionalCoveringLetters(dates: List<Date>) {
+        viewModelScope.launch {
+            useCases.createAdditionalCoveringLetters(
+                coveringLetter = chosenReport.value!!,
+                dates = dates
+            ).collect {
+                _createdAdditionalCoveringLettersState.value = it
+            }
+        }
     }
 }

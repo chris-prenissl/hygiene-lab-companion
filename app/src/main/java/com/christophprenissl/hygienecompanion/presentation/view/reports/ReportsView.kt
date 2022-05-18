@@ -16,6 +16,8 @@ import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.CoveringLetterCard
+import com.christophprenissl.hygienecompanion.util.NOT_LOADED
+import com.christophprenissl.hygienecompanion.util.SORT_BY
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -24,12 +26,18 @@ fun ReportsView(
     navController: NavController,
     viewModel: ReportsViewModel
 ){
-    Column {
-        Button(onClick = {
-            viewModel.groupByNextValue()
-            viewModel.setNextGroupByValue()
-        }) {
-            Text("Sortieren nach ${viewModel.nextGroupByState.value.name}")
+    Column(
+        modifier = Modifier.padding(standardPadding)
+    ) {
+        if (!viewModel.reportsIsEmpty()) {
+            Button(
+                modifier = Modifier.align(Alignment.End),
+                onClick = {
+                viewModel.groupByNextValue()
+                viewModel.setNextGroupByValue()
+            }) {
+                Text(SORT_BY + " " + viewModel.nextGroupByState.value.name)
+            }
         }
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
@@ -63,7 +71,7 @@ fun ReportsView(
                 }
                 else -> {
                     item {
-                        Text("not loaded")
+                        Text(NOT_LOADED)
                     }
                 }
             }

@@ -80,6 +80,9 @@ const val LAB_IN_DATE = "Laboreingang:"
 const val RESULT_CREATED_DATE = "Befundet am"
 const val LOT_ID = "Chargen-Nr.:"
 
+const val CREATE_ADDITIONAL_COVERINGS = "Nachuntersuchungen erstellen"
+const val SORT_BY = "Sortieren nach"
+
 const val GIVE_BACK_COVERING_LETTER = "Probeentnahme zurückgeben"
 const val END_REPORT = "Probeentnahme befunden"
 const val HAND_IN_COVERING_LETTER = "Begleitschein im Labor abgeben"
@@ -94,6 +97,7 @@ const val WARNING = "Warnung"
 
 //communication UI
 const val LOADING = "Lädt gerade"
+const val NOT_LOADED = "nicht geladen"
 const val ERROR = "Fehler"
 const val SUCCESS = "Aktion war erfolgreich"
 const val ACCEPT = "Ok"
@@ -109,6 +113,7 @@ const val COVERING_LETTER_SERIES_FIRESTORE = "covering_letter_series"
 const val COVERING_LETTERS_FIRESTORE = "covering_letters"
 const val ADDRESS_ID = "addressId"
 const val SAMPLING_STATE_FIELD = "samplingState"
+const val COVERING_LETTERS_ARRAY = "coveringLetters"
 
 //time
 const val WEEK_DAYS = 7

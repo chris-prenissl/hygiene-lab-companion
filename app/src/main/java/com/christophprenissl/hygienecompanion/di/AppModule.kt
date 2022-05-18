@@ -118,6 +118,7 @@ object AppModule {
         getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(coveringLetterSeriesRepo),
         getCoveringLettersNotEnded = GetCoveringLettersNotEnded(coveringLetterRepo),
         saveCoveringLetter = SaveCoveringLetter(coveringLetterRepo),
-        getReports = GetReports(coveringLetterRepo)
+        getReports = GetReports(coveringLetterRepo),
+        createAdditionalCoveringLetters = CreateAdditionalCoveringLetters(coveringLetterSeriesRepo)
     )
 }

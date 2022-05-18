@@ -5,7 +5,7 @@ import com.christophprenissl.hygienecompanion.presentation.util.createDates
 import java.util.*
 
 fun createCoveringLetterForSeries(
-    id: Int,
+    id: String,
     description: String?,
     coveringParametersCoveringLetter: List<Parameter>?,
     labParametersCoveringLetter: List<Parameter>?,
@@ -15,7 +15,7 @@ fun createCoveringLetterForSeries(
     date: Date
 ): CoveringLetter {
     return CoveringLetter(
-        id = id.toString(),
+        id = id,
         description = description,
         date = date,
         basicCoveringParameters = coveringParametersCoveringLetter,
@@ -98,7 +98,7 @@ fun createCoveringLettersForSeries(
         val coveringParametersCoveringLetter = coveringParameterBasesCoveringLetter?.createParameterList()
         val labParametersCoveringLetter = labParameterBasesCoveringLetter?.createParameterList()
         createCoveringLetterForSeries(
-            id = dId,
+            id = dId.toString(),
             description = description,
             coveringParametersCoveringLetter = coveringParametersCoveringLetter,
             labParametersCoveringLetter = labParametersCoveringLetter,

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.SampleReportCard
 import com.christophprenissl.hygienecompanion.util.*
+import java.util.*
 
 @Composable
 fun ReportDetailView(
@@ -85,6 +87,16 @@ fun ReportDetailView(
                         SampleReportCard(sample = sample)
                     }
                 }
+            }
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+        }
+        item {
+            Button(
+                onClick = {
+                    viewModel.createAdditionalCoveringLetters(listOf(Date()))
+                }
+            ) {
+                Text(CREATE_ADDITIONAL_COVERINGS)
             }
         }
     }
