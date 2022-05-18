@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.tooling.preview.Preview
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.HygieneCompanionTheme
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRStatusBarDark
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRStatusBarLight
@@ -22,22 +20,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HygieneCompanionTheme {
+           HygieneCompanionTheme {
                 if (isSystemInDarkTheme()) {
                     window?.statusBarColor = UKRStatusBarDark.toArgb()
                 } else {
                     window?.statusBarColor = UKRStatusBarLight.toArgb()
                 }
                 MainView()
-            }
+           }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    HygieneCompanionTheme {
-        MainView()
     }
 }

@@ -95,6 +95,12 @@ const val EXTRA_INFO_LAB_PERSON = "Zusatzinfo der Laborarbeiter:in"
 const val SAMPLING_DATE = "Datum der Probeentnahme"
 const val WARNING = "Warnung"
 
+//Register/Login
+const val LOGIN = "Login"
+const val AS_HYGIENE_WORKER_REGISTER = "als Hygienearbeiter:in registrieren"
+const val AS_SAMPLER_REGISTER = "als Probeentnehmer:in registrieren"
+const val AS_LAB_WORKER_REGISTER = "als Laborarbeiter:in registrieren"
+
 //communication UI
 const val LOADING = "Lädt gerade"
 const val NOT_LOADED = "nicht geladen"
@@ -121,3 +127,6 @@ const val MONTH_DAYS = 30
 const val QUARTER_YEAR_DAYS = 90
 const val HALF_YEAR_DAYS = 180
 const val YEAR_DAYS = 360
+
+//data store
+const val USER_TYPE = "userType"

@@ -12,11 +12,10 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 @Composable
 fun MainView() {
-    val isLabWorker = false
     val navController = rememberNavController()
-    val loggedIn by remember { mutableStateOf(true) }
+    var loggedIn by remember { mutableStateOf(false) }
     val bottomNavItems = listOf(
-        if (isLabWorker) Screen.LabWorks else Screen.CoveringLetters,
+        Screen.CoveringLetters,
         Screen.CoveringLetterBasis,
         Screen.Reports
     )
@@ -34,7 +33,12 @@ fun MainView() {
         }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            NavigationGraph(loggedIn = loggedIn, navController = navController)
+            NavigationGraph(
+                navController = navController,
+                onLogin = {
+                    loggedIn = true
+                }
+            )
         }
     }
 }

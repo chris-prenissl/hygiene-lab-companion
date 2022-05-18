@@ -7,11 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.util.LOGIN
 
 @Composable
-fun RegisterView(navController: NavController) {
+fun RegisterView(
+    navController: NavController,
+    viewModel: LoggedOutViewModel
+) {
     Column {
-        Text("login")
+        Text(LOGIN)
         Button(onClick = {
             navController.navigate(Screen.CoveringLetters.route) {
                 popUpTo(HOME_ROUTE) {
@@ -22,7 +26,7 @@ fun RegisterView(navController: NavController) {
                 restoreState = true
             }
         }) {
-            Text("login")
+            Text(LOGIN)
         }
     }
 }
