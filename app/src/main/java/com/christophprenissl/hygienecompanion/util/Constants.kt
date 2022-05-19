@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 const val APP_TITLE = "Hygiene Companion"
+const val APP_TITLE_START = "| $APP_TITLE"
 const val UKR_LOGO_DESCRIPTION = "UKR Logo"
 const val BACK_BUTTON_DESCRIPTION = "Zurück"
 
@@ -15,6 +16,7 @@ val doubleStandardPadding = standardPadding.times(2)
 val standardElevation = 4.dp
 val titleSize = 20.sp
 val iconSize = 64.dp
+val titleIconSize = iconSize.times(1.25f)
 val titleDistance = 80.dp
 val iconBarOffset = iconSize.times(-halfSize)
 

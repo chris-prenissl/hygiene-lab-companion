@@ -7,9 +7,9 @@
         android:name=".HygieneCompanionApp"
         android:allowBackup="true"
         android:theme="@android:style/Theme.Material.NoActionBar"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_ukr_launcher"
         android:label="Hygiene Companion"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_ukr_launcher_round"
         android:supportsRtl="true">
         <activity
             android:name=".presentation.MainActivity"

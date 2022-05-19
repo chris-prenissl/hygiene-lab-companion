@@ -33,10 +33,10 @@ fun LoginView(
             Icon(
                 painter = painterResource(id = R.drawable.ic_ukr_logo),
                 contentDescription = UKR_LOGO_DESCRIPTION,
-                modifier = Modifier.size(iconSize)
+                modifier = Modifier.size(titleIconSize)
             )
             Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-            TitleText(title = APP_TITLE)
+            TitleText(title = APP_TITLE_START)
         }
         Spacer(modifier = Modifier.padding(vertical = titleDistance))
         Text(LOGIN)
