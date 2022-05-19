@@ -1,16 +1,17 @@
 package com.christophprenissl.hygienecompanion.presentation.view.logged_out
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.christophprenissl.hygienecompanion.R
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
@@ -24,16 +25,30 @@ fun LoginView(
             .fillMaxSize()
             .padding(standardPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_ukr_logo),
+                contentDescription = UKR_LOGO_DESCRIPTION,
+                modifier = Modifier.size(iconSize)
+            )
+            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+            TitleText(title = APP_TITLE)
+        }
+        Spacer(modifier = Modifier.padding(vertical = titleDistance))
         Text(LOGIN)
+        Spacer(modifier = Modifier.padding(vertical = standardPadding))
         Button(
             onClick = {
                 viewModel.login(
                     userType = UserType.HygieneWorker,
                     onLogin = onLogin
                 )
-            }
+            },
+            modifier = Modifier.padding(standardPadding)
         ) {
             Text(AS_HYGIENE_WORKER_REGISTER)
         }
@@ -43,7 +58,8 @@ fun LoginView(
                     userType = UserType.LabWorker,
                     onLogin = onLogin
                 )
-            }
+            },
+            modifier = Modifier.padding(standardPadding)
         ) {
             Text(AS_LAB_WORKER_REGISTER)
         }
@@ -53,7 +69,8 @@ fun LoginView(
                     userType = UserType.Sampler,
                     onLogin = onLogin
                 )
-            }
+            },
+            modifier = Modifier.padding(standardPadding)
         ) {
             Text(AS_SAMPLER_REGISTER)
         }

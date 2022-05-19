@@ -15,6 +15,8 @@ val doubleStandardPadding = standardPadding.times(2)
 val standardElevation = 4.dp
 val titleSize = 20.sp
 val iconSize = 64.dp
+val titleDistance = 80.dp
+val iconBarOffset = iconSize.times(-halfSize)
 
 //views
 const val HOME_ROUTE = "home_route"
