@@ -12,10 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
-import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.CoveringLetterCard
+import com.christophprenissl.hygienecompanion.presentation.view.util.isUserAllowedToEnter
 import com.christophprenissl.hygienecompanion.util.*
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -24,14 +23,14 @@ fun CoveringLettersView(
     navController: NavController,
     viewModel: CoveringLettersViewModel
 ){
-    val userType  = viewModel.userTypeFlow.collectAsState(initial = "")
+    val userType  = viewModel.userTypeFlow.collectAsState(initial = null)
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Text(userType.value)
+            userType.value?.name?.let { Text(it) }
         }
         item {
             Text(NEXT_COVERING_LETTERS)
@@ -51,23 +50,18 @@ fun CoveringLettersView(
                         CoveringLetterCard(
                             coveringLetter = it,
                             onClick = {
-                                when (userType.value) {
-                                    UserType.HygieneWorker.name, UserType.Sampler.name -> {
-                                        if (it.samplingState != SamplingState.InLaboratory
-                                            && it.samplingState != SamplingState.LabInProgress) {
-                                            viewModel.chooseCoveringLetter(it)
-                                            navController.navigate(Screen.CoveringLetterDetail.route)
-                                        }
-                                    }
-                                    UserType.LabWorker.name -> {
-                                        if (it.samplingState == SamplingState.LabInProgress
-                                            || it.samplingState == SamplingState.InLaboratory) {
-                                            viewModel.chooseCoveringLetter(it)
-                                            navController.navigate(Screen.CoveringLetterDetail.route)
-                                        }
-                                    }
+                                if (isUserAllowedToEnter(
+                                        userType = userType.value,
+                                        samplingState = it.samplingState
+                                )) {
+                                    viewModel.chooseCoveringLetter(it)
+                                    navController.navigate(Screen.CoveringLetterDetail.route)
                                 }
-                            }
+                            },
+                            accessIndicator = isUserAllowedToEnter(
+                                userType = userType.value,
+                                samplingState = it.samplingState
+                            )
                         )
                     }
                 }

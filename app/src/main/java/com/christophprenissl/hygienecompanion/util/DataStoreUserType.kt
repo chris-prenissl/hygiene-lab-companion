@@ -16,10 +16,10 @@ class DataStoreUserType(private val context: Context) {
         val USER_TYPE_KEY = stringPreferencesKey(USER_TYPE)
     }
 
-    fun getUserType(): Flow<String> = flow {
+    fun getUserType(): Flow<UserType> = flow {
         context.dataStore.data.first().let { preferences ->
             val type = preferences[USER_TYPE_KEY] ?: UserType.Sampler.name
-            emit(type)
+            emit(UserType.valueOf(type))
         }
     }
 

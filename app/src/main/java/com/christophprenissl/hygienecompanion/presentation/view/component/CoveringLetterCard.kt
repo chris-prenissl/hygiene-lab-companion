@@ -20,7 +20,8 @@ import com.christophprenissl.hygienecompanion.util.halfSize
 @Composable
 fun CoveringLetterCard(
     coveringLetter: CoveringLetter,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    accessIndicator: Boolean = true
 ) {
     Card(
         modifier = Modifier
@@ -38,18 +39,20 @@ fun CoveringLetterCard(
                 coveringLetter.samplingState?.let { Text(it.name) }
             }
         }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.End,
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.ArrowRight,
-                contentDescription = Icons.Rounded.ArrowRight.name,
+        if (accessIndicator) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End,
                 modifier = Modifier
-                    .size(64.dp)
-            )
+                    .fillMaxWidth()
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.ArrowRight,
+                    contentDescription = Icons.Rounded.ArrowRight.name,
+                    modifier = Modifier
+                        .size(64.dp)
+                )
+            }
         }
     }
 }

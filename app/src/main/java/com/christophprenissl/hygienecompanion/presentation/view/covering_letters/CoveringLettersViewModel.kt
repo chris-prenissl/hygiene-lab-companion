@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import com.christophprenissl.hygienecompanion.util.DataStoreUserType
@@ -31,7 +32,7 @@ class CoveringLettersViewModel @Inject constructor(
     private var _savedCoveringLetterState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedCoveringLetterState: State<Response<Void?>> = _savedCoveringLetterState
 
-    val userTypeFlow: Flow<String> = dataStoreUserType.getUserType()
+    val userTypeFlow: Flow<UserType> = dataStoreUserType.getUserType()
 
     init {
         getCoveringLettersNotFinishedByDate()
