@@ -175,7 +175,11 @@ fun CoveringLetterDetailView(
                         modifier = Modifier.padding(vertical = standardPadding),
                         onClick = {
                             viewModel.rejectCoveringLetter(coveringLetter)
-                            navController.navigate(Screen.CoveringLetters.graphRoute)
+                            navController.navigate(Screen.CoveringLetters.graphRoute) {
+                                popUpTo(HOME_ROUTE) {
+                                    inclusive = true
+                                }
+                            }
                         }
                     ) {
                         Text(GIVE_BACK_COVERING_LETTER)
@@ -185,7 +189,11 @@ fun CoveringLetterDetailView(
                         modifier = Modifier.padding(vertical = standardPadding),
                         onClick = {
                             viewModel.finishCoveringLetterInLab(coveringLetter)
-                            navController.navigate(Screen.CoveringLetters.graphRoute)
+                            navController.navigate(Screen.CoveringLetters.graphRoute) {
+                                popUpTo(HOME_ROUTE) {
+                                    inclusive = true
+                                }
+                            }
                         }
                     ) {
                         Text(END_REPORT)
@@ -197,7 +205,11 @@ fun CoveringLetterDetailView(
                         modifier = Modifier.padding(vertical = standardPadding),
                         onClick = {
                             viewModel.giveCoveringLetterToLab(coveringLetter)
-                            navController.navigate(Screen.CoveringLetters.graphRoute)
+                            navController.navigate(Screen.CoveringLetters.graphRoute) {
+                                popUpTo(HOME_ROUTE) {
+                                    inclusive = true
+                                }
+                            }
                         }
                     ) {
                         Text(HAND_IN_COVERING_LETTER)

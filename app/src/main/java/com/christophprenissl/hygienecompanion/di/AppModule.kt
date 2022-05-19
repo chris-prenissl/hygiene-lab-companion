@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.di
 
+import android.content.Context
 import com.christophprenissl.hygienecompanion.data.repository.*
 import com.christophprenissl.hygienecompanion.di.util.*
 import com.christophprenissl.hygienecompanion.domain.repository.*
@@ -11,8 +12,10 @@ import com.google.firebase.firestore.Query
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -121,4 +124,10 @@ object AppModule {
         getReports = GetReports(coveringLetterRepo),
         createAdditionalCoveringLetters = CreateAdditionalCoveringLetters(coveringLetterSeriesRepo)
     )
+
+    @Singleton
+    @Provides
+    fun provideDataStoreUserType(
+        @ApplicationContext app: Context
+    ) : DataStoreUserType = DataStoreUserType(app)
 }

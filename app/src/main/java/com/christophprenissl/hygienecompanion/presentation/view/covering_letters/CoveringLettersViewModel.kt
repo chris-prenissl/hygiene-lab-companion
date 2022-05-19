@@ -9,14 +9,17 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
+import com.christophprenissl.hygienecompanion.util.DataStoreUserType
 import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CoveringLettersViewModel @Inject constructor(
-    private val useCases: HygieneCompanionUseCases
+    private val useCases: HygieneCompanionUseCases,
+    dataStoreUserType: DataStoreUserType
 ): ViewModel() {
 
     private var _gotCoveringLettersState = mutableStateOf<Response<Map<String?, List<CoveringLetter>>>>(Response.Success(mapOf()))
@@ -27,6 +30,8 @@ class CoveringLettersViewModel @Inject constructor(
 
     private var _savedCoveringLetterState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedCoveringLetterState: State<Response<Void?>> = _savedCoveringLetterState
+
+    val userTypeFlow: Flow<String> = dataStoreUserType.getUserType()
 
     init {
         getCoveringLettersNotFinishedByDate()

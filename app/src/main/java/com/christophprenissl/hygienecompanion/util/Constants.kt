@@ -76,6 +76,7 @@ const val NEXT_HEATER = "Nächste Heizung"
 const val ADD_PARAMETER = "Parameter hinzufügen"
 
 const val COVERING_LETTER = "Probenbegleitschein"
+const val NEXT_COVERING_LETTERS = "Anstehende Probeentnahmen"
 const val LAB_IN_DATE = "Laboreingang:"
 const val RESULT_CREATED_DATE = "Befundet am"
 const val LOT_ID = "Chargen-Nr.:"
