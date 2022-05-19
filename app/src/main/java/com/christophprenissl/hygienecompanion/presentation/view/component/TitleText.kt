@@ -12,8 +12,9 @@ fun TitleText(
 ) {
     Text(
         text = title,
-        fontSize = titleSize,
+        fontStyle = MaterialTheme.typography.h1.fontStyle,
         textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.onBackground
+        color = MaterialTheme.colors.onBackground,
+        fontSize = MaterialTheme.typography.h1.fontSize
     )
 }
