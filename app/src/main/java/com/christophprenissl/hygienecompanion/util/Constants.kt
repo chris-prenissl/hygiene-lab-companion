@@ -3,6 +3,10 @@ package com.christophprenissl.hygienecompanion.util
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+const val APP_TITLE = "Hygiene Companion"
+const val UKR_LOGO_DESCRIPTION = "UKR Logo"
+const val BACK_BUTTON_DESCRIPTION = "Zurück"
+
 //sizes
 const val halfSize = 0.5f
 val cardPadding = 4.dp
