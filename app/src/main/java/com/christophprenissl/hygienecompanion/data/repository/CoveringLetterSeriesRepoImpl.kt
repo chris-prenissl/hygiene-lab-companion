@@ -7,12 +7,12 @@ import com.christophprenissl.hygienecompanion.domain.model.dto.ParameterDto
 import com.christophprenissl.hygienecompanion.domain.model.dto.SampleDto
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.model.util.mapper.CoveringLetterMapper
 import com.christophprenissl.hygienecompanion.domain.model.util.mapper.CoveringLetterSeriesMapper
 import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterSeriesRepo
 import com.christophprenissl.hygienecompanion.util.*
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -72,7 +72,8 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
 
     override fun getCoveringLetterSeriesNotEndedFromFireStore() = callbackFlow {
         val snapshotListener = coveringLetterSeriesRef
-            .whereNotEqualTo(SAMPLING_STATE_FIELD, SamplingState.LaboratoryResult.name)
+            .whereLessThan(PLANNED_END, Timestamp.now())
+            .whereEqualTo(HAS_ENDED_FIELD, false)
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {
                     val coveringLetterSeriesDto = snapshot.toObjects(CoveringLetterSeriesDto::class.java)

@@ -120,6 +120,8 @@ const val COVERING_LETTER_SERIES_FIRESTORE = "covering_letter_series"
 const val COVERING_LETTERS_FIRESTORE = "covering_letters"
 const val ADDRESS_ID = "addressId"
 const val SAMPLING_STATE_FIELD = "samplingState"
+const val HAS_ENDED_FIELD = "hasEnded"
+const val PLANNED_END = "plannedEnd"
 const val COVERING_LETTERS_ARRAY = "coveringLetters"
 
 //time
