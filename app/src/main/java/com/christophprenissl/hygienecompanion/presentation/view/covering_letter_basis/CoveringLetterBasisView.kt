@@ -16,6 +16,7 @@ import com.christophprenissl.hygienecompanion.util.*
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 @InternalComposeApi
 @ExperimentalCoroutinesApi
@@ -23,7 +24,6 @@ fun CoveringLetterBasisView(
     navController: NavController,
     viewModel: CoveringLetterBasisViewModel
 ) {
-
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -44,9 +44,11 @@ fun CoveringLetterBasisView(
         when (val addressesResponse = viewModel.gotAddressState.value) {
             is Response.Success -> {
                 val addresses = addressesResponse.data
-                items(addresses) { address ->
+                items(addresses, key = {address -> address.id!!}) { address ->
                     SwipeToDelete(
-                        onDelete = { viewModel.deleteAddress(address) }
+                        onDelete = {
+                            viewModel.deleteAddress(address)
+                        }
                     ) {
                         AddressCard(
                             address = address,
@@ -101,7 +103,7 @@ fun CoveringLetterBasisView(
         when (val basesResponse = viewModel.gotBasesState.value) {
             is Response.Success -> {
                 val bases = basesResponse.data
-                items(bases) { basis ->
+                items(bases, key = {basis -> basis.norm!!}) { basis ->
                     SwipeToDelete(
                         onDelete = { viewModel.deleteBasis(basis) }
                     ) {
@@ -155,14 +157,15 @@ fun CoveringLetterBasisView(
 
         when (val coveringLetterSeriesResponse = viewModel.gotCoveringLetterSeriesNotEndedState.value) {
             is Response.Success -> {
-                items(coveringLetterSeriesResponse.data) { coveringLetterSeries ->
+                val coveringLetterSeries = coveringLetterSeriesResponse.data
+                items(coveringLetterSeries, key = {cs -> cs.id!!}) { series ->
                     SwipeToDelete(
                         onDelete = {  }
                     ) {
                         CoveringLetterSeriesCard(
-                            coveringLetterSeries = coveringLetterSeries,
+                            coveringLetterSeries = series,
                             onClick = {
-                                viewModel.chooseCoveringLetterSeries(coveringLetterSeries)
+                                viewModel.chooseCoveringLetterSeries(series)
                                 navController.navigate(Screen.CoveringLetterSeriesDetail.route)
                             }
                         )

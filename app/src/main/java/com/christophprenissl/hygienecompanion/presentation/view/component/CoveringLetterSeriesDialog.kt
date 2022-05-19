@@ -22,7 +22,7 @@ import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearStri
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun CoveringLetterSeriesDialog(
     viewModel: CoveringLetterBasisViewModel,

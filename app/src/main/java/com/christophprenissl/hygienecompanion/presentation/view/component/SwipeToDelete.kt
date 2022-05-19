@@ -20,16 +20,18 @@ import com.christophprenissl.hygienecompanion.util.SWIPE_THRESHOLD
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SwipeToDelete(
-    onDelete: () -> Unit,
-    disMissContent: @Composable() (RowScope.() -> Unit)
-) {
-    val deleteState = rememberDismissState (
+    deleteState: DismissState = rememberDismissState (
         confirmStateChange =  {
             if (it == DismissValue.DismissedToStart) {
                 onDelete()
+                true
+            } else {
+                false
             }
-            true
-        })
+        }),
+    onDelete: () -> Unit,
+    disMissContent: @Composable() (RowScope.() -> Unit)
+) {
     if (deleteState.currentValue != DismissValue.Default) {
         LaunchedEffect(Unit) {
             deleteState.reset()
