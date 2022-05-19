@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
-import com.christophprenissl.hygienecompanion.presentation.view.component.CoveringLetterCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.CoveringLetterCard
 import com.christophprenissl.hygienecompanion.presentation.view.util.isUserAllowedToEnter
 import com.christophprenissl.hygienecompanion.util.*
 

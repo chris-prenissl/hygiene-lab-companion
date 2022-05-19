@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.bar
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem

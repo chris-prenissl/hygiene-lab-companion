@@ -21,6 +21,10 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.util.getValidTemperature
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
+import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleEdit
+import com.christophprenissl.hygienecompanion.presentation.view.component.edit.ParameterEdit
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.util.*
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -157,7 +161,7 @@ fun CoveringLetterDetailView(
                 coveringLetter.samples?.let { samples ->
                     items(samples) { sample ->
                         samplingState?.let {
-                            SampleEditCard(
+                            SampleEdit(
                                 samplingState = it,
                                 sample = sample
                             )

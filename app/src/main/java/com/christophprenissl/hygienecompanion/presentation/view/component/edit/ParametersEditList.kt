@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.edit
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding

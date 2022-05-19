@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.christophprenissl.hygienecompanion.util.standardPadding
 import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.presentation.view.component.SampleLocationCard
-import com.christophprenissl.hygienecompanion.presentation.view.component.SampleLocationDialog
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.SampleLocationDialog
 import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
 import com.christophprenissl.hygienecompanion.util.NEW_SAMPLE_LOCATION
 

@@ -24,10 +24,8 @@ fun SwipeToDelete(
         confirmStateChange =  {
             if (it == DismissValue.DismissedToStart) {
                 onDelete()
-                true
-            } else {
-                false
             }
+            true
         }),
     onDelete: () -> Unit,
     disMissContent: @Composable() (RowScope.() -> Unit)

@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.dialog
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -19,6 +19,10 @@ import androidx.compose.ui.window.Dialog
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasisCard
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 

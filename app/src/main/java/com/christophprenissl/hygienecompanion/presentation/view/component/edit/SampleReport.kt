@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.edit
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,7 @@ import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearStri
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
-fun SampleReportCard(
+fun SampleReport(
     sample: Sample
 ) {
     Column(

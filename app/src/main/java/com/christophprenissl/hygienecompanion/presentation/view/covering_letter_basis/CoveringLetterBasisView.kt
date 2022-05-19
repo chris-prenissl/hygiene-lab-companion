@@ -12,6 +12,12 @@ import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasisCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.CoveringLetterSeriesCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.AddressDialog
+import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.BasisDialog
+import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.CoveringLetterSeriesDialog
 import com.christophprenissl.hygienecompanion.util.*
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -10,6 +10,7 @@ val standardPadding = 8.dp
 val doubleStandardPadding = standardPadding.times(2)
 val standardElevation = 4.dp
 val titleSize = 20.sp
+val iconSize = 64.dp
 
 //views
 const val HOME_ROUTE = "home_route"

@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.dialog
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -14,6 +14,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.window.Dialog
 import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterBasis
 import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterCreationItem
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 

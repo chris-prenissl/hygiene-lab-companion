@@ -6,13 +6,11 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
-import com.christophprenissl.hygienecompanion.presentation.view.component.BottomNavBar
-import com.christophprenissl.hygienecompanion.presentation.view.component.TopMenuBar
+import com.christophprenissl.hygienecompanion.presentation.view.component.bar.BottomNavBar
+import com.christophprenissl.hygienecompanion.presentation.view.component.bar.TopMenuBar
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
-import com.christophprenissl.hygienecompanion.util.DataStoreUserType
 import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 
 @Composable

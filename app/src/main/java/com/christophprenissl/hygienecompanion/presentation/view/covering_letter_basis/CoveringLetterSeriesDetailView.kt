@@ -1,12 +1,11 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import com.christophprenissl.hygienecompanion.presentation.view.component.AddressCard
-import com.christophprenissl.hygienecompanion.presentation.view.component.BasisCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasisCard
 
 @Composable
 fun CoveringLetterSeriesDetailView(

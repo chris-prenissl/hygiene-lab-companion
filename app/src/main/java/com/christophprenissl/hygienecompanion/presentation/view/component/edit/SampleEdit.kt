@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.edit
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,10 +11,12 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.util.getValidTemperature
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
-fun SampleEditCard(
+fun SampleEdit(
     sample: Sample,
     samplingState: SamplingState
 ) {

@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view.component
+package com.christophprenissl.hygienecompanion.presentation.view.component.edit
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -14,6 +14,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.domain.model.entity.Parameter
 import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable

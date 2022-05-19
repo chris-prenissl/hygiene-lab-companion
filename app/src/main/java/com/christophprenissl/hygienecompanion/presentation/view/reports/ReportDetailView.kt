@@ -14,9 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
-import com.christophprenissl.hygienecompanion.presentation.view.component.SampleReportCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleReport
 import com.christophprenissl.hygienecompanion.util.*
-import java.util.*
 
 @Composable
 fun ReportDetailView(
@@ -86,7 +85,7 @@ fun ReportDetailView(
             LazyRow{
                 report?.samples?.let { samples ->
                     items(samples) { sample ->
-                        SampleReportCard(sample = sample)
+                        SampleReport(sample = sample)
                     }
                 }
             }
