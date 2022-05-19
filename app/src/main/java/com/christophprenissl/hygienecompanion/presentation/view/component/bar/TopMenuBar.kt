@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.R
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
@@ -37,10 +38,16 @@ fun TopMenuBar(
             }
         },
         navigationIcon = {
-            Icon(
-                imageVector = Icons.Rounded.ArrowBack,
-                contentDescription = BACK_BUTTON_DESCRIPTION
-            )
-        },
+            IconButton(
+                onClick = {
+                    navController.navigateUp()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.ArrowBack,
+                    contentDescription = BACK_BUTTON_DESCRIPTION
+                )
+            }
+        }
     )
 }
