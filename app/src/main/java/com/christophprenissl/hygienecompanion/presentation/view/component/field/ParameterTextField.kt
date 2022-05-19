@@ -18,7 +18,8 @@ fun ParameterTextField(
         label = { labelText?.let { Text(labelText) } },
         value = value,
         keyboardOptions = keyboardOptions,
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
+        maxLines = 1
     )
 }
 
@@ -33,6 +34,7 @@ fun ParameterTextField(
         label = { labelText?.let { Text(labelText) } },
         value = value,
         keyboardOptions = keyboardOptions,
-        onValueChange = onValueChange
+        onValueChange = onValueChange,
+        maxLines = 1
     )
 }

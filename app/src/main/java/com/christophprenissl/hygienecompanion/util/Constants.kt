@@ -44,6 +44,8 @@ const val EMAIL = "E-Mail"
 const val BASIS = "Basis"
 const val NORM = "Norm/Basis"
 
+const val CREATE_ADDRESS = "Erstelle eine Adresse"
+
 const val CLIENT_ADDRESS = "Auftraggeber-Adresse"
 const val COVERING_COMPANY_ADDRESS = "Adresse der Probeentnehmer-Firma"
 const val SET_COVERING_COMPANY_ADDRESS = "Adresse der Probeentnehmer-Firma festlegen"
