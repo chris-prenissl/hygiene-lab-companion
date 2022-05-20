@@ -32,6 +32,7 @@ android {
             firebaseAppDistribution {
                 artifactType="APK"
                 testersFile="./app/src/main/res/testers.txt"
+                releaseNotesFile="./app/src/main/res/version_info.txt"
             }
         }
     }

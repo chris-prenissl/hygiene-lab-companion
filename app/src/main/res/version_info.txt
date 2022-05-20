@@ -1,0 +1,4 @@
+v0.1.0 Release Notes
+
+- Erster Release welcher zum Testen aller Basis-Funktionalitäten gilt
+- Gerne Rückmeldung geben falls Benutzung unklar ist oder Inhalte unverständlich sind
