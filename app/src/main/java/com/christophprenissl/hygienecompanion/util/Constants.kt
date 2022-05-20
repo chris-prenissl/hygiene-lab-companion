@@ -14,11 +14,11 @@ val cardPadding = 4.dp
 val standardPadding = 8.dp
 val doubleStandardPadding = standardPadding.times(2)
 val standardElevation = 4.dp
-val titleSize = 20.sp
 val iconSize = 64.dp
 val titleIconSize = iconSize.times(1.25f)
 val titleDistance = 80.dp
 val iconBarOffset = iconSize.times(-halfSize)
+const val dropDownMenuWidth = 0.92f
 
 //views
 const val HOME_ROUTE = "home_route"
@@ -48,6 +48,8 @@ const val EMAIL = "E-Mail"
 const val BASIS = "Basis"
 const val NORM = "Norm/Basis"
 
+const val EMPTY = "---"
+
 const val CREATE_ADDRESS = "Erstelle eine Adresse"
 
 const val CLIENT_ADDRESS = "Auftraggeber-Adresse"
@@ -72,6 +74,8 @@ const val RESULT_TO_COVERING_ADDRESS = "Ergebnis zu Probeentnahme-Adresse:"
 const val COST_LOCATION = "Kostenstelle:"
 const val LAB_ID = "Labor-ID:"
 const val CHOICE_OF_BASIS = "Wahl der Untersuchungsgrundlagen"
+const val ADD_BASIS = "Basis hinzufügen"
+const val SET_CLIENT_ADDRESS = "Client Adresse festlegen"
 
 const val COVERING_LETTER_BASIS_DATA = "Begleitschein-Basis-Daten"
 const val COVERING_BASIS = "Begleitschein-Normen/Grundlagen"

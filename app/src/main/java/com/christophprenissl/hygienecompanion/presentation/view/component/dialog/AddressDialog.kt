@@ -5,9 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
+import com.christophprenissl.hygienecompanion.presentation.view.component.button.CancelButton
+import com.christophprenissl.hygienecompanion.presentation.view.component.button.OkButton
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
@@ -113,19 +114,14 @@ fun AddressDialog(
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
-            Button(
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
-                modifier = Modifier.padding(standardPadding),
-                onClick = onDismissRequest
-            ) {
+            CancelButton(onCancel = onDismissRequest) {
                 Text(
                     CANCEL,
                     color = MaterialTheme.colors.onPrimary
                 )
             }
-            Button(
-                modifier = Modifier.padding(standardPadding),
-                onClick = {
+            OkButton(
+                onOk = {
                     viewModel.saveAddress(
                         name = name.text,
                         zip = zip.text,
@@ -137,7 +133,8 @@ fun AddressDialog(
                         contactName = contactName.text
                     )
                     onDismissRequest()
-                }) {
+                }
+            ) {
                 Text(SAVE_ADDRESS)
             }
         }
