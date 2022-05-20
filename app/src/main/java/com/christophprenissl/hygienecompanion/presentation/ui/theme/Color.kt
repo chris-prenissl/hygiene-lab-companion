@@ -23,3 +23,8 @@ val UKROnBackgroundLight = Color(0xFF1F86FF)
 
 val UKRStatusBarDark = UKROnBackgroundDark
 val UKRStatusBarLight = UKRBackgroundLight
+
+//userType
+val hygieneWorkerColor = Color(0xFF00A66C)
+val samplerColor = Color(0xFFA59052)
+val labWorkerColor = Color(0xFFA5334C)

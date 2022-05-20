@@ -30,13 +30,9 @@ fun CoveringLettersView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            userType.value?.name?.let { Text(it) }
-        }
-        item {
             Text(NEXT_COVERING_LETTERS)
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
-
         when(val response = viewModel.gotCoveringLettersState.value) {
             is Response.Success -> {
                 val groupedCoveringLetters = response.data
