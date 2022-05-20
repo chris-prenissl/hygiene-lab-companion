@@ -15,6 +15,7 @@ import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicCheckBoxField
+import com.christophprenissl.hygienecompanion.presentation.view.component.BasicDivider
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
@@ -130,6 +131,8 @@ fun CoveringLetterSeriesDialog(
                     laboratoryId = it
                 }
             )
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            BasicDivider()
             Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
         }
         item {
@@ -206,6 +209,11 @@ fun CoveringLetterSeriesDialog(
                     onClick = {}
                 )
             }
+        }
+        item {
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            BasicDivider()
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
 
         if (basicCoveringParameters.isNotEmpty()) {
@@ -426,6 +434,10 @@ fun CoveringLetterSeriesDialog(
             && bases.isNotEmpty()
         ) {
             item {
+                BasicDivider()
+                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            }
+            item {
                 Text(CHOICES_FOR_SAMPLE_LOCATIONS)
                 Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
@@ -473,7 +485,12 @@ fun CoveringLetterSeriesDialog(
                     Text(ADD_SAMPLE_LOCATION)
                 }
             }
-
+            
+            item {
+                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                BasicDivider()
+                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            }
             item {
                 Text(PLANNED_START_DATE)
                 Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -542,6 +559,8 @@ fun CoveringLetterSeriesDialog(
         }
 
         item {
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            BasicDivider()
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
             OkButton(
