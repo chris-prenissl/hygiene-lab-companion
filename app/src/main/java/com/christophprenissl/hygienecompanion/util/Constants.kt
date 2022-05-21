@@ -8,6 +8,9 @@ const val APP_TITLE_START = "| $APP_TITLE"
 const val UKR_LOGO_DESCRIPTION = "UKR Logo"
 const val BACK_BUTTON_DESCRIPTION = "Zurück"
 
+//permissions
+const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
+
 //sizes
 const val halfSize = 0.5f
 val cardPadding = 4.dp
@@ -19,6 +22,10 @@ val titleIconSize = iconSize.times(1.25f)
 val titleDistance = 80.dp
 val iconBarOffset = iconSize.times(-halfSize)
 const val dropDownMenuWidth = 0.92f
+
+//pdf
+const val PDF_WIDTH = 792
+const val PDF_HEIGHT = 1120
 
 //views
 const val HOME_ROUTE = "home_route"
@@ -53,10 +60,10 @@ const val EMPTY = "---"
 const val CREATE_ADDRESS = "Erstelle eine Adresse"
 
 const val CLIENT_ADDRESS = "Auftraggeber-Adresse"
-const val COVERING_COMPANY_ADDRESS = "Adresse der Probeentnehmer-Firma"
-const val SET_COVERING_COMPANY_ADDRESS = "Adresse der Probeentnehmer-Firma festlegen"
-const val COVERING_ADDRESS = "Probeentnahme Adresse"
-const val SET_COVERING_ADDRESS = "Probeentnahme Adresse festlegen"
+const val COVERING_COMPANY_ADDRESS = "Probeentnehmer-Firma"
+const val SET_COVERING_COMPANY_ADDRESS = "Probeentnehmer-Firma festlegen"
+const val COVERING_ADDRESS = "Probeentnahmeadresse"
+const val SET_COVERING_ADDRESS = "Probeentnahmeadresse festlegen"
 const val CHOICES_FOR_SAMPLE_LOCATIONS = "Wahl der Probeentnahmestellen"
 const val ADD_SAMPLE_LOCATION = "Probeentnahmestelle hinzufügen"
 const val PLANNED_START_DATE = "Geplanter Anfang der Untersuchung"
@@ -69,8 +76,8 @@ const val BASIC_COVERING_PARAMETERS = "Grundlegende Parameter für Probenentnahm
 const val COVERING_SAMPLE_PARAMETERS = "Probenspezifische Parameter für Probeentnahme"
 const val LAB_SAMPLE_PARAMETERS = "Probenspezifische Parameter für Laborannahme"
 const val BASIC_LAB_REPORT_PARAMETERS = "Grundlegende Parameter für Labor-Befund"
-const val RESULT_TO_CLIENT = "Ergebnis zum Auftraggeber:"
-const val RESULT_TO_COVERING_ADDRESS = "Ergebnis zu Probeentnahme-Adresse:"
+const val RESULT_TO_CLIENT = "Befund an Auftraggeber:"
+const val RESULT_TO_COVERING_ADDRESS = "Befund an Abnahmeadresse:"
 const val COST_LOCATION = "Kostenstelle:"
 const val LAB_ID = "Labor-ID:"
 const val CHOICE_OF_BASIS = "Wahl der Untersuchungsgrundlagen"
@@ -110,6 +117,9 @@ const val EXTRA_INFO_SAMPLING_PERSON = "Zusatzinfo der probenentnehmenden Person
 const val EXTRA_INFO_LAB_PERSON = "Zusatzinfo der Laborarbeiter:in"
 const val SAMPLING_DATE = "Datum der Probeentnahme"
 const val WARNING = "Warnung"
+
+const val SAVE_AS_PDF = "Als PDF exportieren"
+const val REQUEST_EXTERNAL_STORAGE_PERMISSION = "Speichern anfordern"
 
 //Register/Login
 const val LOGIN = "Login"
