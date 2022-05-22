@@ -3,7 +3,5 @@
 /release/app-release.apk
 /debug/output-metadata.json
 /release/output-metadata.json
-/app/src/main/res/testers.txt
-/src/main/res/testers.txt
 /debug/app-debug.aab
 /release/app-release.aab

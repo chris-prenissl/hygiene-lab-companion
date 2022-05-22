@@ -39,7 +39,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             firebaseAppDistribution {
                 artifactType="APK"
-                testersFile="./app/src/main/res/testers.txt"
+                testersFile=System.getenv("HYGIENE_COMPANION_TESTERS")
                 releaseNotesFile="./app/src/main/res/version_info.txt"
             }
         }
