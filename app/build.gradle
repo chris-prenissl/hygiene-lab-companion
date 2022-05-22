@@ -10,6 +10,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("HYGIENE_COMPANION_KEY") ?: "/")
+            storePassword = System.getenv("HYGIENE_COMPANION_PASSWORD")
+            keyPassword = System.getenv("HYGIENE_COMPANION_PASSWORD")
+            keyAlias = System.getenv("HYGIENE_COMPANION_ALIAS")
+        }
+    }
     compileSdk 31
 
     defaultConfig {
@@ -68,7 +76,7 @@ kapt {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
     testImplementation 'junit:junit:4.13.2'
@@ -89,7 +97,7 @@ dependencies {
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:$hiltandroid_version"
-    kapt "com.google.dagger:hilt-android-compiler:2.37"
+    kapt 'com.google.dagger:hilt-android-compiler:2.42'
     kapt "androidx.hilt:hilt-compiler:1.0.0"
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
