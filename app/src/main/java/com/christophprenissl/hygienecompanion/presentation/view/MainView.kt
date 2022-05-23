@@ -64,16 +64,6 @@ fun MainView() {
         }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            if (userType != null) {
-                navController.popBackStack()
-                navController.navigate(Screen.CoveringLetters.graphRoute) {
-                    popUpTo(HOME_ROUTE) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-            }
             NavigationGraph(
                 navController = navController,
                 onLogin = {

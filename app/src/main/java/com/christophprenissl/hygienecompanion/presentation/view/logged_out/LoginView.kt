@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.R
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.util.*
 
@@ -47,6 +48,7 @@ fun LoginView(
                     userType = UserType.HygieneWorker,
                     onLogin = onLogin
                 )
+                navigateToHomeScreen(navController)
             },
             modifier = Modifier.padding(standardPadding)
         ) {
@@ -58,6 +60,7 @@ fun LoginView(
                     userType = UserType.LabWorker,
                     onLogin = onLogin
                 )
+                navigateToHomeScreen(navController)
             },
             modifier = Modifier.padding(standardPadding)
         ) {
@@ -69,10 +72,22 @@ fun LoginView(
                     userType = UserType.Sampler,
                     onLogin = onLogin
                 )
+                navigateToHomeScreen(navController)
             },
             modifier = Modifier.padding(standardPadding)
         ) {
             Text(AS_SAMPLER_REGISTER)
         }
+    }
+}
+
+fun navigateToHomeScreen(navController: NavController) {
+    navController.popBackStack()
+    navController.navigate(Screen.CoveringLetters.graphRoute) {
+        popUpTo(HOME_ROUTE) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
     }
 }
