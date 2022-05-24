@@ -131,7 +131,7 @@ fun ReportDetailView(
                     if (viewModel.loadedCoveringLetterSeries.value != null) {
                         BasicButton(
                             onClick = {
-                                createXSSFromReport(
+                                createXSSFFromReport(
                                     context = context,
                                     coveringLetterSeries = viewModel.loadedCoveringLetterSeries.value!!,
                                     report = report

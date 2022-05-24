@@ -6,6 +6,7 @@ import android.os.Environment
 import android.widget.Toast
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
+import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
@@ -14,7 +15,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 
-fun createXSSFromReport(
+fun createXSSFFromReport(
     context: Context,
     coveringLetterSeries: CoveringLetterSeries,
     report: CoveringLetter
@@ -47,7 +48,31 @@ fun createXSSFromReport(
 
     val costLocationRow = sheet.createRow(rowIdx)
     costLocationRow.createKeyValue(0, COST_LOCATION, coveringLetterSeries.costLocation)
+    rowIdx += 2
+
+    val samplerTitleRow = sheet.createRow(rowIdx)
+    samplerTitleRow.createCell(0).setCellValue(SAMPLER)
     rowIdx++
+
+    val samplerNameRow = sheet.createRow(rowIdx)
+    samplerNameRow.createKeyValue(0, NAME, report.sampler?.name)
+    rowIdx++
+
+    val hasCertificateRow = sheet.createRow(rowIdx)
+    hasCertificateRow.createKeyValue(0, HAS_CERTIFICATE, report.sampler?.hasCertificate)
+    rowIdx++
+
+    val isSamplerOfInstituteRow = sheet.createRow(rowIdx)
+    isSamplerOfInstituteRow.createKeyValue(0, IS_SAMPLER_OF_INSTITUTE, report.sampler?.isSamplerOfInstitute)
+    rowIdx += 2
+
+    val labWorkerTitleRow = sheet.createRow(rowIdx)
+    labWorkerTitleRow.createCell(0).setCellValue(LAB_WORKER)
+    rowIdx++
+
+    val labWorkerRow = sheet.createRow(rowIdx)
+    labWorkerRow.createKeyValue(0, NAME, report.labWorker?.name)
+    rowIdx += 2
 
     val labIdRow = sheet.createRow(rowIdx)
     labIdRow.createKeyValue(0, LAB_ID, coveringLetterSeries.laboratoryId)
@@ -66,7 +91,7 @@ fun createXSSFromReport(
         coveringLetterSeries.samplingCompany
     )
     rowIdx = sheet.createAddressesFields(rowIdx, addresses)
-    rowIdx++
+    rowIdx += 2
 
     val laboratoryInRow = sheet.createRow(rowIdx)
     laboratoryInRow.createKeyValue(0, LAB_IN_DATE, report.laboratoryIn?.dayMonthYearString())
@@ -120,7 +145,8 @@ private fun XSSFRow.createKeyValue(idx: Int, key: String, value: String?) {
 
 private fun XSSFRow.createKeyValue(idx: Int, key: String, value: Boolean?) {
     createCell(idx).setCellValue(key)
-    createCell(idx+1).setCellValue(value?: false)
+    val valueTranslated = value?.translation()
+    createCell(idx+1).setCellValue(valueTranslated)
 }
 
 private fun XSSFSheet.createAddressesFields(rowIdx: Int, addresses: List<Address?>): Int {
@@ -193,7 +219,9 @@ private fun XSSFSheet.createParameterLists(
                 rows.add(row)
                 row.createCell(0).setCellValue(parameter.name)
             }
-            rows[idx2].createCell(idx1+1).setCellValue(parameter.value.toString())
+            val valueTranslated = if (parameter.parameterType == ParameterType.Bool)
+                    (parameter.value as? Boolean)?.translation() else parameter.value.toString()
+            rows[idx2].createCell(idx1+1).setCellValue(valueTranslated)
         }
     }
     return newRowIdx
