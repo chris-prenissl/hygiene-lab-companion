@@ -23,7 +23,7 @@ fun UserTypeDropdownMenu(
             },
             menuOpen = expanded
         ) {
-            Text(chosenUserType.name)
+            Text(chosenUserType.translation)
         }
         Spacer(modifier = Modifier.padding(horizontal = standardPadding))
         BasicDropdownMenu(
@@ -40,7 +40,7 @@ fun UserTypeDropdownMenu(
                         expanded = false
                     }
                 ) {
-                    Text(it.name)
+                    Text(it.translation)
                 }
             }
         }

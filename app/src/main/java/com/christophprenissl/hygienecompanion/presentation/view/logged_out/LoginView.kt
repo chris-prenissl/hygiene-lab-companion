@@ -1,8 +1,10 @@
 package com.christophprenissl.hygienecompanion.presentation.view.logged_out
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -12,10 +14,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.R
-import com.christophprenissl.hygienecompanion.domain.model.entity.User
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicCheckBoxField
+import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.dropdown.UserTypeDropdownMenu
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
@@ -39,6 +41,8 @@ fun LoginView(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
+        Text(LOGIN)
+        Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -51,37 +55,46 @@ fun LoginView(
             TitleText(title = APP_TITLE_START)
         }
         Spacer(modifier = Modifier.padding(vertical = titleDistance))
-        ParameterTextField(
-            labelText = USER_NAME,
-            value = name,
-            onValueChange = {
-                name = it
+        BasicSurface(
+            border = BorderStroke(basicBorderStroke, MaterialTheme.colors.onBackground)
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(standardPadding)
+            ) {
+                ParameterTextField(
+                    labelText = USER_NAME,
+                    value = name,
+                    onValueChange = {
+                        name = it
+                    }
+                )
+                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                if (userType != UserType.LabWorker) {
+                    BasicCheckBoxField(
+                        title = HAS_CERTIFICATE,
+                        value = hasCertificate,
+                        onCheckedChange = {
+                            hasCertificate = it
+                        }
+                    )
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    BasicCheckBoxField(
+                        title = QM_SAMPLER,
+                        value = isSamplerOfInstitute,
+                        onCheckedChange = {
+                            isSamplerOfInstitute = it
+                        }
+                    )
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                }
+
+                UserTypeDropdownMenu(onUserTypeChoose = {
+                    userType = it
+                })
             }
-        )
-        Spacer(modifier = Modifier.padding(vertical = standardPadding))
-        if (userType != UserType.LabWorker) {
-            BasicCheckBoxField(
-                title = HAS_CERTIFICATE,
-                value = hasCertificate,
-                onCheckedChange = {
-                    hasCertificate = it
-                }
-            )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
-            BasicCheckBoxField(
-                title = QM_SAMPLER,
-                value = isSamplerOfInstitute,
-                onCheckedChange = {
-                    isSamplerOfInstitute = it
-                }
-            )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
-        Text(LOGIN)
-        Spacer(modifier = Modifier.padding(vertical = standardPadding))
-        UserTypeDropdownMenu(onUserTypeChoose = {
-            userType = it
-        })
         Spacer(modifier = Modifier.padding(vertical = standardPadding))
         Button(
             enabled = userType != null,

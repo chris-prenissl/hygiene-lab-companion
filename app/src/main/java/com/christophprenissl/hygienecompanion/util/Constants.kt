@@ -17,12 +17,15 @@ val standardPadding = 8.dp
 val doubleStandardPadding = standardPadding.times(2)
 val standardElevation = 4.dp
 val iconSize = 64.dp
+val basicBorderStroke = 1.dp
 val titleIconSize = iconSize.times(1.25f)
-val titleDistance = 80.dp
+val titleDistance = 40.dp
 val iconBarOffset = iconSize.times(-halfSize)
 const val dropDownMenuWidth = 0.92f
+val parameterCreationItemSize = 90.dp
 
 //excel
+const val PARAMETER = "Parametername"
 const val VALUES = "Werte"
 const val BASIC_PARAMETERS = "Grundlegende Parameter"
 const val PARAMETERS = "Parameter"

@@ -1,6 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.dialog
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
+import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
 fun BasicDialog(
@@ -25,7 +27,9 @@ fun BasicDialog(
             Box(contentAlignment = Alignment.Center) {
                 LazyColumn(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.align(Alignment.TopCenter),
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .padding(standardPadding),
                     content = content
                 )
             }

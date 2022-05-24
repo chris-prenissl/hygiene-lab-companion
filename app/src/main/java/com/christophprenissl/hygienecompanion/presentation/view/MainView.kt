@@ -40,7 +40,7 @@ fun MainView() {
         }
         else -> emptyList()
     }
-    val topBarTitle = userType?.name ?: APP_TITLE
+    val topBarTitle = userType?.translation ?: APP_TITLE
     val topBarTitleColor = when(userType) {
         UserType.Sampler -> samplerColor
         UserType.LabWorker -> labWorkerColor

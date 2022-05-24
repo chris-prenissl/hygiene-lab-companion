@@ -8,11 +8,12 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
 @Composable
 fun BasisCard(
     basis: Basis,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
+    accessAble: Boolean = true
 ) {
     BasicCard(
         onClick = onClick,
-        accessIndicator = true
+        accessIndicator = accessAble
     ) {
         Column {
             basis.description?.let { Text(it) }

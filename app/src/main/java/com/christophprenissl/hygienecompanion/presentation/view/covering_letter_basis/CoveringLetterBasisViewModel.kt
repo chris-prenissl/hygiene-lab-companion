@@ -94,7 +94,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _plannedStartDate = mutableStateOf(Date())
     val plannedStartDate: State<Date> = _plannedStartDate
 
-    private var _plannedEndDate = mutableStateOf(Date())
+    private var _plannedEndDate = mutableStateOf(_plannedStartDate.value)
     val plannedEndDate: State<Date> = _plannedEndDate
 
     init {

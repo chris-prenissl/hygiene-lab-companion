@@ -14,11 +14,12 @@ import com.christophprenissl.hygienecompanion.util.*
 @Composable
 fun AddressCard(
     address: Address,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
+    accessAble: Boolean = true
 ) {
     BasicCard(
         onClick = onClick,
-        accessIndicator = true
+        accessIndicator = accessAble
     ) {
         Column {
             address.name?.let { Text(it) }

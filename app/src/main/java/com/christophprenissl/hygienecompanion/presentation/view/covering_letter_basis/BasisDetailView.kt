@@ -34,7 +34,7 @@ fun BasisDetailView(
                 Row {
                     item.name?.let { Text(it) }
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.name?.let { Text(it) }
+                    item.parameterType?.translation?.let { Text(it) }
                 }
             }
             item {
@@ -50,7 +50,7 @@ fun BasisDetailView(
                 Row {
                     item.name?.let { Text(it) }
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.name?.let { Text(it) }
+                    item.parameterType?.translation?.let { Text(it) }
                 }
             }
             item {
@@ -66,7 +66,7 @@ fun BasisDetailView(
                 Row {
                     item.name?.let { Text(it) }
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.name?.let { Text(it) }
+                    item.parameterType?.translation?.let { Text(it) }
                 }
             }
             item {
@@ -82,7 +82,7 @@ fun BasisDetailView(
                 Row {
                     item.name?.let { Text(it) }
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.name?.let { Text(it) }
+                    item.parameterType?.translation?.let { Text(it) }
                 }
             }
             item {

@@ -42,7 +42,7 @@ fun CoveringLettersView(
                             Text(initial)
                         }
                     }
-                    items(coveringLetters) {
+                    items(coveringLetters, key = { cl -> cl.id!! }) {
                         if (userType.value != null) {
                           CoveringLetterCard(
                                 coveringLetter = it,
@@ -63,7 +63,6 @@ fun CoveringLettersView(
                         }
                     }
                 }
-
             }
             else -> {
                 item {

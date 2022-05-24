@@ -19,7 +19,7 @@ fun CoveringLetterCard(
         Column {
             coveringLetter.description?.let { Text(it) }
             coveringLetter.date?.let { Text(it.dayMonthYearString()) }
-            coveringLetter.samplingState?.let { Text(it.name) }
+            coveringLetter.samplingState?.let { Text(it.translation) }
         }
     }
 }
