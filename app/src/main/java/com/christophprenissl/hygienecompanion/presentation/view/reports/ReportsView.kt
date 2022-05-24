@@ -15,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.CoveringLetterCard
 import com.christophprenissl.hygienecompanion.util.NOT_LOADED
+import com.christophprenissl.hygienecompanion.util.REPORTS
 import com.christophprenissl.hygienecompanion.util.SORT_BY
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
@@ -45,7 +47,7 @@ fun ReportsView(
         ) {
 
             item {
-                Text("Befunde")
+                TitleText(REPORTS)
                 Spacer(modifier = Modifier.padding(vertical = standardPadding))
             }
 

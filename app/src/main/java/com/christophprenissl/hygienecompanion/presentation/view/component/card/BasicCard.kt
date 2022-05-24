@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.util.cardPadding
 import com.christophprenissl.hygienecompanion.util.halfSize
 import com.christophprenissl.hygienecompanion.util.iconSize
@@ -21,9 +23,11 @@ fun BasicCard(
     onClick: () -> Unit,
     accessIndicator: Boolean = true,
     indicatorIcon: ImageVector = Icons.Rounded.ArrowRight,
+    elevation: Dp = 0.dp,
     content: @Composable RowScope.() -> Unit
 ) {
     Card(
+        elevation = elevation,
         modifier = Modifier
             .fillMaxWidth(halfSize)
             .padding(cardPadding),
@@ -56,9 +60,11 @@ fun BasicCard(
 
 @Composable
 fun BasicCard(
+    elevation: Dp = 0.dp,
     content: @Composable RowScope.() -> Unit
 ) {
     Card(
+        elevation = elevation,
         modifier = Modifier
             .fillMaxWidth(halfSize)
             .padding(cardPadding)

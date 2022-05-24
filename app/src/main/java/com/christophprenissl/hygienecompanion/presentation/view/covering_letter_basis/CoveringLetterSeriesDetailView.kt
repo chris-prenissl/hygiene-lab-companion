@@ -1,6 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,6 +15,7 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.TitleT
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasisCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
+import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import com.christophprenissl.hygienecompanion.util.*
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -22,13 +24,15 @@ fun CoveringLetterSeriesDetailView(
     viewModel: CoveringLetterBasisViewModel
 ) {
     BasicSurface(
-        modifier = Modifier.padding(standardPadding)
+        modifier = Modifier
+            .padding(standardPadding)
+            .fillMaxSize()
     ) {
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             stickyHeader {
-                TitleText(COVERING_LETTER_SERIES)
+                TitleText(COVERING_LETTER_SERIE)
             }
             viewModel.chosenCoveringLetterSeries.value?.let { cls ->
                 item {
@@ -46,13 +50,13 @@ fun CoveringLetterSeriesDetailView(
                 item {
                     ParameterText(
                         title = TO_CLIENT,
-                        value =  cls.resultToClient.toString()
+                        value =  cls.resultToClient?.translation()
                     )
                 }
                 item {
                     ParameterText(
                         title = TO_COVERING_PROPERTY,
-                        value =  cls.resultToTestingProperty?.toString()
+                        value =  cls.resultToTestingProperty?.translation()
                     )
                 }
                 item {

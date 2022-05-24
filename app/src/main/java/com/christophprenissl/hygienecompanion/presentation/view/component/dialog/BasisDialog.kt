@@ -24,6 +24,7 @@ fun BasisDialog(
     viewModel: CoveringLetterBasisViewModel,
     onDismissRequest: () -> Unit
 ) {
+    var pIdx by remember { mutableStateOf(0) }
     var norm by remember { mutableStateOf(TextFieldValue("")) }
     var description by remember { mutableStateOf(TextFieldValue("")) }
     val basicCoveringParameters = remember { mutableStateListOf<ParameterBasis>() }
@@ -59,7 +60,7 @@ fun BasisDialog(
         item {
             Text(BASIC_COVERING_PARAMETERS)
         }
-        items(basicCoveringParameters) { item ->
+        items(basicCoveringParameters, key = { item -> item.name!! + item.parameterType!!}) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = {
@@ -70,7 +71,13 @@ fun BasisDialog(
         item {
             BasicButton(
                 onClick = {
-                    basicCoveringParameters.add(ParameterBasis(parameterType = ParameterType.Number))
+                    basicCoveringParameters.add(
+                        ParameterBasis(
+                            name = PARAMETER + pIdx.toString(),
+                            parameterType = ParameterType.Number
+                        )
+                    )
+                    pIdx++
                 }
             ) {
                 Text(ADD_PARAMETER)
@@ -81,7 +88,7 @@ fun BasisDialog(
         item {
             Text(COVERING_SAMPLE_PARAMETERS)
         }
-        items(coveringSampleParameters) { item ->
+        items(coveringSampleParameters, key = {item -> item.name!! + item.parameterType!! }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = { coveringSampleParameters.remove(item) }
@@ -90,7 +97,12 @@ fun BasisDialog(
         item {
             BasicButton(
                 onClick = {
-                    coveringSampleParameters.add(ParameterBasis(parameterType = ParameterType.Number))
+                    coveringSampleParameters.add(
+                        ParameterBasis(
+                            name = PARAMETER + pIdx.toString(),
+                            parameterType = ParameterType.Number)
+                    )
+                    pIdx++
                 }
             ) {
                 Text(ADD_PARAMETER)
@@ -101,7 +113,7 @@ fun BasisDialog(
         item {
             Text(LAB_SAMPLE_PARAMETERS)
         }
-        items(labSampleParameters) { item ->
+        items(labSampleParameters, key = { item -> item.name!! + item.parameterType!! }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = { labSampleParameters.remove(item) }
@@ -110,7 +122,12 @@ fun BasisDialog(
         item {
             BasicButton(
                 onClick = {
-                    labSampleParameters.add(ParameterBasis(parameterType = ParameterType.Number))
+                    labSampleParameters.add(
+                        ParameterBasis(
+                            name = PARAMETER + pIdx.toString(),
+                            parameterType = ParameterType.Number)
+                    )
+                    pIdx++
                 }
             ) {
                 Text(ADD_PARAMETER)
@@ -121,7 +138,7 @@ fun BasisDialog(
         item {
             Text(BASIC_LAB_REPORT_PARAMETERS)
         }
-        items(basicLabReportParameters) { item ->
+        items(basicLabReportParameters, key = { item -> item.name!! + item.parameterType!! }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = { basicLabReportParameters.remove(item) }
@@ -130,7 +147,12 @@ fun BasisDialog(
         item {
             BasicButton(
                 onClick = {
-                    basicLabReportParameters.add(ParameterBasis(parameterType = ParameterType.Number))
+                    basicLabReportParameters.add(
+                        ParameterBasis(
+                            name = PARAMETER + pIdx.toString(),
+                            parameterType = ParameterType.Number)
+                    )
+                    pIdx++
                 }
             ) {
                 Text(ADD_PARAMETER)

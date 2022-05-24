@@ -26,18 +26,18 @@ val parameterCreationItemSize = 90.dp
 
 //excel
 const val PARAMETER = "Parametername"
-const val VALUES = "Werte"
-const val BASIC_PARAMETERS = "Grundlegende Parameter"
-const val PARAMETERS = "Parameter"
 const val SAMPLES = "Proben"
 const val SUCCESS_SAVING = "Erfolgreich: %s wurde gespeichert"
 const val ERROR_SAVING = "Fehler: Datei konnte nicht gespeichert werden"
+const val NAME = "Name"
+const val SAMPLER = "Probeentnehmer:in"
+const val LAB_WORKER = "Laborarbeiter:in"
+const val IS_SAMPLER_OF_INSTITUTE = "QM-Probeentnehmer:in des Instituts "
 
 //views
 const val HOME_ROUTE = "home_route"
 const val LOGGED_OUT_ROUTE = "logged_out_route"
 const val COVERING_LETTERS_ROUTE = "covering_letter_route"
-const val LAB_ROUTE = "lab_route"
 const val COVERING_LETTER_BASIS_ROUTE = "covering_letter_basis_route"
 const val COVERING_BASIS_ROUTE = "basis_detail_route"
 const val REPORTS_ROUTE = "reports_route"
@@ -62,6 +62,8 @@ const val BASIS = "Basis"
 const val NORM = "Norm/Basis"
 
 const val EMPTY = "---"
+
+const val SAVE_LOCATION = "Entnahmestelle speichern"
 
 const val CREATE_ADDRESS = "Erstelle eine Adresse"
 const val CREATED = "Erstellt am"
@@ -94,13 +96,13 @@ const val ADD_BASIS = "Basis hinzufügen"
 const val SET_CLIENT_ADDRESS = "Client Adresse festlegen"
 
 const val USER_NAME = "Name"
-const val HAS_CERTIFICATE = "Probeentnehmer-Zertifikat vorhanden"
-const val QM_SAMPLER = "QM-Probennehmer:in des Instituts"
-const val CHOOSING_USER_TYPE = "Nutzertyp wählen"
+const val HAS_CERTIFICATE = "Probeentnehmer-Zertifikat"
+const val QM_SAMPLER = "QM-Probennehmer:in"
 
 const val COVERING_LETTER_BASIS_DATA = "Begleitschein-Basis-Daten"
 const val COVERING_BASIS = "Begleitschein-Normen/Grundlagen"
 const val COVERING_LETTER_SERIES = "Begleitschein-Serien"
+const val COVERING_LETTER_SERIE = "Begleitschein-Serie"
 const val ADD_COVERING_BASIS = "Norm/Grundlage hinzufügen"
 const val ADD_ADDRESS = "Adresse hinzufügen"
 const val SAVE_ADDRESS = "Adresse speichern"
@@ -110,6 +112,7 @@ const val DESCRIPTION = "Beschreibung"
 const val EXTRA_INFO = "Zusätzliche Information"
 const val NEXT_HEATER = "Nächste Heizung"
 const val ADD_PARAMETER = "Parameter hinzufügen"
+const val ADD_COVERING_LETTER_SERIES = "Begleitscheinserie hinzufügen"
 
 const val COVERING_LETTER = "Probenbegleitschein"
 const val NEXT_COVERING_LETTERS = "Anstehende Probeentnahmen"
@@ -137,22 +140,22 @@ const val SAMPLING_DATE = "Datum der Probeentnahme"
 const val WARNING = "Warnung"
 
 const val SAVE_AS_EXCEL = "Als Exceldatei exportieren"
-const val REQUEST_EXTERNAL_STORAGE_PERMISSION = "Speichern anfordern"
 
 //Register/Login
 const val LOGIN = "Login"
-const val AS_HYGIENE_WORKER_REGISTER = "als Hygienearbeiter:in registrieren"
-const val AS_SAMPLER_REGISTER = "als Probeentnehmer:in registrieren"
-const val AS_LAB_WORKER_REGISTER = "als Laborarbeiter:in registrieren"
 
 //communication UI
 const val LOADING = "Lädt gerade"
 const val NOT_LOADED = "nicht geladen"
 const val ERROR = "Fehler"
-const val SUCCESS = "Aktion war erfolgreich"
 const val ACCEPT = "Ok"
 const val CANCEL = "Abbrechen"
 const val DELETE = "Löschen"
+
+const val REPORTS = "Befunde"
+
+const val TRUE = "Wahr"
+const val FALSE = "Falsch"
 
 //firebase
 const val SAMPLE_LOCATIONS_FIRESTORE = "sample_locations"
@@ -164,7 +167,6 @@ const val COVERING_LETTERS_FIRESTORE = "covering_letters"
 const val ADDRESS_ID = "addressId"
 const val SAMPLING_STATE_FIELD = "samplingState"
 const val HAS_ENDED_FIELD = "hasEnded"
-const val PLANNED_END = "plannedEnd"
 const val COVERING_LETTERS_ARRAY = "coveringLetters"
 
 //time

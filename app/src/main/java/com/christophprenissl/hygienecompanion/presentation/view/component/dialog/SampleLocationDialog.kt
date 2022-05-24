@@ -71,7 +71,7 @@ fun SampleLocationDialog(
                                 nextHeater = nextHeater.text)
                             onDismissRequest()
                         }) {
-                        Text(SAVE_ADDRESS)
+                        Text(SAVE_LOCATION)
                     }
                 }
             }

@@ -10,11 +10,11 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
 fun UserTypeDropdownMenu(
+    value: UserType,
     onUserTypeChoose: (UserType) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     val userTypes = UserType.values()
-    var chosenUserType by remember { mutableStateOf(UserType.Sampler) }
 
     Row {
         DropdownCard(
@@ -23,7 +23,7 @@ fun UserTypeDropdownMenu(
             },
             menuOpen = expanded
         ) {
-            Text(chosenUserType.translation)
+            Text(value.translation)
         }
         Spacer(modifier = Modifier.padding(horizontal = standardPadding))
         BasicDropdownMenu(
@@ -35,7 +35,6 @@ fun UserTypeDropdownMenu(
             userTypes.forEach {
                 BasicDropdownItem(
                     onClick = {
-                        chosenUserType = it
                         onUserTypeChoose(it)
                         expanded = false
                     }

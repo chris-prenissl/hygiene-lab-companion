@@ -35,13 +35,13 @@ fun LoginView(
     var name by remember { mutableStateOf(TextFieldValue("")) }
     var hasCertificate by rememberSaveable { mutableStateOf(false) }
     var isSamplerOfInstitute by rememberSaveable { mutableStateOf(false) }
-    var userType by rememberSaveable { mutableStateOf<UserType?>(null) }
+    var userType by rememberSaveable { mutableStateOf(UserType.Sampler) }
 
     viewModel.user.value?.let { user ->
-        name = TextFieldValue(user.name ?: "")
-        hasCertificate = user.hasCertificate ?: false
-        isSamplerOfInstitute = user.isSamplerOfInstitute ?: false
-        userType = user.userType ?: UserType.Sampler
+        name = TextFieldValue(user.name ?: name.text)
+        hasCertificate = user.hasCertificate ?: hasCertificate
+        isSamplerOfInstitute = user.isSamplerOfInstitute ?: isSamplerOfInstitute
+        userType = user.userType ?: userType
     }
 
     LazyColumn(
@@ -104,23 +104,24 @@ fun LoginView(
                         )
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
-
-                    UserTypeDropdownMenu(onUserTypeChoose = {
-                        userType = it
-                    })
+                    UserTypeDropdownMenu(
+                        value = userType,
+                        onUserTypeChoose = {
+                            userType = it
+                        }
+                    )
                 }
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
             Button(
-                enabled = userType != null,
                 onClick = {
                     viewModel.login(
                         name = name.text,
                         hasCertificate = hasCertificate,
                         isSamplerOfInstitute = isSamplerOfInstitute,
-                        userType = userType!!,
+                        userType = userType,
                         onLogin = onLogin
                     )
                     navigateToHomeScreen(navController)

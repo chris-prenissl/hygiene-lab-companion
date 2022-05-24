@@ -72,7 +72,6 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
 
     override fun getCoveringLetterSeriesNotEndedFromFireStore() = callbackFlow {
         val snapshotListener = coveringLetterSeriesRef
-            .whereLessThan(PLANNED_END, Timestamp.now())
             .whereEqualTo(HAS_ENDED_FIELD, false)
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {

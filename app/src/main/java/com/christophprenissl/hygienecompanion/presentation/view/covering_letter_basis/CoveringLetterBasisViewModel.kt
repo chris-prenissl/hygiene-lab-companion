@@ -103,6 +103,13 @@ class CoveringLetterBasisViewModel @Inject constructor(
         getCoveringLetterSeriesNotEnded()
     }
 
+    fun resetDropdownExpands() {
+        _openBasisDropDown.value = false
+        _openClientAddressDropDown.value = false
+        _openSampleAddressDropDown.value = false
+        _openSamplingCompanyAddressDropDown.value = false
+        _openSamplingLocationsDropDown.value = false
+    }
 
     private fun getAddresses() {
         viewModelScope.launch {
@@ -294,7 +301,8 @@ class CoveringLetterBasisViewModel @Inject constructor(
             coveringSampleParameters = coveringSampleParameters,
             labSampleParameters = labSampleParameters,
             startDate = plannedStart,
-            plannedEndDate = plannedEnd,
+            plannedEndDate = if (samplingSeriesType == SamplingSeriesType.NonPeriodic)
+                plannedStart else plannedEnd,
             samplingSeriesType = samplingSeriesType
         )
 

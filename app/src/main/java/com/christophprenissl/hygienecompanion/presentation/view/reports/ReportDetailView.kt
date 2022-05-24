@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.reports
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,11 +11,15 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.BasicButton
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.LabWorkerCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.SamplerCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleReport
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
+import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
@@ -26,6 +31,7 @@ fun ReportDetailView(
 
     BasicSurface {
         LazyColumn(
+            contentPadding = PaddingValues(vertical = standardPadding),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(doubleStandardPadding)
@@ -60,15 +66,32 @@ fun ReportDetailView(
                     value = report?.lotId
                 )
             }
-
+            item {
+                Text(SAMPLER)
+            }
+            report?.sampler?.let {
+                item {
+                    SamplerCard(user = it)
+                }
+            }
+            item {
+                Text(LAB_WORKER)
+            }
+            report?.labWorker?.let {
+                item {
+                    LabWorkerCard(user = it)
+                }
+            }
             item {
                 Text(BASIC_LAB_REPORT_PARAMETERS)
             }
             report?.basicLabReportParameters?.let { parameters ->
                 items(parameters) { parameter ->
+                    val value = if (parameter.parameterType == ParameterType.Bool)
+                        (parameter.value as? Boolean)?.translation() else parameter.value.toString()
                     ParameterText(
                         title = parameter.name ?: EMPTY,
-                        value =  parameter.value.toString()
+                        value = value
                     )
                 }
                 item {
@@ -81,9 +104,11 @@ fun ReportDetailView(
             }
             report?.basicCoveringParameters?.let { parameters ->
                 items(parameters) { parameter ->
+                    val value = if (parameter.parameterType == ParameterType.Bool)
+                            (parameter.value as? Boolean)?.translation() else parameter.value.toString()
                     ParameterText(
                         title = parameter.name ?: EMPTY,
-                        value =  parameter.value.toString()
+                        value = value
                     )
                 }
                 item {

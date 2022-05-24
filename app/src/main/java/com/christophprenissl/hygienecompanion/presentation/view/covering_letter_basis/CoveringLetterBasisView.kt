@@ -207,7 +207,7 @@ fun CoveringLetterBasisView(
             Button(onClick = {
                 viewModel.openCoveringLetterSeriesDialog()
             }) {
-                Text("Begleitscheinserie hinzufügen")
+                Text(ADD_COVERING_LETTER_SERIES)
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }

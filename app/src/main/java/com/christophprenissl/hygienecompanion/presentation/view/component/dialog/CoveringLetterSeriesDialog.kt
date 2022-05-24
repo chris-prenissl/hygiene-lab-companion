@@ -66,6 +66,7 @@ fun CoveringLetterSeriesDialog(
     var samplingSeriesType by remember { mutableStateOf(types[0]) }
 
     LaunchedEffect(Unit) {
+        viewModel.resetDropdownExpands()
         val basesResponse = viewModel.gotBasesState.value
         if (basesResponse is Response.Success) {
             basesChoices.addAll(basesResponse.data)
@@ -455,6 +456,7 @@ fun CoveringLetterSeriesDialog(
                                             if (!samplingLocations.contains(location)) {
                                                 samplingLocations.add(location)
                                             }
+                                            viewModel.closeSamplingLocationsChoice()
                                         }
                                     ) {
                                         location.description?.let { Text(it) }
