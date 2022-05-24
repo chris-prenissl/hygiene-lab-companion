@@ -17,8 +17,24 @@ class LoggedOutViewModel @Inject constructor(
     private val dataStoreUser: DataStoreUser
 ): ViewModel() {
 
+    private var _user = mutableStateOf<User?>(null)
+    val user: State<User?> = _user
+
     private var _userType = mutableStateOf<UserType?>(null)
     val userType: State<UserType?> = _userType
+
+    init {
+        getUserType()
+        getUser()
+    }
+
+    private fun getUser() {
+        viewModelScope.launch {
+            dataStoreUser.getUser().collect {
+                _user.value = it
+            }
+        }
+    }
 
     private fun getUserType() {
         viewModelScope.launch {

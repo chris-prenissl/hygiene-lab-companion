@@ -1,7 +1,9 @@
 package com.christophprenissl.hygienecompanion.presentation.view.logged_out
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -23,6 +25,7 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.dropdo
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.util.*
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LoginView(
     navController: NavController,
@@ -34,83 +37,98 @@ fun LoginView(
     var isSamplerOfInstitute by rememberSaveable { mutableStateOf(false) }
     var userType by rememberSaveable { mutableStateOf<UserType?>(null) }
 
-    Column(
+    viewModel.user.value?.let { user ->
+        name = TextFieldValue(user.name ?: "")
+        hasCertificate = user.hasCertificate ?: false
+        isSamplerOfInstitute = user.isSamplerOfInstitute ?: false
+        userType = user.userType ?: UserType.Sampler
+    }
+
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(standardPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Text(LOGIN)
-        Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_ukr_logo),
-                contentDescription = UKR_LOGO_DESCRIPTION,
-                modifier = Modifier.size(titleIconSize)
-            )
-            Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-            TitleText(title = APP_TITLE_START)
+        stickyHeader {
+            Text(LOGIN)
         }
-        Spacer(modifier = Modifier.padding(vertical = titleDistance))
-        BasicSurface(
-            border = BorderStroke(basicBorderStroke, MaterialTheme.colors.onBackground)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+        item {
+            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_ukr_logo),
+                    contentDescription = UKR_LOGO_DESCRIPTION,
+                    modifier = Modifier.size(titleIconSize)
+                )
+                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                TitleText(title = APP_TITLE_START)
+            }
+            Spacer(modifier = Modifier.padding(vertical = titleDistance))
+        }
+        item {
+            BasicSurface(
+                border = BorderStroke(basicBorderStroke, MaterialTheme.colors.onBackground)
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.padding(standardPadding)
+                ) {
+                    ParameterTextField(
+                        labelText = USER_NAME,
+                        value = name,
+                        onValueChange = {
+                            name = it
+                        }
+                    )
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    if (userType != UserType.LabWorker) {
+                        BasicCheckBoxField(
+                            title = HAS_CERTIFICATE,
+                            value = hasCertificate,
+                            onCheckedChange = {
+                                hasCertificate = it
+                            }
+                        )
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                        BasicCheckBoxField(
+                            title = QM_SAMPLER,
+                            value = isSamplerOfInstitute,
+                            onCheckedChange = {
+                                isSamplerOfInstitute = it
+                            }
+                        )
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    }
+
+                    UserTypeDropdownMenu(onUserTypeChoose = {
+                        userType = it
+                    })
+                }
+            }
+            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+        }
+        item {
+            Button(
+                enabled = userType != null,
+                onClick = {
+                    viewModel.login(
+                        name = name.text,
+                        hasCertificate = hasCertificate,
+                        isSamplerOfInstitute = isSamplerOfInstitute,
+                        userType = userType!!,
+                        onLogin = onLogin
+                    )
+                    navigateToHomeScreen(navController)
+                },
                 modifier = Modifier.padding(standardPadding)
             ) {
-                ParameterTextField(
-                    labelText = USER_NAME,
-                    value = name,
-                    onValueChange = {
-                        name = it
-                    }
-                )
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                if (userType != UserType.LabWorker) {
-                    BasicCheckBoxField(
-                        title = HAS_CERTIFICATE,
-                        value = hasCertificate,
-                        onCheckedChange = {
-                            hasCertificate = it
-                        }
-                    )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                    BasicCheckBoxField(
-                        title = QM_SAMPLER,
-                        value = isSamplerOfInstitute,
-                        onCheckedChange = {
-                            isSamplerOfInstitute = it
-                        }
-                    )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                }
-
-                UserTypeDropdownMenu(onUserTypeChoose = {
-                    userType = it
-                })
+                Text(LOGIN)
             }
-        }
-        Spacer(modifier = Modifier.padding(vertical = standardPadding))
-        Button(
-            enabled = userType != null,
-            onClick = {
-                viewModel.login(
-                    name = name.text,
-                    hasCertificate = hasCertificate,
-                    isSamplerOfInstitute = isSamplerOfInstitute,
-                    userType = userType!!,
-                    onLogin = onLogin
-                )
-                navigateToHomeScreen(navController)
-            },
-            modifier = Modifier.padding(standardPadding)
-        ) {
-            Text(LOGIN)
         }
     }
 }
