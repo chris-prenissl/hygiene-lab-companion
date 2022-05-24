@@ -14,8 +14,8 @@ data class CoveringLetterDto(
     val resultCreated: Date? = null,
     val basicCoveringParameters: List<ParameterDto>? = null,
     val basicLabReportParameters: List<ParameterDto>? = null,
-    val samplerId: String? = null,
-    val labWorkerId: String? = null,
+    var sampler: UserDto? = null,
+    var labWorker: UserDto? = null,
     val samples: List<SampleDto>? = null,
     val samplingState: String? = null
 )

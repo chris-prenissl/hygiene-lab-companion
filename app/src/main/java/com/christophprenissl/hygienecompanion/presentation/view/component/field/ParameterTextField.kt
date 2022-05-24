@@ -19,6 +19,7 @@ fun ParameterTextField(
         value = value,
         keyboardOptions = keyboardOptions,
         onValueChange = onValueChange,
+        singleLine = true,
         maxLines = 1
     )
 }
@@ -35,6 +36,7 @@ fun ParameterTextField(
         value = value,
         keyboardOptions = keyboardOptions,
         onValueChange = onValueChange,
+        singleLine = true,
         maxLines = 1
     )
 }

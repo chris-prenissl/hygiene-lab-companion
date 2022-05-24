@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letters
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
@@ -34,6 +36,9 @@ fun CoveringLetterDetailView(
     viewModel: CoveringLettersViewModel,
     navController: NavController
 ) {
+    val context = LocalContext.current
+
+    val user = viewModel.userFlow.collectAsState(initial = null)
     val coveringLetter = viewModel.chosenCoveringLetter.value!!
     val title = coveringLetter.description ?: COVERING_LETTER
     val date = coveringLetter.date
@@ -176,6 +181,8 @@ fun CoveringLetterDetailView(
                         modifier = Modifier.padding(vertical = standardPadding),
                         onClick = {
                             viewModel.rejectCoveringLetter(coveringLetter)
+                            Toast.makeText(context, SUCCESS_REJECT, Toast.LENGTH_SHORT)
+                                .show()
                             navController.navigate(Screen.CoveringLetters.graphRoute) {
                                 popUpTo(HOME_ROUTE) {
                                     inclusive = true
@@ -189,11 +196,21 @@ fun CoveringLetterDetailView(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
                         modifier = Modifier.padding(vertical = standardPadding),
                         onClick = {
-                            viewModel.finishCoveringLetterInLab(coveringLetter)
-                            navController.navigate(Screen.CoveringLetters.graphRoute) {
-                                popUpTo(HOME_ROUTE) {
-                                    inclusive = true
+                            if (user.value != null) {
+                                viewModel.finishCoveringLetterInLab(
+                                    labWorker = user.value!!,
+                                    coveringLetter = coveringLetter
+                                )
+                                Toast.makeText(context, SUCCESS_REPORT, Toast.LENGTH_SHORT)
+                                    .show()
+                                navController.navigate(Screen.CoveringLetters.graphRoute) {
+                                    popUpTo(HOME_ROUTE) {
+                                        inclusive = true
+                                    }
                                 }
+                            } else {
+                                Toast.makeText(context, NO_LAB_WORKER_REGISTERED, Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                     ) {
@@ -205,11 +222,21 @@ fun CoveringLetterDetailView(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
                         modifier = Modifier.padding(vertical = standardPadding),
                         onClick = {
-                            viewModel.giveCoveringLetterToLab(coveringLetter)
-                            navController.navigate(Screen.CoveringLetters.graphRoute) {
-                                popUpTo(HOME_ROUTE) {
-                                    inclusive = true
+                            if (user.value != null) {
+                                viewModel.giveCoveringLetterToLab(
+                                    sampler = user.value!!,
+                                    coveringLetter = coveringLetter
+                                )
+                                Toast.makeText(context, SUCCESS_GIVE_TO_LAB, Toast.LENGTH_SHORT)
+                                    .show()
+                                navController.navigate(Screen.CoveringLetters.graphRoute) {
+                                    popUpTo(HOME_ROUTE) {
+                                        inclusive = true
+                                    }
                                 }
+                            } else {
+                                Toast.makeText(context, NO_SAMPLER_REGISTERED, Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                     ) {
@@ -226,14 +253,30 @@ fun CoveringLetterDetailView(
                     coveringLetter.seriesId?.let {
                         when(samplingState) {
                             SamplingState.InLaboratory, SamplingState.LabInProgress -> {
-                                viewModel.labProgress(
-                                    coveringLetter = coveringLetter
-                                )
+                                if (user.value != null) {
+                                    viewModel.labProgress(
+                                        labWorker = user.value!!,
+                                        coveringLetter = coveringLetter
+                                    )
+                                    Toast.makeText(context, SAVED, Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    Toast.makeText(context, NO_LAB_WORKER_REGISTERED, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                             }
                             else -> {
-                                viewModel.sampleProgress(
-                                    coveringLetter = coveringLetter
-                                )
+                                if (user.value != null) {
+                                    viewModel.sampleProgress(
+                                        sampler = user.value!!,
+                                        coveringLetter = coveringLetter
+                                    )
+                                    Toast.makeText(context, SAVED, Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    Toast.makeText(context, NO_SAMPLER_REGISTERED, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
                             }
                         }
                     }

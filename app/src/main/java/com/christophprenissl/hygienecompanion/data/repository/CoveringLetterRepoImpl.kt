@@ -67,8 +67,8 @@ class CoveringLetterRepoImpl @Inject constructor(
     override suspend fun saveCoveringLetterToFireStore(coveringLetter: CoveringLetter) = flow {
         try {
             emit(Response.Loading)
-            val mapper = CoveringLetterMapper()
-            val coveringLetterDto = mapper.toEntity(coveringLetter)
+            val coveringLetterMapper = CoveringLetterMapper()
+            val coveringLetterDto = coveringLetterMapper.toEntity(coveringLetter)
             if (coveringLetterDto.id != null) {
                 val saved = coveringLetterRef.document(coveringLetterDto.id).set(coveringLetterDto).await()
                 emit(Response.Success(saved))

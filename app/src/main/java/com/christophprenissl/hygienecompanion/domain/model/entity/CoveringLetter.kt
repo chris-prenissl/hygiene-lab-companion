@@ -12,8 +12,8 @@ data class CoveringLetter(
     var resultCreated: Date? = null,
     val basicCoveringParameters: List<Parameter>? = null,
     val basicLabReportParameters: List<Parameter>? = null,
-    val sampler: User? = null,
-    val labWorker: User? = null,
+    var sampler: User? = null,
+    var labWorker: User? = null,
     val samples: List<Sample>? = null,
     var samplingState: SamplingState? = null
 )

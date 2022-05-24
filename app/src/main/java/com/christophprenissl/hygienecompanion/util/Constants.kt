@@ -90,6 +90,11 @@ const val CHOICE_OF_BASIS = "Wahl der Untersuchungsgrundlagen"
 const val ADD_BASIS = "Basis hinzufügen"
 const val SET_CLIENT_ADDRESS = "Client Adresse festlegen"
 
+const val USER_NAME = "Name"
+const val HAS_CERTIFICATE = "Probeentnehmer-Zertifikat vorhanden"
+const val QM_SAMPLER = "QM-Probennehmer:in des Instituts"
+const val CHOOSING_USER_TYPE = "Nutzertyp wählen"
+
 const val COVERING_LETTER_BASIS_DATA = "Begleitschein-Basis-Daten"
 const val COVERING_BASIS = "Begleitschein-Normen/Grundlagen"
 const val COVERING_LETTER_SERIES = "Begleitschein-Serien"
@@ -116,7 +121,11 @@ const val GIVE_BACK_COVERING_LETTER = "Probeentnahme zurückgeben"
 const val END_REPORT = "Probeentnahme befunden"
 const val HAND_IN_COVERING_LETTER = "Begleitschein im Labor abgeben"
 const val SAVE = "Speichern"
+const val SAVED = "Gespeichert"
+const val SUCCESS_REJECT = "Begleitschein wurde erfolgreich zurückgewiesen"
 const val LAB_REPORT_AVAILABLE = "Laborergebnisse vorhanden"
+const val SUCCESS_REPORT = "Befund wurde erfolgreich erstellt"
+const val SUCCESS_GIVE_TO_LAB = "Begleitschein erfolgreich im Labor abgegeben"
 
 const val SAMPLE_ID = "Probennummer"
 const val EXTRA_INFO_SAMPLING_PERSON = "Zusatzinfo der probenentnehmenden Person"
@@ -163,4 +172,10 @@ const val HALF_YEAR_DAYS = 180
 const val YEAR_DAYS = 360
 
 //data store
-const val USER_TYPE = "userType"
+const val USER_PREF_STORE = "user"
+const val USER_NAME_PREF = "userName"
+const val HAS_CERTIFICATE_PREF = "hasCertificate"
+const val QM_PREF = "qm"
+const val USER_TYPE_PREF = "userType"
+const val NO_LAB_WORKER_REGISTERED = "Keine Laborarbeit:in registriert"
+const val NO_SAMPLER_REGISTERED = "Keine Probeentnehmer:in registriert"

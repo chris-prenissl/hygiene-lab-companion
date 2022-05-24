@@ -1,13 +1,14 @@
 package com.christophprenissl.hygienecompanion.presentation.view.util
 
+import com.christophprenissl.hygienecompanion.domain.model.entity.User
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
-import com.christophprenissl.hygienecompanion.util.DataStoreUserType
+import com.christophprenissl.hygienecompanion.util.DataStoreUser
 
 suspend fun loginAs(
-    userTypeStore: DataStoreUserType,
-    userType: UserType,
+    userDataStore: DataStoreUser,
+    user: User,
     onLogin: (UserType) -> Unit
 ) {
-    userTypeStore.saveUserType(userType)
-    onLogin(userType)
+    userDataStore.saveUser(user)
+    onLogin(user.userType?: UserType.Sampler)
 }

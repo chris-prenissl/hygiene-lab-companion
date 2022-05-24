@@ -2,13 +2,9 @@ package com.christophprenissl.hygienecompanion.data.repository
 
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.dto.AddressDto
-import com.christophprenissl.hygienecompanion.domain.model.dto.SampleLocationDto
 import com.christophprenissl.hygienecompanion.domain.model.entity.Address
-import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import com.christophprenissl.hygienecompanion.domain.model.util.mapper.AddressMapper
-import com.christophprenissl.hygienecompanion.domain.model.util.mapper.SampleLocationMapper
 import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
-import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,9 +24,9 @@ class AddressRepoImpl @Inject constructor(
     override fun getAddressesFromFireStore() = callbackFlow {
         val snapshotListener = addressesQuery.addSnapshotListener { snapshot, e ->
             val response = if (snapshot != null) {
-                val sampleLocationsDto = snapshot.toObjects(AddressDto::class.java)
+                val addressesDto = snapshot.toObjects(AddressDto::class.java)
                 val mapper = AddressMapper()
-                val addresses = sampleLocationsDto.map {
+                val addresses = addressesDto.map {
                     mapper.fromEntity(it)
                 }
                 Response.Success(addresses)

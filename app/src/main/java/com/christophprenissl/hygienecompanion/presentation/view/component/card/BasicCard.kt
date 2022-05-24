@@ -9,6 +9,7 @@ import androidx.compose.material.icons.rounded.ArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import com.christophprenissl.hygienecompanion.util.cardPadding
 import com.christophprenissl.hygienecompanion.util.halfSize
 import com.christophprenissl.hygienecompanion.util.iconSize
@@ -19,6 +20,7 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 fun BasicCard(
     onClick: () -> Unit,
     accessIndicator: Boolean = true,
+    indicatorIcon: ImageVector = Icons.Rounded.ArrowRight,
     content: @Composable RowScope.() -> Unit
 ) {
     Card(
@@ -42,8 +44,8 @@ fun BasicCard(
                     .fillMaxWidth()
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.ArrowRight,
-                    contentDescription = Icons.Rounded.ArrowRight.name,
+                    imageVector = indicatorIcon,
+                    contentDescription = indicatorIcon.name,
                     modifier = Modifier
                         .size(iconSize)
                 )

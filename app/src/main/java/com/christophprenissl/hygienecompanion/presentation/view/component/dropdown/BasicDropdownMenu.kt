@@ -1,8 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.dropdown
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.DropdownMenu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,6 +14,8 @@ fun BasicDropdownMenu(
     content: @Composable() (ColumnScope.() -> Unit)
 ) {
     Box(
+        modifier = Modifier
+            .wrapContentSize(Alignment.TopStart),
         contentAlignment = Alignment.Center
     ) {
         DropdownMenu(

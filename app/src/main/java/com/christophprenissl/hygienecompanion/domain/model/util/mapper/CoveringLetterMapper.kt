@@ -6,9 +6,11 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.model.entity.User
 
 class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
+    private val userMapper = UserMapper()
+    private val parameterMapper = ParameterMapper()
+    private val sampleMapper = SampleMapper()
+
     override fun fromEntity(entity: CoveringLetterDto): CoveringLetter {
-        val parameterMapper = ParameterMapper()
-        val sampleMapper = SampleMapper()
         return CoveringLetter(
             id = entity.id,
             seriesId = entity.seriesId,
@@ -23,8 +25,8 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
             basicLabReportParameters = entity.basicLabReportParameters?.map {
                 parameterMapper.fromEntity(it)
             },
-            sampler = User(entity.samplerId),
-            labWorker = User(entity.labWorkerId),
+            sampler = entity.sampler?.let { userMapper.fromEntity(it) },
+            labWorker = entity.labWorker?.let { userMapper.fromEntity(it) },
             samples = entity.samples?.map {
                 sampleMapper.fromEntity(it)
             },
@@ -33,8 +35,6 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
     }
 
     override fun toEntity(domain: CoveringLetter): CoveringLetterDto {
-        val parameterMapper = ParameterMapper()
-        val sampleMapper = SampleMapper()
         return CoveringLetterDto(
             id = domain.id,
             seriesId = domain.seriesId,
@@ -49,8 +49,8 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
             basicLabReportParameters = domain.basicLabReportParameters?.map {
                 parameterMapper.toEntity(it)
             },
-            samplerId = domain.sampler?.id,
-            labWorkerId = domain.labWorker?.id,
+            sampler = domain.sampler?.let { userMapper.toEntity(it) },
+            labWorker = domain.labWorker?.let { userMapper.toEntity(it) },
             samples = domain.samples?.map {
                 sampleMapper.toEntity(it)
             },

@@ -52,7 +52,7 @@ class UserRepoImpl @Inject constructor(
         try {
             emit(Response.Loading)
             if (user.id != null) {
-                val deletion = userRef.document(user.id).delete().await()
+                val deletion = userRef.document(user.id!!).delete().await()
                 emit(Response.Success(deletion))
             } else {
                 emit(Response.Error("no id provided as reference"))

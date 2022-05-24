@@ -130,5 +130,5 @@ object AppModule {
     @Provides
     fun provideDataStoreUserType(
         @ApplicationContext app: Context
-    ) : DataStoreUserType = DataStoreUserType(app)
+    ) : DataStoreUser = DataStoreUser(app)
 }

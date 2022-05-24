@@ -4,16 +4,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.christophprenissl.hygienecompanion.domain.model.entity.User
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.view.util.loginAs
-import com.christophprenissl.hygienecompanion.util.DataStoreUserType
+import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoggedOutViewModel @Inject constructor(
-    private val dataStoreUserType: DataStoreUserType
+    private val dataStoreUser: DataStoreUser
 ): ViewModel() {
 
     private var _userType = mutableStateOf<UserType?>(null)
@@ -21,20 +22,29 @@ class LoggedOutViewModel @Inject constructor(
 
     private fun getUserType() {
         viewModelScope.launch {
-            dataStoreUserType.getUserType().collect {
+            dataStoreUser.getUserType().collect {
                 _userType.value = it
             }
         }
     }
 
     fun login(
+        name: String,
+        hasCertificate: Boolean,
+        isSamplerOfInstitute: Boolean,
         userType: UserType,
         onLogin: (UserType) -> Unit
     ) {
+        val user = User(
+            name = name,
+            hasCertificate = if (userType != UserType.LabWorker) hasCertificate else null,
+            isSamplerOfInstitute = if (userType != UserType.LabWorker) isSamplerOfInstitute else null,
+            userType = userType
+        )
         viewModelScope.launch {
             loginAs(
-                userTypeStore = dataStoreUserType,
-                userType = userType,
+                userDataStore = dataStoreUser,
+                user = user,
                 onLogin = onLogin
             )
         }
