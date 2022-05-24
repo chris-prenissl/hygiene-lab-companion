@@ -43,22 +43,24 @@ fun CoveringLettersView(
                         }
                     }
                     items(coveringLetters) {
-                        CoveringLetterCard(
-                            coveringLetter = it,
-                            onClick = {
-                                if (isUserAllowedToEnter(
-                                        userType = userType.value,
-                                        samplingState = it.samplingState
-                                )) {
-                                    viewModel.chooseCoveringLetter(it)
-                                    navController.navigate(Screen.CoveringLetterDetail.route)
-                                }
-                            },
-                            accessIndicator = isUserAllowedToEnter(
-                                userType = userType.value,
-                                samplingState = it.samplingState
+                        if (userType.value != null) {
+                          CoveringLetterCard(
+                                coveringLetter = it,
+                                onClick = {
+                                    if (isUserAllowedToEnter(
+                                            userType = userType.value,
+                                            samplingState = it.samplingState
+                                        )) {
+                                        viewModel.chooseCoveringLetter(it)
+                                        navController.navigate(Screen.CoveringLetterDetail.route)
+                                    }
+                                },
+                                accessIndicator = isUserAllowedToEnter(
+                                    userType = userType.value,
+                                    samplingState = it.samplingState
+                                )
                             )
-                        )
+                        }
                     }
                 }
 
