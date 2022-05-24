@@ -1,7 +1,6 @@
 package com.christophprenissl.hygienecompanion.util
 
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 const val APP_TITLE = "Hygiene Companion"
 const val APP_TITLE_START = "| $APP_TITLE"
@@ -62,6 +61,9 @@ const val NORM = "Norm/Basis"
 const val EMPTY = "---"
 
 const val CREATE_ADDRESS = "Erstelle eine Adresse"
+const val CREATED = "Erstellt am"
+const val TO_CLIENT = "An den Auftraggeber senden"
+const val TO_COVERING_PROPERTY = "an die Abnehmestelle senden"
 
 const val CLIENT_ADDRESS = "Auftraggeber-Adresse"
 const val COVERING_COMPANY_ADDRESS = "Probeentnehmer-Firma"

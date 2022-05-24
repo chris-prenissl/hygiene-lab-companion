@@ -2,6 +2,7 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.butto
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -11,7 +12,10 @@ fun CancelButton(
     content: @Composable() (RowScope.() -> Unit)
 ) {
     BasicButton(
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = contentColorFor(backgroundColor = Color.Red),
+            backgroundColor = Color.Red
+        ),
         onClick = onCancel,
         content = content
     )

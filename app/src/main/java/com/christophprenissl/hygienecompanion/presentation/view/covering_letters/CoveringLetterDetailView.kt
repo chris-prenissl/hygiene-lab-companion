@@ -19,12 +19,13 @@ import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
-import com.christophprenissl.hygienecompanion.presentation.util.getValidTemperature
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleEdit
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.ParameterEdit
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
+import com.christophprenissl.hygienecompanion.presentation.view.util.getValidNumberTextFieldValue
+import com.christophprenissl.hygienecompanion.presentation.view.util.getValidTemperatureTextFieldValue
 import com.christophprenissl.hygienecompanion.util.*
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -92,14 +93,12 @@ fun CoveringLetterDetailView(
                         parameter = coveringLetter.basicLabReportParameters!![idx],
                         value = pValue,
                         onNumbEdit = { value ->
-                            basicLabReportValues[idx] = value.filter {
-                                it.isDigit()
-                            }
+                            basicLabReportValues[idx] = getValidNumberTextFieldValue(value, basicLabReportValues[idx])
                             coveringLetter.basicLabReportParameters[idx].value =
                                 basicLabReportValues[idx].toInt()
                         },
                         onTempEdit = { value ->
-                            basicLabReportValues[idx] = getValidTemperature(value)
+                            basicLabReportValues[idx] = getValidTemperatureTextFieldValue(value)
                             coveringLetter.basicLabReportParameters[idx].value =
                                 basicLabReportValues[idx].toFloat()
                         },
@@ -130,14 +129,12 @@ fun CoveringLetterDetailView(
                         parameter = coveringLetter.basicCoveringParameters!![idx],
                         value = pValue,
                         onNumbEdit = { value ->
-                            basicCoveringValues[idx] = value.filter {
-                                it.isDigit()
-                            }
+                            basicCoveringValues[idx] = getValidNumberTextFieldValue(value, basicCoveringValues[idx])
                             coveringLetter.basicCoveringParameters[idx].value =
                                 basicCoveringValues[idx].toInt()
                         },
                         onTempEdit = { value ->
-                            basicCoveringValues[idx] = getValidTemperature(value)
+                            basicCoveringValues[idx] = getValidTemperatureTextFieldValue(value)
                             coveringLetter.basicCoveringParameters[idx].value =
                                 basicCoveringValues[idx].toFloat()
                         },

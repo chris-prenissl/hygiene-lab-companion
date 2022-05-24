@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.window.Dialog
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 
@@ -30,22 +31,22 @@ fun SampleLocationDialog(
                 Column(modifier = Modifier.align(Alignment.TopCenter)) {
                     Text(SAMPLE_LOCATION)
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                    Text(DESCRIPTION)
-                    OutlinedTextField(
+                    ParameterTextField(
+                        labelText = DESCRIPTION,
                         value = description,
                         onValueChange = {
                             description = it
                         }
                     )
-                    Text(EXTRA_INFO)
-                    OutlinedTextField(
+                    ParameterTextField(
+                        labelText = EXTRA_INFO,
                         value = extraInfo,
                         onValueChange = {
                             extraInfo = it
                         }
                     )
-                    Text(NEXT_HEATER)
-                    OutlinedTextField(
+                    ParameterTextField(
+                        labelText = NEXT_HEATER,
                         value = nextHeater,
                         onValueChange = {
                             nextHeater = it

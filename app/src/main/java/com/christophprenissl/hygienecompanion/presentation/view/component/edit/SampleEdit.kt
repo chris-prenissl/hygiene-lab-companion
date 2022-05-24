@@ -10,9 +10,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
-import com.christophprenissl.hygienecompanion.presentation.util.getValidTemperature
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
+import com.christophprenissl.hygienecompanion.presentation.view.util.getValidNumberTextFieldValue
+import com.christophprenissl.hygienecompanion.presentation.view.util.getValidTemperatureTextFieldValue
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
@@ -22,15 +23,15 @@ fun SampleEdit(
 ) {
     var extraInfoSampling by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoSampling ?: "")
+            TextFieldValue(sample.extraInfoSampling ?: EMPTY)
         )
     }
     var extraInfoLaboratory by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoLaboratory ?: "")
+            TextFieldValue(sample.extraInfoLaboratory ?: EMPTY)
         )
     }
-    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: "")) }
+    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: EMPTY)) }
 
     val coveringSampleValues = remember {
         sample.coveringSampleParameters!!.map {
@@ -106,7 +107,7 @@ fun SampleEdit(
                     Text(COVERING_SAMPLE_PARAMETERS)
                     sample.coveringSampleParameters?.forEach {
                         ParameterText(
-                            title = it.name?: "---",
+                            title = it.name?: EMPTY,
                             value = it.value.toString()
                         )
                     }
@@ -126,14 +127,12 @@ fun SampleEdit(
                             parameters = parameters,
                             values = labSampleValues,
                             onNumbEdit = { idx, value ->
-                                labSampleValues[idx] = value.filter {
-                                    it.isDigit()
-                                }
+                                labSampleValues[idx] = getValidNumberTextFieldValue(value, labSampleValues[idx])
                                 sample.labSampleParameters[idx].value =
                                     labSampleValues[idx].toInt()
                             },
                             onTempEdit = { idx, value ->
-                                labSampleValues[idx] = getValidTemperature(value)
+                                labSampleValues[idx] = getValidTemperatureTextFieldValue(value)
                                 sample.labSampleParameters[idx].value =
                                     labSampleValues[idx].toFloat()
                             },
@@ -159,14 +158,12 @@ fun SampleEdit(
                             parameters = parameters,
                             values = coveringSampleValues,
                             onNumbEdit = { idx, value ->
-                                coveringSampleValues[idx] = value.filter {
-                                    it.isDigit()
-                                }
+                                coveringSampleValues[idx] = getValidNumberTextFieldValue(value, coveringSampleValues[idx])
                                 sample.coveringSampleParameters[idx].value =
                                     coveringSampleValues[idx].toInt()
                             },
                             onTempEdit = { idx, value ->
-                                coveringSampleValues[idx] = getValidTemperature(value)
+                                coveringSampleValues[idx] = getValidTemperatureTextFieldValue(value)
                                 sample.coveringSampleParameters[idx].value =
                                     coveringSampleValues[idx].toFloat()
                             },

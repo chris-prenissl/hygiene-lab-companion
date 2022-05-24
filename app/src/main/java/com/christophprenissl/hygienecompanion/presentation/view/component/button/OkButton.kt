@@ -2,6 +2,7 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.butto
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -12,7 +13,12 @@ fun OkButton(
     content: @Composable() (RowScope.() -> Unit)
 ) {
     BasicButton(
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = contentColorFor(
+                backgroundColor = Color.Cyan
+            ),
+            backgroundColor = Color.Cyan
+        ),
         onClick = onOk,
         enabled = enabled,
         content = content

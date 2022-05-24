@@ -1,55 +1,73 @@
 package com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
+import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasisCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
+import com.christophprenissl.hygienecompanion.util.*
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLetterSeriesDetailView(
     viewModel: CoveringLetterBasisViewModel
 ) {
     LazyColumn {
-        item {
-            Text("Covering Letter Series")
+        stickyHeader {
+            TitleText(COVERING_LETTER_SERIES)
         }
         viewModel.chosenCoveringLetterSeries.value?.let { cls ->
             item {
-                Text("Beschreibung")
-                cls.description?.let { Text(it) }
+                ParameterText(
+                    title = DESCRIPTION,
+                    value =  cls.description
+                )
             }
             item {
-                Text("Erstellt:")
-                cls.created?.let { Text(it.toString()) }
+                ParameterText(
+                    title = CREATED,
+                    value =  cls.created?.dayMonthYearString()
+                )
             }
             item {
-                Text("An den Auftraggeber Ergebnis senden:")
-                cls.resultToClient?.let { Text(it.toString()) }
+                ParameterText(
+                    title = TO_CLIENT,
+                    value =  cls.resultToClient.toString()
+                )
             }
             item {
-                Text("An die Abnahmestelle senden:")
-                cls.resultToTestingProperty?.let { Text(it.toString()) }
+                ParameterText(
+                    title = TO_COVERING_PROPERTY,
+                    value =  cls.resultToTestingProperty?.toString()
+                )
             }
             item {
-                Text("Kostenstelle:")
-                cls.costLocation?.let { Text(it) }
+                ParameterText(
+                    title = COST_LOCATION,
+                    value =  cls.costLocation
+                )
             }
             item {
-                Text("Labor-ID:")
-                cls.laboratoryId?.let { Text(it) }
+                ParameterText(
+                    title = LAB_ID,
+                    value =  cls.laboratoryId
+                )
             }
             item {
-                Text("Client")
+                Text(CLIENT_ADDRESS)
                 cls.client?.let { AddressCard(it, onClick = {}) }
             }
             item {
-                Text("Probeentnahme-Addresse")
+                Text(COVERING_ADDRESS)
                 cls.sampleAddress?.let { AddressCard(it, onClick = {}) }
             }
             item {
-                Text("Probeentnahme-Firma")
+                Text(COVERING_COMPANY_ADDRESS)
                 cls.samplingCompany?.let { AddressCard(it, onClick = {}) }
             }
             cls.bases?.let { basesList ->
@@ -61,7 +79,7 @@ fun CoveringLetterSeriesDetailView(
                 }
             }
             item {
-                Text("End-Datum")
+                Text(PLANNED_END_DATE)
                 cls.endedDate?.let { Text(it.toString()) }
             }
         }

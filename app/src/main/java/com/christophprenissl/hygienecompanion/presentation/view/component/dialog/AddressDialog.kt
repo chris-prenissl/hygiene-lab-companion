@@ -2,9 +2,11 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.dialo
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.CancelButton
@@ -97,6 +99,7 @@ fun AddressDialog(
             ParameterTextField(
                 labelText = FAX,
                 value = fax,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 onValueChange = {
                     fax = it
                 }
@@ -107,6 +110,7 @@ fun AddressDialog(
             ParameterTextField(
                 labelText = EMAIL,
                 value = eMail,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 onValueChange = {
                     eMail = it
                 }
