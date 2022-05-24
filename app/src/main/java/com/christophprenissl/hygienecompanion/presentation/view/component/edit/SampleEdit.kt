@@ -12,26 +12,31 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
+import com.christophprenissl.hygienecompanion.presentation.view.util.checkIfNotEmptyAndNotCurrentDay
 import com.christophprenissl.hygienecompanion.presentation.view.util.getValidNumberTextFieldValue
 import com.christophprenissl.hygienecompanion.presentation.view.util.getValidTemperatureTextFieldValue
 import com.christophprenissl.hygienecompanion.util.*
+import com.google.firebase.Timestamp
+import java.util.*
 
 @Composable
 fun SampleEdit(
     sample: Sample,
     samplingState: SamplingState
 ) {
+    val currentDate = Date()
+    var date by remember { mutableStateOf(sample.created?.dayMonthYearString()) }
     var extraInfoSampling by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoSampling ?: EMPTY)
+            TextFieldValue(sample.extraInfoSampling ?: "")
         )
     }
     var extraInfoLaboratory by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoLaboratory ?: EMPTY)
+            TextFieldValue(sample.extraInfoLaboratory ?: "")
         )
     }
-    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: EMPTY)) }
+    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: "")) }
 
     val coveringSampleValues = remember {
         sample.coveringSampleParameters!!.map {
@@ -63,7 +68,7 @@ fun SampleEdit(
             )
             ParameterText(
                 title = SAMPLING_DATE,
-                value = sample.created?.dayMonthYearString()
+                value = date ?: EMPTY
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
@@ -87,6 +92,14 @@ fun SampleEdit(
                         onValueChange = {
                             extraInfoSampling = it
                             sample.extraInfoSampling = it.text
+                            if (checkIfNotEmptyAndNotCurrentDay(
+                                    sample = sample,
+                                    currentDate = currentDate,
+                                    value = it.text
+                                )) {
+                                sample.created = Timestamp.now().toDate()
+                                date = sample.created?.dayMonthYearString()
+                            }
                         }
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -96,6 +109,14 @@ fun SampleEdit(
                         onValueChange = {
                             warningMessage = it
                             sample.warningMessage = it.text
+                            if (checkIfNotEmptyAndNotCurrentDay(
+                                    sample = sample,
+                                    currentDate = currentDate,
+                                    value = it.text
+                                )) {
+                                sample.created = Timestamp.now().toDate()
+                                date = sample.created?.dayMonthYearString()
+                            }
                         }
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -118,6 +139,14 @@ fun SampleEdit(
                         onValueChange = {
                             extraInfoLaboratory = it
                             sample.extraInfoLaboratory = it.text
+                            if (checkIfNotEmptyAndNotCurrentDay(
+                                    sample = sample,
+                                    currentDate = currentDate,
+                                    value = it.text
+                                )) {
+                                sample.created = Timestamp.now().toDate()
+                                date = sample.created?.dayMonthYearString()
+                            }
                         }
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -130,19 +159,51 @@ fun SampleEdit(
                                 labSampleValues[idx] = getValidNumberTextFieldValue(value, labSampleValues[idx])
                                 sample.labSampleParameters[idx].value =
                                     labSampleValues[idx].toInt()
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             },
                             onTempEdit = { idx, value ->
                                 labSampleValues[idx] = getValidTemperatureTextFieldValue(value)
                                 sample.labSampleParameters[idx].value =
                                     labSampleValues[idx].toFloat()
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             },
                             onBoolEdit = { idx, value ->
                                 labSampleValues[idx] = value.toString()
                                 sample.labSampleParameters[idx].value = value
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value.toString()
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             },
                             onNoteEdit = { idx, value ->
                                 labSampleValues[idx] = value
                                 sample.labSampleParameters[idx].value = value
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             }
                         )
                     }
@@ -161,19 +222,51 @@ fun SampleEdit(
                                 coveringSampleValues[idx] = getValidNumberTextFieldValue(value, coveringSampleValues[idx])
                                 sample.coveringSampleParameters[idx].value =
                                     coveringSampleValues[idx].toInt()
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             },
                             onTempEdit = { idx, value ->
                                 coveringSampleValues[idx] = getValidTemperatureTextFieldValue(value)
                                 sample.coveringSampleParameters[idx].value =
                                     coveringSampleValues[idx].toFloat()
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             },
                             onBoolEdit = { idx, value ->
                                 coveringSampleValues[idx] = value.toString()
                                 sample.coveringSampleParameters[idx].value = value
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value.toString()
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             },
                             onNoteEdit = { idx, value ->
                                 coveringSampleValues[idx] = value
                                 sample.coveringSampleParameters[idx].value = value
+                                if (checkIfNotEmptyAndNotCurrentDay(
+                                        sample = sample,
+                                        currentDate = currentDate,
+                                        value = value
+                                    )) {
+                                    sample.created = Timestamp.now().toDate()
+                                    date = sample.created?.dayMonthYearString()
+                                }
                             }
                         )
                     }

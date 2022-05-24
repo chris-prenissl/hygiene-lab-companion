@@ -1,5 +1,9 @@
 package com.christophprenissl.hygienecompanion.presentation.view.util
 
+import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
+import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
+import java.util.*
+
 fun getValidNumberTextFieldValue(newValue: String, oldValue: String): String {
     val removedWhenOnlyBlank = newValue.removePrefix(if (oldValue == "0" && newValue.isNotBlank()) oldValue else "")
     val notBlank = removedWhenOnlyBlank.ifBlank { "0" }
@@ -17,4 +21,9 @@ fun getValidTemperatureTextFieldValue(newValue: String): String {
     } else {
         filteredChars.take(3) + ".0"
     }
+}
+
+fun checkIfNotEmptyAndNotCurrentDay(sample: Sample, currentDate: Date, value: String): Boolean {
+    return sample.created?.dayMonthYearString() != currentDate.dayMonthYearString()
+        && value.isNotBlank()
 }
