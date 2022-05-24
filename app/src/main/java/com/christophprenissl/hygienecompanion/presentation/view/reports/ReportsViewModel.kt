@@ -1,12 +1,12 @@
 package com.christophprenissl.hygienecompanion.presentation.view.reports
 
 import android.content.Context
-import android.widget.Toast
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
+import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.GroupBy
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
@@ -24,6 +24,9 @@ class ReportsViewModel @Inject constructor(
 
     private var _chosenReport = mutableStateOf<CoveringLetter?>(null)
     val chosenReport: State<CoveringLetter?> = _chosenReport
+
+    private var _loadedCoveringLetterSeries = mutableStateOf<CoveringLetterSeries?>(null)
+    val loadedCoveringLetterSeries: State<CoveringLetterSeries?> = _loadedCoveringLetterSeries
 
     private var _chosenDate = mutableStateOf(Date())
     val chosenDate: State<Date> = _chosenDate
@@ -106,6 +109,19 @@ class ReportsViewModel @Inject constructor(
         }
     }
 
+    private fun getCoveringLetterSeries(id: String) {
+        viewModelScope.launch {
+            useCases.getCoveringLetterSeriesById(id = id).collect {
+                when (it) {
+                    is Response.Success -> {
+                        _loadedCoveringLetterSeries.value = it.data
+                    }
+                    else -> Unit
+                }
+            }
+        }
+    }
+
     fun setNextGroupByValue() {
         val currentIndex = _groupByState.value.ordinal
         val values = GroupBy.values()
@@ -121,6 +137,7 @@ class ReportsViewModel @Inject constructor(
     }
 
     fun chooseReport(report: CoveringLetter) {
+        report.seriesId?.let { getCoveringLetterSeries(it) }
         _chosenReport.value = report
     }
 
@@ -157,14 +174,14 @@ class ReportsViewModel @Inject constructor(
         )
     }
 
-    fun requestPdfOfReportSave(
+    fun requestExcelOfReportSave(
         context: Context
     ) {
         if (!writePermissionApproved(context = context)) {
             requestWritePermission(context = context)
             return
         }
-        val path = createPdfFromReport(chosenReport.value!!, context = context)
-        Toast.makeText(context, "$path erstellt", Toast.LENGTH_SHORT).show()
+        //val path = createPdfFromReport(chosenReport.value!!, context = context)
+        //Toast.makeText(context, "$path erstellt", Toast.LENGTH_SHORT).show()
     }
 }

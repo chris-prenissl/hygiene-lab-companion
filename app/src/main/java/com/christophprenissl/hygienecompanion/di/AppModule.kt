@@ -116,6 +116,7 @@ object AppModule {
         getBases = GetBases(basisRepo),
         saveBasis = SaveBasis(basisRepo),
         deleteBasis = DeleteBasis(basisRepo),
+        getCoveringLetterSeriesById = GetCoveringLetterSeriesById(coveringLetterSeriesRepo),
         createCoveringLetterSeries = CreateCoveringLetterSeries(coveringLetterSeriesRepo),
         getCoveringLetterSeries = GetCoveringLetterSeries(coveringLetterSeriesRepo),
         getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(coveringLetterSeriesRepo),

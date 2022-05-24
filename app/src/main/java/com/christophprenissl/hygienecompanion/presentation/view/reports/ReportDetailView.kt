@@ -1,6 +1,5 @@
 package com.christophprenissl.hygienecompanion.presentation.view.reports
 
-import android.app.Activity
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.BasicButton
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleReport
@@ -93,12 +93,20 @@ fun ReportDetailView(
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
         item {
-            BasicButton(onClick = {
-                viewModel.requestPdfOfReportSave(context as Activity)
-            }) {
-                Text(SAVE_AS_PDF)
+            report?.let {
+                if (viewModel.loadedCoveringLetterSeries.value != null) {
+                    BasicButton(onClick = {
+                        createXSSFromReport(
+                            context = context,
+                            coveringLetterSeries = viewModel.loadedCoveringLetterSeries.value!!,
+                            report = report
+                        )
+                    }) {
+                        Text(SAVE_AS_EXCEL)
+                    }
+                    Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+                }
             }
-            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
         }
         item {
             BasicButton(

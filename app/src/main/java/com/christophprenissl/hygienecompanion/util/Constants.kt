@@ -23,9 +23,13 @@ val titleDistance = 80.dp
 val iconBarOffset = iconSize.times(-halfSize)
 const val dropDownMenuWidth = 0.92f
 
-//pdf
-const val PDF_WIDTH = 792
-const val PDF_HEIGHT = 1120
+//excel
+const val VALUES = "Werte"
+const val BASIC_PARAMETERS = "Grundlegende Parameter"
+const val PARAMETERS = "Parameter"
+const val SAMPLES = "Proben"
+const val SUCCESS_SAVING = "Erfolgreich: %s wurde gespeichert"
+const val ERROR_SAVING = "Fehler: Datei konnte nicht gespeichert werden"
 
 //views
 const val HOME_ROUTE = "home_route"
@@ -118,7 +122,7 @@ const val EXTRA_INFO_LAB_PERSON = "Zusatzinfo der Laborarbeiter:in"
 const val SAMPLING_DATE = "Datum der Probeentnahme"
 const val WARNING = "Warnung"
 
-const val SAVE_AS_PDF = "Als PDF exportieren"
+const val SAVE_AS_EXCEL = "Als Exceldatei exportieren"
 const val REQUEST_EXTERNAL_STORAGE_PERMISSION = "Speichern anfordern"
 
 //Register/Login

@@ -10,6 +10,7 @@ data class HygieneCompanionUseCases(
     val getBases: GetBases,
     val saveBasis: SaveBasis,
     val deleteBasis: DeleteBasis,
+    val getCoveringLetterSeriesById: GetCoveringLetterSeriesById,
     val createCoveringLetterSeries: CreateCoveringLetterSeries,
     val getCoveringLetterSeries: GetCoveringLetterSeries,
     val getCoveringLetterSeriesNotEnded: GetCoveringLetterSeriesNotEnded,
