@@ -1,3 +1,6 @@
+v0.2.1 Release Notes
+- Ein Bug bei dem sich im Login-Textfeld Zeichen wiederholen sollte nun behoben sein:)
+
 v0.2.0 Release Notes
 - Für diesen Release gerne alle Funktionen der einezelnen Menüpunkte ausprobieren
 - Möglichst durch beliebige Eingaben App zum Crashen bringen
