@@ -24,6 +24,8 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.TitleT
 import com.christophprenissl.hygienecompanion.presentation.view.component.dropdown.UserTypeDropdownMenu
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.util.*
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import javax.inject.Inject
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -32,17 +34,6 @@ fun LoginView(
     viewModel: LoggedOutViewModel,
     onLogin: (UserType) -> Unit
 ) {
-    var name by remember { mutableStateOf(TextFieldValue("")) }
-    var hasCertificate by rememberSaveable { mutableStateOf(false) }
-    var isSamplerOfInstitute by rememberSaveable { mutableStateOf(false) }
-    var userType by rememberSaveable { mutableStateOf(UserType.Sampler) }
-
-    viewModel.user.value?.let { user ->
-        name = TextFieldValue(user.name ?: name.text)
-        hasCertificate = user.hasCertificate ?: hasCertificate
-        isSamplerOfInstitute = user.isSamplerOfInstitute ?: isSamplerOfInstitute
-        userType = user.userType ?: userType
-    }
 
     LazyColumn(
         modifier = Modifier
@@ -80,34 +71,34 @@ fun LoginView(
                 ) {
                     ParameterTextField(
                         labelText = USER_NAME,
-                        value = name,
+                        value = viewModel.userNameState.value,
                         onValueChange = {
-                            name = it
+                            viewModel.setUserName(it)
                         }
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                    if (userType != UserType.LabWorker) {
+                    if (viewModel.userTypeState.value != UserType.LabWorker) {
                         BasicCheckBoxField(
                             title = HAS_CERTIFICATE,
-                            value = hasCertificate,
+                            value = viewModel.hasCertificateState.value,
                             onCheckedChange = {
-                                hasCertificate = it
+                                viewModel.setUserHasCertificate(it)
                             }
                         )
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                         BasicCheckBoxField(
                             title = QM_SAMPLER,
-                            value = isSamplerOfInstitute,
+                            value = viewModel.isUserOfInstituteState.value,
                             onCheckedChange = {
-                                isSamplerOfInstitute = it
+                                viewModel.setUserIsSamplerOfInstitute(it)
                             }
                         )
                         Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     }
                     UserTypeDropdownMenu(
-                        value = userType,
+                        value = viewModel.userTypeState.value,
                         onUserTypeChoose = {
-                            userType = it
+                            viewModel.setUserType(it)
                         }
                     )
                 }
@@ -117,13 +108,7 @@ fun LoginView(
         item {
             Button(
                 onClick = {
-                    viewModel.login(
-                        name = name.text,
-                        hasCertificate = hasCertificate,
-                        isSamplerOfInstitute = isSamplerOfInstitute,
-                        userType = userType,
-                        onLogin = onLogin
-                    )
+                    viewModel.login(onLogin)
                     navigateToHomeScreen(navController)
                 },
                 modifier = Modifier.padding(standardPadding)

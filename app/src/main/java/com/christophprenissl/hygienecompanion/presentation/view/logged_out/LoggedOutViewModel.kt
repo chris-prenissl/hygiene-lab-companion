@@ -17,45 +17,57 @@ class LoggedOutViewModel @Inject constructor(
     private val dataStoreUser: DataStoreUser
 ): ViewModel() {
 
-    private var _user = mutableStateOf<User?>(null)
-    val user: State<User?> = _user
+    private var _userNameState = mutableStateOf("")
+    val userNameState: State<String> = _userNameState
 
-    private var _userType = mutableStateOf<UserType?>(null)
-    val userType: State<UserType?> = _userType
+    private var _hasCertificateState = mutableStateOf(false)
+    val hasCertificateState: State<Boolean> = _hasCertificateState
+
+    private var _isUserOfInstituteState = mutableStateOf(false)
+    val isUserOfInstituteState: State<Boolean> = _isUserOfInstituteState
+
+    private var _userTypeState = mutableStateOf(UserType.Sampler)
+    val userTypeState: State<UserType> = _userTypeState
 
     init {
-        getUserType()
         getUser()
     }
 
     private fun getUser() {
         viewModelScope.launch {
-            dataStoreUser.getUser().collect {
-                _user.value = it
+            dataStoreUser.getUser().collect { user ->
+                user.name?.let { _userNameState.value = it }
+                user.userType?.let { _userTypeState.value = it }
+                user.hasCertificate?.let { _hasCertificateState.value = it }
+                user.isSamplerOfInstitute?.let { _isUserOfInstituteState.value = it }
             }
         }
     }
 
-    private fun getUserType() {
-        viewModelScope.launch {
-            dataStoreUser.getUserType().collect {
-                _userType.value = it
-            }
-        }
+    fun setUserName(name: String) {
+        _userNameState.value = name
+    }
+
+    fun setUserType(type: UserType) {
+        _userTypeState.value = type
+    }
+
+    fun setUserHasCertificate(value: Boolean) {
+        _hasCertificateState.value = value
+    }
+
+    fun setUserIsSamplerOfInstitute(value: Boolean) {
+        _isUserOfInstituteState.value = value
     }
 
     fun login(
-        name: String,
-        hasCertificate: Boolean,
-        isSamplerOfInstitute: Boolean,
-        userType: UserType,
         onLogin: (UserType) -> Unit
     ) {
         val user = User(
-            name = name,
-            hasCertificate = if (userType != UserType.LabWorker) hasCertificate else null,
-            isSamplerOfInstitute = if (userType != UserType.LabWorker) isSamplerOfInstitute else null,
-            userType = userType
+            name = _userNameState.value,
+            hasCertificate = if (_userTypeState.value != UserType.LabWorker) _hasCertificateState.value else null,
+            isSamplerOfInstitute = if (_userTypeState.value != UserType.LabWorker) _isUserOfInstituteState.value else null,
+            userType = _userTypeState.value
         )
         viewModelScope.launch {
             loginAs(
