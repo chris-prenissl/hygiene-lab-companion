@@ -52,7 +52,9 @@ fun CoveringLettersView(
                                             samplingState = it.samplingState
                                         )) {
                                         viewModel.chooseCoveringLetter(it)
-                                        navController.navigate(Screen.CoveringLetterDetail.route)
+                                        if (viewModel.chosenCoveringLetter.value != null) {
+                                            navController.navigate(Screen.CoveringLetterDetail.route)
+                                        }
                                     }
                                 },
                                 accessIndicator = isUserAllowedToEnter(
