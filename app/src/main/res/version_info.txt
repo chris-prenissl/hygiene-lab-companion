@@ -1,3 +1,6 @@
+v0.2.2 Release Notes
+- Ein Bug wurde beseitigt bei dem beim Navigieren zum Begleitschein ein Absturz passierte
+
 v0.2.1 Release Notes
 - Ein Bug bei dem sich im Login-Textfeld Zeichen wiederholen sollte nun behoben sein:)
 
