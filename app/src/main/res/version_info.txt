@@ -1,3 +1,6 @@
+v0.2.3 Release Notes
+- input of textFields is now more user friendly:)
+
 v0.2.2 Release Notes
 - Ein Bug wurde beseitigt bei dem beim Navigieren zum Begleitschein ein Absturz passierte
 
