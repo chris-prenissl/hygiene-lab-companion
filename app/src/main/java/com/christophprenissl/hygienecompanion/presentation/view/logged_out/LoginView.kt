@@ -9,11 +9,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.R
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
@@ -24,8 +22,6 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.TitleT
 import com.christophprenissl.hygienecompanion.presentation.view.component.dropdown.UserTypeDropdownMenu
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.util.*
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import javax.inject.Inject
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -34,7 +30,6 @@ fun LoginView(
     viewModel: LoggedOutViewModel,
     onLogin: (UserType) -> Unit
 ) {
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
