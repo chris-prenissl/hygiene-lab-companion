@@ -6,23 +6,44 @@ import com.christophprenissl.hygienecompanion.util.FALSE
 import com.christophprenissl.hygienecompanion.util.TRUE
 import java.util.*
 
-fun getValidNumberTextFieldValue(newValue: String, oldValue: String): String {
-    val removedWhenOnlyBlank = newValue.removePrefix(if (oldValue == "0" && newValue.isNotBlank()) oldValue else "")
-    val notBlank = removedWhenOnlyBlank.ifBlank { "0" }
-    return notBlank.filter { it.isDigit() }
+fun getValidNumberTextFieldValue(value: String, oldValue: String): String {
+    val lettersFiltered = value.filter { it in "0123456789,." }
+    val commaReplaced = lettersFiltered.replace(",", ".")
+    val separatorCount = commaReplaced.count { it in "." }
+
+    if (separatorCount > 1) return oldValue
+
+    var lastPrefixedZeroIndex = -1
+
+    run loop@{
+        commaReplaced.forEachIndexed { i, c ->
+            if (c == '.' && lastPrefixedZeroIndex == i-1) {
+                lastPrefixedZeroIndex--
+                return@loop
+            }
+            if (c !in "0") return@loop
+            else lastPrefixedZeroIndex = i
+        }
+    }
+
+    if (lastPrefixedZeroIndex <= -1) return commaReplaced
+    if (lastPrefixedZeroIndex == commaReplaced.lastIndex) return "0"
+
+    return commaReplaced.removeRange(0, lastPrefixedZeroIndex+1)
 }
 
-fun getValidTemperatureTextFieldValue(newValue: String): String {
-    val filteredChars = newValue.filterIndexed { index, c ->
-        c in "0123456789" || (c == '.' && newValue.indexOf('.') == index)
+fun getValidTemperatureTextFieldValue(value: String, oldValue: String): String {
+    val validNumber = getValidNumberTextFieldValue(value = value, oldValue = oldValue)
+    val idxSeparator = validNumber.indexOf('.')
+    if (idxSeparator > 3) {
+        return oldValue
+    } else if (validNumber.lastIndex - idxSeparator > 2 && idxSeparator >= 0) {
+        return oldValue
+    } else if (validNumber.lastIndex > 2 && idxSeparator == -1) {
+        return oldValue
     }
-    return if(filteredChars.contains('.')) {
-        val beforeDecimal = filteredChars.substringBefore('.').ifEmpty { "0" }
-        val afterDecimal = filteredChars.substringAfter('.').ifEmpty { "0" }
-        beforeDecimal.take(3) + "." + afterDecimal.take(2)
-    } else {
-        filteredChars.take(3) + ".0"
-    }
+
+    return validNumber
 }
 
 fun checkIfNotEmptyAndNotCurrentDay(sample: Sample, currentDate: Date, value: String): Boolean {

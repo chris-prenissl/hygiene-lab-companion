@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -17,13 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
+import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
+import com.christophprenissl.hygienecompanion.presentation.view.component.edit.ParameterBooleanEdit
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleEdit
-import com.christophprenissl.hygienecompanion.presentation.view.component.edit.ParameterEdit
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.presentation.view.util.getValidNumberTextFieldValue
@@ -93,29 +96,54 @@ fun CoveringLetterDetailView(
                 item {
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
                 }
-                itemsIndexed(basicLabReportValues) { idx, pValue ->
-                    ParameterEdit(
-                        parameter = coveringLetter.basicLabReportParameters!![idx],
-                        value = pValue,
-                        onNumbEdit = { value ->
-                            basicLabReportValues[idx] = getValidNumberTextFieldValue(value, basicLabReportValues[idx])
-                            coveringLetter.basicLabReportParameters[idx].value =
-                                basicLabReportValues[idx].toInt()
-                        },
-                        onTempEdit = { value ->
-                            basicLabReportValues[idx] = getValidTemperatureTextFieldValue(value)
-                            coveringLetter.basicLabReportParameters[idx].value =
-                                basicLabReportValues[idx].toFloat()
-                        },
-                        onBoolEdit = { value ->
-                            basicLabReportValues[idx] = value.toString()
-                            coveringLetter.basicLabReportParameters[idx].value = value
-                        },
-                        onNoteEdit = { value ->
-                            basicLabReportValues[idx] = value
-                            coveringLetter.basicLabReportParameters[idx].value = value
+                itemsIndexed(basicLabReportValues) { idx, _ ->
+                    val parameter = coveringLetter.basicCoveringParameters!![idx]
+                    when (parameter.parameterType!!) {
+                        ParameterType.Temperature -> {
+                            ParameterTextField(
+                                labelText = parameter.name,
+                                value = basicLabReportValues[idx],
+                                onValueChange = {
+                                    val input = getValidTemperatureTextFieldValue(it, basicLabReportValues[idx])
+                                    parameter.value = input
+                                    basicLabReportValues[idx] = input
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                            )
                         }
-                    )
+                        ParameterType.Number -> {
+                            ParameterTextField(
+                                labelText = parameter.name,
+                                value = basicLabReportValues[idx],
+                                onValueChange = {
+                                    val input = getValidNumberTextFieldValue(it, basicLabReportValues[idx])
+                                    parameter.value = input
+                                    basicLabReportValues[idx] = input
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                            )
+                        }
+                        ParameterType.Note -> {
+                            ParameterTextField(
+                                labelText = parameter.name,
+                                value = basicLabReportValues[idx],
+                                onValueChange = { input ->
+                                    parameter.value = input
+                                    basicLabReportValues[idx] = input
+                                }
+                            )
+                        }
+                        ParameterType.Bool -> {
+                            ParameterBooleanEdit(
+                                parameterName = parameter.name?: EMPTY,
+                                value = basicLabReportValues[idx],
+                                onCheckedChange = {
+                                    basicLabReportValues[idx] = it.toString()
+                                    parameter.value = it.toString()
+                                }
+                            )
+                        }
+                    }
                 }
             }
             else -> {
@@ -129,29 +157,54 @@ fun CoveringLetterDetailView(
                         }
                     )
                 }
-                itemsIndexed(basicCoveringValues) { idx, pValue ->
-                    ParameterEdit(
-                        parameter = coveringLetter.basicCoveringParameters!![idx],
-                        value = pValue,
-                        onNumbEdit = { value ->
-                            basicCoveringValues[idx] = getValidNumberTextFieldValue(value, basicCoveringValues[idx])
-                            coveringLetter.basicCoveringParameters[idx].value =
-                                basicCoveringValues[idx].toInt()
-                        },
-                        onTempEdit = { value ->
-                            basicCoveringValues[idx] = getValidTemperatureTextFieldValue(value)
-                            coveringLetter.basicCoveringParameters[idx].value =
-                                basicCoveringValues[idx].toFloat()
-                        },
-                        onBoolEdit = { value ->
-                            basicCoveringValues[idx] = value.toString()
-                            coveringLetter.basicCoveringParameters[idx].value = value
-                        },
-                        onNoteEdit = { value ->
-                            basicCoveringValues[idx] = value
-                            coveringLetter.basicCoveringParameters[idx].value = value
+                itemsIndexed(basicCoveringValues) { idx, _ ->
+                    val parameter = coveringLetter.basicCoveringParameters!![idx]
+                    when (parameter.parameterType!!) {
+                        ParameterType.Temperature -> {
+                            ParameterTextField(
+                                labelText = parameter.name,
+                                value = basicCoveringValues[idx],
+                                onValueChange = {
+                                    val input = getValidTemperatureTextFieldValue(it, basicCoveringValues[idx])
+                                    parameter.value = input
+                                    basicCoveringValues[idx] = input
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                            )
                         }
-                    )
+                        ParameterType.Number -> {
+                            ParameterTextField(
+                                labelText = parameter.name,
+                                value = basicCoveringValues[idx],
+                                onValueChange = {
+                                    val input = getValidNumberTextFieldValue(it, basicCoveringValues[idx])
+                                    parameter.value = input
+                                    basicCoveringValues[idx] = input
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                            )
+                        }
+                        ParameterType.Note -> {
+                            ParameterTextField(
+                                labelText = parameter.name,
+                                value = basicCoveringValues[idx],
+                                onValueChange = { input ->
+                                    parameter.value = input
+                                    basicCoveringValues[idx] = input
+                                }
+                            )
+                        }
+                        ParameterType.Bool -> {
+                            ParameterBooleanEdit(
+                                parameterName = parameter.name?: EMPTY,
+                                value = basicCoveringValues[idx],
+                                onCheckedChange = {
+                                    basicCoveringValues[idx] = it.toString()
+                                    parameter.value = it.toString()
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }

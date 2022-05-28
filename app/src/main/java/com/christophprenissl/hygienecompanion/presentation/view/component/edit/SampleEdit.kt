@@ -3,10 +3,13 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.edit
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
@@ -24,7 +27,7 @@ fun SampleEdit(
     sample: Sample,
     samplingState: SamplingState
 ) {
-    val currentDate = Date()
+    val currentDate by remember { mutableStateOf(Date()) }
     var date by remember { mutableStateOf(sample.created?.dayMonthYearString()) }
     var extraInfoSampling by remember {
         mutableStateOf(
@@ -45,7 +48,7 @@ fun SampleEdit(
     }
     val labSampleValues = remember {
         sample.labSampleParameters!!.map {
-            it.value.toString()
+            mutableStateOf(it.value.toString())
         }.toMutableStateList()
     }
 
@@ -151,61 +154,56 @@ fun SampleEdit(
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
                     sample.labSampleParameters?.let { parameters ->
-                        ParametersEditList(
-                            title = LAB_SAMPLE_PARAMETERS,
-                            parameters = parameters,
-                            values = labSampleValues,
-                            onNumbEdit = { idx, value ->
-                                labSampleValues[idx] = getValidNumberTextFieldValue(value, labSampleValues[idx])
-                                sample.labSampleParameters[idx].value =
-                                    labSampleValues[idx].toInt()
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                        parameters.forEachIndexed { idx, _ ->
+                            val parameter = parameters[idx]
+                            when (parameter.parameterType!!) {
+                                ParameterType.Temperature -> {
+                                    ParameterTextField(
+                                        labelText = parameter.name,
+                                        value = labSampleValues[idx].value,
+                                        onValueChange = {
+                                            val input = getValidTemperatureTextFieldValue(it, labSampleValues[idx].value)
+                                            parameter.value = input
+                                            labSampleValues[idx].value = input
+                                        },
+                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                    )
                                 }
-                            },
-                            onTempEdit = { idx, value ->
-                                labSampleValues[idx] = getValidTemperatureTextFieldValue(value)
-                                sample.labSampleParameters[idx].value =
-                                    labSampleValues[idx].toFloat()
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                                ParameterType.Number -> {
+                                    ParameterTextField(
+                                        labelText = parameter.name,
+                                        value = labSampleValues[idx].value,
+                                        onValueChange = {
+                                            val input = getValidNumberTextFieldValue(it, labSampleValues[idx].value)
+                                            parameter.value = input
+                                            labSampleValues[idx].value = input
+                                        },
+                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                    )
                                 }
-                            },
-                            onBoolEdit = { idx, value ->
-                                labSampleValues[idx] = value.toString()
-                                sample.labSampleParameters[idx].value = value
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value.toString()
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                                ParameterType.Note -> {
+                                    ParameterTextField(
+                                        labelText = parameter.name,
+                                        value = labSampleValues[idx].value,
+                                        onValueChange = { input ->
+                                            parameter.value = input
+                                            labSampleValues[idx].value = input
+                                        }
+                                    )
                                 }
-                            },
-                            onNoteEdit = { idx, value ->
-                                labSampleValues[idx] = value
-                                sample.labSampleParameters[idx].value = value
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                                ParameterType.Bool -> {
+                                    ParameterBooleanEdit(
+                                        parameterName = parameter.name?: EMPTY,
+                                        value = labSampleValues[idx].value,
+                                        onCheckedChange = {
+                                            labSampleValues[idx].value = it.toString()
+                                            parameter.value = it.toString()
+                                        }
+                                    )
                                 }
                             }
-                        )
+                        }
+
                     }
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
                 }
@@ -214,61 +212,56 @@ fun SampleEdit(
                 }
                 else -> {
                     sample.coveringSampleParameters?.let { parameters ->
-                        ParametersEditList(
-                            title = COVERING_SAMPLE_PARAMETERS,
-                            parameters = parameters,
-                            values = coveringSampleValues,
-                            onNumbEdit = { idx, value ->
-                                coveringSampleValues[idx] = getValidNumberTextFieldValue(value, coveringSampleValues[idx])
-                                sample.coveringSampleParameters[idx].value =
-                                    coveringSampleValues[idx].toInt()
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                        parameters.forEachIndexed { idx, _ ->
+                            val parameter = parameters[idx]
+                            when (parameter.parameterType!!) {
+                                ParameterType.Temperature -> {
+                                    ParameterTextField(
+                                        labelText = parameter.name,
+                                        value = coveringSampleValues[idx],
+                                        onValueChange = {
+                                            val input = getValidTemperatureTextFieldValue(it, coveringSampleValues[idx])
+                                            parameter.value = input
+                                            coveringSampleValues[idx] = input
+                                        },
+                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                    )
                                 }
-                            },
-                            onTempEdit = { idx, value ->
-                                coveringSampleValues[idx] = getValidTemperatureTextFieldValue(value)
-                                sample.coveringSampleParameters[idx].value =
-                                    coveringSampleValues[idx].toFloat()
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                                ParameterType.Number -> {
+                                    ParameterTextField(
+                                        labelText = parameter.name,
+                                        value = coveringSampleValues[idx],
+                                        onValueChange = {
+                                            val input = getValidNumberTextFieldValue(it, coveringSampleValues[idx])
+                                            parameter.value = input
+                                            coveringSampleValues[idx] = input
+                                        },
+                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                    )
                                 }
-                            },
-                            onBoolEdit = { idx, value ->
-                                coveringSampleValues[idx] = value.toString()
-                                sample.coveringSampleParameters[idx].value = value
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value.toString()
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                                ParameterType.Note -> {
+                                    ParameterTextField(
+                                        labelText = parameter.name,
+                                        value = coveringSampleValues[idx],
+                                        onValueChange = { input ->
+                                            parameter.value = input
+                                            coveringSampleValues[idx] = input
+                                        }
+                                    )
                                 }
-                            },
-                            onNoteEdit = { idx, value ->
-                                coveringSampleValues[idx] = value
-                                sample.coveringSampleParameters[idx].value = value
-                                if (checkIfNotEmptyAndNotCurrentDay(
-                                        sample = sample,
-                                        currentDate = currentDate,
-                                        value = value
-                                    )) {
-                                    sample.created = Timestamp.now().toDate()
-                                    date = sample.created?.dayMonthYearString()
+                                ParameterType.Bool -> {
+                                    ParameterBooleanEdit(
+                                        parameterName = parameter.name?: EMPTY,
+                                        value = coveringSampleValues[idx],
+                                        onCheckedChange = {
+                                            coveringSampleValues[idx] = it.toString()
+                                            parameter.value = it.toString()
+                                        }
+                                    )
                                 }
                             }
-                        )
+                        }
+
                     }
                 }
             }

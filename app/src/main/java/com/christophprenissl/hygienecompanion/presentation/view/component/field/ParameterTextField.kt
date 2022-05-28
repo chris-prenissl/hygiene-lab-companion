@@ -12,15 +12,16 @@ fun ParameterTextField(
     labelText: String? = null,
     value: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    isError: Boolean = false
 ) {
     OutlinedTextField(
         label = { labelText?.let { Text(labelText) } },
         value = value,
         keyboardOptions = keyboardOptions,
         onValueChange = onValueChange,
-        singleLine = true,
-        maxLines = 1
+        isError = isError,
+        singleLine = true
     )
 }
 
@@ -29,14 +30,15 @@ fun ParameterTextField(
     labelText: String? = null,
     value: TextFieldValue,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-    onValueChange: (TextFieldValue) -> Unit
+    onValueChange: (TextFieldValue) -> Unit,
+    isError: Boolean = false
 ) {
     OutlinedTextField(
         label = { labelText?.let { Text(labelText) } },
         value = value,
         keyboardOptions = keyboardOptions,
         onValueChange = onValueChange,
-        singleLine = true,
-        maxLines = 1
+        isError = isError,
+        singleLine = true
     )
 }

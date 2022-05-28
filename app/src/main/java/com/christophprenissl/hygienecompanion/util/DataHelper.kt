@@ -27,7 +27,7 @@ fun createCoveringLetterForSeries(
                     coveringSampleParametersSample.add(
                         Parameter(
                         name = it.key.name,
-                        value = it.key.parameterType?.toValue(),
+                        value = "",
                         parameterType = it.key.parameterType
                     )
                     )
@@ -39,7 +39,7 @@ fun createCoveringLetterForSeries(
                     labSampleParametersSample.add(
                         Parameter(
                         name = it.key.name,
-                        value = it.key.parameterType?.toValue(),
+                        value = "",
                         parameterType = it.key.parameterType
                     )
                     )
@@ -56,18 +56,11 @@ fun createCoveringLetterForSeries(
     )
 }
 
-fun ParameterBasis.mapToParameter(): Parameter {
+fun ParameterBasis.mapToBlankValue(): Parameter {
     return Parameter(
         name = name,
         parameterType = parameterType,
-        value = when(parameterType) {
-            ParameterType.Bool -> false
-            ParameterType.Note -> ""
-            ParameterType.Number -> 0
-            ParameterType.Temperature -> 25.0
-            else -> ""
-        }
-    )
+        value = "")
 }
 
 fun Map<ParameterBasis, Boolean>.createParameterList(): List<Parameter> {
@@ -75,7 +68,7 @@ fun Map<ParameterBasis, Boolean>.createParameterList(): List<Parameter> {
     forEach {
         if (it.value) {
             parameters.add(
-                it.key.mapToParameter()
+                it.key.mapToBlankValue()
             )
         }
     }
@@ -111,11 +104,16 @@ fun createCoveringLettersForSeries(
     return coveringLetters
 }
 
-fun ParameterType.toValue(): Any {
-    return when(this) {
-        ParameterType.Bool -> false
-        ParameterType.Temperature -> 0.0
-        ParameterType.Number -> 0
-        ParameterType.Note -> ""
+fun Parameter.toValue(): Any {
+    return when(this.parameterType) {
+        ParameterType.Bool -> this.value.toBoolean()
+        ParameterType.Number, ParameterType.Temperature -> {
+            try {
+                this.value?.toFloat()?: -1.0f
+            } catch(_: Exception) {
+                -1.0f
+            }
+        }
+        else -> this.value.toString()
     }
 }
