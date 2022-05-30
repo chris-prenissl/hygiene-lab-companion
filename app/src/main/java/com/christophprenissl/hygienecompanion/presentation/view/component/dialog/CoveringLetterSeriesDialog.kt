@@ -357,7 +357,7 @@ fun CoveringLetterSeriesDialog(
         }
 
         item {
-            Button(
+            BasicButton(
                 onClick = {
                     viewModel.openSamplingCompanyAddressChoice()
                 }

@@ -60,7 +60,7 @@ fun BasisDialog(
         item {
             Text(BASIC_COVERING_PARAMETERS)
         }
-        items(basicCoveringParameters, key = { item -> item.name!! + item.parameterType!!}) { item ->
+        items(basicCoveringParameters, key = { item -> item.creationId}) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = {
@@ -73,7 +73,8 @@ fun BasisDialog(
                 onClick = {
                     basicCoveringParameters.add(
                         ParameterBasis(
-                            name = PARAMETER + pIdx.toString(),
+                            creationId = pIdx,
+                            name = "",
                             parameterType = ParameterType.Number
                         )
                     )
@@ -88,7 +89,7 @@ fun BasisDialog(
         item {
             Text(COVERING_SAMPLE_PARAMETERS)
         }
-        items(coveringSampleParameters, key = {item -> item.name!! + item.parameterType!! }) { item ->
+        items(coveringSampleParameters, key = {item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = { coveringSampleParameters.remove(item) }
@@ -99,7 +100,8 @@ fun BasisDialog(
                 onClick = {
                     coveringSampleParameters.add(
                         ParameterBasis(
-                            name = PARAMETER + pIdx.toString(),
+                            creationId = pIdx,
+                            name = "",
                             parameterType = ParameterType.Number)
                     )
                     pIdx++
@@ -113,7 +115,7 @@ fun BasisDialog(
         item {
             Text(LAB_SAMPLE_PARAMETERS)
         }
-        items(labSampleParameters, key = { item -> item.name!! + item.parameterType!! }) { item ->
+        items(labSampleParameters, key = { item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = { labSampleParameters.remove(item) }
@@ -124,7 +126,8 @@ fun BasisDialog(
                 onClick = {
                     labSampleParameters.add(
                         ParameterBasis(
-                            name = PARAMETER + pIdx.toString(),
+                            creationId = pIdx,
+                            name = "",
                             parameterType = ParameterType.Number)
                     )
                     pIdx++
@@ -138,7 +141,7 @@ fun BasisDialog(
         item {
             Text(BASIC_LAB_REPORT_PARAMETERS)
         }
-        items(basicLabReportParameters, key = { item -> item.name!! + item.parameterType!! }) { item ->
+        items(basicLabReportParameters, key = { item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = { basicLabReportParameters.remove(item) }
@@ -149,7 +152,8 @@ fun BasisDialog(
                 onClick = {
                     basicLabReportParameters.add(
                         ParameterBasis(
-                            name = PARAMETER + pIdx.toString(),
+                            creationId = pIdx,
+                            name = "",
                             parameterType = ParameterType.Number)
                     )
                     pIdx++

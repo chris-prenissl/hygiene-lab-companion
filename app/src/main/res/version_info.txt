@@ -1,3 +1,6 @@
+v0.2.4 Release Notes
+- Parameternamen im Dialog zur Erstellung von Normen ist nun ohne vor eingegebenen Namen
+
 v0.2.3 Release Notes
 - input of textFields is now more user friendly:)
 
