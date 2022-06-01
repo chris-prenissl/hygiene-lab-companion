@@ -30,7 +30,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
     private val coveringLettersRef: CollectionReference,
     private val coveringLetterSeriesRef: CollectionReference
 ): CoveringLetterSeriesRepo {
-    override fun getCoveringLetterSeriesFromFireStore(id: String) = flow {
+    override fun getCoveringLetterSeriesFromDatabase(id: String) = flow {
         try {
             emit(Response.Loading)
             val mapper = CoveringLetterSeriesMapper()
@@ -50,7 +50,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
         }
     }
 
-    override fun getCoveringLetterSeriesFromFireStore() = callbackFlow {
+    override fun getCoveringLetterSeriesFromDatabase() = callbackFlow {
         val snapshotListener = coveringLetterSeriesRef
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {
@@ -70,7 +70,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
         }
     }
 
-    override fun getCoveringLetterSeriesNotEndedFromFireStore() = callbackFlow {
+    override fun getCoveringLetterSeriesNotEndedFromDatabase() = callbackFlow {
         val snapshotListener = coveringLetterSeriesRef
             .whereEqualTo(HAS_ENDED_FIELD, false)
             .addSnapshotListener { snapshot, e ->
@@ -91,7 +91,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun createCoveringLetterSeriesInFireStore(coveringLetterSeries: CoveringLetterSeries) = flow {
+    override suspend fun createCoveringLetterSeriesInDatabase(coveringLetterSeries: CoveringLetterSeries) = flow {
 
         try {
             emit(Response.Loading)
@@ -123,7 +123,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun createAdditionalCoveringLettersToSeriesInFireStore(
+    override suspend fun createAdditionalCoveringLettersToSeriesInDatabase(
         coveringLetter: CoveringLetter,
         dates: List<Date>
     ) = flow {

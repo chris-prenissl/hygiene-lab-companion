@@ -6,5 +6,5 @@ import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRe
 class GetSampleLocations(
     private val sampleLocationRepo: SampleLocationRepo
 ) {
-    operator fun invoke(fromAddress: Address) = sampleLocationRepo.getSampleLocationsFromFireStore(fromAddress)
+    operator fun invoke(fromAddress: Address) = sampleLocationRepo.getSampleLocationsFromDatabase(fromAddress)
 }

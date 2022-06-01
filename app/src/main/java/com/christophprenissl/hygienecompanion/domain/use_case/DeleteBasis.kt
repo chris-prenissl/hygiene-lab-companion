@@ -6,5 +6,5 @@ import com.christophprenissl.hygienecompanion.domain.repository.BasisRepo
 class DeleteBasis(
     private val basisRepo: BasisRepo
 ) {
-    suspend operator fun invoke(basis: Basis) = basisRepo.deleteBasisFromFireStore(basis)
+    suspend operator fun invoke(basis: Basis) = basisRepo.deleteBasisFromDatabase(basis)
 }

@@ -8,5 +8,5 @@ class CreateCoveringLetterSeries(
 ) {
     suspend operator fun invoke(
         coveringLetterSeries: CoveringLetterSeries
-    ) = coveringLetterSeriesRepo.createCoveringLetterSeriesInFireStore(coveringLetterSeries)
+    ) = coveringLetterSeriesRepo.createCoveringLetterSeriesInDatabase(coveringLetterSeries)
 }

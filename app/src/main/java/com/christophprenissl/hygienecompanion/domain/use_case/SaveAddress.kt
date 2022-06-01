@@ -6,5 +6,5 @@ import com.christophprenissl.hygienecompanion.domain.repository.AddressRepo
 class SaveAddress(
     private val addressRepo: AddressRepo
 ) {
-    suspend operator fun invoke(address: Address) = addressRepo.saveAddressToFireStore(address)
+    suspend operator fun invoke(address: Address) = addressRepo.saveAddressToDatabase(address)
 }

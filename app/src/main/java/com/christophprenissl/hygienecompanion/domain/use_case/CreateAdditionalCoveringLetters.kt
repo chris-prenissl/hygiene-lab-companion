@@ -10,7 +10,7 @@ class CreateAdditionalCoveringLetters(
     suspend operator fun invoke(
         coveringLetter: CoveringLetter,
         dates: List<Date>
-    ) = coveringLetterSeriesRepo.createAdditionalCoveringLettersToSeriesInFireStore(
+    ) = coveringLetterSeriesRepo.createAdditionalCoveringLettersToSeriesInDatabase(
         coveringLetter = coveringLetter,
         dates = dates
     )

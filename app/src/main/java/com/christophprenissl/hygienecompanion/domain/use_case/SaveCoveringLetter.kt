@@ -8,5 +8,5 @@ class SaveCoveringLetter(
 ) {
     suspend operator fun invoke(
         coveringLetter: CoveringLetter
-    ) = coveringLetterRepo.saveCoveringLetterToFireStore(coveringLetter)
+    ) = coveringLetterRepo.saveCoveringLetterToDatabase(coveringLetter)
 }

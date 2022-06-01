@@ -6,12 +6,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface BasisRepo {
 
-    fun getBasesFromFireStore(): Flow<Response<List<Basis>>>
+    fun getBasesFromDatabase(): Flow<Response<List<Basis>>>
 
-    suspend fun getBasisById(id: String): Flow<Response<Basis>>
+    suspend fun getBasisByIdFromDatabase(id: String): Flow<Response<Basis>>
 
-    suspend fun saveBasisToFireStore(basis: Basis): Flow<Response<Void?>>
+    suspend fun saveBasisToDatabase(basis: Basis): Flow<Response<Void?>>
 
-    suspend fun deleteBasisFromFireStore(basis: Basis): Flow<Response<Void?>>
+    suspend fun deleteBasisFromDatabase(basis: Basis): Flow<Response<Void?>>
 
 }

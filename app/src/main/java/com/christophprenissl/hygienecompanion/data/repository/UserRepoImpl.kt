@@ -16,7 +16,7 @@ import javax.inject.Singleton
 class UserRepoImpl @Inject constructor(
     private val userRef: CollectionReference
 ): UserRepo  {
-    override fun getUserFromFireStore(id: String) = flow {
+    override fun getUserFromDatabase(id: String) = flow {
         try {
             emit(Response.Loading)
             val mapper = UserMapper()
@@ -32,7 +32,7 @@ class UserRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveUserToFireStore(user: User) = flow {
+    override suspend fun saveUserToDatabase(user: User) = flow {
         try {
             emit(Response.Loading)
             val mapper = UserMapper()
@@ -48,7 +48,7 @@ class UserRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteUserFromFireStore(user: User) = flow {
+    override suspend fun deleteUserFromDatabase(user: User) = flow {
         try {
             emit(Response.Loading)
             if (user.id != null) {

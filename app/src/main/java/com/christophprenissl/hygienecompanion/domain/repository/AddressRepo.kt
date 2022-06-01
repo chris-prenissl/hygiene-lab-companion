@@ -5,9 +5,9 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.Address
 import kotlinx.coroutines.flow.Flow
 
 interface AddressRepo {
-    fun getAddressesFromFireStore(): Flow<Response<List<Address>>>
+    fun getAddressesFromDatabase(): Flow<Response<List<Address>>>
 
-    suspend fun saveAddressToFireStore(address: Address): Flow<Response<Void?>>
+    suspend fun saveAddressToDatabase(address: Address): Flow<Response<Void?>>
 
-    suspend fun deleteAddressFromFireStore(address: Address): Flow<Response<Void?>>
+    suspend fun deleteAddressFromDatabase(address: Address): Flow<Response<Void?>>
 }

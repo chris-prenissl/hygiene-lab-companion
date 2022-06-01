@@ -6,5 +6,5 @@ class GetCoveringLetterSeriesById(
     private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo
 ) {
     operator fun invoke(id: String) = coveringLetterSeriesRepo
-        .getCoveringLetterSeriesFromFireStore(id = id)
+        .getCoveringLetterSeriesFromDatabase(id = id)
 }

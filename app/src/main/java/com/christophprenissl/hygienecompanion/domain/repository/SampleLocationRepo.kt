@@ -6,9 +6,9 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import kotlinx.coroutines.flow.Flow
 
 interface SampleLocationRepo {
-    fun getSampleLocationsFromFireStore(fromAddress: Address): Flow<Response<List<SampleLocation>>>
+    fun getSampleLocationsFromDatabase(fromAddress: Address): Flow<Response<List<SampleLocation>>>
 
-    suspend fun saveSampleLocationToFireStore(sampleLocation: SampleLocation): Flow<Response<Void?>>
+    suspend fun saveSampleLocationToDatabase(sampleLocation: SampleLocation): Flow<Response<Void?>>
 
-    suspend fun deleteSampleLocationFromFireStore(sampleLocation: SampleLocation): Flow<Response<Void?>>
+    suspend fun deleteSampleLocationFromDatabase(sampleLocation: SampleLocation): Flow<Response<Void?>>
 }

@@ -24,7 +24,7 @@ import javax.inject.Singleton
 class SampleLocationRepoImpl @Inject constructor(
     private val sampleLocationsRef: CollectionReference
 ): SampleLocationRepo {
-    override fun getSampleLocationsFromFireStore(fromAddress: Address) = callbackFlow {
+    override fun getSampleLocationsFromDatabase(fromAddress: Address) = callbackFlow {
         val snapshotListener = sampleLocationsRef.whereEqualTo(ADDRESS_ID, fromAddress.id).addSnapshotListener { snapshot, e ->
             val response = if (snapshot != null) {
                 val sampleLocationsDto = snapshot.toObjects(SampleLocationDto::class.java)
@@ -43,7 +43,7 @@ class SampleLocationRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveSampleLocationToFireStore(sampleLocation: SampleLocation) = flow {
+    override suspend fun saveSampleLocationToDatabase(sampleLocation: SampleLocation) = flow {
         try {
             emit(Loading)
             val mapper = SampleLocationMapper(null)
@@ -57,7 +57,7 @@ class SampleLocationRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteSampleLocationFromFireStore(sampleLocation: SampleLocation) = flow {
+    override suspend fun deleteSampleLocationFromDatabase(sampleLocation: SampleLocation) = flow {
         try {
             emit(Loading)
             if (sampleLocation.id != null) {

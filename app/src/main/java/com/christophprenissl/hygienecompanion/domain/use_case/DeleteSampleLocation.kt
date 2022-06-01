@@ -7,6 +7,6 @@ class DeleteSampleLocation(
     private val sampleRepo: SampleLocationRepo
 ) {
 
-    suspend operator fun invoke(sampleLocation: SampleLocation) = sampleRepo.deleteSampleLocationFromFireStore(sampleLocation)
+    suspend operator fun invoke(sampleLocation: SampleLocation) = sampleRepo.deleteSampleLocationFromDatabase(sampleLocation)
 
 }

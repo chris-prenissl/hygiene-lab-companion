@@ -6,6 +6,6 @@ class GetAddresses(
     private val addressRepo: AddressRepo
 ) {
 
-    operator fun invoke() = addressRepo.getAddressesFromFireStore()
+    operator fun invoke() = addressRepo.getAddressesFromDatabase()
 
 }

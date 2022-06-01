@@ -18,7 +18,7 @@ class BasisRepoImpl @Inject constructor(
      private val basisRef: CollectionReference
 ): BasisRepo {
 
-    override fun getBasesFromFireStore() = callbackFlow {
+    override fun getBasesFromDatabase() = callbackFlow {
         val snapshotListener = basisRef.addSnapshotListener { snapshot, e ->
             trySend(Response.Loading)
             val response = if (snapshot != null) {
@@ -38,7 +38,7 @@ class BasisRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getBasisById(id: String) = flow {
+    override suspend fun getBasisByIdFromDatabase(id: String) = flow {
         try {
             emit(Response.Loading)
             val mapper = BasisMapper()
@@ -54,7 +54,7 @@ class BasisRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveBasisToFireStore(basis: Basis) = flow {
+    override suspend fun saveBasisToDatabase(basis: Basis) = flow {
         try {
             emit(Response.Loading)
             val mapper = BasisMapper()
@@ -70,7 +70,7 @@ class BasisRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteBasisFromFireStore(basis: Basis) = flow {
+    override suspend fun deleteBasisFromDatabase(basis: Basis) = flow {
         try {
             emit(Response.Loading)
             if (basis.norm != null) {

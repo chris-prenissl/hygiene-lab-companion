@@ -21,7 +21,7 @@ class AddressRepoImpl @Inject constructor(
     private val addressesRef: CollectionReference,
     private val addressesQuery: Query,
 ): AddressRepo {
-    override fun getAddressesFromFireStore() = callbackFlow {
+    override fun getAddressesFromDatabase() = callbackFlow {
         val snapshotListener = addressesQuery.addSnapshotListener { snapshot, e ->
             val response = if (snapshot != null) {
                 val addressesDto = snapshot.toObjects(AddressDto::class.java)
@@ -40,7 +40,7 @@ class AddressRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveAddressToFireStore(address: Address) = flow {
+    override suspend fun saveAddressToDatabase(address: Address) = flow {
         try {
             emit(Response.Loading)
             val mapper = AddressMapper()
@@ -54,7 +54,7 @@ class AddressRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteAddressFromFireStore(address: Address) = flow {
+    override suspend fun deleteAddressFromDatabase(address: Address) = flow {
         try {
             emit(Response.Loading)
             if (address.id != null) {

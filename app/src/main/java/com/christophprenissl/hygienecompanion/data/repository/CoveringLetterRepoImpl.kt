@@ -20,7 +20,7 @@ class CoveringLetterRepoImpl @Inject constructor(
     private val coveringLetterRef: CollectionReference
 ): CoveringLetterRepo {
 
-    override fun getCoveringLettersNotEndedFromFireStore() = callbackFlow {
+    override fun getCoveringLettersNotEndedFromDatabase() = callbackFlow {
         val snapshotListener = coveringLetterRef
             .whereNotEqualTo(SAMPLING_STATE_FIELD, SamplingState.LaboratoryResult.name)
             .addSnapshotListener { snapshot, e ->
@@ -42,7 +42,7 @@ class CoveringLetterRepoImpl @Inject constructor(
         }
     }
 
-    override fun getCoveringLettersWithLabResultFromFireStore() = callbackFlow {
+    override fun getCoveringLettersWithLabResultFromDatabase() = callbackFlow {
         val snapshotListener = coveringLetterRef
             .whereEqualTo(SAMPLING_STATE_FIELD, SamplingState.LaboratoryResult.name)
             .addSnapshotListener { snapshot, e ->
@@ -64,7 +64,7 @@ class CoveringLetterRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveCoveringLetterToFireStore(coveringLetter: CoveringLetter) = flow {
+    override suspend fun saveCoveringLetterToDatabase(coveringLetter: CoveringLetter) = flow {
         try {
             emit(Response.Loading)
             val coveringLetterMapper = CoveringLetterMapper()

@@ -8,17 +8,17 @@ import java.util.*
 
 interface CoveringLetterSeriesRepo {
 
-    fun getCoveringLetterSeriesFromFireStore(id: String): Flow<Response<CoveringLetterSeries?>>
+    fun getCoveringLetterSeriesFromDatabase(id: String): Flow<Response<CoveringLetterSeries?>>
 
-    fun getCoveringLetterSeriesFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
+    fun getCoveringLetterSeriesFromDatabase(): Flow<Response<List<CoveringLetterSeries>>>
 
-    fun getCoveringLetterSeriesNotEndedFromFireStore(): Flow<Response<List<CoveringLetterSeries>>>
+    fun getCoveringLetterSeriesNotEndedFromDatabase(): Flow<Response<List<CoveringLetterSeries>>>
 
-    suspend fun createCoveringLetterSeriesInFireStore(
+    suspend fun createCoveringLetterSeriesInDatabase(
         coveringLetterSeries: CoveringLetterSeries
     ): Flow<Response<Void?>>
 
-    suspend fun createAdditionalCoveringLettersToSeriesInFireStore(
+    suspend fun createAdditionalCoveringLettersToSeriesInDatabase(
         coveringLetter: CoveringLetter,
         dates: List<Date>
     ): Flow<Response<Void?>>

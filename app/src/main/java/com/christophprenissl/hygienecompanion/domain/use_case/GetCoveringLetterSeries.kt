@@ -5,5 +5,5 @@ import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterSe
 class GetCoveringLetterSeries(
     private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo
 ) {
-    operator fun invoke() = coveringLetterSeriesRepo.getCoveringLetterSeriesFromFireStore()
+    operator fun invoke() = coveringLetterSeriesRepo.getCoveringLetterSeriesFromDatabase()
 }

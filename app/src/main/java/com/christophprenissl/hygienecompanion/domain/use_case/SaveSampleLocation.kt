@@ -7,5 +7,5 @@ class SaveSampleLocation(private val sampleLocationRepo: SampleLocationRepo
 ) {
     suspend operator fun invoke(
         sampleLocation: SampleLocation
-    ) = sampleLocationRepo.saveSampleLocationToFireStore(sampleLocation)
+    ) = sampleLocationRepo.saveSampleLocationToDatabase(sampleLocation)
 }
