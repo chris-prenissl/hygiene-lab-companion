@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.util
 
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingSeriesType
+import com.christophprenissl.hygienecompanion.model.entity.SamplingSeriesType
 import com.christophprenissl.hygienecompanion.util.*
 import java.text.SimpleDateFormat
 import java.util.*

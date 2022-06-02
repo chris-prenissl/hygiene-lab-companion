@@ -11,8 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.entity.*
+import com.christophprenissl.hygienecompanion.model.Response
+import com.christophprenissl.hygienecompanion.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicCheckBoxField
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicDivider

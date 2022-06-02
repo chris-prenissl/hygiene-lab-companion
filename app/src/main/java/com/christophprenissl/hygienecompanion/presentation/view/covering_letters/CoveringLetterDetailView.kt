@@ -20,8 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.*

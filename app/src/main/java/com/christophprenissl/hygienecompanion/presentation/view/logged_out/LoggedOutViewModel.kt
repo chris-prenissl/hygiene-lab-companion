@@ -4,8 +4,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.christophprenissl.hygienecompanion.domain.model.entity.User
-import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.model.entity.User
+import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.view.util.loginAs
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import dagger.hilt.android.lifecycle.HiltViewModel

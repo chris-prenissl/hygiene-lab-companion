@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Environment
 import android.widget.Toast
-import com.christophprenissl.hygienecompanion.domain.model.entity.*
+import com.christophprenissl.hygienecompanion.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import org.apache.poi.xssf.usermodel.XSSFRow

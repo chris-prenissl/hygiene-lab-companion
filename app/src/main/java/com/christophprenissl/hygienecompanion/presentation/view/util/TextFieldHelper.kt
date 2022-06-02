@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.util
 
-import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
+import com.christophprenissl.hygienecompanion.model.entity.Sample
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.util.FALSE
 import com.christophprenissl.hygienecompanion.util.TRUE

@@ -7,9 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
-import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.model.entity.Sample
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasicCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText

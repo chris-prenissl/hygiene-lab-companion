@@ -10,8 +10,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterBasis
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.model.entity.ParameterBasis
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
 import com.christophprenissl.hygienecompanion.util.PARAMETER
 import com.christophprenissl.hygienecompanion.util.parameterCreationItemSize

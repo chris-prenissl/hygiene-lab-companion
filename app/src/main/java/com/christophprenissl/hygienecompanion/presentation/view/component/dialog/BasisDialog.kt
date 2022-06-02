@@ -7,8 +7,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterBasis
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.model.entity.ParameterBasis
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.BasicButton
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.CancelButton

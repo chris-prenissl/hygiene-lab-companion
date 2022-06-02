@@ -9,7 +9,7 @@ import androidx.compose.runtime.InternalComposeApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.christophprenissl.hygienecompanion.domain.model.Response
+import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard

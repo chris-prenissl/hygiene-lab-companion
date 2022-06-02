@@ -1,11 +1,10 @@
 package com.christophprenissl.hygienecompanion.data.repository
 
-import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.dto.CoveringLetterDto
-import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
-import com.christophprenissl.hygienecompanion.domain.model.util.mapper.CoveringLetterMapper
-import com.christophprenissl.hygienecompanion.domain.repository.CoveringLetterRepo
+import com.christophprenissl.hygienecompanion.model.Response
+import com.christophprenissl.hygienecompanion.model.dto.CoveringLetterDto
+import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
+import com.christophprenissl.hygienecompanion.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.model.util.mapper.CoveringLetterMapper
 import com.christophprenissl.hygienecompanion.util.SAMPLING_STATE_FIELD
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.channels.awaitClose

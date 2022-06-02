@@ -1,7 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.util
 
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
-import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.model.entity.UserType
 
 fun isUserAllowedToEnter(
     userType: UserType?,

@@ -1,10 +1,9 @@
 package com.christophprenissl.hygienecompanion.data.repository
 
-import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.dto.UserDto
-import com.christophprenissl.hygienecompanion.domain.model.entity.User
-import com.christophprenissl.hygienecompanion.domain.model.util.mapper.UserMapper
-import com.christophprenissl.hygienecompanion.domain.repository.UserRepo
+import com.christophprenissl.hygienecompanion.model.Response
+import com.christophprenissl.hygienecompanion.model.dto.UserDto
+import com.christophprenissl.hygienecompanion.model.entity.User
+import com.christophprenissl.hygienecompanion.model.util.mapper.UserMapper
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
@@ -15,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class UserRepoImpl @Inject constructor(
     private val userRef: CollectionReference
-): UserRepo  {
+): UserRepo {
     override fun getUserFromDatabase(id: String) = flow {
         try {
             emit(Response.Loading)

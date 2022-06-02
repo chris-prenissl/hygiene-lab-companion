@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.util
 
-import com.christophprenissl.hygienecompanion.domain.model.entity.*
+import com.christophprenissl.hygienecompanion.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.createDates
 import java.util.*
 

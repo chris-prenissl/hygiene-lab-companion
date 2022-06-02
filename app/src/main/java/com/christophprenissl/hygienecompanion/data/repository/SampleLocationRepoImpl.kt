@@ -1,16 +1,14 @@
 package com.christophprenissl.hygienecompanion.data.repository
 
-import com.christophprenissl.hygienecompanion.domain.model.Response.Error
-import com.christophprenissl.hygienecompanion.domain.model.Response.Success
-import com.christophprenissl.hygienecompanion.domain.model.Response.Loading
-import com.christophprenissl.hygienecompanion.domain.model.dto.SampleLocationDto
-import com.christophprenissl.hygienecompanion.domain.model.entity.Address
-import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
-import com.christophprenissl.hygienecompanion.domain.model.util.mapper.SampleLocationMapper
-import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo
+import com.christophprenissl.hygienecompanion.model.Response.Error
+import com.christophprenissl.hygienecompanion.model.Response.Success
+import com.christophprenissl.hygienecompanion.model.Response.Loading
+import com.christophprenissl.hygienecompanion.model.dto.SampleLocationDto
+import com.christophprenissl.hygienecompanion.model.entity.Address
+import com.christophprenissl.hygienecompanion.model.entity.SampleLocation
+import com.christophprenissl.hygienecompanion.model.util.mapper.SampleLocationMapper
 import com.christophprenissl.hygienecompanion.util.ADDRESS_ID
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.Query
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.tasks.await

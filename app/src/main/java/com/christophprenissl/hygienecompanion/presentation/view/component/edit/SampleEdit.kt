@@ -9,9 +9,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
-import com.christophprenissl.hygienecompanion.domain.model.entity.Sample
-import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.model.entity.Sample
+import com.christophprenissl.hygienecompanion.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField

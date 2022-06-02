@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.hygieneWorkerColor
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.labWorkerColor
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.samplerColor
@@ -17,7 +17,6 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.bar.Bo
 import com.christophprenissl.hygienecompanion.presentation.view.component.bar.TopMenuBar
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.util.APP_TITLE
-import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 
 @Composable
 fun MainView() {

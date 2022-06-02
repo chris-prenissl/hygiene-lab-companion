@@ -2,11 +2,10 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.card
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import com.christophprenissl.hygienecompanion.domain.model.entity.User
+import com.christophprenissl.hygienecompanion.model.entity.User
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import com.christophprenissl.hygienecompanion.util.HAS_CERTIFICATE
-import com.christophprenissl.hygienecompanion.util.IS_SAMPLER_OF_INSTITUTE
 import com.christophprenissl.hygienecompanion.util.NAME
 import com.christophprenissl.hygienecompanion.util.QM_SAMPLER
 

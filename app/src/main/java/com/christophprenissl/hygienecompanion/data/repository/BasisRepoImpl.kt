@@ -1,10 +1,9 @@
 package com.christophprenissl.hygienecompanion.data.repository
 
-import com.christophprenissl.hygienecompanion.domain.model.Response
-import com.christophprenissl.hygienecompanion.domain.model.dto.BasisDto
-import com.christophprenissl.hygienecompanion.domain.model.entity.Basis
-import com.christophprenissl.hygienecompanion.domain.model.util.mapper.BasisMapper
-import com.christophprenissl.hygienecompanion.domain.repository.BasisRepo
+import com.christophprenissl.hygienecompanion.model.Response
+import com.christophprenissl.hygienecompanion.model.dto.BasisDto
+import com.christophprenissl.hygienecompanion.model.entity.Basis
+import com.christophprenissl.hygienecompanion.model.util.mapper.BasisMapper
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow

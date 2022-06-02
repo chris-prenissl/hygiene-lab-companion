@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable

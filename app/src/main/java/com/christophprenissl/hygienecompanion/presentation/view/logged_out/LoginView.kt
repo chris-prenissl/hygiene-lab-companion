@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.R
-import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
+import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicCheckBoxField
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface

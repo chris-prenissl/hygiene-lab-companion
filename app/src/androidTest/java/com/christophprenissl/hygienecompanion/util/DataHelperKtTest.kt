@@ -1,8 +1,7 @@
 package com.christophprenissl.hygienecompanion.util
 
-import com.christophprenissl.hygienecompanion.domain.model.entity.Parameter
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
-import org.junit.Assert.*
+import com.christophprenissl.hygienecompanion.model.entity.Parameter
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 
 import org.junit.Test
 

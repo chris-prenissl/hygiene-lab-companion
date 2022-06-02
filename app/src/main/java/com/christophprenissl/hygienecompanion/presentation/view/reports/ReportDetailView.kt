@@ -11,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.christophprenissl.hygienecompanion.domain.model.entity.ParameterType
+import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.BasicButton
