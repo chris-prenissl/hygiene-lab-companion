@@ -4,6 +4,7 @@ import android.content.Context
 import com.christophprenissl.hygienecompanion.data.repository.*
 import com.christophprenissl.hygienecompanion.di.util.*
 import com.christophprenissl.hygienecompanion.domain.use_case.*
+import com.christophprenissl.hygienecompanion.model.repository.*
 import com.christophprenissl.hygienecompanion.util.*
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference

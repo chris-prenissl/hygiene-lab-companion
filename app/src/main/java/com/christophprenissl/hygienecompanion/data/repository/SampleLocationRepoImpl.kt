@@ -6,6 +6,7 @@ import com.christophprenissl.hygienecompanion.model.Response.Loading
 import com.christophprenissl.hygienecompanion.model.dto.SampleLocationDto
 import com.christophprenissl.hygienecompanion.model.entity.Address
 import com.christophprenissl.hygienecompanion.model.entity.SampleLocation
+import com.christophprenissl.hygienecompanion.model.repository.SampleLocationRepo
 import com.christophprenissl.hygienecompanion.model.util.mapper.SampleLocationMapper
 import com.christophprenissl.hygienecompanion.util.ADDRESS_ID
 import com.google.firebase.firestore.CollectionReference

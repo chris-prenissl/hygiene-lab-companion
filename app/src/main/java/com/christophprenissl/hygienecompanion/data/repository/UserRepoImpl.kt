@@ -3,6 +3,7 @@ package com.christophprenissl.hygienecompanion.data.repository
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.dto.UserDto
 import com.christophprenissl.hygienecompanion.model.entity.User
+import com.christophprenissl.hygienecompanion.model.repository.UserRepo
 import com.christophprenissl.hygienecompanion.model.util.mapper.UserMapper
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.flow.flow

@@ -8,6 +8,7 @@ import com.christophprenissl.hygienecompanion.model.dto.SampleDto
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.model.repository.CoveringLetterSeriesRepo
 import com.christophprenissl.hygienecompanion.model.util.mapper.CoveringLetterMapper
 import com.christophprenissl.hygienecompanion.model.util.mapper.CoveringLetterSeriesMapper
 import com.christophprenissl.hygienecompanion.util.*

@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.domain.use_case
 
-import com.christophprenissl.hygienecompanion.data.repository.CoveringLetterSeriesRepo
+import com.christophprenissl.hygienecompanion.model.repository.CoveringLetterSeriesRepo
 
 class GetCoveringLetterSeries(
     private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo

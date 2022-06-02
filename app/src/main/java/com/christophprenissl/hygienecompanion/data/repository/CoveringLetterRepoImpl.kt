@@ -4,6 +4,7 @@ import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.dto.CoveringLetterDto
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.model.repository.CoveringLetterRepo
 import com.christophprenissl.hygienecompanion.model.util.mapper.CoveringLetterMapper
 import com.christophprenissl.hygienecompanion.util.SAMPLING_STATE_FIELD
 import com.google.firebase.firestore.CollectionReference

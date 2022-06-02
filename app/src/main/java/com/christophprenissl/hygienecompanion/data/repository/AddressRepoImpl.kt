@@ -3,6 +3,7 @@ package com.christophprenissl.hygienecompanion.data.repository
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.dto.AddressDto
 import com.christophprenissl.hygienecompanion.model.entity.Address
+import com.christophprenissl.hygienecompanion.model.repository.AddressRepo
 import com.christophprenissl.hygienecompanion.model.util.mapper.AddressMapper
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query

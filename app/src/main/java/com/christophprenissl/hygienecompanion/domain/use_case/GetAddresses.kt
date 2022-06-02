@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.domain.use_case
 
-import com.christophprenissl.hygienecompanion.data.repository.AddressRepo
+import com.christophprenissl.hygienecompanion.model.repository.AddressRepo
 
 class GetAddresses(
     private val addressRepo: AddressRepo

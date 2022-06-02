@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.data.repository
+package com.christophprenissl.hygienecompanion.model.repository
 
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.entity.User
