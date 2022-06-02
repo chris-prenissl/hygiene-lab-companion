@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.domain.use_case
+package com.christophprenissl.hygienecompanion.use_case
 
 import com.christophprenissl.hygienecompanion.domain.model.entity.SampleLocation
 import com.christophprenissl.hygienecompanion.domain.repository.SampleLocationRepo

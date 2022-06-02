@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.domain.model.Response
 import com.christophprenissl.hygienecompanion.domain.model.entity.*
-import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
+import com.christophprenissl.hygienecompanion.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
 import com.christophprenissl.hygienecompanion.util.createCoveringLettersForSeries
 import dagger.hilt.android.lifecycle.HiltViewModel

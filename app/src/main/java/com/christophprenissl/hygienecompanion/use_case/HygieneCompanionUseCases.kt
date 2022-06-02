@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.domain.use_case
+package com.christophprenissl.hygienecompanion.use_case
 
 data class HygieneCompanionUseCases(
     val saveAddress: SaveAddress,

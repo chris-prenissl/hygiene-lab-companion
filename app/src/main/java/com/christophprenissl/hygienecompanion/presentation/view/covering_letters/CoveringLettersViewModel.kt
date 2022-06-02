@@ -9,7 +9,7 @@ import com.christophprenissl.hygienecompanion.domain.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.domain.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.domain.model.entity.User
 import com.christophprenissl.hygienecompanion.domain.model.entity.UserType
-import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
+import com.christophprenissl.hygienecompanion.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import com.google.firebase.Timestamp
