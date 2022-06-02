@@ -219,9 +219,7 @@ private fun XSSFSheet.createParameterLists(
                 rows.add(row)
                 row.createCell(0).setCellValue(parameter.name)
             }
-            val valueTranslated = if (parameter.parameterType == ParameterType.Bool)
-                    (parameter.value as? Boolean)?.translation() else parameter.value.toString()
-            rows[idx2].createCell(idx1+1).setCellValue(valueTranslated)
+            rows[idx2].createCell(idx1+1).setCellValue(parameter.value)
         }
     }
     return newRowIdx

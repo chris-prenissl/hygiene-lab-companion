@@ -87,11 +87,9 @@ fun ReportDetailView(
             }
             report?.basicLabReportParameters?.let { parameters ->
                 items(parameters) { parameter ->
-                    val value = if (parameter.parameterType == ParameterType.Bool)
-                        (parameter.value as? Boolean)?.translation() else parameter.value.toString()
                     ParameterText(
                         title = parameter.name ?: EMPTY,
-                        value = value
+                        value = parameter.value
                     )
                 }
                 item {
@@ -104,11 +102,9 @@ fun ReportDetailView(
             }
             report?.basicCoveringParameters?.let { parameters ->
                 items(parameters) { parameter ->
-                    val value = if (parameter.parameterType == ParameterType.Bool)
-                            (parameter.value as? Boolean)?.translation() else parameter.value.toString()
                     ParameterText(
                         title = parameter.name ?: EMPTY,
-                        value = value
+                        value = parameter.value
                     )
                 }
                 item {

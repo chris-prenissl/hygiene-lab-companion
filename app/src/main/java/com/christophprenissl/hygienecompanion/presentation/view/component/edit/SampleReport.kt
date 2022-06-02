@@ -56,15 +56,13 @@ fun SampleReport(
 
             Text(LAB_SAMPLE_PARAMETERS)
             sample.labSampleParameters?.forEach { parameter ->
-                val value = if (parameter.parameterType == ParameterType.Bool) (parameter.value as? Boolean)?.translation() else parameter.value.toString()
-                ParameterText(parameter.name.toString() , value)
+                ParameterText(parameter.name.toString() , parameter.value)
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
             Text(COVERING_SAMPLE_PARAMETERS)
             sample.coveringSampleParameters?.forEach { parameter ->
-                val value = if (parameter.parameterType == ParameterType.Bool) (parameter.value as? Boolean)?.translation() else parameter.value.toString()
-                ParameterText(parameter.name.toString() , value)
+                ParameterText(parameter.name.toString() , parameter.value)
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }
