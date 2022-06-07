@@ -13,8 +13,8 @@ import com.christophprenissl.hygienecompanion.util.QM_SAMPLER
 fun SamplerCard(
     user: User
 ) {
-    val hasCertificate = user.hasCertificate?: false
-    val isSamplerOfInstitute = user.isSamplerOfInstitute?: false
+    val hasCertificate = user.hasCertificate
+    val isSamplerOfInstitute = user.isSamplerOfInstitute
     BasicCard {
         Column {
             ParameterText(

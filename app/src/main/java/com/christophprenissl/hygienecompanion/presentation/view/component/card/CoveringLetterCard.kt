@@ -17,7 +17,7 @@ fun CoveringLetterCard(
         accessIndicator = accessIndicator
     ) {
         Column {
-            coveringLetter.description?.let { Text(it) }
+            Text(coveringLetter.description)
             coveringLetter.date?.let { Text(it.dayMonthYearString()) }
             coveringLetter.samplingState?.let { Text(it.translation) }
         }

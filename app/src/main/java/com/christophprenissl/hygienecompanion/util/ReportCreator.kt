@@ -80,7 +80,7 @@ fun createXSSFFromReport(
 
     val normRow = sheet.createRow(rowIdx)
     normRow.createCell(0).setCellValue(NORM)
-    coveringLetterSeries.bases?.forEachIndexed { idx, norm ->
+    coveringLetterSeries.bases.forEachIndexed { idx, norm ->
         normRow.createCell(idx+1).setCellValue(norm.norm)
     }
     rowIdx++
@@ -116,7 +116,7 @@ fun createXSSFFromReport(
     )
     rowIdx += 2
 
-    report.samples?.let {
+    report.samples.let {
         sheet.createSamplesLists(
         rowIdx = rowIdx,
         samples = it
@@ -230,13 +230,13 @@ private fun XSSFSheet.createSamplesLists(
     samples: List<Sample>
 ): Int {
     var newRowIdx = rowIdx
-    val sampleTitles = samples.map { it.id?: EMPTY }
+    val sampleTitles = samples.map { it.id }
     val samplingParameters = mutableListOf<List<Parameter>>()
     val labParameters = mutableListOf<List<Parameter>>()
 
     samples.forEach { sample ->
-        sample.coveringSampleParameters?.let { samplingParameters.add(it) }
-        sample.labSampleParameters?.let { labParameters.add(it) }
+        sample.coveringSampleParameters.let { samplingParameters.add(it) }
+        sample.labSampleParameters.let { labParameters.add(it) }
     }
     val titleRow = createRow(newRowIdx)
     titleRow.createCell(0).setCellValue(SAMPLES)
@@ -273,7 +273,7 @@ private fun XSSFSheet.createSamplesLists(
     val warningRow = createRow(newRowIdx)
     warningRow.createCell(0).setCellValue(WARNING)
     samples.forEachIndexed { idx, sample ->
-        sampleLocationRow.createCell(idx+1).setCellValue(sample.sampleLocation?.description)
+        sampleLocationRow.createCell(idx+1).setCellValue(sample.sampleLocation.description)
         datesRow.createCell(idx+1).setCellValue(sample.created?.dayMonthYearString())
         extraInfoSamplingRow.createCell(idx+1).setCellValue(sample.extraInfoSampling)
         extraInfoLabRow.createCell(idx+1).setCellValue(sample.extraInfoLaboratory)

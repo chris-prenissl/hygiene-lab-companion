@@ -73,12 +73,8 @@ class BasisRepoImpl @Inject constructor(
     override suspend fun deleteBasisFromDatabase(basis: Basis) = flow {
         try {
             emit(Response.Loading)
-            if (basis.norm != null) {
-                val deletion = basisRef.document(basis.norm).delete().await()
-                emit(Response.Success(deletion))
-            } else {
-                emit(Response.Error("no address id provided"))
-            }
+            val deletion = basisRef.document(basis.norm).delete().await()
+            emit(Response.Success(deletion))
         } catch (e: Exception) {
             emit(Response.Error(e.message ?: e.toString()))
         }

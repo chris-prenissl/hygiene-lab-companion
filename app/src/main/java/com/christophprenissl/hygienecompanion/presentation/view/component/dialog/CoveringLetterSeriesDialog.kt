@@ -145,27 +145,27 @@ fun CoveringLetterSeriesDialog(
                     viewModel.closeBasesChoice()
                 }) {
                 basesChoices.forEach { basis ->
-                    basis.norm?.let {
+                    basis.norm.let {
                         BasicDropdownItem(
                             onClick = {
                                 bases.add(basis)
                                 basesChoices.remove(basis)
-                                basis.basicCoveringParameters?.forEach {
+                                basis.basicCoveringParameters.forEach {
                                     basicCoveringParameters[it] = false
                                 }
                                 basicCoveringParametersKeys = basicCoveringParameters.keys.toMutableStateList()
 
-                                basis.coveringSampleParameters?.forEach {
+                                basis.coveringSampleParameters.forEach {
                                     coveringSampleParameters[it] = false
                                 }
                                 coveringSampleParametersKeys = coveringSampleParameters.keys.toMutableStateList()
 
-                                basis.labSampleParameters?.forEach {
+                                basis.labSampleParameters.forEach {
                                     labSampleParameters[it] = false
                                 }
                                 labSampleParametersKeys = labSampleParameters.keys.toMutableStateList()
 
-                                basis.basicLabReportParameters?.forEach {
+                                basis.basicLabReportParameters.forEach {
                                     basicLabReportParameters[it] = false
                                 }
                                 basicLabReportParametersKeys = basicLabReportParameters.keys.toMutableStateList()
@@ -182,24 +182,24 @@ fun CoveringLetterSeriesDialog(
                 Text(ADD_BASIS)
             }
         }
-        items(bases, key = { basis -> basis.norm!! }) {
+        items(bases, key = { basis -> basis.norm }) {
             SwipeToDelete(onDelete = {
                 viewModel.closeBasesChoice()
                 basesChoices.add(it)
                 bases.remove(it)
-                it.basicCoveringParameters?.forEach { basis ->
+                it.basicCoveringParameters.forEach { basis ->
                     basicCoveringParametersKeys.remove(basis)
                     basicCoveringParameters.remove(basis)
                 }
-                it.basicLabReportParameters?.forEach { basis ->
+                it.basicLabReportParameters.forEach { basis ->
                     basicLabReportParametersKeys.remove(basis)
                     basicLabReportParameters.remove(basis)
                 }
-                it.coveringSampleParameters?.forEach { basis ->
+                it.coveringSampleParameters.forEach { basis ->
                     coveringSampleParametersKeys.remove(basis)
                     coveringSampleParameters.remove(basis)
                 }
-                it.labSampleParameters?.forEach { basis ->
+                it.labSampleParameters.forEach { basis ->
                     labSampleParametersKeys.remove(basis)
                     labSampleParameters.remove(basis)
 
@@ -225,7 +225,7 @@ fun CoveringLetterSeriesDialog(
                 basicCoveringParametersKeys[idx].let { basis ->
                     basicCoveringParameters[basis]?.let { value ->
                         BasicCheckBoxField(
-                            title = basis.name?: EMPTY,
+                            title = basis.name,
                             value = value,
                             onCheckedChange = {
                                 basicCoveringParameters[basis] = it
@@ -248,7 +248,7 @@ fun CoveringLetterSeriesDialog(
             coveringSampleParametersKeys[idx].let { basis ->
                 coveringSampleParameters[basis]?.let { value ->
                     BasicCheckBoxField(
-                        title = basis.name?: EMPTY, 
+                        title = basis.name,
                         value = value, 
                         onCheckedChange = {
                             coveringSampleParameters[basis] = it
@@ -269,7 +269,7 @@ fun CoveringLetterSeriesDialog(
                 labSampleParametersKeys[idx].let{ basis ->
                     labSampleParameters[basis]?.let { value ->
                         BasicCheckBoxField(
-                            title = basis.name ?: EMPTY, 
+                            title = basis.name,
                             value = value, 
                             onCheckedChange = {
                                 labSampleParameters[basis] = it
@@ -291,7 +291,7 @@ fun CoveringLetterSeriesDialog(
                 basicLabReportParametersKeys[idx].let { basis ->
                     basicLabReportParameters[basis]?.let { value ->
                         BasicCheckBoxField(
-                            title = basis.name ?: EMPTY,
+                            title = basis.name,
                             value = value,
                             onCheckedChange = {
                                 basicLabReportParameters[basis] = it
@@ -336,7 +336,7 @@ fun CoveringLetterSeriesDialog(
                             client = address
                             viewModel.closeClientAddressChoice()
                         }) {
-                            address.name?.let { Text(it) }
+                            Text(address.name)
                         }
                     }
                 }
@@ -376,7 +376,7 @@ fun CoveringLetterSeriesDialog(
                             samplingCompany = address
                             viewModel.closeSamplingCompanyAddressChoice()
                         }) {
-                            address.name?.let { Text(it) }
+                            Text(address.name)
                         }
                     }
                 }
@@ -419,7 +419,7 @@ fun CoveringLetterSeriesDialog(
                             viewModel.chooseAddressForSampleLocations(address)
                             viewModel.closeSampleAddressChoice()
                         }) {
-                            address.name?.let { Text(it) }
+                            Text(address.name)
                         }
                     }
                 }
@@ -459,7 +459,7 @@ fun CoveringLetterSeriesDialog(
                                             viewModel.closeSamplingLocationsChoice()
                                         }
                                     ) {
-                                        location.description?.let { Text(it) }
+                                        Text(location.description)
                                     }
                                 }
                             }

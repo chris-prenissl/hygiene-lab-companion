@@ -102,7 +102,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
                 coveringLetterSeries.id = coveringLetterSeriesId
                 val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(coveringLetterSeriesId)
 
-                coveringLetterSeries.coveringLetters?.forEach {
+                coveringLetterSeries.coveringLetters.forEach {
                     val coveringLetterId = coveringLettersRef.document().id
                     it.id = coveringLetterId
                     it.seriesId = coveringLetterSeriesId
@@ -132,7 +132,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
             emit(Response.Loading)
 
             val saved = db.runBatch { batch ->
-                val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(coveringLetter.seriesId!!)
+                val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(coveringLetter.seriesId)
                 dates.forEach { date ->
                     val newId = coveringLettersRef.document().id
                     val newCoveringLetterDto = CoveringLetterDto(

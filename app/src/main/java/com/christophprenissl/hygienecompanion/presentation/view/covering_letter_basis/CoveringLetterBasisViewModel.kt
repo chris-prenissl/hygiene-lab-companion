@@ -145,9 +145,9 @@ class CoveringLetterBasisViewModel @Inject constructor(
     }
 
     fun saveSampleLocation(
-        description: String?,
-        extraInfo: String?,
-        nextHeater: String?
+        description: String,
+        extraInfo: String,
+        nextHeater: String
     ) {
         val sampleLocation = SampleLocation(
             description = description,
@@ -275,20 +275,20 @@ class CoveringLetterBasisViewModel @Inject constructor(
     }
 
     fun saveCoveringLetterSeries(
-        description: String? = null,
-        resultToClient: Boolean? = null,
-        resultToTestingProperty: Boolean? = null,
-        costLocation: String? = null,
-        laboratoryId: String? = null,
-        bases: List<Basis>? = null,
+        description: String = "",
+        resultToClient: Boolean,
+        resultToTestingProperty: Boolean,
+        costLocation: String = "",
+        laboratoryId: String = "",
+        bases: List<Basis> = emptyList(),
         client: Address? = null,
         sampleAddress: Address? = null,
         samplingCompany: Address? = null,
-        sampleLocations: List<SampleLocation>? = null,
-        coveringParameters: Map<ParameterBasis, Boolean>? = null,
-        coveringSampleParameters: Map<ParameterBasis, Boolean>? = null,
-        labSampleParameters: Map<ParameterBasis, Boolean>? = null,
-        labReportParameters: Map<ParameterBasis, Boolean>? = null,
+        sampleLocations: List<SampleLocation> = emptyList(),
+        coveringParameters: Map<ParameterBasis, Boolean> = emptyMap(),
+        coveringSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
+        labSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
+        labReportParameters: Map<ParameterBasis, Boolean> = emptyMap(),
         plannedStart: Date,
         plannedEnd: Date,
         samplingSeriesType: SamplingSeriesType

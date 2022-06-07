@@ -11,9 +11,9 @@ fun SampleLocationCard(
 ) {
     BasicCard {
         Column {
-            sampleLocation.description?.let { Text(it) }
-            sampleLocation.extraInfo?.let { Text(it) }
-            sampleLocation.nextHeater?.let { Text(it) }
+            Text(sampleLocation.description)
+            Text(sampleLocation.extraInfo)
+            Text(sampleLocation.nextHeater)
             sampleLocation.address?.name?.let { Text(it) }
         }
     }

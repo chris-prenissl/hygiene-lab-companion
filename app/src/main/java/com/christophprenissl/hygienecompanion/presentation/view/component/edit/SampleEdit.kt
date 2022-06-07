@@ -31,24 +31,24 @@ fun SampleEdit(
     var date by remember { mutableStateOf(sample.created?.dayMonthYearString()) }
     var extraInfoSampling by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoSampling ?: "")
+            TextFieldValue(sample.extraInfoSampling)
         )
     }
     var extraInfoLaboratory by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoLaboratory ?: "")
+            TextFieldValue(sample.extraInfoLaboratory)
         )
     }
-    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage ?: "")) }
+    var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage)) }
 
     val coveringSampleValues = remember {
-        sample.coveringSampleParameters!!.map {
-            it.value.toString()
+        sample.coveringSampleParameters.map {
+            it.value
         }.toMutableStateList()
     }
     val labSampleValues = remember {
-        sample.labSampleParameters!!.map {
-            mutableStateOf(it.value.toString())
+        sample.labSampleParameters.map {
+            mutableStateOf(it.value)
         }.toMutableStateList()
     }
 
@@ -63,7 +63,7 @@ fun SampleEdit(
         ) {
             ParameterText(
                 title = SAMPLE_LOCATION,
-                value = sample.sampleLocation?.description
+                value = sample.sampleLocation.description
             )
             ParameterText(
                 title = SAMPLE_ID,
@@ -129,10 +129,10 @@ fun SampleEdit(
             when (samplingState) {
                 SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                     Text(COVERING_SAMPLE_PARAMETERS)
-                    sample.coveringSampleParameters?.forEach {
+                    sample.coveringSampleParameters.forEach {
                         ParameterText(
-                            title = it.name?: EMPTY,
-                            value = it.value.toString()
+                            title = it.name,
+                            value = it.value
                         )
                     }
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
@@ -153,10 +153,10 @@ fun SampleEdit(
                         }
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
-                    sample.labSampleParameters?.let { parameters ->
+                    sample.labSampleParameters.let { parameters ->
                         parameters.forEachIndexed { idx, _ ->
                             val parameter = parameters[idx]
-                            when (parameter.parameterType!!) {
+                            when (parameter.parameterType) {
                                 ParameterType.Temperature -> {
                                     ParameterTextField(
                                         labelText = parameter.name,
@@ -193,7 +193,7 @@ fun SampleEdit(
                                 }
                                 ParameterType.Bool -> {
                                     ParameterBooleanEdit(
-                                        parameterName = parameter.name?: EMPTY,
+                                        parameterName = parameter.name,
                                         value = labSampleValues[idx].value,
                                         onCheckedChange = {
                                             labSampleValues[idx].value = it.toString()
@@ -211,10 +211,10 @@ fun SampleEdit(
                     Text(LAB_REPORT_AVAILABLE)
                 }
                 else -> {
-                    sample.coveringSampleParameters?.let { parameters ->
+                    sample.coveringSampleParameters.let { parameters ->
                         parameters.forEachIndexed { idx, _ ->
                             val parameter = parameters[idx]
-                            when (parameter.parameterType!!) {
+                            when (parameter.parameterType) {
                                 ParameterType.Temperature -> {
                                     ParameterTextField(
                                         labelText = parameter.name,
@@ -251,7 +251,7 @@ fun SampleEdit(
                                 }
                                 ParameterType.Bool -> {
                                     ParameterBooleanEdit(
-                                        parameterName = parameter.name?: EMPTY,
+                                        parameterName = parameter.name,
                                         value = coveringSampleValues[idx],
                                         onCheckedChange = {
                                             coveringSampleValues[idx] = it.toString()

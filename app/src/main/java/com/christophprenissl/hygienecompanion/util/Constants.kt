@@ -62,6 +62,7 @@ const val BASIS = "Basis"
 const val NORM = "Norm/Basis"
 
 const val EMPTY = "---"
+const val EMPTY_DATE = "--.--.----"
 
 const val SAVE_LOCATION = "Entnahmestelle speichern"
 

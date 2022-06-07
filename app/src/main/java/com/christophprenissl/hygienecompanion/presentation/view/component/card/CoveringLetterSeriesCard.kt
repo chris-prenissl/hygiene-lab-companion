@@ -15,8 +15,8 @@ fun CoveringLetterSeriesCard(
         accessIndicator = true
     ) {
         Column {
-            coveringLetterSeries.description?.let { Text(it) }
-            coveringLetterSeries.samplingSeriesType?.let { Text(it.name) }
+            Text(coveringLetterSeries.description)
+            Text(coveringLetterSeries.samplingSeriesType.name)
         }
     }
 }

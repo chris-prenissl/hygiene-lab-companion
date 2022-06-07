@@ -50,13 +50,13 @@ fun CoveringLetterSeriesDetailView(
                 item {
                     ParameterText(
                         title = TO_CLIENT,
-                        value =  cls.resultToClient?.translation()
+                        value =  cls.resultToClient.translation()
                     )
                 }
                 item {
                     ParameterText(
                         title = TO_COVERING_PROPERTY,
-                        value =  cls.resultToTestingProperty?.translation()
+                        value =  cls.resultToTestingProperty.translation()
                     )
                 }
                 item {
@@ -83,13 +83,11 @@ fun CoveringLetterSeriesDetailView(
                     Text(COVERING_COMPANY_ADDRESS)
                     cls.samplingCompany?.let { AddressCard(it, accessAble = false) }
                 }
-                cls.bases?.let { basesList ->
-                    items(basesList) { item ->
-                        BasisCard(
-                            basis = item,
-                            accessAble = false
-                        )
-                    }
+                items(cls.bases) { item ->
+                    BasisCard(
+                        basis = item,
+                        accessAble = false
+                    )
                 }
                 item {
                     Text(PLANNED_END_DATE)

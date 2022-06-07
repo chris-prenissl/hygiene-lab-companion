@@ -7,9 +7,9 @@ import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 class ParameterMapper: DataMapper<Parameter, ParameterDto> {
     override fun fromEntity(entity: ParameterDto): Parameter {
         return Parameter(
-            name = entity.name,
-            value = entity.value,
-            parameterType = entity.parameterType?.let { ParameterType.valueOf(it) }
+            name = entity.name!!,
+            value = entity.value ?: "",
+            parameterType = entity.parameterType?.let { ParameterType.valueOf(it) } ?: ParameterType.Note
         )
     }
 
@@ -17,7 +17,7 @@ class ParameterMapper: DataMapper<Parameter, ParameterDto> {
         return ParameterDto(
             name = domain.name,
             value = domain.value,
-            parameterType = domain.parameterType?.name
+            parameterType = domain.parameterType.name
         )
     }
 }

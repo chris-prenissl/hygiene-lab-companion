@@ -1,9 +1,9 @@
 package com.christophprenissl.hygienecompanion.model.entity
 
 data class User(
-    var id: String? = null,
-    val name: String? = null,
-    val hasCertificate: Boolean? = null,
-    val isSamplerOfInstitute: Boolean? = null,
-    val userType: UserType? = null
+    var id: String = "",
+    val name: String,
+    val hasCertificate: Boolean = false,
+    val isSamplerOfInstitute: Boolean = false,
+    val userType: UserType
 )

@@ -45,7 +45,7 @@ object AppModule {
 
     @UserRefFireStore
     @Provides
-    fun provideUseRef(db: FirebaseFirestore) = db.collection(USERS_FIRESTORE)
+    fun provideUserRef(db: FirebaseFirestore) = db.collection(USERS_FIRESTORE)
 
     @CoveringLetterSeriesRefFireStore
     @Provides

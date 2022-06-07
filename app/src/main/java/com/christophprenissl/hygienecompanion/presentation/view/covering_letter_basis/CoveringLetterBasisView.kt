@@ -50,7 +50,7 @@ fun CoveringLetterBasisView(
         when (val addressesResponse = viewModel.gotAddressState.value) {
             is Response.Success -> {
                 val addresses = addressesResponse.data
-                items(addresses, key = {address -> address.id!!}) { address ->
+                items(addresses, key = {address -> address.id}) { address ->
                     SwipeToDelete(
                         onDelete = {
                             viewModel.deleteAddress(address)
@@ -109,7 +109,7 @@ fun CoveringLetterBasisView(
         when (val basesResponse = viewModel.gotBasesState.value) {
             is Response.Success -> {
                 val bases = basesResponse.data
-                items(bases, key = {basis -> basis.norm!!}) { basis ->
+                items(bases, key = {basis -> basis.norm}) { basis ->
                     SwipeToDelete(
                         onDelete = { viewModel.deleteBasis(basis) }
                     ) {
@@ -164,7 +164,7 @@ fun CoveringLetterBasisView(
         when (val coveringLetterSeriesResponse = viewModel.gotCoveringLetterSeriesNotEndedState.value) {
             is Response.Success -> {
                 val coveringLetterSeries = coveringLetterSeriesResponse.data
-                items(coveringLetterSeries, key = {cs -> cs.id!!}) { series ->
+                items(coveringLetterSeries, key = {cs -> cs.id}) { series ->
                     SwipeToDelete(
                         onDelete = {  }
                     ) {

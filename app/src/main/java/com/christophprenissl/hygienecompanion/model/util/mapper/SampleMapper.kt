@@ -8,18 +8,18 @@ class SampleMapper: DataMapper<Sample, SampleDto> {
         val parameterMapper = ParameterMapper()
         val sampleLocationMapper = SampleLocationMapper(null)
         return Sample(
-            id = entity.id,
+            id = entity.id!!,
             created = entity.created,
-            extraInfoSampling = entity.extraInfoSampling,
-            extraInfoLaboratory = entity.extraInfoLaboratory,
-            warningMessage = entity.warningMessage,
+            extraInfoSampling = entity.extraInfoSampling ?: "",
+            extraInfoLaboratory = entity.extraInfoLaboratory ?: "",
+            warningMessage = entity.warningMessage ?: "",
             coveringSampleParameters = entity.coveringSampleParameters?.map {
                 parameterMapper.fromEntity(it)
-            },
+            } ?: emptyList(),
             labSampleParameters = entity.labSampleParameters?.map {
                 parameterMapper.fromEntity(it)
-            },
-            sampleLocation = entity.sampleLocation?.let { sampleLocationMapper.fromEntity(it) }
+            } ?: emptyList(),
+            sampleLocation = entity.sampleLocation?.let { sampleLocationMapper.fromEntity(it) }!!
         )
     }
 
@@ -32,13 +32,13 @@ class SampleMapper: DataMapper<Sample, SampleDto> {
             extraInfoSampling = domain.extraInfoSampling,
             extraInfoLaboratory = domain.extraInfoLaboratory,
             warningMessage = domain.warningMessage,
-            coveringSampleParameters = domain.coveringSampleParameters?.map {
+            coveringSampleParameters = domain.coveringSampleParameters.map {
                 parameterMapper.toEntity(it)
             },
-            labSampleParameters = domain.labSampleParameters?.map {
+            labSampleParameters = domain.labSampleParameters.map {
                 parameterMapper.toEntity(it)
             },
-            sampleLocation = domain.sampleLocation?.let { sampleLocationMapper.toEntity(it) }
+            sampleLocation = domain.sampleLocation.let { sampleLocationMapper.toEntity(it) }
         )
     }
 }

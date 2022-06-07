@@ -43,20 +43,20 @@ fun CoveringLetterDetailView(
 
     val user = viewModel.userFlow.collectAsState(initial = null)
     val coveringLetter = viewModel.chosenCoveringLetter.value!!
-    val title = coveringLetter.description ?: COVERING_LETTER
+    val title = coveringLetter.description
     val date = coveringLetter.date
 
     val samplingState by remember { mutableStateOf(coveringLetter.samplingState) }
     var lotId by remember { mutableStateOf(coveringLetter.lotId) }
 
     val basicCoveringValues = remember {
-        coveringLetter.basicCoveringParameters!!.map {
-            it.value.toString()
+        coveringLetter.basicCoveringParameters.map {
+            it.value
         }.toMutableStateList()
     }
     val basicLabReportValues = remember {
-        coveringLetter.basicLabReportParameters!!.map {
-            it.value.toString()
+        coveringLetter.basicLabReportParameters.map {
+            it.value
         }.toMutableStateList()
     }
 
@@ -89,7 +89,7 @@ fun CoveringLetterDetailView(
                 }
                 itemsIndexed(basicCoveringValues) { idx, pValue ->
                     ParameterText(
-                        title = coveringLetter.basicCoveringParameters!![idx].name.toString(),
+                        title = coveringLetter.basicCoveringParameters[idx].name,
                         value = pValue
                     )
                 }
@@ -97,8 +97,8 @@ fun CoveringLetterDetailView(
                     Spacer(modifier = Modifier.padding(vertical = standardPadding))
                 }
                 itemsIndexed(basicLabReportValues) { idx, _ ->
-                    val parameter = coveringLetter.basicCoveringParameters!![idx]
-                    when (parameter.parameterType!!) {
+                    val parameter = coveringLetter.basicCoveringParameters[idx]
+                    when (parameter.parameterType) {
                         ParameterType.Temperature -> {
                             ParameterTextField(
                                 labelText = parameter.name,
@@ -135,7 +135,7 @@ fun CoveringLetterDetailView(
                         }
                         ParameterType.Bool -> {
                             ParameterBooleanEdit(
-                                parameterName = parameter.name?: EMPTY,
+                                parameterName = parameter.name,
                                 value = basicLabReportValues[idx],
                                 onCheckedChange = {
                                     basicLabReportValues[idx] = it.toString()
@@ -150,7 +150,7 @@ fun CoveringLetterDetailView(
                 item {
                     ParameterTextField(
                         labelText = LOT_ID,
-                        value = lotId?: "",
+                        value = lotId,
                         onValueChange = {
                             lotId = it
                             coveringLetter.lotId = it
@@ -158,8 +158,8 @@ fun CoveringLetterDetailView(
                     )
                 }
                 itemsIndexed(basicCoveringValues) { idx, _ ->
-                    val parameter = coveringLetter.basicCoveringParameters!![idx]
-                    when (parameter.parameterType!!) {
+                    val parameter = coveringLetter.basicCoveringParameters[idx]
+                    when (parameter.parameterType) {
                         ParameterType.Temperature -> {
                             ParameterTextField(
                                 labelText = parameter.name,
@@ -196,7 +196,7 @@ fun CoveringLetterDetailView(
                         }
                         ParameterType.Bool -> {
                             ParameterBooleanEdit(
-                                parameterName = parameter.name?: EMPTY,
+                                parameterName = parameter.name,
                                 value = basicCoveringValues[idx],
                                 onCheckedChange = {
                                     basicCoveringValues[idx] = it.toString()
@@ -213,14 +213,12 @@ fun CoveringLetterDetailView(
         }
         item {
             LazyRow{
-                coveringLetter.samples?.let { samples ->
-                    items(samples) { sample ->
-                        samplingState?.let {
-                            SampleEdit(
-                                samplingState = it,
-                                sample = sample
-                            )
-                        }
+                items(coveringLetter.samples) { sample ->
+                    samplingState?.let {
+                        SampleEdit(
+                            samplingState = it,
+                            sample = sample
+                        )
                     }
                 }
             }
@@ -303,7 +301,7 @@ fun CoveringLetterDetailView(
         item {
             Button(
                 onClick = {
-                    coveringLetter.seriesId?.let {
+                    coveringLetter.seriesId.let {
                         when(samplingState) {
                             SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                                 if (user.value != null) {

@@ -51,15 +51,10 @@ class UserRepoImpl @Inject constructor(
     override suspend fun deleteUserFromDatabase(user: User) = flow {
         try {
             emit(Response.Loading)
-            if (user.id != null) {
-                val deletion = userRef.document(user.id!!).delete().await()
-                emit(Response.Success(deletion))
-            } else {
-                emit(Response.Error("no id provided as reference"))
-            }
+            val deletion = userRef.document(user.id).delete().await()
+            emit(Response.Success(deletion))
         } catch (e: Exception) {
             emit(Response.Error(e.message ?: e.toString()))
         }
     }
-
 }

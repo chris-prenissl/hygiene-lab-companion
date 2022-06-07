@@ -8,10 +8,10 @@ class SampleLocationMapper(private val address: Address?): DataMapper<SampleLoca
 
     override fun fromEntity(entity: SampleLocationDto): SampleLocation {
         return SampleLocation(
-            id = entity.id,
-            description = entity.description,
-            extraInfo = entity.extraInfo,
-            nextHeater = entity.nextHeater,
+            id = entity.id ?: "",
+            description = entity.description ?: "",
+            extraInfo = entity.extraInfo ?: "",
+            nextHeater = entity.nextHeater ?: "",
             address = address
         )
     }
@@ -22,7 +22,7 @@ class SampleLocationMapper(private val address: Address?): DataMapper<SampleLoca
             description = domain.description,
             extraInfo = domain.extraInfo,
             nextHeater = domain.nextHeater,
-            addressId = domain.address?.id
+            addressId = domain.address!!.id
         )
     }
 }

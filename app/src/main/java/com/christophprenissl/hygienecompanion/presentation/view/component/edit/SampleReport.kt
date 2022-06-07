@@ -29,12 +29,12 @@ fun SampleReport(
             Row {
                 Text(SAMPLE_LOCATION)
                 Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                sample.sampleLocation?.description?.let { Text(it) }
+                sample.sampleLocation.description.let { Text(it) }
             }
             Row {
                 Text(SAMPLE_ID)
                 Spacer(modifier = Modifier.padding(horizontal = standardPadding))
-                sample.id?.let { Text(it) }
+                Text(sample.id)
             }
             Row {
                 Text(SAMPLING_DATE)
@@ -43,26 +43,26 @@ fun SampleReport(
                 Spacer(modifier = Modifier.padding(vertical = standardPadding))
             }
             Text(EXTRA_INFO_SAMPLING_PERSON)
-            Text(sample.extraInfoSampling?: EMPTY)
+            Text(sample.extraInfoSampling)
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
             Text(EXTRA_INFO_LAB_PERSON)
-            Text(sample.extraInfoLaboratory?: EMPTY)
+            Text(sample.extraInfoLaboratory)
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
             Text(WARNING)
-            Text(sample.warningMessage?: EMPTY)
+            Text(sample.warningMessage)
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
             Text(LAB_SAMPLE_PARAMETERS)
-            sample.labSampleParameters?.forEach { parameter ->
-                ParameterText(parameter.name.toString() , parameter.value)
+            sample.labSampleParameters.forEach { parameter ->
+                ParameterText(parameter.name, parameter.value)
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
 
             Text(COVERING_SAMPLE_PARAMETERS)
-            sample.coveringSampleParameters?.forEach { parameter ->
-                ParameterText(parameter.name.toString() , parameter.value)
+            sample.coveringSampleParameters.forEach { parameter ->
+                ParameterText(parameter.name, parameter.value)
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding))
         }

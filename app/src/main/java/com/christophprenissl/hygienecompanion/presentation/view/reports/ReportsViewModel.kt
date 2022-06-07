@@ -34,9 +34,9 @@ class ReportsViewModel @Inject constructor(
     private var _createdAdditionalCoveringLettersState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val createdAdditionalCoveringLettersState: State<Response<Void?>> = _createdAdditionalCoveringLettersState
 
-    private var _gotReportsState = mutableStateOf<Response<Map<String?, List<CoveringLetter>>>>(
+    private var _gotReportsState = mutableStateOf<Response<Map<String, List<CoveringLetter>>>>(
         Response.Success(mapOf()))
-    val gotReportsState: State<Response<Map<String?, List<CoveringLetter>>>> = _gotReportsState
+    val gotReportsState: State<Response<Map<String, List<CoveringLetter>>>> = _gotReportsState
 
     private var _groupByState = mutableStateOf(GroupBy.Month)
     private var groupBy: GroupBy
@@ -58,7 +58,7 @@ class ReportsViewModel @Inject constructor(
                         }
                         GroupBy.Month -> {
                             val reports = reportsResponse.data.values.reduce { acc, list -> acc + list }
-                            reports.groupBy { it.resultCreated?.monthYearString() }
+                            reports.groupBy { it.resultCreated?.monthYearString()?: EMPTY_DATE }
                         }
                     }
                     _gotReportsState.value = Response.Success(reportsGrouped)
@@ -95,7 +95,7 @@ class ReportsViewModel @Inject constructor(
                             }
                             GroupBy.Month -> {
                                 reportsSorted.groupBy {
-                                    it.resultCreated?.monthYearString()
+                                    it.resultCreated?.monthYearString() ?: EMPTY_DATE
                                 }
                             }
                         }
@@ -137,7 +137,7 @@ class ReportsViewModel @Inject constructor(
     }
 
     fun chooseReport(report: CoveringLetter) {
-        report.seriesId?.let { getCoveringLetterSeries(it) }
+        report.seriesId.let { getCoveringLetterSeries(it) }
         _chosenReport.value = report
     }
 

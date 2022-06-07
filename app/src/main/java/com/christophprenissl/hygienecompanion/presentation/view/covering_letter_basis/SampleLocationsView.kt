@@ -44,7 +44,7 @@ fun SampleLocationsView(
         when(val response = viewModel.gotSampleLocationsState.value) {
             is Response.Success -> {
                 LazyColumn {
-                    items(response.data, key = {location -> location.id!!}) { item ->
+                    items(response.data, key = {location -> location.id}) { item ->
                         SwipeToDelete(onDelete = {
                             viewModel.deleteSampleLocation(item)
                         }) {

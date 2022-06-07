@@ -10,5 +10,5 @@ suspend fun loginAs(
     onLogin: (UserType) -> Unit
 ) {
     userDataStore.saveUser(user)
-    onLogin(user.userType?: UserType.Sampler)
+    onLogin(user.userType)
 }

@@ -57,12 +57,8 @@ class AddressRepoImpl @Inject constructor(
     override suspend fun deleteAddressFromDatabase(address: Address) = flow {
         try {
             emit(Response.Loading)
-            if (address.id != null) {
-                val deletion = addressesRef.document(address.id).delete().await()
-                emit(Response.Success(deletion))
-            } else {
-                emit(Response.Error("no address id provided"))
-            }
+            val deletion = addressesRef.document(address.id).delete().await()
+            emit(Response.Success(deletion))
         } catch (e: Exception) {
             emit(Response.Error(e.message ?: e.toString()))
         }

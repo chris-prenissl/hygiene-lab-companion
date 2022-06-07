@@ -88,7 +88,7 @@ fun ReportDetailView(
             report?.basicLabReportParameters?.let { parameters ->
                 items(parameters) { parameter ->
                     ParameterText(
-                        title = parameter.name ?: EMPTY,
+                        title = parameter.name,
                         value = parameter.value
                     )
                 }
@@ -103,7 +103,7 @@ fun ReportDetailView(
             report?.basicCoveringParameters?.let { parameters ->
                 items(parameters) { parameter ->
                     ParameterText(
-                        title = parameter.name ?: EMPTY,
+                        title = parameter.name,
                         value = parameter.value
                     )
                 }

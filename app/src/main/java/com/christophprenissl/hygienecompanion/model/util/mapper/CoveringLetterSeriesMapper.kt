@@ -11,28 +11,31 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
         val addressMapper = AddressMapper()
 
         val templateBases = entity.basesByNorm?.map {
-            Basis(norm = it)
+            Basis(norm = it!!)
         }
         return CoveringLetterSeries(
-            id = entity.id,
+            id = entity.id!!,
             created = entity.created,
-            description = entity.description,
-            resultToClient = entity.resultToClient,
-            resultToTestingProperty = entity.resultToTestingProperty,
-            costLocation = entity.costLocation,
-            laboratoryId = entity.laboratoryId,
-            bases = templateBases,
+            description = entity.description ?: "",
+            resultToClient = entity.resultToClient ?: false,
+            resultToTestingProperty = entity.resultToTestingProperty ?: false,
+            costLocation = entity.costLocation ?: "",
+            laboratoryId = entity.laboratoryId ?: "",
+            bases = templateBases?: emptyList(),
             client = entity.client?.let { addressMapper.fromEntity(it) },
             sampleAddress = entity.sampleAddress?.let { addressMapper.fromEntity(it) },
             samplingCompany = entity.samplingCompany?.let { addressMapper.fromEntity(it) },
             coveringLetters = entity.coveringLetters?.map {
-                CoveringLetter(id = it)
-            },
-            plannedStart = entity.plannedStart,
-            plannedEnd = entity.plannedEnd,
-            hasEnded = entity.hasEnded,
+                CoveringLetter(
+                    id = it,
+                    seriesId = entity.id
+                )
+            } ?: emptyList(),
+            plannedStart = entity.plannedStart!!,
+            plannedEnd = entity.plannedEnd!!,
+            hasEnded = entity.hasEnded ?: false,
             endedDate = entity.endedDate,
-            samplingSeriesType = entity.samplingSeriesType?.let { SamplingSeriesType.valueOf(it) }
+            samplingSeriesType = entity.samplingSeriesType?.let { SamplingSeriesType.valueOf(it) }?: SamplingSeriesType.NonPeriodic
         )
     }
 
@@ -46,18 +49,18 @@ class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLet
             resultToTestingProperty = domain.resultToTestingProperty,
             costLocation = domain.costLocation,
             laboratoryId = domain.laboratoryId,
-            basesByNorm = domain.bases?.map { it.norm },
+            basesByNorm = domain.bases.map { it.norm },
             client = domain.client?.let { addressMapper.toEntity(it) },
             sampleAddress = domain.sampleAddress?.let { addressMapper.toEntity(it) },
             samplingCompany = domain.samplingCompany?.let { addressMapper.toEntity(it) },
-            coveringLetters = domain.coveringLetters?.map {
-                it.id?: ""
+            coveringLetters = domain.coveringLetters.map {
+                it.id
             },
             plannedStart = domain.plannedStart,
             plannedEnd = domain.plannedEnd,
             hasEnded = domain.hasEnded,
             endedDate = domain.endedDate,
-            samplingSeriesType = domain.samplingSeriesType?.name
+            samplingSeriesType = domain.samplingSeriesType.name
         )
     }
 }

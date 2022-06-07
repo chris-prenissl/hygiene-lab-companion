@@ -32,9 +32,9 @@ fun BasisDetailView(
             }
             items(parameters) { item ->
                 Row {
-                    item.name?.let { Text(it) }
+                    Text(item.name)
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.translation?.let { Text(it) }
+                    item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
@@ -48,9 +48,9 @@ fun BasisDetailView(
             }
             items(parameters) { item ->
                 Row {
-                    item.name?.let { Text(it) }
+                    Text(item.name)
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.translation?.let { Text(it) }
+                    item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
@@ -64,9 +64,9 @@ fun BasisDetailView(
             }
             items(parameters) { item ->
                 Row {
-                    item.name?.let { Text(it) }
+                    Text(item.name)
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.translation?.let { Text(it) }
+                    item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
@@ -80,9 +80,9 @@ fun BasisDetailView(
             }
             items(parameters) { item ->
                 Row {
-                    item.name?.let { Text(it) }
+                    Text(item.name)
                     Spacer(modifier = Modifier.padding(standardPadding))
-                    item.parameterType?.translation?.let { Text(it) }
+                    item.parameterType.translation.let { Text(it) }
                 }
             }
             item {

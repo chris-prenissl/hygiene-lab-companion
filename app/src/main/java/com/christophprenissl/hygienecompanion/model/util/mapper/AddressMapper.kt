@@ -6,15 +6,15 @@ import com.christophprenissl.hygienecompanion.model.entity.Address
 class AddressMapper: DataMapper<Address, AddressDto> {
     override fun fromEntity(entity: AddressDto): Address {
         return Address(
-            id = entity.id,
-            name = entity.name,
-            zip = entity.zip,
-            city = entity.city,
-            contactName = entity.contactName,
-            street = entity.street,
-            phone = entity.phone,
-            fax = entity.fax,
-            eMail = entity.eMail
+            id = entity.id ?: "",
+            name = entity.name ?: "",
+            zip = entity.zip ?: "",
+            city = entity.city ?: "",
+            contactName = entity.contactName ?: "",
+            street = entity.street ?: "",
+            phone = entity.phone ?: "",
+            fax = entity.fax ?: "",
+            eMail = entity.eMail ?: ""
         )
     }
 

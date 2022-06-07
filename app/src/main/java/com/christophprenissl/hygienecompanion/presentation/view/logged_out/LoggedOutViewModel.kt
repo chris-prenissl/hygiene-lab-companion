@@ -36,10 +36,10 @@ class LoggedOutViewModel @Inject constructor(
     private fun getUser() {
         viewModelScope.launch {
             dataStoreUser.getUser().collect { user ->
-                user.name?.let { _userNameState.value = it }
-                user.userType?.let { _userTypeState.value = it }
-                user.hasCertificate?.let { _hasCertificateState.value = it }
-                user.isSamplerOfInstitute?.let { _isUserOfInstituteState.value = it }
+                user.name.let { _userNameState.value = it }
+                user.userType.let { _userTypeState.value = it }
+                user.hasCertificate.let { _hasCertificateState.value = it }
+                user.isSamplerOfInstitute.let { _isUserOfInstituteState.value = it }
             }
         }
     }
@@ -65,8 +65,8 @@ class LoggedOutViewModel @Inject constructor(
     ) {
         val user = User(
             name = _userNameState.value,
-            hasCertificate = if (_userTypeState.value != UserType.LabWorker) _hasCertificateState.value else null,
-            isSamplerOfInstitute = if (_userTypeState.value != UserType.LabWorker) _isUserOfInstituteState.value else null,
+            hasCertificate = if (_userTypeState.value != UserType.LabWorker) _hasCertificateState.value else false,
+            isSamplerOfInstitute = if (_userTypeState.value != UserType.LabWorker) _isUserOfInstituteState.value else false,
             userType = _userTypeState.value
         )
         viewModelScope.launch {

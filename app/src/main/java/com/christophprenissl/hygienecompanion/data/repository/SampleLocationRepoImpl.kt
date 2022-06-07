@@ -59,12 +59,8 @@ class SampleLocationRepoImpl @Inject constructor(
     override suspend fun deleteSampleLocationFromDatabase(sampleLocation: SampleLocation) = flow {
         try {
             emit(Loading)
-            if (sampleLocation.id != null) {
-                val deletion = sampleLocationsRef.document(sampleLocation.id).delete().await()
-                emit(Success(deletion))
-            } else {
-                emit(Error("no sample id provided"))
-            }
+            val deletion = sampleLocationsRef.document(sampleLocation.id).delete().await()
+            emit(Success(deletion))
         } catch (e: Exception) {
             emit(Error(e.message ?: e.toString()))
         }

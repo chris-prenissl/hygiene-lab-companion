@@ -1,13 +1,13 @@
 package com.christophprenissl.hygienecompanion.model.entity
 
 data class Address(
-    val id: String? = null,
-    val name: String? = null,
-    val zip: String? = null,
-    val city: String? = null,
-    val contactName: String? = null,
-    val street: String? = null,
-    val phone: String? = null,
-    val fax: String? = null,
-    val eMail: String? = null
+    val id: String = "",
+    val name: String,
+    val zip: String,
+    val city: String,
+    val contactName: String = "",
+    val street: String,
+    val phone: String = "",
+    val fax: String = "",
+    val eMail: String = ""
 )

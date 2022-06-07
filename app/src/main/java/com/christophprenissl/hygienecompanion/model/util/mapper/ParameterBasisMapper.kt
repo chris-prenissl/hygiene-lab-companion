@@ -8,15 +8,15 @@ class ParameterBasisMapper: DataMapper<ParameterBasis, ParameterBasisDto> {
 
     override fun fromEntity(entity: ParameterBasisDto): ParameterBasis {
         return ParameterBasis(
-            name = entity.name,
-            parameterType = entity.parameterType?.let { ParameterType.valueOf(it) }
+            name = entity.name!!,
+            parameterType = entity.parameterType?.let { ParameterType.valueOf(it) } ?: ParameterType.Note
         )
     }
 
     override fun toEntity(domain: ParameterBasis): ParameterBasisDto {
         return ParameterBasisDto(
             name = domain.name,
-            parameterType = domain.parameterType?.name
+            parameterType = domain.parameterType.name
         )
     }
 }

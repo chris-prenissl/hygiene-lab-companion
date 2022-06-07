@@ -6,13 +6,13 @@ import java.util.*
 
 fun createCoveringLetterForSeries(
     id: String,
-    description: String?,
-    coveringParametersCoveringLetter: List<Parameter>?,
-    labParametersCoveringLetter: List<Parameter>?,
-    sampleLocations: List<SampleLocation>?,
-    coveringSampleParameters: Map<ParameterBasis, Boolean>?,
-    labSampleParameters: Map<ParameterBasis, Boolean>?,
-    date: Date
+    description: String,
+    coveringParametersCoveringLetter: List<Parameter> = emptyList(),
+    labParametersCoveringLetter: List<Parameter> = emptyList(),
+    sampleLocations: List<SampleLocation> = emptyList(),
+    coveringSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
+    labSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
+    date: Date?
 ): CoveringLetter {
     return CoveringLetter(
         id = id,
@@ -20,28 +20,28 @@ fun createCoveringLetterForSeries(
         date = date,
         basicCoveringParameters = coveringParametersCoveringLetter,
         basicLabReportParameters = labParametersCoveringLetter,
-        samples = sampleLocations?.mapIndexed { idx, location ->
+        samples = sampleLocations.mapIndexed { idx, location ->
             val coveringSampleParametersSample = mutableListOf<Parameter>()
-            coveringSampleParameters?.forEach {
+            coveringSampleParameters.forEach {
                 if (it.value) {
                     coveringSampleParametersSample.add(
                         Parameter(
-                        name = it.key.name,
-                        value = "",
-                        parameterType = it.key.parameterType
-                    )
+                            name = it.key.name,
+                            value = "",
+                            parameterType = it.key.parameterType
+                        )
                     )
                 }
             }
             val labSampleParametersSample = mutableListOf<Parameter>()
-            labSampleParameters?.forEach {
+            labSampleParameters.forEach {
                 if (it.value) {
                     labSampleParametersSample.add(
                         Parameter(
-                        name = it.key.name,
-                        value = "",
-                        parameterType = it.key.parameterType
-                    )
+                            name = it.key.name,
+                            value = "",
+                            parameterType = it.key.parameterType
+                        )
                     )
                 }
             }
@@ -77,22 +77,22 @@ fun Map<ParameterBasis, Boolean>.createParameterList(): List<Parameter> {
 
 fun createCoveringLettersForSeries(
     description: String?,
-    coveringParameterBasesCoveringLetter: Map<ParameterBasis, Boolean>?,
-    labParameterBasesCoveringLetter: Map<ParameterBasis, Boolean>?,
-    sampleLocations: List<SampleLocation>?,
-    coveringSampleParameters: Map<ParameterBasis, Boolean>?,
-    labSampleParameters: Map<ParameterBasis, Boolean>?,
+    coveringParameterBasesCoveringLetter: Map<ParameterBasis, Boolean> = emptyMap(),
+    labParameterBasesCoveringLetter: Map<ParameterBasis, Boolean> = emptyMap(),
+    sampleLocations: List<SampleLocation> = emptyList(),
+    coveringSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
+    labSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
     startDate: Date,
     plannedEndDate: Date,
     samplingSeriesType: SamplingSeriesType
 ): List<CoveringLetter> {
     val coveringLetterDates = createDates(startDate, plannedEndDate, samplingSeriesType)
     val coveringLetters = coveringLetterDates.mapIndexed { dId, date ->
-        val coveringParametersCoveringLetter = coveringParameterBasesCoveringLetter?.createParameterList()
-        val labParametersCoveringLetter = labParameterBasesCoveringLetter?.createParameterList()
+        val coveringParametersCoveringLetter = coveringParameterBasesCoveringLetter.createParameterList()
+        val labParametersCoveringLetter = labParameterBasesCoveringLetter.createParameterList()
         createCoveringLetterForSeries(
             id = dId.toString(),
-            description = description,
+            description = description ?: "",
             coveringParametersCoveringLetter = coveringParametersCoveringLetter,
             labParametersCoveringLetter = labParametersCoveringLetter,
             sampleLocations = sampleLocations,
@@ -109,11 +109,11 @@ fun Parameter.toValue(): Any {
         ParameterType.Bool -> this.value.toBoolean()
         ParameterType.Number, ParameterType.Temperature -> {
             try {
-                this.value?.toFloat()?: -1.0f
+                this.value.toFloat()
             } catch(_: Exception) {
                 -1.0f
             }
         }
-        else -> this.value.toString()
+        else -> this.value
     }
 }

@@ -35,7 +35,7 @@ class DataStoreUser(private val context: Context) {
             val userTypeString = preferences[USER_TYPE_KEY]?: UserType.Sampler.name
             emit(
                 User(
-                    name = name,
+                    name = name!!,
                     hasCertificate = hasCertificate,
                     isSamplerOfInstitute = qm,
                     userType = UserType.valueOf(userTypeString)
@@ -46,10 +46,10 @@ class DataStoreUser(private val context: Context) {
 
     suspend fun saveUser(user: User) {
         context.dataStore.edit { preferences ->
-            preferences[USER_NAME_KEY] = user.name?: ""
+            preferences[USER_NAME_KEY] = user.name
             preferences[HAS_CERTIFICATE_KEY] = user.hasCertificate.toString()
             preferences[QM_KEY] = user.isSamplerOfInstitute.toString()
-            preferences[USER_TYPE_KEY] = user.userType?.name ?: ""
+            preferences[USER_TYPE_KEY] = user.userType.name
         }
     }
 }
