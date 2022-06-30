@@ -35,7 +35,7 @@ class DataStoreUser(private val context: Context) {
             val userTypeString = preferences[USER_TYPE_KEY]?: UserType.Sampler.name
             emit(
                 User(
-                    name = name!!,
+                    name = name?: "",
                     hasCertificate = hasCertificate,
                     isSamplerOfInstitute = qm,
                     userType = UserType.valueOf(userTypeString)
