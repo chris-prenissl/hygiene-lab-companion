@@ -17,13 +17,13 @@ fun AddressCard(
         accessIndicator = accessAble
     ) {
         Column {
-            address.name?.let { Text(it) }
+            Text(address.name)
             Row {
                 Text(CONTACT)
-                address.contactName?.let { Text(it) }
+                Text(address.contactName)
             }
-            address.city?.let { Text(it) }
-            address.street?.let { Text(it) }
+            Text(address.city)
+            Text(address.street)
         }
     }
 }

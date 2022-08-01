@@ -16,8 +16,8 @@ fun BasisCard(
         accessIndicator = accessAble
     ) {
         Column {
-            basis.description?.let { Text(it) }
-            basis.norm?.let { Text(it) }
+            Text(basis.description)
+            Text(basis.norm)
         }
     }
 }

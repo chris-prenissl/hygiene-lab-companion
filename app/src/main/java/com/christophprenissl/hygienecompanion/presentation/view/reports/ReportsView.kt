@@ -55,10 +55,8 @@ fun ReportsView(
                 is Response.Success -> {
                     val groupedReports = response.data
                     groupedReports.forEach { (initial, reports) ->
-                        initial?.let {
-                            stickyHeader {
-                                Text(initial)
-                            }
+                        stickyHeader {
+                            Text(initial)
                         }
                         items(reports) {
                             CoveringLetterCard(

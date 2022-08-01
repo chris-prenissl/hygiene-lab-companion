@@ -52,6 +52,6 @@ fun NavigationGraph(
             viewModel = reportsViewModel
         )
 
-        profileNavGraph(navController = navController)
+        profileNavGraph()
     }
 }

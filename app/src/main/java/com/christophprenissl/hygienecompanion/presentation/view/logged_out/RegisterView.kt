@@ -11,8 +11,7 @@ import com.christophprenissl.hygienecompanion.util.LOGIN
 
 @Composable
 fun RegisterView(
-    navController: NavController,
-    viewModel: LoggedOutViewModel
+    navController: NavController
 ) {
     Column {
         Text(LOGIN)

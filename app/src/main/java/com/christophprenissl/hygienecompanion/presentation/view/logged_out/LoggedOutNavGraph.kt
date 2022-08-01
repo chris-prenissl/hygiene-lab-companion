@@ -22,8 +22,7 @@ fun NavGraphBuilder.loggedOutGraph(
         }
         composable(Screen.Register.route) {
             RegisterView(
-                navController = navController,
-                viewModel = viewModel
+                navController = navController
             )
         }
     }

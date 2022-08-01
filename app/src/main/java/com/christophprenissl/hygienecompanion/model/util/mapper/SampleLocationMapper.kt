@@ -22,7 +22,7 @@ class SampleLocationMapper(private val address: Address?): DataMapper<SampleLoca
             description = domain.description,
             extraInfo = domain.extraInfo,
             nextHeater = domain.nextHeater,
-            addressId = domain.address!!.id
+            addressId = domain.address?.id
         )
     }
 }
