@@ -1,0 +1,21 @@
+v0.2.4 Release Notes
+- Parameternamen im Dialog zur Erstellung von Normen ist nun ohne vor eingegebenen Namen
+
+v0.2.3 Release Notes
+- input of textFields is now more user friendly:)
+
+v0.2.2 Release Notes
+- Ein Bug wurde beseitigt bei dem beim Navigieren zum Begleitschein ein Absturz passierte
+
+v0.2.1 Release Notes
+- Ein Bug bei dem sich im Login-Textfeld Zeichen wiederholen sollte nun behoben sein:)
+
+v0.2.0 Release Notes
+- Für diesen Release gerne alle Funktionen der einezelnen Menüpunkte ausprobieren
+- Möglichst durch beliebige Eingaben App zum Crashen bringen
+
+Vielen Dank für deine Zeit:)
+
+v0.1.0 Release Notes
+- Erster Release welcher zum Testen aller Basis-Funktionalitäten gilt
+- Gerne Rückmeldung geben falls Benutzung unklar ist oder Inhalte unverständlich sind
