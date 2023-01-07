@@ -10,12 +10,9 @@ import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRBackgroun
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRStatusBarDark
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRStatusBarLight
 import com.christophprenissl.hygienecompanion.presentation.view.MainView
-import com.google.firebase.FirebaseApp
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 
-@AndroidEntryPoint
 @InternalCoroutinesApi
 @ExperimentalCoroutinesApi
 class MainActivity : ComponentActivity() {

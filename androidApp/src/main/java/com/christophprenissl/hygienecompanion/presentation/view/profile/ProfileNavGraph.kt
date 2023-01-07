@@ -1,6 +1,5 @@
 package com.christophprenissl.hygienecompanion.presentation.view.profile
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation

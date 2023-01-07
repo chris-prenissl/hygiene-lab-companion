@@ -1,142 +1,108 @@
 package com.christophprenissl.hygienecompanion.di
 
-import android.content.Context
 import com.christophprenissl.hygienecompanion.data.repository.*
 import com.christophprenissl.hygienecompanion.di.util.*
 import com.christophprenissl.hygienecompanion.domain.use_case.*
 import com.christophprenissl.hygienecompanion.model.repository.*
 import com.christophprenissl.hygienecompanion.util.*
-import com.example.hygienecompanion.getPlatform
-import com.google.firebase.FirebaseApp
-import com.google.firebase.appdistribution.gradle.FirebaseAppDistribution
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import javax.inject.Singleton
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
+@OptIn(ExperimentalCoroutinesApi::class)
+val appModule = module {
 
-    @Provides
-    fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()
+    single { FirebaseFirestore.getInstance() }
 
-    @Provides
-    fun provideFirebaseCrashlytics() = FirebaseCrashlytics.getInstance()
+    single { FirebaseCrashlytics.getInstance() }
 
-    @SampleLocationRefFireStore
-    @Provides
-    fun provideSampleLocationsRef(db: FirebaseFirestore) = db.collection(SAMPLE_LOCATIONS_FIRESTORE)
+    single(named(KoinNames.FireStoreRefs.sampleLocation)) {
+        get<FirebaseFirestore>().collection(SAMPLE_LOCATIONS_FIRESTORE)
+    }
 
-    @AddressRefFireStore
-    @Provides
-    fun provideAddressesRef(db: FirebaseFirestore) = db.collection(ADDRESSES_FIRESTORE)
+    single(named(KoinNames.FireStoreRefs.address)) {
+        get<FirebaseFirestore>().collection(ADDRESSES_FIRESTORE)
+    }
 
-    @AddressQueryFireStore
-    @Provides
-    fun provideAddressesQuery(@AddressRefFireStore addressesRef: CollectionReference) = addressesRef.orderBy("name")
+    single(named(KoinNames.FireStoreQuery.address)) {
+        get<CollectionReference>(named(KoinNames.FireStoreRefs.address)).orderBy("name")
+    }
+    
+    single(named(KoinNames.FireStoreRefs.basis)) {
+        get<FirebaseFirestore>().collection(BASES_FIRESTORE)
+    }
 
-    @BasisRefFireStore
-    @Provides
-    fun provideBasisRef(db: FirebaseFirestore) = db.collection(BASES_FIRESTORE)
+    single(named(KoinNames.FireStoreRefs.user)) {
+        get<FirebaseFirestore>().collection(USERS_FIRESTORE)
+    }
+    
+    single(named(KoinNames.FireStoreRefs.coveringLetterSeries)) {
+        get<FirebaseFirestore>().collection(COVERING_LETTERS_FIRESTORE)
+    }
+    
+    single(named(KoinNames.FireStoreRefs.coveringLetter)) {
+        get<FirebaseFirestore>().collection(COVERING_LETTERS_FIRESTORE)
+    }
 
-    @UserRefFireStore
-    @Provides
-    fun provideUserRef(db: FirebaseFirestore) = db.collection(USERS_FIRESTORE)
+    single<SampleLocationRepo> {
+        SampleLocationRepoImpl(get(named(KoinNames.FireStoreRefs.sampleLocation)))
+    }
+    
+    single<AddressRepo> {
+        AddressRepoImpl(
+            get(named(KoinNames.FireStoreRefs.address)), 
+            get(named(KoinNames.FireStoreQuery.address))
+        )
+    }
+    
+    single<BasisRepo> {
+        BasisRepoImpl(get(named(KoinNames.FireStoreRefs.basis)))
+    }
+    
+    single<UserRepo> {
+        UserRepoImpl(get(named(KoinNames.FireStoreRefs.user)))
+    }
 
-    @CoveringLetterSeriesRefFireStore
-    @Provides
-    fun provideCoveringLetterSeriesRef(db: FirebaseFirestore) = db.collection(
-        COVERING_LETTER_SERIES_FIRESTORE)
+    single<CoveringLetterSeriesRepo> {
+        CoveringLetterSeriesRepoImpl(
+            get(),
+            get(named(KoinNames.FireStoreRefs.coveringLetter)),
+            get(named(KoinNames.FireStoreRefs.coveringLetterSeries))
+        )
+    }
+    
+    single<CoveringLetterRepo> {
+        CoveringLetterRepoImpl(
+            get(named(KoinNames.FireStoreRefs.coveringLetter))
+        )
+    }
 
-    @CoveringLetterRefFireStore
-    @Provides
-    fun provideCoveringLettersRef(db: FirebaseFirestore) = db.collection(COVERING_LETTERS_FIRESTORE)
+    single {
+        HygieneCompanionUseCases(
+            saveAddress = SaveAddress(get()),
+            deleteAddress = DeleteAddress(get()),
+            getAddresses = GetAddresses(get()),
+            getSampleLocations = GetSampleLocations(get()),
+            saveSampleLocation = SaveSampleLocation(get()),
+            deleteSampleLocation = DeleteSampleLocation(get()),
+            getBases = GetBases(get()),
+            saveBasis = SaveBasis(get()),
+            deleteBasis = DeleteBasis(get()),
+            getCoveringLetterSeriesById = GetCoveringLetterSeriesById(get()),
+            createCoveringLetterSeries = CreateCoveringLetterSeries(get()),
+            getCoveringLetterSeries = GetCoveringLetterSeries(get()),
+            getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(get()),
+            getCoveringLettersNotEnded = GetCoveringLettersNotEnded(get()),
+            saveCoveringLetter = SaveCoveringLetter(get()),
+            getReports = GetReports(get()),
+            createAdditionalCoveringLetters = CreateAdditionalCoveringLetters(get())
+        )
+    }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Provides
-    fun provideSampleLocationRepoImpl(
-        @SampleLocationRefFireStore sampleLocationsRef: CollectionReference
-    ): SampleLocationRepo = SampleLocationRepoImpl(
-        sampleLocationsRef = sampleLocationsRef)
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Provides
-    fun provideAddressRepoImpl(
-        @AddressRefFireStore addressesRef: CollectionReference,
-        @AddressQueryFireStore addressesQuery: Query
-    ): AddressRepo = AddressRepoImpl(
-        addressesRef = addressesRef,
-        addressesQuery = addressesQuery)
-
-    @Provides
-    fun provideBasisRepoImpl(
-        @BasisRefFireStore basisRef: CollectionReference
-    ): BasisRepo = BasisRepoImpl(
-        basisRef = basisRef)
-
-    @Provides
-    fun provideUserRepoImpl(
-        @UserRefFireStore userRef: CollectionReference
-    ): UserRepo = UserRepoImpl(
-        userRef = userRef
-    )
-
-    @Provides
-    fun provideCoveringLetterSeriesRepoImpl(
-        db: FirebaseFirestore,
-        @CoveringLetterRefFireStore coveringLettersRef: CollectionReference,
-        @CoveringLetterSeriesRefFireStore coveringLetterSeriesRef: CollectionReference
-    ): CoveringLetterSeriesRepo = CoveringLetterSeriesRepoImpl(
-        db = db,
-        coveringLettersRef = coveringLettersRef,
-        coveringLetterSeriesRef = coveringLetterSeriesRef
-    )
-
-    @Provides
-    fun provideCoveringLetterRepoImpl(
-        @CoveringLetterRefFireStore coveringLetterRef: CollectionReference
-    ): CoveringLetterRepo = CoveringLetterRepoImpl(
-        coveringLetterRef = coveringLetterRef
-    )
-
-    @Provides
-    fun provideUseCases(
-        sampleLocationRepo: SampleLocationRepo,
-        addressRepo: AddressRepo,
-        basisRepo: BasisRepo,
-        coveringLetterSeriesRepo: CoveringLetterSeriesRepo,
-        coveringLetterRepo: CoveringLetterRepo
-    ) = HygieneCompanionUseCases(
-        saveAddress = SaveAddress(addressRepo),
-        deleteAddress = DeleteAddress(addressRepo),
-        getAddresses = GetAddresses(addressRepo),
-        getSampleLocations = GetSampleLocations(sampleLocationRepo),
-        saveSampleLocation = SaveSampleLocation(sampleLocationRepo),
-        deleteSampleLocation = DeleteSampleLocation(sampleLocationRepo),
-        getBases = GetBases(basisRepo),
-        saveBasis = SaveBasis(basisRepo),
-        deleteBasis = DeleteBasis(basisRepo),
-        getCoveringLetterSeriesById = GetCoveringLetterSeriesById(coveringLetterSeriesRepo),
-        createCoveringLetterSeries = CreateCoveringLetterSeries(coveringLetterSeriesRepo),
-        getCoveringLetterSeries = GetCoveringLetterSeries(coveringLetterSeriesRepo),
-        getCoveringLetterSeriesNotEnded = GetCoveringLetterSeriesNotEnded(coveringLetterSeriesRepo),
-        getCoveringLettersNotEnded = GetCoveringLettersNotEnded(coveringLetterRepo),
-        saveCoveringLetter = SaveCoveringLetter(coveringLetterRepo),
-        getReports = GetReports(coveringLetterRepo),
-        createAdditionalCoveringLetters = CreateAdditionalCoveringLetters(coveringLetterSeriesRepo)
-    )
-
-    @Singleton
-    @Provides
-    fun provideDataStoreUserType(
-        @ApplicationContext app: Context
-    ) : DataStoreUser = DataStoreUser(app)
+    single {
+        DataStoreUser(get())
+    }
 }

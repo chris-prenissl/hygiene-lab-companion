@@ -13,12 +13,10 @@ import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUs
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import com.google.firebase.Timestamp
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 class CoveringLettersViewModel @Inject constructor(
     private val useCases: HygieneCompanionUseCases,
     dataStoreUser: DataStoreUser

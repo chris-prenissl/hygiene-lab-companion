@@ -1,4 +1,4 @@
-package com.example.hygienecompanion
+package com.christophprenissl.hygienecompanion
 
 interface Platform {
     val name: String

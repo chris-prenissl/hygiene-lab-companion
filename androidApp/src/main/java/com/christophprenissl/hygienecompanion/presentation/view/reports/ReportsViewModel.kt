@@ -12,12 +12,10 @@ import com.christophprenissl.hygienecompanion.presentation.util.GroupBy
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
 import com.christophprenissl.hygienecompanion.util.*
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-@HiltViewModel
 class ReportsViewModel @Inject constructor(
     private val useCases: HygieneCompanionUseCases
 ): ViewModel() {

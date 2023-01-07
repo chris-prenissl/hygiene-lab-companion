@@ -1,4 +1,4 @@
-package com.example.hygienecompanion
+package com.christophprenissl.hygienecompanion
 
 import platform.UIKit.UIDevice
 

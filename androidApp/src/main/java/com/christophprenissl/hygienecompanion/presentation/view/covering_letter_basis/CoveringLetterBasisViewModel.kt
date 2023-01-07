@@ -10,12 +10,10 @@ import com.christophprenissl.hygienecompanion.model.entity.*
 import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
 import com.christophprenissl.hygienecompanion.util.createCoveringLettersForSeries
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-@HiltViewModel
 class CoveringLetterBasisViewModel @Inject constructor(
     private val useCases: HygieneCompanionUseCases
 ): ViewModel() {

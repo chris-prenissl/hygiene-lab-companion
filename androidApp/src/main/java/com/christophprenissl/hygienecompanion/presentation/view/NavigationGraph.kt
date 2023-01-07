@@ -1,7 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.christophprenissl.hygienecompanion.model.entity.UserType
@@ -16,14 +15,15 @@ import com.christophprenissl.hygienecompanion.presentation.view.logged_out.logge
 import com.christophprenissl.hygienecompanion.presentation.view.profile.profileNavGraph
 import com.christophprenissl.hygienecompanion.presentation.view.reports.ReportsViewModel
 import com.christophprenissl.hygienecompanion.presentation.view.reports.reportsNavGraph
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    coveringLetterBasisViewModel: CoveringLetterBasisViewModel = hiltViewModel(),
-    coveringLettersViewModel: CoveringLettersViewModel = hiltViewModel(),
-    reportsViewModel: ReportsViewModel = hiltViewModel(),
-    loggedOutViewModel: LoggedOutViewModel = hiltViewModel(),
+    coveringLetterBasisViewModel: CoveringLetterBasisViewModel = getViewModel(),
+    coveringLettersViewModel: CoveringLettersViewModel = getViewModel(),
+    reportsViewModel: ReportsViewModel = getViewModel(),
+    loggedOutViewModel: LoggedOutViewModel = getViewModel(),
     onLogin: (UserType) -> Unit
 ) {
     NavHost(

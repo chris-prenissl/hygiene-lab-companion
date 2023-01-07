@@ -8,11 +8,9 @@ import com.christophprenissl.hygienecompanion.model.entity.User
 import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.view.util.loginAs
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 class LoggedOutViewModel @Inject constructor(
     private val dataStoreUser: DataStoreUser
 ): ViewModel() {

@@ -17,7 +17,11 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                api("io.insert-koin:koin-core:3.2.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -47,10 +51,31 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.hygienecompanion.android"
+    namespace = "com.christophprenissl.hygienecompanion.android"
     compileSdk = 33
     defaultConfig {
         minSdk = 21
         targetSdk = 33
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.0"
+    }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            pickFirsts += "/META-INF/DEPENDENCIES"
+        }
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+    }
+}
+
+dependencies {
+    implementation("com.google.firebase:firebase-firestore-ktx:24.4.1")
 }

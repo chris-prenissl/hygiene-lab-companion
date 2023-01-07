@@ -1,4 +1,4 @@
-package com.example.hygienecompanion
+package com.christophprenissl.hygienecompanion
 
 class Greeting {
     private val platform: Platform = getPlatform()
