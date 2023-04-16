@@ -55,7 +55,6 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
     }
     buildFeatures {
         compose = true
@@ -77,5 +76,6 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-firestore-ktx:24.4.1")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.5.0")
+    implementation("com.android.support:support-annotations:28.0.0")
 }
