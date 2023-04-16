@@ -62,7 +62,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.0"
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             pickFirsts += "/META-INF/DEPENDENCIES"
@@ -78,4 +78,5 @@ android {
 dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:24.5.0")
     implementation("com.android.support:support-annotations:28.0.0")
+    implementation("androidx.compose.runtime:runtime:1.4.1")
 }
