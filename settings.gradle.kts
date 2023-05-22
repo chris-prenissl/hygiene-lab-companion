@@ -14,5 +14,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Hygiene_Companion_Multi-Platform"
+
 include(":androidApp")
 include(":shared")

@@ -5,10 +5,8 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name="com.christophprenissl.hygienecompanion.HygieneCompanionApp"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:theme="@android:style/Theme.Material.NoActionBar"
