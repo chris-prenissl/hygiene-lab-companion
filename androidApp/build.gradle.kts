@@ -8,10 +8,14 @@ android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.christophprenissl.hygienecompanion.android"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
@@ -55,9 +59,9 @@ dependencies {
     implementation("androidx.compose.runtime:runtime:1.4.3")
 
     //Koin
-    implementation("io.insert-koin:koin-android:3.2.0")
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
-    implementation("io.insert-koin:koin-androidx-navigation:3.2.0")
+    implementation("io.insert-koin:koin-android:3.4.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.4")
+    implementation("io.insert-koin:koin-androidx-navigation:3.4.0")
 
     //Firebase
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")

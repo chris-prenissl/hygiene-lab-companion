@@ -19,9 +19,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("io.insert-koin:koin-core:3.2.0")
+                api("io.insert-koin:koin-core:3.4.0")
             }
         }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
+        val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -48,11 +54,15 @@ android {
     defaultConfig {
         minSdk = 21
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
     packaging {
         resources {
