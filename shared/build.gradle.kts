@@ -78,7 +78,6 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-firestore-ktx:24.6.0")
     implementation("com.android.support:support-annotations:28.0.0")
     implementation("androidx.compose.runtime:runtime:1.4.3")
 }

@@ -20,6 +20,7 @@ import com.christophprenissl.hygienecompanion.util.SWIPE_THRESHOLD
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SwipeToDelete(
+    onDelete: () -> Unit = {},
     deleteState: DismissState = rememberDismissState (
         confirmStateChange =  {
             if (it == DismissValue.DismissedToStart) {
@@ -27,7 +28,6 @@ fun SwipeToDelete(
             }
             true
         }),
-    onDelete: () -> Unit,
     disMissContent: @Composable() (RowScope.() -> Unit)
 ) {
     if (deleteState.currentValue != DismissValue.Default) {
