@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
@@ -31,7 +32,7 @@ fun CoveringLettersView(
     ) {
         item {
             Text(NEXT_COVERING_LETTERS)
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         when(val response = viewModel.gotCoveringLettersState.value) {
             is Response.Success -> {

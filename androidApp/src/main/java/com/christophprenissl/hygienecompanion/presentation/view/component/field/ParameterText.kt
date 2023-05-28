@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.util.EMPTY
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
@@ -16,7 +17,7 @@ fun ParameterText(
 ) {
     Row {
         Text(title)
-        Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+        Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
         Text(value?: EMPTY)
     }
 }

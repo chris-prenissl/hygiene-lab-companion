@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
@@ -29,7 +30,7 @@ fun ReportsView(
     viewModel: ReportsViewModel
 ){
     Column(
-        modifier = Modifier.padding(standardPadding)
+        modifier = Modifier.padding(standardPadding.dp)
     ) {
         if (!viewModel.reportsIsEmpty()) {
             Button(
@@ -48,7 +49,7 @@ fun ReportsView(
 
             item {
                 TitleText(REPORTS)
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
 
             when(val response = viewModel.gotReportsState.value) {

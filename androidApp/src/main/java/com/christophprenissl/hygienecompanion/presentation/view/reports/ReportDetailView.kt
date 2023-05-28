@@ -11,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.christophprenissl.hygienecompanion.model.entity.ParameterType
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.BasicButton
@@ -19,7 +19,6 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.card.L
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.SamplerCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleReport
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
-import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
@@ -31,10 +30,10 @@ fun ReportDetailView(
 
     BasicSurface {
         LazyColumn(
-            contentPadding = PaddingValues(vertical = standardPadding),
+            contentPadding = PaddingValues(vertical = standardPadding.dp),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(doubleStandardPadding)
+                .padding(doubleStandardPadding.dp)
         ) {
             item {
                 ParameterText(
@@ -93,7 +92,7 @@ fun ReportDetailView(
                     )
                 }
                 item {
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
             }
 
@@ -108,7 +107,7 @@ fun ReportDetailView(
                     )
                 }
                 item {
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
             }
 
@@ -120,7 +119,7 @@ fun ReportDetailView(
                         }
                     }
                 }
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
             item {
                 report?.let {
@@ -142,7 +141,7 @@ fun ReportDetailView(
                         ) {
                             Text(SAVE_AS_EXCEL)
                         }
-                        Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+                        Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
                     }
                 }
             }

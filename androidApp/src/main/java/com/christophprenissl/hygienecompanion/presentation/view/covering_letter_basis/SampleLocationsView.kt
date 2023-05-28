@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.util.standardPadding
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
@@ -28,11 +29,11 @@ fun SampleLocationsView(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(standardPadding)
+            .padding(standardPadding.dp)
     ) {
         val address = viewModel.chosenAddress
         Text("${address.value?.name}")
-        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+        Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
 
         if (viewModel.openSampleLocationState.value) {
             SampleLocationDialog(

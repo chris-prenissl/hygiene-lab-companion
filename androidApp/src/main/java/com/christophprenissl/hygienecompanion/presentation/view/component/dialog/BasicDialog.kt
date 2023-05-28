@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
@@ -29,7 +30,7 @@ fun BasicDialog(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .align(Alignment.TopCenter)
-                        .padding(standardPadding),
+                        .padding(standardPadding.dp),
                     content = content
                 )
             }

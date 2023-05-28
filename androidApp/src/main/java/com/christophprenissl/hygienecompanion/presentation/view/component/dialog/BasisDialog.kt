@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.model.entity.ParameterBasis
 import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
@@ -44,7 +45,7 @@ fun BasisDialog(
                     norm = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -54,7 +55,7 @@ fun BasisDialog(
                     description = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
         }
 
         item {
@@ -83,7 +84,7 @@ fun BasisDialog(
             ) {
                 Text(ADD_PARAMETER)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -109,7 +110,7 @@ fun BasisDialog(
             ) {
                 Text(ADD_PARAMETER)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -135,7 +136,7 @@ fun BasisDialog(
             ) {
                 Text(ADD_PARAMETER)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -161,7 +162,7 @@ fun BasisDialog(
             ) {
                 Text(ADD_PARAMETER)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             OkButton(

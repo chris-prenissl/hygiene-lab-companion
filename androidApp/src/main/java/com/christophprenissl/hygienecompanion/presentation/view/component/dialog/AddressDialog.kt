@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.CancelButton
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.OkButton
@@ -35,7 +36,7 @@ fun AddressDialog(
             TitleText(CREATE_ADDRESS)
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             ParameterTextField(
                 labelText = ADDRESS_NAME,
                 value = name,
@@ -43,7 +44,7 @@ fun AddressDialog(
                     name = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -53,7 +54,7 @@ fun AddressDialog(
                     cityName = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -63,7 +64,7 @@ fun AddressDialog(
                     zip = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -73,7 +74,7 @@ fun AddressDialog(
                     street = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -83,7 +84,7 @@ fun AddressDialog(
                     contactName = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -93,7 +94,7 @@ fun AddressDialog(
                     phone = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -104,7 +105,7 @@ fun AddressDialog(
                     fax = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterTextField(
@@ -115,7 +116,7 @@ fun AddressDialog(
                     eMail = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             CancelButton(onCancel = onDismissRequest) {

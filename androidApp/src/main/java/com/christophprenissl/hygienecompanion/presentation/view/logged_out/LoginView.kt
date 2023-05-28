@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.android.R
 import com.christophprenissl.hygienecompanion.model.entity.UserType
@@ -33,7 +34,7 @@ fun LoginView(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(standardPadding),
+            .padding(standardPadding.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -41,28 +42,28 @@ fun LoginView(
             Text(LOGIN)
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_ukr_logo),
                     contentDescription = UKR_LOGO_DESCRIPTION,
-                    modifier = Modifier.size(titleIconSize)
+                    modifier = Modifier.size(titleIconSize.dp)
                 )
-                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
                 TitleText(title = APP_TITLE_START)
             }
-            Spacer(modifier = Modifier.padding(vertical = titleDistance))
+            Spacer(modifier = Modifier.padding(vertical = titleDistance.dp))
         }
         item {
             BasicSurface(
-                border = BorderStroke(basicBorderStroke, MaterialTheme.colors.onBackground)
+                border = BorderStroke(basicBorderStroke.dp, MaterialTheme.colors.onBackground)
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(standardPadding)
+                    modifier = Modifier.padding(standardPadding.dp)
                 ) {
                     ParameterTextField(
                         labelText = USER_NAME,
@@ -71,7 +72,7 @@ fun LoginView(
                             viewModel.setUserName(it)
                         }
                     )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     if (viewModel.userTypeState.value != UserType.LabWorker) {
                         BasicCheckBoxField(
                             title = HAS_CERTIFICATE,
@@ -80,7 +81,7 @@ fun LoginView(
                                 viewModel.setUserHasCertificate(it)
                             }
                         )
-                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                         BasicCheckBoxField(
                             title = QM_SAMPLER,
                             value = viewModel.isUserOfInstituteState.value,
@@ -88,7 +89,7 @@ fun LoginView(
                                 viewModel.setUserIsSamplerOfInstitute(it)
                             }
                         )
-                        Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                        Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     }
                     UserTypeDropdownMenu(
                         value = viewModel.userTypeState.value,
@@ -98,7 +99,7 @@ fun LoginView(
                     )
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             Button(
@@ -106,7 +107,7 @@ fun LoginView(
                     viewModel.login(onLogin)
                     navigateToHomeScreen(navController)
                 },
-                modifier = Modifier.padding(standardPadding)
+                modifier = Modifier.padding(standardPadding.dp)
             ) {
                 Text(LOGIN)
             }

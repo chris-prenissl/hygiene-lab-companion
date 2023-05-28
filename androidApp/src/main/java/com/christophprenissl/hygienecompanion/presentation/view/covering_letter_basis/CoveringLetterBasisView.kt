@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.InternalComposeApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
@@ -37,10 +38,10 @@ fun CoveringLetterBasisView(
 
         item {
             Text(
-                modifier = Modifier.padding(standardPadding),
+                modifier = Modifier.padding(standardPadding.dp),
                 text = COVERING_LETTER_BASIS_DATA
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -96,12 +97,12 @@ fun CoveringLetterBasisView(
             }) {
                 Text(ADD_ADDRESS)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
             Text(
-                modifier = Modifier.padding(vertical = standardPadding),
+                modifier = Modifier.padding(vertical = standardPadding.dp),
                 text = COVERING_BASIS
             )
         }
@@ -154,7 +155,7 @@ fun CoveringLetterBasisView(
             }) {
                 Text(ADD_COVERING_BASIS)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         
         item {
@@ -209,7 +210,7 @@ fun CoveringLetterBasisView(
             }) {
                 Text(ADD_COVERING_LETTER_SERIES)
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
     }
 }

@@ -80,7 +80,7 @@ fun CoveringLetterSeriesDialog(
         }
 
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item{
             ParameterTextField(
@@ -90,7 +90,7 @@ fun CoveringLetterSeriesDialog(
                     description = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             BasicCheckBoxField(
@@ -100,7 +100,7 @@ fun CoveringLetterSeriesDialog(
                     resultToClient = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
         }
         item {
             Row {
@@ -112,7 +112,7 @@ fun CoveringLetterSeriesDialog(
                     }
                 )
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item{
             ParameterTextField(
@@ -122,7 +122,7 @@ fun CoveringLetterSeriesDialog(
                     costLocation = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item{
             ParameterTextField(
@@ -132,13 +132,13 @@ fun CoveringLetterSeriesDialog(
                     laboratoryId = it
                 }
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             BasicDivider()
-            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding))
+            Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
         }
         item {
             Text(CHOICE_OF_BASIS)
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             BasicDropdownMenu(
                 expanded = viewModel.openBasisDropDown.value && basesChoices.isNotEmpty(),
                 onDismissRequest = {
@@ -212,9 +212,9 @@ fun CoveringLetterSeriesDialog(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             BasicDivider()
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         if (basicCoveringParameters.isNotEmpty()) {
@@ -236,7 +236,7 @@ fun CoveringLetterSeriesDialog(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         if (coveringSampleParameters.isNotEmpty()) {
@@ -258,7 +258,7 @@ fun CoveringLetterSeriesDialog(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         if (labSampleParameters.isNotEmpty()) {
@@ -280,7 +280,7 @@ fun CoveringLetterSeriesDialog(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         if (basicLabReportParameters.isNotEmpty()) {
@@ -302,7 +302,7 @@ fun CoveringLetterSeriesDialog(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -341,7 +341,7 @@ fun CoveringLetterSeriesDialog(
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -381,7 +381,7 @@ fun CoveringLetterSeriesDialog(
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {
@@ -424,7 +424,7 @@ fun CoveringLetterSeriesDialog(
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         if (costLocation.text.isNotEmpty()
@@ -436,11 +436,11 @@ fun CoveringLetterSeriesDialog(
         ) {
             item {
                 BasicDivider()
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
             item {
                 Text(CHOICES_FOR_SAMPLE_LOCATIONS)
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
 
                 if (viewModel.chosenAddress.value != null) {
                     BasicDropdownMenu(
@@ -489,13 +489,13 @@ fun CoveringLetterSeriesDialog(
             }
             
             item {
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 BasicDivider()
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
             item {
                 Text(PLANNED_START_DATE)
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
             item {
                 Text(viewModel.plannedStartDate.value.dayMonthYearString())
@@ -525,7 +525,7 @@ fun CoveringLetterSeriesDialog(
                                     onClick = { samplingSeriesType = type },
                                     role = Role.RadioButton
                                 )
-                                .padding(vertical = standardPadding)
+                                .padding(vertical = standardPadding.dp)
                         ) {
                             RadioButton(
                                 selected = type == samplingSeriesType,
@@ -561,9 +561,9 @@ fun CoveringLetterSeriesDialog(
         }
 
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             BasicDivider()
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
 
             OkButton(
                 onOk = {

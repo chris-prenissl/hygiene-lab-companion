@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
@@ -25,7 +26,7 @@ fun UserTypeDropdownMenu(
         ) {
             Text(value.translation)
         }
-        Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+        Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
         BasicDropdownMenu(
             expanded = expanded,
             onDismissRequest = {

@@ -30,14 +30,14 @@ fun BasicCard(
         elevation = elevation,
         modifier = Modifier
             .fillMaxWidth(halfSize)
-            .padding(cardPadding),
+            .padding(cardPadding.dp),
         onClick = onClick
     ) {
         Row (
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(standardPadding),
+                .padding(standardPadding.dp),
             content = content
         )
         if (accessIndicator) {
@@ -51,7 +51,7 @@ fun BasicCard(
                     imageVector = indicatorIcon,
                     contentDescription = indicatorIcon.name,
                     modifier = Modifier
-                        .size(iconSize)
+                        .size(iconSize.dp)
                 )
             }
         }
@@ -67,13 +67,13 @@ fun BasicCard(
         elevation = elevation,
         modifier = Modifier
             .fillMaxWidth(halfSize)
-            .padding(cardPadding)
+            .padding(cardPadding.dp)
     ) {
         Row (
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(standardPadding),
+                .padding(standardPadding.dp),
             content = content
         )
     }

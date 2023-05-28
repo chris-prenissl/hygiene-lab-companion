@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.model.entity.Sample
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
@@ -55,11 +56,11 @@ fun SampleEdit(
     Card(
         backgroundColor = MaterialTheme.colors.surface,
         modifier = Modifier
-            .padding(standardPadding),
-        elevation = standardElevation
+            .padding(standardPadding.dp),
+        elevation = standardElevation.dp
     ) {
         Column(
-            modifier = Modifier.padding(standardPadding)
+            modifier = Modifier.padding(standardPadding.dp)
         ) {
             ParameterText(
                 title = SAMPLE_LOCATION,
@@ -73,7 +74,7 @@ fun SampleEdit(
                 title = SAMPLING_DATE,
                 value = date ?: EMPTY
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
 
             when(samplingState) {
                 SamplingState.InLaboratory, SamplingState.LabInProgress -> {
@@ -81,12 +82,12 @@ fun SampleEdit(
                         title = EXTRA_INFO_SAMPLING_PERSON,
                         value = sample.extraInfoSampling
                     )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     ParameterText(
                         title = WARNING,
                         value = sample.warningMessage
                     )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
                 else -> {
                     ParameterTextField(
@@ -105,7 +106,7 @@ fun SampleEdit(
                             }
                         }
                     )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     ParameterTextField(
                         labelText = WARNING,
                         value = warningMessage,
@@ -122,7 +123,7 @@ fun SampleEdit(
                             }
                         }
                     )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
             }
 
@@ -135,7 +136,7 @@ fun SampleEdit(
                             value = it.value
                         )
                     }
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     ParameterTextField(
                         labelText = EXTRA_INFO_LAB_PERSON,
                         value = extraInfoLaboratory,
@@ -152,7 +153,7 @@ fun SampleEdit(
                             }
                         }
                     )
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     sample.labSampleParameters.let { parameters ->
                         parameters.forEachIndexed { idx, _ ->
                             val parameter = parameters[idx]
@@ -205,7 +206,7 @@ fun SampleEdit(
                         }
 
                     }
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
                 SamplingState.LaboratoryResult -> {
                     Text(LAB_REPORT_AVAILABLE)
@@ -265,7 +266,7 @@ fun SampleEdit(
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
     }
 }

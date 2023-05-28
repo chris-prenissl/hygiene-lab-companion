@@ -13,7 +13,9 @@ import kotlinx.coroutines.flow.*
 class DataStoreUser(private val context: Context) {
 
     companion object {
-        private val  Context.dataStore: DataStore<Preferences> by preferencesDataStore(USER_PREF_STORE)
+        private val  Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+            USER_PREF_STORE
+        )
         val USER_NAME_KEY = stringPreferencesKey(USER_NAME_PREF)
         val HAS_CERTIFICATE_KEY = stringPreferencesKey(HAS_CERTIFICATE_PREF)
         val QM_KEY = stringPreferencesKey(QM_PREF)

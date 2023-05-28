@@ -30,11 +30,11 @@ fun ParameterBooleanEdit(
                 ),
                 shape = MaterialTheme.shapes.small
             )
-            .padding(standardPadding),
+            .padding(standardPadding.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(parameterName)
-        Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+        Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
         Checkbox(
             checked = value.toBoolean(),
             onCheckedChange = onCheckedChange

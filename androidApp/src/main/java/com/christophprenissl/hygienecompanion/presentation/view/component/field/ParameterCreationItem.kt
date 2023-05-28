@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.model.entity.ParameterBasis
 import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
@@ -46,13 +47,13 @@ fun ParameterCreationItem(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
-                            .width(parameterCreationItemSize)
+                            .width(parameterCreationItemSize.dp)
                             .selectable(
                                 selected = type == checkedRadioButton,
                                 onClick = { checkedRadioButton = type },
                                 role = Role.RadioButton
                             )
-                            .padding(vertical = standardPadding)
+                            .padding(vertical = standardPadding.dp)
                     ) {
                         RadioButton(
                             selected = type == checkedRadioButton,

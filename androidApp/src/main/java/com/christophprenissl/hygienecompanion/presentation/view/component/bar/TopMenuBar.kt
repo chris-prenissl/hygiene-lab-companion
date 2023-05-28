@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.android.R
 import com.christophprenissl.hygienecompanion.util.*
@@ -26,8 +27,8 @@ fun TopMenuBar(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(standardPadding)
-                    .offset(x = iconBarOffset),
+                    .padding(standardPadding.dp)
+                    .offset(x = iconBarOffset.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -40,7 +41,7 @@ fun TopMenuBar(
                     color = titleColor,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .padding(horizontal = standardPadding)
+                        .padding(horizontal = standardPadding.dp)
                 )
             }
         },

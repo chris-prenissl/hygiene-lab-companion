@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
@@ -18,7 +19,7 @@ fun BasicCheckBoxField(
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(title)
-        Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+        Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
         Checkbox(
             checked = value,
             onCheckedChange = onCheckedChange

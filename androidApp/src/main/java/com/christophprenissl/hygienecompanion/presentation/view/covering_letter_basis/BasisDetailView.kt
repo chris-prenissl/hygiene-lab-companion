@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
@@ -16,15 +17,15 @@ fun BasisDetailView(
         item {
             Row {
                 Text(NORM)
-                Spacer(Modifier.padding(horizontal = standardPadding))
+                Spacer(Modifier.padding(horizontal = standardPadding.dp))
                 viewModel.chosenBasis.value?.norm?.let { Text(it) }
             }
             Row {
                 Text(DESCRIPTION)
-                Spacer(modifier = Modifier.padding(horizontal = standardPadding))
+                Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
                 viewModel.chosenBasis.value?.description?.let { Text(it) }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         viewModel.chosenBasis.value?.basicCoveringParameters?.let { parameters ->
             item {
@@ -33,12 +34,12 @@ fun BasisDetailView(
             items(parameters) { item ->
                 Row {
                     Text(item.name)
-                    Spacer(modifier = Modifier.padding(standardPadding))
+                    Spacer(modifier = Modifier.padding(standardPadding.dp))
                     item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
         }
 
@@ -49,12 +50,12 @@ fun BasisDetailView(
             items(parameters) { item ->
                 Row {
                     Text(item.name)
-                    Spacer(modifier = Modifier.padding(standardPadding))
+                    Spacer(modifier = Modifier.padding(standardPadding.dp))
                     item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
         }
 
@@ -65,12 +66,12 @@ fun BasisDetailView(
             items(parameters) { item ->
                 Row {
                     Text(item.name)
-                    Spacer(modifier = Modifier.padding(standardPadding))
+                    Spacer(modifier = Modifier.padding(standardPadding.dp))
                     item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
         }
 
@@ -81,12 +82,12 @@ fun BasisDetailView(
             items(parameters) { item ->
                 Row {
                     Text(item.name)
-                    Spacer(modifier = Modifier.padding(standardPadding))
+                    Spacer(modifier = Modifier.padding(standardPadding.dp))
                     item.parameterType.translation.let { Text(it) }
                 }
             }
             item {
-                Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
         }
     }

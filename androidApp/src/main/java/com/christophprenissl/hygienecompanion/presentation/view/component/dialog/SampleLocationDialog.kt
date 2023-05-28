@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
@@ -30,7 +31,7 @@ fun SampleLocationDialog(
             ) {
                 Column(modifier = Modifier.align(Alignment.TopCenter)) {
                     Text(SAMPLE_LOCATION)
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     ParameterTextField(
                         labelText = DESCRIPTION,
                         value = description,
@@ -54,7 +55,7 @@ fun SampleLocationDialog(
                     )
                     Button(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
-                        modifier = Modifier.padding(standardPadding),
+                        modifier = Modifier.padding(standardPadding.dp),
                         onClick = onDismissRequest
                     ) {
                         Text(
@@ -63,7 +64,7 @@ fun SampleLocationDialog(
                         )
                     }
                     Button(
-                        modifier = Modifier.padding(standardPadding),
+                        modifier = Modifier.padding(standardPadding.dp),
                         onClick = {
                             viewModel.saveSampleLocation(
                                 description = description.text,

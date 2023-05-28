@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
@@ -69,14 +70,14 @@ fun CoveringLetterDetailView(
         }
 
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             ParameterText(
                 title = PLANNED_START_DATE,
                 value = date?.dayMonthYearString()
             )
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         when(samplingState) {
@@ -94,7 +95,7 @@ fun CoveringLetterDetailView(
                     )
                 }
                 item {
-                    Spacer(modifier = Modifier.padding(vertical = standardPadding))
+                    Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
                 itemsIndexed(basicLabReportValues) { idx, _ ->
                     val parameter = coveringLetter.basicCoveringParameters[idx]
@@ -209,7 +210,7 @@ fun CoveringLetterDetailView(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
             LazyRow{
@@ -229,7 +230,7 @@ fun CoveringLetterDetailView(
                 SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                     Button(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
-                        modifier = Modifier.padding(vertical = standardPadding),
+                        modifier = Modifier.padding(vertical = standardPadding.dp),
                         onClick = {
                             viewModel.rejectCoveringLetter(coveringLetter)
                             Toast.makeText(context, SUCCESS_REJECT, Toast.LENGTH_SHORT)
@@ -245,7 +246,7 @@ fun CoveringLetterDetailView(
                     }
                     Button(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
-                        modifier = Modifier.padding(vertical = standardPadding),
+                        modifier = Modifier.padding(vertical = standardPadding.dp),
                         onClick = {
                             if (user.value != null) {
                                 viewModel.finishCoveringLetterInLab(
@@ -271,7 +272,7 @@ fun CoveringLetterDetailView(
                 else -> {
                     Button(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
-                        modifier = Modifier.padding(vertical = standardPadding),
+                        modifier = Modifier.padding(vertical = standardPadding.dp),
                         onClick = {
                             if (user.value != null) {
                                 viewModel.giveCoveringLetterToLab(
@@ -295,7 +296,7 @@ fun CoveringLetterDetailView(
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(vertical = standardPadding))
+            Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
         item {

@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicSurface
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
@@ -25,7 +26,7 @@ fun CoveringLetterSeriesDetailView(
 ) {
     BasicSurface(
         modifier = Modifier
-            .padding(standardPadding)
+            .padding(standardPadding.dp)
             .fillMaxSize()
     ) {
         LazyColumn(
