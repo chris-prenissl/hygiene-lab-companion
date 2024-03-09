@@ -1,13 +1,13 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("io.insert-koin:koin-core:3.4.0")
+                api(libs.koin.core)
             }
         }
         val commonTest by getting {
@@ -41,13 +41,14 @@ kotlin {
 
 android {
     namespace = "com.christophprenissl.hygienecompanion"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 21
     }
 }
 
 dependencies {
-    implementation("com.android.support:support-annotations:28.0.0")
-    implementation("androidx.compose.runtime:runtime:1.4.3")
+    implementation(libs.support.annotations)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.material3)
 }

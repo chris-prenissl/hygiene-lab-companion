@@ -1,18 +1,18 @@
 plugins {
-    id("com.android.application").version("8.0.2").apply(false)
-    id("com.android.library").version("8.0.2").apply(false)
-    kotlin("android").version("1.8.21").apply(false)
-    kotlin("multiplatform").version("1.8.21").apply(false)
+    alias(libs.plugins.android.application) apply(false)
+    alias(libs.plugins.android.library) apply(false)
+    alias(libs.plugins.firebase.crashlytics) apply(false)
+    alias(libs.plugins.google.services) apply(false)
+    alias(libs.plugins.kotlin.android) apply(false)
+    alias(libs.plugins.kotlin.multiplatform) apply(false)
 }
 
 tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+    delete(layout.buildDirectory)
 }
 
 buildscript {
     dependencies {
-        classpath("com.google.gms:google-services:4.3.15")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.5")
-        classpath("com.android.tools.build:gradle:8.0.2")
+        classpath(libs.gradle)
     }
 }
