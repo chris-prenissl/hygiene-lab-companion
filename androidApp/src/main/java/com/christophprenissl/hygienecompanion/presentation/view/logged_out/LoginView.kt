@@ -4,10 +4,10 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,7 +58,7 @@ fun LoginView(
         }
         item {
             BasicSurface(
-                border = BorderStroke(basicBorderStroke.dp, MaterialTheme.colors.onBackground)
+                border = BorderStroke(basicBorderStroke.dp, MaterialTheme.colorScheme.onBackground)
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,

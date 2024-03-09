@@ -1,10 +1,10 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.bar
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,10 +16,11 @@ import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.android.R
 import com.christophprenissl.hygienecompanion.util.*
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopMenuBar(
     title: String = APP_TITLE,
-    titleColor: Color = contentColorFor(backgroundColor),
+    titleColor: Color = contentColorFor(MaterialTheme.colorScheme.background),
     navController: NavController
 ) {
     TopAppBar(
@@ -52,7 +53,7 @@ fun TopMenuBar(
                 }
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                     contentDescription = BACK_BUTTON_DESCRIPTION
                 )
             }

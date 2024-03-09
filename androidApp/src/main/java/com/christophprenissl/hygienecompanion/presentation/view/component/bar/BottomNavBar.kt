@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.bar
 
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -14,15 +14,15 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 fun BottomNavBar(
     navController: NavHostController,
     navItems: List<Screen>,
-    iconsColor: Color = contentColorFor(MaterialTheme.colors.primarySurface)
+    iconsColor: Color = contentColorFor(MaterialTheme.colorScheme.primaryContainer)
 ) {
-    BottomNavigation(
+    NavigationBar(
         contentColor = iconsColor
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         navItems.forEach { screen ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 icon = { screen.icon?.let { Icon(it, contentDescription = screen.name) } },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 label = { Text(screen.name) },

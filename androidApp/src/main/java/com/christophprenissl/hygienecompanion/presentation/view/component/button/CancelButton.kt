@@ -1,8 +1,8 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.button
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -14,7 +14,7 @@ fun CancelButton(
     BasicButton(
         colors = ButtonDefaults.buttonColors(
             contentColor = contentColorFor(backgroundColor = Color.Red),
-            backgroundColor = Color.Red
+            containerColor = Color.Red
         ),
         onClick = onCancel,
         content = content

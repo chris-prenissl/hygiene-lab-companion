@@ -1,8 +1,8 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 

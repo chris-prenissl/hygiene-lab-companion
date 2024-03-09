@@ -3,7 +3,7 @@ package com.christophprenissl.hygienecompanion.model.util.mapper
 import com.christophprenissl.hygienecompanion.model.dto.BasisDto
 import com.christophprenissl.hygienecompanion.model.entity.Basis
 
-class BasisMapper(): DataMapper<Basis, BasisDto> {
+class BasisMapper : DataMapper<Basis, BasisDto> {
 
     override fun fromEntity(entity: BasisDto): Basis {
         val parameterBasisMapper = ParameterBasisMapper()

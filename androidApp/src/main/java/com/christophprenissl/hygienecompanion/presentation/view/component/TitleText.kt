@@ -1,7 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 
@@ -11,9 +11,9 @@ fun TitleText(
 ) {
     Text(
         text = title,
-        fontStyle = MaterialTheme.typography.h1.fontStyle,
+        fontStyle = MaterialTheme.typography.headlineLarge.fontStyle,
         textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.onBackground,
-        fontSize = MaterialTheme.typography.h1.fontSize
+        color = MaterialTheme.colorScheme.onBackground,
+        fontSize = MaterialTheme.typography.headlineLarge.fontSize
     )
 }

@@ -2,7 +2,7 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.dropd
 
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,7 +15,7 @@ fun UserTypeDropdownMenu(
     onUserTypeChoose: (UserType) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    val userTypes = UserType.values()
+    val userTypes = UserType.entries.toTypedArray()
 
     Row {
         DropdownCard(

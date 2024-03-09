@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -126,16 +126,12 @@ fun ReportDetailView(
                     if (viewModel.loadedCoveringLetterSeries.value != null) {
                         BasicButton(
                             onClick = {
-                                createXSSFFromReport(
-                                    context = context,
-                                    coveringLetterSeries = viewModel.loadedCoveringLetterSeries.value!!,
-                                    report = report
-                                )
+                                TODO()
                             },
                             colors = ButtonDefaults.buttonColors(
-                                backgroundColor = MaterialTheme.colors.secondary,
+                                containerColor = MaterialTheme.colorScheme.secondary,
                                 contentColor = contentColorFor(
-                                    backgroundColor = MaterialTheme.colors.secondary
+                                    backgroundColor = MaterialTheme.colorScheme.secondary
                                 )
                             )
                         ) {

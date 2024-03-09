@@ -3,9 +3,8 @@ package com.christophprenissl.hygienecompanion.presentation.view.component.field
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Text
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,14 +18,13 @@ import com.christophprenissl.hygienecompanion.util.parameterCreationItemSize
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ParameterCreationItem(
     item: ParameterBasis,
     onDelete: () -> Unit
 ) {
     var name by remember { mutableStateOf(item.name) }
-    val options = ParameterType.values()
+    val options = ParameterType.entries.toTypedArray()
     var checkedRadioButton by remember { mutableStateOf(item.parameterType) }
 
     SwipeToDelete(onDelete = onDelete) {

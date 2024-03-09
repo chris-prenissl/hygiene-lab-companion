@@ -4,7 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -30,7 +30,7 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.field.
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.*
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLetterSeriesDialog(
     viewModel: CoveringLetterBasisViewModel,
@@ -62,7 +62,7 @@ fun CoveringLetterSeriesDialog(
 
     val samplingLocations = remember { mutableStateListOf<SampleLocation>() }
 
-    val types = SamplingSeriesType.values()
+    val types = SamplingSeriesType.entries.toTypedArray()
     var samplingSeriesType by remember { mutableStateOf(types[0]) }
 
     LaunchedEffect(Unit) {

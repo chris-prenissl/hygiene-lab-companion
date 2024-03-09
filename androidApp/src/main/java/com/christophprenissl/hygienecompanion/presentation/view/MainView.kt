@@ -2,9 +2,9 @@ package com.christophprenissl.hygienecompanion.presentation.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -44,7 +44,7 @@ fun MainView() {
         UserType.Sampler -> samplerColor
         UserType.LabWorker -> labWorkerColor
         UserType.HygieneWorker -> hygieneWorkerColor
-        else -> contentColorFor(MaterialTheme.colors.surface)
+        else -> contentColorFor(MaterialTheme.colorScheme.surface)
     }
     Scaffold(
         topBar = {

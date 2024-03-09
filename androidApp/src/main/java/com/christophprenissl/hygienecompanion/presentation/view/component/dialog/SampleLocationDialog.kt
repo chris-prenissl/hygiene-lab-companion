@@ -1,7 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.dialog
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,13 +54,13 @@ fun SampleLocationDialog(
                         }
                     )
                     Button(
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                         modifier = Modifier.padding(standardPadding.dp),
                         onClick = onDismissRequest
                     ) {
                         Text(
                             CANCEL,
-                            color = MaterialTheme.colors.onPrimary
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                     Button(

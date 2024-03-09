@@ -6,7 +6,7 @@ import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.model.entity.SamplingSeriesType
 
-class CoveringLetterSeriesMapper(): DataMapper<CoveringLetterSeries, CoveringLetterSeriesDto> {
+class CoveringLetterSeriesMapper : DataMapper<CoveringLetterSeries, CoveringLetterSeriesDto> {
     override fun fromEntity(entity: CoveringLetterSeriesDto): CoveringLetterSeries {
         val addressMapper = AddressMapper()
 

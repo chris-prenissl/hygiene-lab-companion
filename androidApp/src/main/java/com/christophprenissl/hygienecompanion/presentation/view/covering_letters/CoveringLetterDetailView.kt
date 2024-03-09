@@ -10,9 +10,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -229,7 +229,7 @@ fun CoveringLetterDetailView(
             when(samplingState) {
                 SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                     Button(
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                         modifier = Modifier.padding(vertical = standardPadding.dp),
                         onClick = {
                             viewModel.rejectCoveringLetter(coveringLetter)
@@ -245,7 +245,7 @@ fun CoveringLetterDetailView(
                         Text(GIVE_BACK_COVERING_LETTER)
                     }
                     Button(
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan),
                         modifier = Modifier.padding(vertical = standardPadding.dp),
                         onClick = {
                             if (user.value != null) {
@@ -271,7 +271,7 @@ fun CoveringLetterDetailView(
                 }
                 else -> {
                     Button(
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Cyan),
                         modifier = Modifier.padding(vertical = standardPadding.dp),
                         onClick = {
                             if (user.value != null) {

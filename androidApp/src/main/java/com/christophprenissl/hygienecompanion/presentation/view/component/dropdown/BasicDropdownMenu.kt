@@ -1,7 +1,7 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.dropdown
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.DropdownMenu
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier

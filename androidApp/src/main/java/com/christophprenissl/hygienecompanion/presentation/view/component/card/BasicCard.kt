@@ -1,11 +1,11 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.card
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowRight
+import androidx.compose.material.icons.automirrored.rounded.ArrowRight
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,17 +17,16 @@ import com.christophprenissl.hygienecompanion.util.halfSize
 import com.christophprenissl.hygienecompanion.util.iconSize
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BasicCard(
     onClick: () -> Unit,
     accessIndicator: Boolean = true,
-    indicatorIcon: ImageVector = Icons.Rounded.ArrowRight,
+    indicatorIcon: ImageVector = Icons.AutoMirrored.Rounded.ArrowRight,
     elevation: Dp = 0.dp,
     content: @Composable RowScope.() -> Unit
 ) {
     Card(
-        elevation = elevation,
+        elevation = CardDefaults.cardElevation(elevation),
         modifier = Modifier
             .fillMaxWidth(halfSize)
             .padding(cardPadding.dp),
@@ -64,7 +63,7 @@ fun BasicCard(
     content: @Composable RowScope.() -> Unit
 ) {
     Card(
-        elevation = elevation,
+        elevation = CardDefaults.cardElevation(elevation),
         modifier = Modifier
             .fillMaxWidth(halfSize)
             .padding(cardPadding.dp)

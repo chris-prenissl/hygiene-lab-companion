@@ -1,7 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.ui.theme
 
-import androidx.compose.material.Typography
-import androidx.compose.ui.Modifier
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -18,25 +17,14 @@ val fonts = FontFamily(
 )
 
 val Typography = Typography(
-    h1 = TextStyle(
+    displayLarge = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Bold,
         fontSize = 26.sp
     ),
-    body1 = TextStyle(
+    bodyLarge = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Thin,
         fontSize = 16.sp
-    ),
-    button = TextStyle(
-        fontFamily = fonts,
-        fontWeight = FontWeight.Thin,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontFamily = fonts,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        fontStyle = FontStyle.Italic
     )
 )
