@@ -1,12 +1,9 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.application)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    applyDefaultHierarchyTemplate()
-
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -22,33 +19,25 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            isStatic = true
         }
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(libs.koin.core)
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+        commonMain.dependencies {
+            //put your multiplatform dependencies here
         }
     }
 }
 
 android {
-    namespace = "com.christophprenissl.hygienecompanion"
+    namespace = "com.christophprenissl.hygienecompanion.android"
     compileSdk = 34
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
     }
-}
-
-dependencies {
-    implementation(libs.support.annotations)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material3)
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
