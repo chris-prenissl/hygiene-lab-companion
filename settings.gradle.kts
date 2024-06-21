@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Hygiene_Companion_Multi-Platform"
+rootProject.name = "Hygiene Lab Companion"
 
 include(":androidApp")
 include(":shared")

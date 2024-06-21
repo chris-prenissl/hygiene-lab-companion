@@ -1,3 +1,3 @@
-# Hygiene Companion
+# Hygiene Lab Companion
 
-a companion app to manage testing meta data in hospital hygiene
+a companion app to manage sample meta data for workers at the hospital hygiene laboratory.
