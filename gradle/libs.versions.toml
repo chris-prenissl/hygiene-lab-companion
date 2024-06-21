@@ -1,7 +1,7 @@
 [versions]
 activityCompose = "1.9.0"
 androidxCoreKtx = "1.13.1"
-androidGradlePlugin = "8.2.2"
+androidGradlePlugin = "8.3.2"
 androidxLifecycleRuntimeKtx = "2.8.2"
 composeBom = "2024.06.00"
 datastorePreferences = "1.1.1"
@@ -10,16 +10,15 @@ firebaseAppDistributionGradle = "5.0.0"
 firebaseBom = "33.1.1"
 firebaseCrashlytics = "3.0.2"
 googleServices = "4.4.2"
-gradle = "8.5.0"
+gradle = "8.3.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 koinCore = "3.5.3"
-kotlin = "1.9.22"
+kotlin = "2.0.0"
 kotlinxCoroutinesPlayServices = "1.8.0"
 lifecycleViewmodelCompose = "2.8.2"
-multiplatform = "1.9.23"
+multiplatform = "2.0.0"
 navigationCompose = "2.7.7"
-supportAnnotations = "28.0.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -49,11 +48,11 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 koin-androidx-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
-support-annotations = { module = "com.android.support:support-annotations", version.ref = "supportAnnotations" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
