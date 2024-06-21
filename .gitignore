@@ -12,3 +12,4 @@ local.properties
 /androidApp/build/*
 /androidApp/release/*
 /shared/build/*
+/androidApp/google-services.json
