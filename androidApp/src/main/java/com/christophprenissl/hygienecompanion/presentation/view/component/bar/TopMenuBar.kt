@@ -34,7 +34,7 @@ fun TopMenuBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_ukr_logo),
+                    painter = painterResource(id = R.drawable.baseline_lens_blur_24),
                     contentDescription = UKR_LOGO_DESCRIPTION
                 )
                 Text(
