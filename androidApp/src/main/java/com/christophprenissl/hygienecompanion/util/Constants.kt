@@ -10,17 +10,17 @@ const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 
 //sizes
 const val halfSize = 0.5f
-val cardPadding = 4
-val standardPadding = 8
-val doubleStandardPadding = standardPadding.times(2)
-val standardElevation = 4
-val iconSize = 64
-val basicBorderStroke = 1
-val titleIconSize = iconSize.times(1.25f)
-val titleDistance = 40
-val iconBarOffset = iconSize.times(-halfSize)
+const val cardPadding = 4
+const val standardPadding = 8
+const val doubleStandardPadding = standardPadding.times(2)
+const val standardElevation = 4
+const val iconSize = 64
+const val basicBorderStroke = 1
+const val titleIconSize = iconSize.times(1.25f)
+const val titleDistance = 40
+const val iconBarOffset = iconSize.times(-halfSize)
 const val dropDownMenuWidth = 0.92f
-val parameterCreationItemSize = 90
+const val parameterCreationItemSize = 90
 
 //excel
 const val PARAMETER = "Parametername"

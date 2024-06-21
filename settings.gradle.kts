@@ -1,5 +1,14 @@
+rootProject.name = "Hygiene Lab Companion"
+
 pluginManagement {
     repositories {
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         gradlePluginPortal()
         google()
         mavenCentral()
@@ -8,12 +17,15 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
-        google()
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
         mavenCentral()
     }
 }
 
-rootProject.name = "Hygiene Lab Companion"
-
 include(":androidApp")
-include(":shared")
