@@ -50,7 +50,7 @@ kotlin {
             implementation(libs.androidx.compose.material.icons)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.navigation.compose)
-            implementation(libs.kotlinx.coroutines.play.services)
+            implementation(libs.jetbrains.kotlinx.coroutines.play.services)
 
             //Koin
             implementation(libs.bundles.koin)
@@ -72,6 +72,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.jetbrains.compose.navigation)
         }
     }
 }
