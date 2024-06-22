@@ -11,7 +11,7 @@ import com.christophprenissl.hygienecompanion.util.dropDownMenuWidth
 fun BasicDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
-    content: @Composable() (ColumnScope.() -> Unit)
+    content: @Composable (ColumnScope.() -> Unit)
 ) {
     Box(
         modifier = Modifier
