@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class LoggedOutViewModel @Inject constructor(
     private val dataStoreUser: DataStoreUser
-): ViewModel() {
+) : ViewModel() {
 
     private var _state = MutableStateFlow(LoggedOutState())
     val state: StateFlow<LoggedOutState> = _state
@@ -23,26 +23,36 @@ class LoggedOutViewModel @Inject constructor(
     }
 
 
-
     private fun getUser() {
         viewModelScope.launch {
             dataStoreUser.getUser().collect { user ->
-                _state.update { it.copy(
-                    name = user.name,
-                    hasCertificate = user.hasCertificate,
-                    isUserOfInstitute = user.isSamplerOfInstitute,
-                    userType = user.userType
-                ) }
+                if (user == null) {
+                    _state.update { LoggedOutState() }
+                } else {
+                    _state.update {
+                        it.copy(
+                            name = user.name,
+                            hasCertificate = user.hasCertificate,
+                            isUserOfInstitute = user.isSamplerOfInstitute,
+                            userType = user.userType
+                        )
+                    }
+                }
             }
         }
     }
 
     fun onEvent(event: LoggedOutEvent) {
-        when(event) {
+        when (event) {
             is LoggedOutEvent.UserNameChanged -> _state.update { it.copy(name = event.name) }
             is LoggedOutEvent.Login -> login()
             is LoggedOutEvent.SetCertificateChanged -> _state.update { it.copy(hasCertificate = event.hasCertificate) }
-            is LoggedOutEvent.SetSamplerOfInstituteChanged -> _state.update { it.copy(isUserOfInstitute = event.isSamplerOfInstitute) }
+            is LoggedOutEvent.SetSamplerOfInstituteChanged -> _state.update {
+                it.copy(
+                    isUserOfInstitute = event.isSamplerOfInstitute
+                )
+            }
+
             is LoggedOutEvent.UserTypeChanged -> _state.update { it.copy(userType = event.type) }
         }
     }
@@ -50,14 +60,16 @@ class LoggedOutViewModel @Inject constructor(
     private fun login() {
         val userType = _state.value.userType
         val isNotLabWorker = userType != UserType.LabWorker
-        val user = User(
-            name = _state.value.name,
-            hasCertificate = if (isNotLabWorker) _state.value.hasCertificate else false,
-            isSamplerOfInstitute = if (isNotLabWorker) _state.value.isUserOfInstitute else false,
-            userType = userType
-        )
-        viewModelScope.launch {
-            dataStoreUser.saveUser(user)
+        _state.value.name?.let {
+            val user = User(
+                name = it,
+                hasCertificate = if (isNotLabWorker) _state.value.hasCertificate else false,
+                isSamplerOfInstitute = if (isNotLabWorker) _state.value.isUserOfInstitute else false,
+                userType = userType!!
+            )
+            viewModelScope.launch {
+                dataStoreUser.saveUser(user)
+            }
         }
     }
 }

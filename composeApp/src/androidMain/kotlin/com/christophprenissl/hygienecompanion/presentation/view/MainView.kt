@@ -8,6 +8,7 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.hygieneWorkerColor
@@ -21,37 +22,44 @@ import com.christophprenissl.hygienecompanion.util.DataStoreUser
 
 @Composable
 fun MainView(dataStoreUser: DataStoreUser) {
+    val defaultColor = contentColorFor(MaterialTheme.colorScheme.surface)
     val navController = rememberNavController()
-    var userType by rememberSaveable { mutableStateOf<UserType?>(null) }
+    var topBarTitle by rememberSaveable { mutableStateOf(APP_TITLE) }
+    var topBarTitleColor by remember { mutableStateOf(Color.White) }
+    var bottomNavItems by rememberSaveable { mutableStateOf<List<Screen>>(emptyList()) }
     LaunchedEffect(Unit) {
-        dataStoreUser.getUser().collect { user ->
-            userType = user.userType
+        dataStoreUser.getUserType().collect { userType ->
+            bottomNavItems = when(userType) {
+                UserType.Sampler -> {
+                    listOf(Screen.CoveringLetters)
+                }
+                UserType.LabWorker -> {
+                    listOf(Screen.Lab)
+                }
+                UserType.HygieneWorker -> {
+                    listOf(
+                        Screen.CoveringLetters,
+                        Screen.CoveringLetterBasis,
+                        Screen.Reports
+                    )
+                }
+                else -> emptyList()
+            }
+
+            topBarTitleColor = when(userType) {
+                UserType.Sampler -> samplerColor
+                UserType.LabWorker -> labWorkerColor
+                UserType.HygieneWorker -> hygieneWorkerColor
+                else -> defaultColor
+            }
+            topBarTitle = userType?.translation ?: APP_TITLE
+
+            if (userType != null) {
+                navController.navigate(Screen.CoveringLetters.route)
+            }
         }
     }
 
-    val bottomNavItems = when(userType) {
-        UserType.Sampler -> {
-            listOf(Screen.CoveringLetters)
-        }
-        UserType.LabWorker -> {
-            listOf(Screen.Lab)
-        }
-        UserType.HygieneWorker -> {
-            listOf(
-                Screen.CoveringLetters,
-                Screen.CoveringLetterBasis,
-                Screen.Reports
-            )
-        }
-        else -> emptyList()
-    }
-    val topBarTitle = userType?.translation ?: APP_TITLE
-    val topBarTitleColor = when(userType) {
-        UserType.Sampler -> samplerColor
-        UserType.LabWorker -> labWorkerColor
-        UserType.HygieneWorker -> hygieneWorkerColor
-        else -> contentColorFor(MaterialTheme.colorScheme.surface)
-    }
     Scaffold(
         topBar = {
             TopMenuBar(
@@ -61,7 +69,7 @@ fun MainView(dataStoreUser: DataStoreUser) {
             )
         },
         bottomBar = {
-            if (userType != null) BottomNavBar(
+            if (bottomNavItems.isNotEmpty()) BottomNavBar(
                 navController = navController,
                 navItems = bottomNavItems,
                 iconsColor = topBarTitleColor

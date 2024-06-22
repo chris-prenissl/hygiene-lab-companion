@@ -31,8 +31,8 @@ class CoveringLettersViewModel @Inject constructor(
     private var _savedCoveringLetterState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedCoveringLetterState: State<Response<Void?>> = _savedCoveringLetterState
 
-    val userTypeFlow: Flow<UserType> = dataStoreUser.getUserType()
-    val userFlow: Flow<User> = dataStoreUser.getUser()
+    val userTypeFlow: Flow<UserType?> = dataStoreUser.getUserType()
+    val userFlow: Flow<User?> = dataStoreUser.getUser()
 
     init {
         getCoveringLettersNotFinishedByDate()

@@ -22,27 +22,32 @@ class DataStoreUser(private val context: Context) {
         val USER_TYPE_KEY = stringPreferencesKey(USER_TYPE_PREF)
     }
 
-    fun getUserType(): Flow<UserType> = flow {
+    fun getUserType(): Flow<UserType?> = flow {
         context.dataStore.data.first().let { preferences ->
-            val type = preferences[USER_TYPE_KEY] ?: UserType.Sampler.name
-            emit(UserType.valueOf(type))
+            preferences[USER_TYPE_KEY]?.let {
+                emit(UserType.valueOf(it))
+            } ?: emit(null)
         }
     }
 
-    fun getUser(): Flow<User> = flow {
+    fun getUser(): Flow<User?> = flow {
         context.dataStore.data.first().let { preferences ->
             val name = preferences[USER_NAME_KEY]
             val hasCertificate = preferences[HAS_CERTIFICATE_KEY].toBoolean()
             val qm = preferences[QM_KEY].toBoolean()
-            val userTypeString = preferences[USER_TYPE_KEY]?: UserType.Sampler.name
-            emit(
-                User(
-                    name = name?: "",
-                    hasCertificate = hasCertificate,
-                    isSamplerOfInstitute = qm,
-                    userType = UserType.valueOf(userTypeString)
+            val userTypeString = preferences[USER_TYPE_KEY]
+            if (name == null || userTypeString == null) {
+                emit(null)
+            } else {
+                emit(
+                    User(
+                        name = name,
+                        hasCertificate = hasCertificate,
+                        isSamplerOfInstitute = qm,
+                        userType = UserType.valueOf(userTypeString)
+                    )
                 )
-            )
+            }
         }
     }
 

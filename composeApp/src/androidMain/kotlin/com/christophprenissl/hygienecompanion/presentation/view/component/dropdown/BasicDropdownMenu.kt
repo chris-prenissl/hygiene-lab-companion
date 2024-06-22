@@ -5,7 +5,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.window.PopupProperties
 import com.christophprenissl.hygienecompanion.util.dropDownMenuWidth
 
 @Composable
@@ -23,8 +22,6 @@ fun BasicDropdownMenu(
             modifier = Modifier.fillMaxWidth(dropDownMenuWidth),
             expanded = expanded,
             onDismissRequest = onDismissRequest,
-            content = content,
-            properties = PopupProperties(focusable = false)
-        )
+            content = content,)
     }
 }

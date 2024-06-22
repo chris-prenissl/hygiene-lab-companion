@@ -10,12 +10,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 
 @Composable
 fun ParameterTextField(
+    modifier: Modifier = Modifier,
     labelText: String? = null,
     value: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
     onValueChange: (String) -> Unit,
     isError: Boolean = false,
-    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         label = { labelText?.let { Text(labelText) } },

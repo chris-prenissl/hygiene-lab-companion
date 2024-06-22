@@ -36,8 +36,8 @@ fun UserTypeDropdownMenu(
             userTypes.forEach {
                 BasicDropdownItem(
                     onClick = {
-                        onUserTypeChoose(it)
                         expanded = false
+                        onUserTypeChoose(it)
                     }
                 ) {
                     Text(it.translation)
