@@ -1,4 +1,4 @@
-rootProject.name = "Hygiene Lab Companion"
+rootProject.name = "HygieneLabCompanion"
 
 pluginManagement {
     repositories {
@@ -28,4 +28,4 @@ dependencyResolutionManagement {
     }
 }
 
-include(":androidApp")
+include(":composeApp")
