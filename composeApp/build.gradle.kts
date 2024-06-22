@@ -52,6 +52,8 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             implementation(libs.jetbrains.kotlinx.coroutines.play.services)
 
+            implementation(libs.androidx.compose.adaptive.navigation.suite)
+
             //Koin
             implementation(libs.bundles.koin)
 
@@ -83,7 +85,7 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+    //sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "com.christophprenissl.hygienecompanion.android"
