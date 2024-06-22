@@ -1,13 +1,13 @@
 package com.christophprenissl.hygienecompanion.presentation.view.logged_out
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.model.entity.User
 import com.christophprenissl.hygienecompanion.model.entity.UserType
-import com.christophprenissl.hygienecompanion.presentation.view.util.loginAs
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,64 +15,49 @@ class LoggedOutViewModel @Inject constructor(
     private val dataStoreUser: DataStoreUser
 ): ViewModel() {
 
-    private var _userNameState = mutableStateOf("")
-    val userNameState: State<String> = _userNameState
-
-    private var _hasCertificateState = mutableStateOf(false)
-    val hasCertificateState: State<Boolean> = _hasCertificateState
-
-    private var _isUserOfInstituteState = mutableStateOf(false)
-    val isUserOfInstituteState: State<Boolean> = _isUserOfInstituteState
-
-    private var _userTypeState = mutableStateOf(UserType.Sampler)
-    val userTypeState: State<UserType> = _userTypeState
+    private var _state = MutableStateFlow(LoggedOutState())
+    val state: StateFlow<LoggedOutState> = _state
 
     init {
         getUser()
     }
 
+
+
     private fun getUser() {
         viewModelScope.launch {
             dataStoreUser.getUser().collect { user ->
-                user.name.let { _userNameState.value = it }
-                user.userType.let { _userTypeState.value = it }
-                user.hasCertificate.let { _hasCertificateState.value = it }
-                user.isSamplerOfInstitute.let { _isUserOfInstituteState.value = it }
+                _state.update { it.copy(
+                    name = user.name,
+                    hasCertificate = user.hasCertificate,
+                    isUserOfInstitute = user.isSamplerOfInstitute,
+                    userType = user.userType
+                ) }
             }
         }
     }
 
-    fun setUserName(name: String) {
-        _userNameState.value = name
+    fun onEvent(event: LoggedOutEvent) {
+        when(event) {
+            is LoggedOutEvent.UserNameChanged -> _state.update { it.copy(name = event.name) }
+            is LoggedOutEvent.Login -> login()
+            is LoggedOutEvent.SetCertificateChanged -> _state.update { it.copy(hasCertificate = event.hasCertificate) }
+            is LoggedOutEvent.SetSamplerOfInstituteChanged -> _state.update { it.copy(isUserOfInstitute = event.isSamplerOfInstitute) }
+            is LoggedOutEvent.UserTypeChanged -> _state.update { it.copy(userType = event.type) }
+        }
     }
 
-    fun setUserType(type: UserType) {
-        _userTypeState.value = type
-    }
-
-    fun setUserHasCertificate(value: Boolean) {
-        _hasCertificateState.value = value
-    }
-
-    fun setUserIsSamplerOfInstitute(value: Boolean) {
-        _isUserOfInstituteState.value = value
-    }
-
-    fun login(
-        onLogin: (UserType) -> Unit
-    ) {
+    private fun login() {
+        val userType = _state.value.userType
+        val isNotLabWorker = userType != UserType.LabWorker
         val user = User(
-            name = _userNameState.value,
-            hasCertificate = if (_userTypeState.value != UserType.LabWorker) _hasCertificateState.value else false,
-            isSamplerOfInstitute = if (_userTypeState.value != UserType.LabWorker) _isUserOfInstituteState.value else false,
-            userType = _userTypeState.value
+            name = _state.value.name,
+            hasCertificate = if (isNotLabWorker) _state.value.hasCertificate else false,
+            isSamplerOfInstitute = if (isNotLabWorker) _state.value.isUserOfInstitute else false,
+            userType = userType
         )
         viewModelScope.launch {
-            loginAs(
-                userDataStore = dataStoreUser,
-                user = user,
-                onLogin = onLogin
-            )
+            dataStoreUser.saveUser(user)
         }
     }
 }

@@ -17,11 +17,17 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.bar.Bo
 import com.christophprenissl.hygienecompanion.presentation.view.component.bar.TopMenuBar
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.util.APP_TITLE
+import com.christophprenissl.hygienecompanion.util.DataStoreUser
 
 @Composable
-fun MainView() {
+fun MainView(dataStoreUser: DataStoreUser) {
     val navController = rememberNavController()
     var userType by rememberSaveable { mutableStateOf<UserType?>(null) }
+    LaunchedEffect(Unit) {
+        dataStoreUser.getUser().collect { user ->
+            userType = user.userType
+        }
+    }
 
     val bottomNavItems = when(userType) {
         UserType.Sampler -> {
@@ -65,9 +71,6 @@ fun MainView() {
         Box(modifier = Modifier.padding(innerPadding)) {
             NavigationGraph(
                 navController = navController,
-                onLogin = {
-                    userType = it
-                }
             )
         }
     }

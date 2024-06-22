@@ -3,7 +3,6 @@ package com.christophprenissl.hygienecompanion.presentation.view
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
 import com.christophprenissl.hygienecompanion.util.LOGGED_OUT_ROUTE
@@ -15,16 +14,15 @@ import com.christophprenissl.hygienecompanion.presentation.view.logged_out.logge
 import com.christophprenissl.hygienecompanion.presentation.view.profile.profileNavGraph
 import com.christophprenissl.hygienecompanion.presentation.view.reports.ReportsViewModel
 import com.christophprenissl.hygienecompanion.presentation.view.reports.reportsNavGraph
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    coveringLetterBasisViewModel: CoveringLetterBasisViewModel = getViewModel(),
-    coveringLettersViewModel: CoveringLettersViewModel = getViewModel(),
-    reportsViewModel: ReportsViewModel = getViewModel(),
-    loggedOutViewModel: LoggedOutViewModel = getViewModel(),
-    onLogin: (UserType) -> Unit
+    coveringLetterBasisViewModel: CoveringLetterBasisViewModel = koinViewModel(),
+    coveringLettersViewModel: CoveringLettersViewModel = koinViewModel(),
+    reportsViewModel: ReportsViewModel = koinViewModel(),
+    loggedOutViewModel: LoggedOutViewModel = koinViewModel(),
 ) {
     NavHost(
         navController = navController,
@@ -34,7 +32,6 @@ fun NavigationGraph(
         loggedOutGraph(
             navController = navController,
             viewModel = loggedOutViewModel,
-            onLogin = onLogin
         )
 
         coveringLettersGraph(

@@ -6,12 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.graphics.toArgb
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.HygieneCompanionTheme
-import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRBackgroundDark
-import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRStatusBarDark
-import com.christophprenissl.hygienecompanion.presentation.ui.theme.UKRStatusBarLight
+import com.christophprenissl.hygienecompanion.presentation.ui.theme.appBackgroundDark
+import com.christophprenissl.hygienecompanion.presentation.ui.theme.appStatusBarDark
+import com.christophprenissl.hygienecompanion.presentation.ui.theme.appStatusBarLight
 import com.christophprenissl.hygienecompanion.presentation.view.MainView
+import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
+import org.koin.java.KoinJavaComponent.get
 
 @InternalCoroutinesApi
 @ExperimentalCoroutinesApi
@@ -20,13 +22,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             if (isSystemInDarkTheme()) {
-                window.statusBarColor = UKRStatusBarDark.toArgb()
+                window.statusBarColor = appStatusBarDark.toArgb()
             } else {
-                window.statusBarColor = UKRStatusBarLight.toArgb()
+                window.statusBarColor = appStatusBarLight.toArgb()
             }
-            window.navigationBarColor = UKRBackgroundDark.toArgb()
+            window.navigationBarColor = appBackgroundDark.toArgb()
             HygieneCompanionTheme {
-               MainView()
+               MainView(get(DataStoreUser::class.java))
            }
         }
     }
