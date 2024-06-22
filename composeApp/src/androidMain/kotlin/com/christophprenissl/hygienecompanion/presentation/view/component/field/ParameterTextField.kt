@@ -4,6 +4,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 
@@ -13,7 +14,8 @@ fun ParameterTextField(
     value: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
     onValueChange: (String) -> Unit,
-    isError: Boolean = false
+    isError: Boolean = false,
+    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         label = { labelText?.let { Text(labelText) } },
@@ -21,7 +23,8 @@ fun ParameterTextField(
         keyboardOptions = keyboardOptions,
         onValueChange = onValueChange,
         isError = isError,
-        singleLine = true
+        singleLine = true,
+        modifier = modifier
     )
 }
 
