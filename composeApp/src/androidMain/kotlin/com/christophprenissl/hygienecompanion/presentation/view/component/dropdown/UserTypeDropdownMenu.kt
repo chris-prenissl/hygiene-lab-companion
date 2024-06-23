@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.util.standardPadding
@@ -14,12 +15,14 @@ fun UserTypeDropdownMenu(
     value: UserType,
     onUserTypeChoose: (UserType) -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
     var expanded by remember { mutableStateOf(false) }
     val userTypes = UserType.entries.toTypedArray()
 
     Row {
         DropdownCard(
             onClick = {
+                focusManager.clearFocus()
                 expanded = !expanded
             },
             menuOpen = expanded
