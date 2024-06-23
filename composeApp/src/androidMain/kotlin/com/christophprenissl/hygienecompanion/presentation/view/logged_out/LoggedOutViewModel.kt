@@ -64,7 +64,7 @@ class LoggedOutViewModel @Inject constructor(
                 name = it,
                 hasCertificate = if (isNotLabWorker) _state.value.hasCertificate else false,
                 isSamplerOfInstitute = if (isNotLabWorker) _state.value.isUserOfInstitute else false,
-                userType = userType!!
+                userType = userType ?: UserType.Sampler
             )
             viewModelScope.launch {
                 dataStoreUser.saveUser(user)
