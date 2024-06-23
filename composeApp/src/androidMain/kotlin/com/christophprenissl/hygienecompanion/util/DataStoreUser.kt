@@ -59,4 +59,10 @@ class DataStoreUser(private val context: Context) {
             preferences[USER_TYPE_KEY] = user.userType.name
         }
     }
+
+    suspend fun removeUser() {
+        context.dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
 }
