@@ -1,5 +1,6 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.field
 
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -14,6 +15,7 @@ fun ParameterTextField(
     labelText: String? = null,
     value: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+    keyboardActions: KeyboardActions = KeyboardActions(),
     onValueChange: (String) -> Unit,
     isError: Boolean = false,
 ) {
@@ -21,6 +23,7 @@ fun ParameterTextField(
         label = { labelText?.let { Text(labelText) } },
         value = value,
         keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         onValueChange = onValueChange,
         isError = isError,
         singleLine = true,
