@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.android.R
 import com.christophprenissl.hygienecompanion.util.*
 
@@ -21,7 +20,10 @@ import com.christophprenissl.hygienecompanion.util.*
 fun TopMenuBar(
     title: String = APP_TITLE,
     titleColor: Color = contentColorFor(MaterialTheme.colorScheme.background),
-    navController: NavController
+    hasBackButton: Boolean = false,
+    hasLogoutButton: Boolean = false,
+    onLogout: () -> Unit = {},
+    onNavigateUp: () -> Unit = {},
 ) {
     TopAppBar(
         title = {
@@ -47,15 +49,28 @@ fun TopMenuBar(
             }
         },
         navigationIcon = {
-            IconButton(
-                onClick = {
-                    navController.navigateUp()
+            if (hasBackButton) {
+                IconButton(
+                    onClick = onNavigateUp
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                        contentDescription = BACK_BUTTON_DESCRIPTION
+                    )
                 }
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    contentDescription = BACK_BUTTON_DESCRIPTION
-                )
+            }
+        },
+        actions = {
+            if (hasLogoutButton) {
+                IconButton(
+                    onClick = onLogout
+                ) {
+                    Icon(
+                        painter = painterResource(id = com.google.firebase.database.collection.R.drawable.googleg_standard_color_18),
+                        contentDescription = "Logout",
+                        tint = Color.Red
+                    )
+                }
             }
         }
     )

@@ -22,7 +22,6 @@ class LoggedOutViewModel @Inject constructor(
         getUser()
     }
 
-
     private fun getUser() {
         viewModelScope.launch {
             dataStoreUser.getUser().collect { user ->
