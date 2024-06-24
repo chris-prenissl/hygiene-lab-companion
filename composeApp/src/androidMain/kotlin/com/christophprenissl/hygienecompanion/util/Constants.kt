@@ -2,7 +2,7 @@ package com.christophprenissl.hygienecompanion.util
 
 const val APP_TITLE = "Hygiene Companion"
 const val APP_TITLE_START = "| $APP_TITLE"
-const val UKR_LOGO_DESCRIPTION = "UKR Logo"
+const val APP_LOGO_DESCRIPTION = "App Logo"
 const val BACK_BUTTON_DESCRIPTION = "Zurück"
 
 //permissions
@@ -17,42 +17,23 @@ const val standardElevation = 4
 const val iconSize = 64
 const val basicBorderStroke = 1
 const val titleIconSize = iconSize.times(1.25f)
-const val titleDistance = 40
 const val iconBarOffset = iconSize.times(-halfSize)
 const val dropDownMenuWidth = 0.92f
 const val parameterCreationItemSize = 90
 
 //excel
 const val PARAMETER = "Parametername"
-const val SAMPLES = "Proben"
-const val SUCCESS_SAVING = "Erfolgreich: %s wurde gespeichert"
-const val ERROR_SAVING = "Fehler: Datei konnte nicht gespeichert werden"
 const val NAME = "Name"
 const val SAMPLER = "Probeentnehmer:in"
 const val LAB_WORKER = "Laborarbeiter:in"
-const val IS_SAMPLER_OF_INSTITUTE = "QM-Probeentnehmer:in des Instituts "
-
-//views
-const val HOME_ROUTE = "home_route"
-const val LOGGED_OUT_ROUTE = "logged_out_route"
-const val COVERING_LETTERS_ROUTE = "covering_letter_route"
-const val COVERING_LETTER_BASIS_ROUTE = "covering_letter_basis_route"
-const val COVERING_BASIS_ROUTE = "basis_detail_route"
-const val REPORTS_ROUTE = "reports_route"
-const val PROFILE_ROUTE = "profile_route"
-
-//swipe to delete
-const val SWIPE_THRESHOLD = 0.8f
 
 //string resources
 const val ADDRESS_NAME = "Addressbezeichnung"
-const val ADDRESS = "Adresse"
 const val ZIP = "Postleitzahl"
 const val STREET = "Straße"
 const val CITY_NAME = "Stadtname"
 const val CONTACT = "Kontakt: "
 const val CONTACT_NAME = "Kontaktperson"
-const val CONTACT_DATA = "Kontaktdaten"
 const val PHONE = "Telefon"
 const val FAX = "Fax"
 const val EMAIL = "E-Mail"
@@ -143,13 +124,14 @@ const val SAVE_AS_EXCEL = "Als Exceldatei exportieren"
 //Register/Login
 const val LOGIN = "Login"
 
+const val LOGOUT = "Logout"
+
 //communication UI
 const val LOADING = "Lädt gerade"
 const val NOT_LOADED = "nicht geladen"
 const val ERROR = "Fehler"
 const val ACCEPT = "Ok"
 const val CANCEL = "Abbrechen"
-const val DELETE = "Löschen"
 
 const val REPORTS = "Befunde"
 
@@ -161,7 +143,6 @@ const val SAMPLE_LOCATIONS_FIRESTORE = "sample_locations"
 const val ADDRESSES_FIRESTORE = "addresses"
 const val BASES_FIRESTORE = "bases"
 const val USERS_FIRESTORE = "user"
-const val COVERING_LETTER_SERIES_FIRESTORE = "covering_letter_series"
 const val COVERING_LETTERS_FIRESTORE = "covering_letters"
 const val ADDRESS_ID = "addressId"
 const val SAMPLING_STATE_FIELD = "samplingState"

@@ -54,7 +54,7 @@ fun CoveringLettersView(
                                         )) {
                                         viewModel.chooseCoveringLetter(it)
                                         if (viewModel.chosenCoveringLetter.value != null) {
-                                            navController.navigate(Screen.CoveringLetterDetail.route)
+                                            navController.navigate(Screen.CoveringLetterDetail)
                                         }
                                     }
                                 },

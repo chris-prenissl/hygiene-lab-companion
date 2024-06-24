@@ -64,7 +64,7 @@ fun ReportsView(
                                 coveringLetter = it,
                                 onClick = {
                                     viewModel.chooseReport(it)
-                                    navController.navigate(Screen.ReportDetail.route)
+                                    navController.navigate(Screen.ReportDetail)
                                 }
                             )
                         }

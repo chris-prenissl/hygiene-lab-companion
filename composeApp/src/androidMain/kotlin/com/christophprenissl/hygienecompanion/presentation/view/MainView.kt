@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.presentation.MainViewEvent
+import com.christophprenissl.hygienecompanion.presentation.util.Route
 import com.christophprenissl.hygienecompanion.presentation.view.component.bar.BottomNavBar
 import com.christophprenissl.hygienecompanion.presentation.view.component.bar.TopMenuBar
-import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.util.APP_TITLE
 
 @Composable
@@ -20,8 +20,8 @@ fun MainView(mainViewViewModel: MainViewViewModel) {
     val uiState = mainViewViewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(uiState.value.userType) {
         if (uiState.value.userType != null) {
-            navController.navigate(Screen.CoveringLetters.graphRoute) {
-                popUpTo(Screen.Login.graphRoute) {
+            navController.navigate(Route.CoveringLetters) {
+                popUpTo(Route.LoggedOut) {
                     inclusive = true
                 }
             }
@@ -38,6 +38,11 @@ fun MainView(mainViewViewModel: MainViewViewModel) {
                 hasLogoutButton = stateValue.userType != null,
                 onLogout = {
                     mainViewViewModel.onEvent(MainViewEvent.Logout)
+                    navController.navigate(Route.LoggedOut) {
+                        navController.currentBackStackEntry?.destination?.route?.let { popUpTo(it) {
+                            inclusive = true
+                        } }
+                    }
                 },
                 hasBackButton = navController.previousBackStackEntry != null,
                 onNavigateUp = navController::navigateUp,

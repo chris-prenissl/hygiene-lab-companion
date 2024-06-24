@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -37,7 +38,7 @@ fun TopMenuBar(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_lens_blur_24),
-                    contentDescription = UKR_LOGO_DESCRIPTION
+                    contentDescription = APP_LOGO_DESCRIPTION
                 )
                 Text(
                     text = title,
@@ -66,9 +67,8 @@ fun TopMenuBar(
                     onClick = onLogout
                 ) {
                     Icon(
-                        painter = painterResource(id = com.google.firebase.database.collection.R.drawable.googleg_standard_color_18),
-                        contentDescription = "Logout",
-                        tint = Color.Red
+                        imageVector = Icons.AutoMirrored.Rounded.Logout,
+                        contentDescription = LOGOUT
                     )
                 }
             }

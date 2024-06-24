@@ -5,15 +5,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.christophprenissl.hygienecompanion.util.HOME_ROUTE
-import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.presentation.util.Route
 
 @Composable
 fun BottomNavBar(
     navController: NavHostController,
-    navItems: List<Screen>,
+    navItems: List<Route>,
     iconsColor: Color = contentColorFor(MaterialTheme.colorScheme.primaryContainer)
 ) {
     NavigationBar(
@@ -21,15 +21,14 @@ fun BottomNavBar(
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
-        navItems.forEach { screen ->
+        navItems.forEach { route ->
             NavigationBarItem(
-                icon = { screen.icon?.let { Icon(it, contentDescription = screen.name) } },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                label = { Text(screen.name) },
+                icon = { route.icon?.let { Icon(it, contentDescription = route.name) } },
+                selected = currentDestination?.hierarchy?.any { it.route == route.name } == true,
+                label = { Text(route.name) },
                 onClick = {
-                    navController.popBackStack()
-                    navController.navigate(screen.graphRoute) {
-                        popUpTo(HOME_ROUTE) {
+                    navController.navigate(route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         launchSingleTop = true

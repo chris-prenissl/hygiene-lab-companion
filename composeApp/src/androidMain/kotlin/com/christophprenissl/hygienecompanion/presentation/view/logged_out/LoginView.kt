@@ -29,7 +29,8 @@ import com.christophprenissl.hygienecompanion.util.*
 @Composable
 fun LoginView(
     state: LoggedOutState,
-    onEvent: (LoggedOutEvent) -> Unit
+    onEvent: (LoggedOutEvent) -> Unit,
+    onLogin: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -48,7 +49,7 @@ fun LoginView(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_lens_blur_24),
-                    contentDescription = UKR_LOGO_DESCRIPTION,
+                    contentDescription = APP_LOGO_DESCRIPTION,
                     modifier = Modifier.size(titleIconSize.dp)
                 )
                 Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
@@ -99,7 +100,10 @@ fun LoginView(
         }
         item {
             Button(
-                onClick = { onEvent(LoggedOutEvent.Login) },
+                onClick = {
+                    onEvent(LoggedOutEvent.Login)
+                    onLogin()
+                },
                 modifier = Modifier.padding(standardPadding.dp)
             ) {
                 Text(LOGIN)
@@ -114,5 +118,6 @@ fun LoginViewPreview() {
     LoginView(
         state = LoggedOutState(),
         onEvent = {},
+        onLogin = {}
     )
 }

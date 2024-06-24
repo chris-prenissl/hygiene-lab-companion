@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 kotlin {
@@ -51,6 +52,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.jetbrains.kotlinx.coroutines.play.services)
+            implementation(libs.jetbrains.kotlinx.serialization.json)
 
             implementation(libs.androidx.compose.adaptive.navigation.suite)
 

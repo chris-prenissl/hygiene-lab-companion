@@ -1,27 +1,33 @@
 package com.christophprenissl.hygienecompanion.presentation.view.logged_out
 
-import android.annotation.SuppressLint
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.christophprenissl.hygienecompanion.presentation.util.Route
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
-@SuppressLint("StateFlowValueCalledInComposition")
 fun NavGraphBuilder.loggedOutGraph(
     navController: NavController,
     viewModel: LoggedOutViewModel,
 ) {
-    navigation(startDestination = Screen.Login.route, route = Screen.Login.graphRoute) {
-        composable(Screen.Login.route) {
+    navigation<Route.LoggedOut>(startDestination = Screen.Login) {
+        composable<Screen.Login> {
             val state = viewModel.state.collectAsState()
             LoginView(
                 state = state.value,
-                onEvent = viewModel::onEvent
+                onEvent = viewModel::onEvent,
+                onLogin = {
+                    navController.navigate(Route.CoveringLetters) {
+                        popUpTo(Route.LoggedOut) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
-        composable(Screen.Register.route) {
+        composable<Screen.Register> {
             RegisterView(
                 navController = navController
             )

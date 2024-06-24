@@ -8,7 +8,7 @@ import com.christophprenissl.hygienecompanion.presentation.MainViewEvent
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.hygieneWorkerColor
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.labWorkerColor
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.samplerColor
-import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.presentation.util.Route
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -16,8 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStoreUser) :
-    ViewModel() {
+class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStoreUser) : ViewModel() {
 
     val state = dataStoreUser
         .getUser()
@@ -34,14 +33,13 @@ class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStore
                     else -> Color.White
                 },
                 bottomNavItems = when (userType) {
-                    UserType.Sampler -> listOf(Screen.CoveringLetters)
-                    UserType.LabWorker -> listOf(Screen.Lab)
+                    UserType.Sampler -> listOf(Route.CoveringLetters)
+                    UserType.LabWorker -> listOf(Route.CoveringLetters)
                     UserType.HygieneWorker -> listOf(
-                        Screen.CoveringLetters,
-                        Screen.CoveringLetterBasis,
-                        Screen.Reports
+                        Route.CoveringLetters,
+                        Route.CoveringLetterBasis,
+                        Route.Reports
                     )
-
                     else -> emptyList()
                 }
             )

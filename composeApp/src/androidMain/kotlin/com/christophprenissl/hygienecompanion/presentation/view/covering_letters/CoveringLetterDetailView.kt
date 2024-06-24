@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
+import com.christophprenissl.hygienecompanion.presentation.util.Route
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
@@ -235,8 +236,8 @@ fun CoveringLetterDetailView(
                             viewModel.rejectCoveringLetter(coveringLetter)
                             Toast.makeText(context, SUCCESS_REJECT, Toast.LENGTH_SHORT)
                                 .show()
-                            navController.navigate(Screen.CoveringLetters.graphRoute) {
-                                popUpTo(HOME_ROUTE) {
+                            navController.navigate(Route.CoveringLetters) {
+                                popUpTo(Screen.CoveringLetters) {
                                     inclusive = true
                                 }
                             }
@@ -255,8 +256,8 @@ fun CoveringLetterDetailView(
                                 )
                                 Toast.makeText(context, SUCCESS_REPORT, Toast.LENGTH_SHORT)
                                     .show()
-                                navController.navigate(Screen.CoveringLetters.graphRoute) {
-                                    popUpTo(HOME_ROUTE) {
+                                navController.navigate(Route.CoveringLetters) {
+                                    popUpTo(Screen.CoveringLetters) {
                                         inclusive = true
                                     }
                                 }
@@ -281,8 +282,8 @@ fun CoveringLetterDetailView(
                                 )
                                 Toast.makeText(context, SUCCESS_GIVE_TO_LAB, Toast.LENGTH_SHORT)
                                     .show()
-                                navController.navigate(Screen.CoveringLetters.graphRoute) {
-                                    popUpTo(HOME_ROUTE) {
+                                navController.navigate(Route.CoveringLetters) {
+                                    popUpTo(Screen.CoveringLetters) {
                                         inclusive = true
                                     }
                                 }

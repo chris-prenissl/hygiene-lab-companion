@@ -60,7 +60,7 @@ fun CoveringLetterBasisView(
                             address = address,
                             onClick = {
                                 viewModel.chooseAddressForSampleLocations(address)
-                                navController.navigate(Screen.SampleLocations.route)
+                                navController.navigate(Screen.SampleLocations)
                             }
                         )
                     }
@@ -117,7 +117,7 @@ fun CoveringLetterBasisView(
                             basis = basis,
                             onClick = {
                                 viewModel.chooseBasis(basis)
-                                navController.navigate(Screen.BasisDetail.route)
+                                navController.navigate(Screen.BasisDetail)
                             }
                         )
                     }
@@ -172,7 +172,7 @@ fun CoveringLetterBasisView(
                             coveringLetterSeries = series,
                             onClick = {
                                 viewModel.chooseCoveringLetterSeries(series)
-                                navController.navigate(Screen.CoveringLetterSeriesDetail.route)
+                                navController.navigate(Screen.CoveringLetterSeriesDetail)
                             }
                         )
                     }
