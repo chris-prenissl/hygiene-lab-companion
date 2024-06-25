@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
@@ -42,11 +43,9 @@ kotlin {
             //Compose
             val composeBom = project.dependencies.platform(libs.androidx.compose.bom)
             implementation(composeBom)
-
             implementation(libs.androidx.compose.material3)
-
-            implementation(libs.androidx.compose.ui.tooling.preview)
-
+            implementation(libs.androidx.compose.adaptive.navigation)
+            implementation(libs.androidx.compose.adaptive.layout)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.compose.material.icons)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -54,7 +53,7 @@ kotlin {
             implementation(libs.jetbrains.kotlinx.coroutines.play.services)
             implementation(libs.jetbrains.kotlinx.serialization.json)
 
-            implementation(libs.androidx.compose.adaptive.navigation.suite)
+            implementation(libs.androidx.compose.ui.tooling.preview)
 
             //Koin
             implementation(libs.bundles.koin)
@@ -87,7 +86,7 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-    //sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+    // sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "com.christophprenissl.hygienecompanion.android"

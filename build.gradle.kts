@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply(false)
     alias(libs.plugins.compose.compiler) apply(false)
     alias(libs.plugins.jetbrains.compose) apply(false)
+    alias(libs.plugins.kotlin.parcelize) apply(false)
+    alias(libs.plugins.jetbrains.kotlin.serialization) apply(false)
 }
 
 tasks.register("clean", Delete::class) {
