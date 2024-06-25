@@ -20,7 +20,7 @@ fun NavGraphBuilder.loggedOutGraph(
                 onEvent = viewModel::onEvent,
                 onLogin = {
                     navController.navigate(Route.CoveringLetters) {
-                        popUpTo(Route.LoggedOut) {
+                        popUpTo(Screen.Login) {
                             inclusive = true
                         }
                     }

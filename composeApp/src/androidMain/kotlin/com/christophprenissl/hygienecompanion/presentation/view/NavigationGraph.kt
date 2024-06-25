@@ -19,6 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun NavigationGraph(
+    isInitiallyLoggedIn: Boolean,
     navController: NavHostController,
     coveringLetterBasisViewModel: CoveringLetterBasisViewModel = koinViewModel(),
     coveringLettersViewModel: CoveringLettersViewModel = koinViewModel(),
@@ -27,7 +28,7 @@ fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Route.LoggedOut,
+        startDestination = if (isInitiallyLoggedIn) Route.CoveringLetters else Route.LoggedOut,
     ) {
         loggedOutGraph(
             navController = navController,

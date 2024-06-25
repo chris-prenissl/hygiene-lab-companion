@@ -1,10 +1,10 @@
 package com.christophprenissl.hygienecompanion.presentation.view
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.christophprenissl.hygienecompanion.model.entity.UserType
 import com.christophprenissl.hygienecompanion.presentation.MainViewEvent
+import com.christophprenissl.hygienecompanion.presentation.ui.theme.appPrimaryDark
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.hygieneWorkerColor
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.labWorkerColor
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.samplerColor
@@ -18,11 +18,17 @@ import javax.inject.Inject
 
 class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStoreUser) : ViewModel() {
 
+    private var firstLoadFinished = false
+    private var initiallyLoggedIn = false
     val state = dataStoreUser
         .getUser()
         .map {
             val userName = it?.name
             val userType = it?.userType
+            if (!firstLoadFinished && userType != null) {
+                initiallyLoggedIn = true
+                firstLoadFinished = true
+            }
             MainViewState(
                 userName = userName,
                 userType = userType,
@@ -30,7 +36,7 @@ class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStore
                     UserType.Sampler -> samplerColor
                     UserType.LabWorker -> labWorkerColor
                     UserType.HygieneWorker -> hygieneWorkerColor
-                    else -> Color.White
+                    else -> appPrimaryDark
                 },
                 bottomNavItems = when (userType) {
                     UserType.Sampler -> listOf(Route.CoveringLetters)
@@ -41,10 +47,11 @@ class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStore
                         Route.Reports
                     )
                     else -> emptyList()
-                }
+                },
+                initiallyLoggedIn = initiallyLoggedIn
             )
         }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), MainViewState())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     fun onEvent(event: MainViewEvent) {
         when (event) {

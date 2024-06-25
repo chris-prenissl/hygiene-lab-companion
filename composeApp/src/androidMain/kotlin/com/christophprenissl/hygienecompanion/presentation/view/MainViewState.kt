@@ -8,5 +8,6 @@ data class MainViewState(
     val userName: String? = null,
     val userType: UserType? = null,
     val userColor: Color = Color.White,
-    val bottomNavItems: List<Route> = emptyList()
+    val bottomNavItems: List<Route> = emptyList(),
+    val initiallyLoggedIn: Boolean = false
 )
