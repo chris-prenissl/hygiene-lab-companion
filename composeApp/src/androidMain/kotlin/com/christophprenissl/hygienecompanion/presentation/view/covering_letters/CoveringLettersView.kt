@@ -11,18 +11,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.Response
-import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.CoveringLetterCard
 import com.christophprenissl.hygienecompanion.presentation.view.util.isUserAllowedToEnter
 import com.christophprenissl.hygienecompanion.util.*
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLettersView(
-    navController: NavController,
-    viewModel: CoveringLettersViewModel
+    onNavigateToDetail: () -> Unit,
+    viewModel: CoveringLettersViewModel = koinViewModel()
 ){
     val userType  = viewModel.userTypeFlow.collectAsState(initial = null)
 
@@ -54,7 +53,7 @@ fun CoveringLettersView(
                                         )) {
                                         viewModel.chooseCoveringLetter(it)
                                         if (viewModel.chosenCoveringLetter.value != null) {
-                                            navController.navigate(Screen.CoveringLetterDetail)
+                                            onNavigateToDetail()
                                         }
                                     }
                                 },

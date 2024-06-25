@@ -28,9 +28,9 @@ import com.christophprenissl.hygienecompanion.util.*
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LoginView(
-    state: LoggedOutState,
-    onEvent: (LoggedOutEvent) -> Unit,
-    onLogin: () -> Unit
+    state: LoggedOutState = LoggedOutState(),
+    onEvent: (LoggedOutEvent) -> Unit = {},
+    onLogin: () -> Unit = {}
 ) {
     LazyColumn(
         modifier = Modifier
@@ -115,9 +115,5 @@ fun LoginView(
 @Preview
 @Composable
 fun LoginViewPreview() {
-    LoginView(
-        state = LoggedOutState(),
-        onEvent = {},
-        onLogin = {}
-    )
+    LoginView()
 }

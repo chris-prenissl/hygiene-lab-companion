@@ -9,11 +9,9 @@ import com.christophprenissl.hygienecompanion.presentation.ui.theme.HygieneCompa
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.appBackgroundDark
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.appStatusBarDark
 import com.christophprenissl.hygienecompanion.presentation.ui.theme.appStatusBarLight
-import com.christophprenissl.hygienecompanion.presentation.view.MainView
-import com.christophprenissl.hygienecompanion.presentation.view.MainViewViewModel
+import com.christophprenissl.hygienecompanion.presentation.view.main.MainView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
-import org.koin.java.KoinJavaComponent.get
 
 @InternalCoroutinesApi
 @ExperimentalCoroutinesApi
@@ -28,7 +26,7 @@ class MainActivity : ComponentActivity() {
             }
             window.navigationBarColor = appBackgroundDark.toArgb()
             HygieneCompanionTheme {
-               MainView(get(MainViewViewModel::class.java))
+               MainView()
            }
         }
     }

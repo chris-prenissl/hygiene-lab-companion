@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.di
 
-import com.christophprenissl.hygienecompanion.presentation.view.MainViewViewModel
+import com.christophprenissl.hygienecompanion.presentation.view.main.MainViewViewModel
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letter_basis.CoveringLetterBasisViewModel
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.CoveringLettersViewModel
 import com.christophprenissl.hygienecompanion.presentation.view.logged_out.LoggedOutViewModel

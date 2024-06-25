@@ -20,11 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.entity.ParameterType
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
-import com.christophprenissl.hygienecompanion.presentation.util.Route
-import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.ParameterBooleanEdit
@@ -34,12 +31,13 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.field.
 import com.christophprenissl.hygienecompanion.presentation.view.util.getValidNumberTextFieldValue
 import com.christophprenissl.hygienecompanion.presentation.view.util.getValidTemperatureTextFieldValue
 import com.christophprenissl.hygienecompanion.util.*
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLetterDetailView(
-    viewModel: CoveringLettersViewModel,
-    navController: NavController
+    viewModel: CoveringLettersViewModel = koinViewModel(),
+    onNavigateUp: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -236,11 +234,7 @@ fun CoveringLetterDetailView(
                             viewModel.rejectCoveringLetter(coveringLetter)
                             Toast.makeText(context, SUCCESS_REJECT, Toast.LENGTH_SHORT)
                                 .show()
-                            navController.navigate(Route.CoveringLetters) {
-                                popUpTo(Screen.CoveringLetters) {
-                                    inclusive = true
-                                }
-                            }
+                            onNavigateUp()
                         }
                     ) {
                         Text(GIVE_BACK_COVERING_LETTER)
@@ -256,11 +250,7 @@ fun CoveringLetterDetailView(
                                 )
                                 Toast.makeText(context, SUCCESS_REPORT, Toast.LENGTH_SHORT)
                                     .show()
-                                navController.navigate(Route.CoveringLetters) {
-                                    popUpTo(Screen.CoveringLetters) {
-                                        inclusive = true
-                                    }
-                                }
+                                onNavigateUp()
                             } else {
                                 Toast.makeText(context, NO_LAB_WORKER_REGISTERED, Toast.LENGTH_SHORT)
                                     .show()
@@ -282,11 +272,7 @@ fun CoveringLetterDetailView(
                                 )
                                 Toast.makeText(context, SUCCESS_GIVE_TO_LAB, Toast.LENGTH_SHORT)
                                     .show()
-                                navController.navigate(Route.CoveringLetters) {
-                                    popUpTo(Screen.CoveringLetters) {
-                                        inclusive = true
-                                    }
-                                }
+                                onNavigateUp()
                             } else {
                                 Toast.makeText(context, NO_SAMPLER_REGISTERED, Toast.LENGTH_SHORT)
                                     .show()

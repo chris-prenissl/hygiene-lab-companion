@@ -5,7 +5,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.christophprenissl.hygienecompanion.presentation.util.Route
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -14,7 +13,7 @@ fun NavGraphBuilder.coveringLetterBasisNavGraph(
     navController: NavController,
     viewModel: CoveringLetterBasisViewModel
 ) {
-    navigation<Route.CoveringLetterBasis>(startDestination = Screen.CoveringLetterBasis) {
+    navigation<Screen.CoveringLetterBasis>(startDestination = Screen.CoveringLetterBasis) {
         composable<Screen.CoveringLetterBasis> {
             CoveringLetterBasisView(
                 navController = navController,

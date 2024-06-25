@@ -1,4 +1,4 @@
-package com.christophprenissl.hygienecompanion.presentation.view
+package com.christophprenissl.hygienecompanion.presentation.view.main
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
@@ -9,15 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.christophprenissl.hygienecompanion.presentation.MainViewEvent
-import com.christophprenissl.hygienecompanion.presentation.util.Route
-import com.christophprenissl.hygienecompanion.presentation.view.component.bar.BottomNavBar
+import com.christophprenissl.hygienecompanion.presentation.util.Screen
+import com.christophprenissl.hygienecompanion.presentation.view.navigation.NavigationGraph
 import com.christophprenissl.hygienecompanion.presentation.view.component.bar.TopMenuBar
 import com.christophprenissl.hygienecompanion.util.APP_TITLE
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("RememberReturnType")
 @Composable
-fun MainView(mainViewViewModel: MainViewViewModel) {
+fun MainView(mainViewViewModel: MainViewViewModel = koinViewModel()) {
     val navController = rememberNavController()
     val uiState = mainViewViewModel.state.collectAsStateWithLifecycle()
 
@@ -31,7 +31,7 @@ fun MainView(mainViewViewModel: MainViewViewModel) {
                     hasLogoutButton = stateValue.userType != null,
                     onLogout = {
                         mainViewViewModel.onEvent(MainViewEvent.Logout)
-                        navController.navigate(Route.LoggedOut) {
+                        navController.navigate(Screen.Login) {
                             navController.currentBackStackEntry?.destination?.route?.let {
                                 popUpTo(it) {
                                     inclusive = true
@@ -43,21 +43,12 @@ fun MainView(mainViewViewModel: MainViewViewModel) {
                     onNavigateUp = navController::navigateUp,
                     titleColor = userColor
                 )
-            },
-            bottomBar = {
-                val navItems = stateValue.bottomNavItems
-                if (navItems.isNotEmpty()) {
-                    BottomNavBar(
-                        navController = navController,
-                        navItems = navItems,
-                        iconsColor = userColor
-                    )
-                }
             }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 NavigationGraph(
                     isInitiallyLoggedIn = stateValue.initiallyLoggedIn,
+                    navItems = stateValue.mainNavItems,
                     navController = navController,
                 )
             }
