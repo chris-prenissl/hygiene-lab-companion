@@ -11,13 +11,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @OptIn(InternalComposeApi::class, ExperimentalCoroutinesApi::class)
 fun NavGraphBuilder.coveringLetterBasisNavGraph(
     navController: NavController,
-    viewModel: CoveringLetterBasisViewModel
+    viewModel: CoveringLetterBasisViewModel,
 ) {
     navigation<Screen.CoveringLetterBasis>(startDestination = Screen.CoveringLetterBasis) {
         composable<Screen.CoveringLetterBasis> {
             CoveringLetterBasisView(
                 navController = navController,
-                viewModel = viewModel
+                viewModel = viewModel,
             )
         }
         composable<Screen.SampleLocations> {

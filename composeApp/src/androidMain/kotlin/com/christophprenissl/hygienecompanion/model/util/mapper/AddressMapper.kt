@@ -3,7 +3,7 @@ package com.christophprenissl.hygienecompanion.model.util.mapper
 import com.christophprenissl.hygienecompanion.model.dto.AddressDto
 import com.christophprenissl.hygienecompanion.model.entity.Address
 
-class AddressMapper: DataMapper<Address, AddressDto> {
+class AddressMapper : DataMapper<Address, AddressDto> {
     override fun fromEntity(entity: AddressDto): Address {
         return Address(
             id = entity.id ?: "",
@@ -14,7 +14,7 @@ class AddressMapper: DataMapper<Address, AddressDto> {
             street = entity.street ?: "",
             phone = entity.phone ?: "",
             fax = entity.fax ?: "",
-            eMail = entity.eMail ?: ""
+            eMail = entity.eMail ?: "",
         )
     }
 
@@ -28,7 +28,7 @@ class AddressMapper: DataMapper<Address, AddressDto> {
             street = domain.street,
             phone = domain.phone,
             fax = domain.fax,
-            eMail = domain.eMail
+            eMail = domain.eMail,
         )
     }
 }

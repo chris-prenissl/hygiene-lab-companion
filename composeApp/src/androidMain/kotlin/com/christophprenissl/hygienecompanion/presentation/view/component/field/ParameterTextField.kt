@@ -27,7 +27,7 @@ fun ParameterTextField(
         onValueChange = onValueChange,
         isError = isError,
         singleLine = true,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -37,7 +37,7 @@ fun ParameterTextField(
     value: TextFieldValue,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
     onValueChange: (TextFieldValue) -> Unit,
-    isError: Boolean = false
+    isError: Boolean = false,
 ) {
     OutlinedTextField(
         label = { labelText?.let { Text(labelText) } },
@@ -45,6 +45,6 @@ fun ParameterTextField(
         keyboardOptions = keyboardOptions,
         onValueChange = onValueChange,
         isError = isError,
-        singleLine = true
+        singleLine = true,
     )
 }

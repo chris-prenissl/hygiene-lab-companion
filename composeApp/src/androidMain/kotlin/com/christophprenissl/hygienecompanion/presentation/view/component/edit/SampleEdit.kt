@@ -26,18 +26,18 @@ import java.util.*
 @Composable
 fun SampleEdit(
     sample: Sample,
-    samplingState: SamplingState
+    samplingState: SamplingState,
 ) {
     val currentDate by remember { mutableStateOf(Date()) }
     var date by remember { mutableStateOf(sample.created?.dayMonthYearString()) }
     var extraInfoSampling by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoSampling)
+            TextFieldValue(sample.extraInfoSampling),
         )
     }
     var extraInfoLaboratory by remember {
         mutableStateOf(
-            TextFieldValue(sample.extraInfoLaboratory)
+            TextFieldValue(sample.extraInfoLaboratory),
         )
     }
     var warningMessage by remember { mutableStateOf(TextFieldValue(sample.warningMessage)) }
@@ -56,35 +56,35 @@ fun SampleEdit(
     Card(
         modifier = Modifier
             .padding(standardPadding.dp),
-        elevation = CardDefaults.cardElevation(standardElevation.dp)
+        elevation = CardDefaults.cardElevation(standardElevation.dp),
     ) {
         Column(
-            modifier = Modifier.padding(standardPadding.dp)
+            modifier = Modifier.padding(standardPadding.dp),
         ) {
             ParameterText(
                 title = SAMPLE_LOCATION,
-                value = sample.sampleLocation.description
+                value = sample.sampleLocation.description,
             )
             ParameterText(
                 title = SAMPLE_ID,
-                value = sample.id
+                value = sample.id,
             )
             ParameterText(
                 title = SAMPLING_DATE,
-                value = date ?: EMPTY
+                value = date ?: EMPTY,
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
 
-            when(samplingState) {
+            when (samplingState) {
                 SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                     ParameterText(
                         title = EXTRA_INFO_SAMPLING_PERSON,
-                        value = sample.extraInfoSampling
+                        value = sample.extraInfoSampling,
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     ParameterText(
                         title = WARNING,
-                        value = sample.warningMessage
+                        value = sample.warningMessage,
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
@@ -98,12 +98,13 @@ fun SampleEdit(
                             if (checkIfNotEmptyAndNotCurrentDay(
                                     sample = sample,
                                     currentDate = currentDate,
-                                    value = it.text
-                                )) {
+                                    value = it.text,
+                                )
+                            ) {
                                 sample.created = Timestamp.now().toDate()
                                 date = sample.created?.dayMonthYearString()
                             }
-                        }
+                        },
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     ParameterTextField(
@@ -115,12 +116,13 @@ fun SampleEdit(
                             if (checkIfNotEmptyAndNotCurrentDay(
                                     sample = sample,
                                     currentDate = currentDate,
-                                    value = it.text
-                                )) {
+                                    value = it.text,
+                                )
+                            ) {
                                 sample.created = Timestamp.now().toDate()
                                 date = sample.created?.dayMonthYearString()
                             }
-                        }
+                        },
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
@@ -132,7 +134,7 @@ fun SampleEdit(
                     sample.coveringSampleParameters.forEach {
                         ParameterText(
                             title = it.name,
-                            value = it.value
+                            value = it.value,
                         )
                     }
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
@@ -145,12 +147,13 @@ fun SampleEdit(
                             if (checkIfNotEmptyAndNotCurrentDay(
                                     sample = sample,
                                     currentDate = currentDate,
-                                    value = it.text
-                                )) {
+                                    value = it.text,
+                                )
+                            ) {
                                 sample.created = Timestamp.now().toDate()
                                 date = sample.created?.dayMonthYearString()
                             }
-                        }
+                        },
                     )
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     sample.labSampleParameters.let { parameters ->
@@ -162,11 +165,17 @@ fun SampleEdit(
                                         labelText = parameter.name,
                                         value = labSampleValues[idx].value,
                                         onValueChange = {
-                                            val input = getValidTemperatureTextFieldValue(it, labSampleValues[idx].value)
+                                            val input =
+                                                getValidTemperatureTextFieldValue(
+                                                    it,
+                                                    labSampleValues[idx].value,
+                                                )
                                             parameter.value = input
                                             labSampleValues[idx].value = input
                                         },
-                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                        keyboardOptions = KeyboardOptions(
+                                            keyboardType = KeyboardType.Number,
+                                        ),
                                     )
                                 }
                                 ParameterType.Number -> {
@@ -174,11 +183,17 @@ fun SampleEdit(
                                         labelText = parameter.name,
                                         value = labSampleValues[idx].value,
                                         onValueChange = {
-                                            val input = getValidNumberTextFieldValue(it, labSampleValues[idx].value)
+                                            val input =
+                                                getValidNumberTextFieldValue(
+                                                    it,
+                                                    labSampleValues[idx].value,
+                                                )
                                             parameter.value = input
                                             labSampleValues[idx].value = input
                                         },
-                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                        keyboardOptions = KeyboardOptions(
+                                            keyboardType = KeyboardType.Number,
+                                        ),
                                     )
                                 }
                                 ParameterType.Note -> {
@@ -188,7 +203,7 @@ fun SampleEdit(
                                         onValueChange = { input ->
                                             parameter.value = input
                                             labSampleValues[idx].value = input
-                                        }
+                                        },
                                     )
                                 }
                                 ParameterType.Bool -> {
@@ -198,12 +213,11 @@ fun SampleEdit(
                                         onCheckedChange = {
                                             labSampleValues[idx].value = it.toString()
                                             parameter.value = it.toString()
-                                        }
+                                        },
                                     )
                                 }
                             }
                         }
-
                     }
                     Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 }
@@ -220,11 +234,17 @@ fun SampleEdit(
                                         labelText = parameter.name,
                                         value = coveringSampleValues[idx],
                                         onValueChange = {
-                                            val input = getValidTemperatureTextFieldValue(it, coveringSampleValues[idx])
+                                            val input =
+                                                getValidTemperatureTextFieldValue(
+                                                    it,
+                                                    coveringSampleValues[idx],
+                                                )
                                             parameter.value = input
                                             coveringSampleValues[idx] = input
                                         },
-                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                        keyboardOptions = KeyboardOptions(
+                                            keyboardType = KeyboardType.Number,
+                                        ),
                                     )
                                 }
                                 ParameterType.Number -> {
@@ -232,11 +252,17 @@ fun SampleEdit(
                                         labelText = parameter.name,
                                         value = coveringSampleValues[idx],
                                         onValueChange = {
-                                            val input = getValidNumberTextFieldValue(it, coveringSampleValues[idx])
+                                            val input =
+                                                getValidNumberTextFieldValue(
+                                                    it,
+                                                    coveringSampleValues[idx],
+                                                )
                                             parameter.value = input
                                             coveringSampleValues[idx] = input
                                         },
-                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                        keyboardOptions = KeyboardOptions(
+                                            keyboardType = KeyboardType.Number,
+                                        ),
                                     )
                                 }
                                 ParameterType.Note -> {
@@ -246,7 +272,7 @@ fun SampleEdit(
                                         onValueChange = { input ->
                                             parameter.value = input
                                             coveringSampleValues[idx] = input
-                                        }
+                                        },
                                     )
                                 }
                                 ParameterType.Bool -> {
@@ -256,12 +282,11 @@ fun SampleEdit(
                                         onCheckedChange = {
                                             coveringSampleValues[idx] = it.toString()
                                             parameter.value = it.toString()
-                                        }
+                                        },
                                     )
                                 }
                             }
                         }
-
                     }
                 }
             }

@@ -18,25 +18,25 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 fun ParameterBooleanEdit(
     parameterName: String,
     value: String,
-    onCheckedChange: (Boolean) -> Unit
+    onCheckedChange: (Boolean) -> Unit,
 ) {
     Row(
         modifier = Modifier
             .border(
                 border = BorderStroke(
                     width = 1.dp,
-                    MaterialTheme.colorScheme.onSurface
+                    MaterialTheme.colorScheme.onSurface,
                 ),
-                shape = MaterialTheme.shapes.small
+                shape = MaterialTheme.shapes.small,
             )
             .padding(standardPadding.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(parameterName)
         Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
         Checkbox(
             checked = value.toBoolean(),
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
         )
     }
 }

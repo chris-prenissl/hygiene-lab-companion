@@ -5,17 +5,17 @@ import com.christophprenissl.hygienecompanion.model.entity.UserType
 
 fun isUserAllowedToEnter(
     userType: UserType?,
-    samplingState: SamplingState?
+    samplingState: SamplingState?,
 ): Boolean {
     return when (userType) {
         UserType.HygieneWorker, UserType.Sampler -> {
-            samplingState != SamplingState.InLaboratory
-                    && samplingState != SamplingState.LabInProgress
-                    && samplingState != null
+            samplingState != SamplingState.InLaboratory &&
+                samplingState != SamplingState.LabInProgress &&
+                samplingState != null
         }
         UserType.LabWorker -> {
-            samplingState == SamplingState.LabInProgress
-                    || samplingState == SamplingState.InLaboratory
+            samplingState == SamplingState.LabInProgress ||
+                samplingState == SamplingState.InLaboratory
         }
         else -> false
     }

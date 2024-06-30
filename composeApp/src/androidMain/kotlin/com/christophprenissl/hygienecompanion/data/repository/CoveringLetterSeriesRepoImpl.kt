@@ -27,8 +27,8 @@ import javax.inject.Singleton
 class CoveringLetterSeriesRepoImpl @Inject constructor(
     private val db: FirebaseFirestore,
     private val coveringLettersRef: CollectionReference,
-    private val coveringLetterSeriesRef: CollectionReference
-): CoveringLetterSeriesRepo {
+    private val coveringLetterSeriesRef: CollectionReference,
+) : CoveringLetterSeriesRepo {
     override fun getCoveringLetterSeriesFromDatabase(id: String) = flow {
         try {
             emit(Response.Loading)
@@ -53,7 +53,9 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
         val snapshotListener = coveringLetterSeriesRef
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {
-                    val coveringLetterSeriesDto = snapshot.toObjects(CoveringLetterSeriesDto::class.java)
+                    val coveringLetterSeriesDto = snapshot.toObjects(
+                        CoveringLetterSeriesDto::class.java,
+                    )
                     val mapper = CoveringLetterSeriesMapper()
                     val coveringLetterSeries = coveringLetterSeriesDto.map {
                         mapper.fromEntity(it)
@@ -74,7 +76,9 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
             .whereEqualTo(HAS_ENDED_FIELD, false)
             .addSnapshotListener { snapshot, e ->
                 val response = if (snapshot != null) {
-                    val coveringLetterSeriesDto = snapshot.toObjects(CoveringLetterSeriesDto::class.java)
+                    val coveringLetterSeriesDto = snapshot.toObjects(
+                        CoveringLetterSeriesDto::class.java,
+                    )
                     val mapper = CoveringLetterSeriesMapper()
                     val coveringLetterSeries = coveringLetterSeriesDto.map {
                         mapper.fromEntity(it)
@@ -91,7 +95,6 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
     }
 
     override suspend fun createCoveringLetterSeriesInDatabase(coveringLetterSeries: CoveringLetterSeries) = flow {
-
         try {
             emit(Response.Loading)
             val coveringLetterSeriesMapper = CoveringLetterSeriesMapper()
@@ -100,7 +103,9 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
             val saved = db.runBatch { batch ->
                 val coveringLetterSeriesId = coveringLetterSeriesRef.document().id
                 coveringLetterSeries.id = coveringLetterSeriesId
-                val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(coveringLetterSeriesId)
+                val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(
+                    coveringLetterSeriesId,
+                )
 
                 coveringLetterSeries.coveringLetters.forEach {
                     val coveringLetterId = coveringLettersRef.document().id
@@ -111,7 +116,9 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
                     batch.set(coveringLetterSaveRef, coveringLetterDto)
                 }
 
-                val coveringLetterSeriesDto = coveringLetterSeriesMapper.toEntity(coveringLetterSeries)
+                val coveringLetterSeriesDto = coveringLetterSeriesMapper.toEntity(
+                    coveringLetterSeries,
+                )
 
                 batch.set(coveringLetterSeriesDocument, coveringLetterSeriesDto)
             }.await()
@@ -124,7 +131,7 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
 
     override suspend fun createAdditionalCoveringLettersToSeriesInDatabase(
         coveringLetter: CoveringLetter,
-        dates: List<Date>
+        dates: List<Date>,
     ) = flow {
         val coveringLetterMapper = CoveringLetterMapper()
         val coveringLetterDto = coveringLetterMapper.toEntity(coveringLetter)
@@ -132,7 +139,9 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
             emit(Response.Loading)
 
             val saved = db.runBatch { batch ->
-                val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(coveringLetter.seriesId)
+                val coveringLetterSeriesDocument = coveringLetterSeriesRef.document(
+                    coveringLetter.seriesId,
+                )
                 dates.forEach { date ->
                     val newId = coveringLettersRef.document().id
                     val newCoveringLetterDto = CoveringLetterDto(
@@ -143,13 +152,13 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
                         basicCoveringParameters = coveringLetterDto.basicCoveringParameters?.map {
                             ParameterDto(
                                 name = it.name,
-                                parameterType = it.parameterType
+                                parameterType = it.parameterType,
                             )
                         },
                         basicLabReportParameters = coveringLetterDto.basicLabReportParameters?.map {
                             ParameterDto(
                                 name = it.name,
-                                parameterType = it.parameterType
+                                parameterType = it.parameterType,
                             )
                         },
                         samples = coveringLetterDto.samples?.map { sample ->
@@ -161,14 +170,18 @@ class CoveringLetterSeriesRepoImpl @Inject constructor(
                                 labSampleParameters = sample.labSampleParameters?.map {
                                     it.copy(value = null)
                                 },
-                                sampleLocation = sample.sampleLocation
+                                sampleLocation = sample.sampleLocation,
                             )
                         },
-                        samplingState = SamplingState.Created.name
+                        samplingState = SamplingState.Created.name,
                     )
                     val newCoveringLetterDocument = coveringLettersRef.document(newId)
                     batch.set(newCoveringLetterDocument, newCoveringLetterDto)
-                    batch.update(coveringLetterSeriesDocument, COVERING_LETTERS_ARRAY, FieldValue.arrayUnion(newId))
+                    batch.update(
+                        coveringLetterSeriesDocument,
+                        COVERING_LETTERS_ARRAY,
+                        FieldValue.arrayUnion(newId),
+                    )
                 }
             }.await()
 

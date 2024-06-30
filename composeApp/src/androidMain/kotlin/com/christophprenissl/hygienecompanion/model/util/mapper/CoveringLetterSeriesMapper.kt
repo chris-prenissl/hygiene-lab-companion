@@ -21,21 +21,23 @@ class CoveringLetterSeriesMapper : DataMapper<CoveringLetterSeries, CoveringLett
             resultToTestingProperty = entity.resultToTestingProperty ?: false,
             costLocation = entity.costLocation ?: "",
             laboratoryId = entity.laboratoryId ?: "",
-            bases = templateBases?: emptyList(),
+            bases = templateBases ?: emptyList(),
             client = entity.client?.let { addressMapper.fromEntity(it) },
             sampleAddress = entity.sampleAddress?.let { addressMapper.fromEntity(it) },
             samplingCompany = entity.samplingCompany?.let { addressMapper.fromEntity(it) },
             coveringLetters = entity.coveringLetters?.map {
                 CoveringLetter(
                     id = it,
-                    seriesId = entity.id
+                    seriesId = entity.id,
                 )
             } ?: emptyList(),
             plannedStart = entity.plannedStart!!,
             plannedEnd = entity.plannedEnd!!,
             hasEnded = entity.hasEnded ?: false,
             endedDate = entity.endedDate,
-            samplingSeriesType = entity.samplingSeriesType?.let { SamplingSeriesType.valueOf(it) }?: SamplingSeriesType.NonPeriodic
+            samplingSeriesType = entity.samplingSeriesType?.let {
+                SamplingSeriesType.valueOf(it)
+            } ?: SamplingSeriesType.NonPeriodic,
         )
     }
 
@@ -60,7 +62,7 @@ class CoveringLetterSeriesMapper : DataMapper<CoveringLetterSeries, CoveringLett
             plannedEnd = domain.plannedEnd,
             hasEnded = domain.hasEnded,
             endedDate = domain.endedDate,
-            samplingSeriesType = domain.samplingSeriesType.name
+            samplingSeriesType = domain.samplingSeriesType.name,
         )
     }
 }

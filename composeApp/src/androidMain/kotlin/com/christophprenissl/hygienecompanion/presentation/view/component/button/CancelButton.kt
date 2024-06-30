@@ -9,14 +9,16 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun CancelButton(
     onCancel: () -> Unit,
-    content: @Composable() (RowScope.() -> Unit)
+    content:
+    @Composable()
+    (RowScope.() -> Unit),
 ) {
     BasicButton(
         colors = ButtonDefaults.buttonColors(
             contentColor = contentColorFor(backgroundColor = Color.Red),
-            containerColor = Color.Red
+            containerColor = Color.Red,
         ),
         onClick = onCancel,
-        content = content
+        content = content,
     )
 }

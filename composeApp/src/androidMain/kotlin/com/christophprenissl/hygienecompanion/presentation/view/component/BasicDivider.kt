@@ -10,6 +10,6 @@ import com.christophprenissl.hygienecompanion.util.doubleStandardPadding
 @Composable
 fun BasicDivider() {
     HorizontalDivider(
-        modifier = Modifier.padding(horizontal = doubleStandardPadding.dp)
+        modifier = Modifier.padding(horizontal = doubleStandardPadding.dp),
     )
 }

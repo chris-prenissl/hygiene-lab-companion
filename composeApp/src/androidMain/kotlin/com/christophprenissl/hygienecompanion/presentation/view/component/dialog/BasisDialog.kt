@@ -23,7 +23,7 @@ import com.christophprenissl.hygienecompanion.util.*
 @Composable
 fun BasisDialog(
     viewModel: CoveringLetterBasisViewModel,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     var pIdx by remember { mutableStateOf(0) }
     var norm by remember { mutableStateOf(TextFieldValue("")) }
@@ -33,7 +33,7 @@ fun BasisDialog(
     val labSampleParameters = remember { mutableStateListOf<ParameterBasis>() }
     val basicLabReportParameters = remember { mutableStateListOf<ParameterBasis>() }
 
-    BasicDialog(onDismissRequest =  onDismissRequest) {
+    BasicDialog(onDismissRequest = onDismissRequest) {
         stickyHeader {
             TitleText(BASIS)
         }
@@ -43,7 +43,7 @@ fun BasisDialog(
                 value = norm,
                 onValueChange = {
                     norm = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -53,7 +53,7 @@ fun BasisDialog(
                 value = description,
                 onValueChange = {
                     description = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
         }
@@ -61,12 +61,12 @@ fun BasisDialog(
         item {
             Text(BASIC_COVERING_PARAMETERS)
         }
-        items(basicCoveringParameters, key = { item -> item.creationId}) { item ->
+        items(basicCoveringParameters, key = { item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
                 onDelete = {
                     basicCoveringParameters.remove(item)
-                }
+                },
             )
         }
         item {
@@ -76,11 +76,11 @@ fun BasisDialog(
                         ParameterBasis(
                             creationId = pIdx,
                             name = "",
-                            parameterType = ParameterType.Number
-                        )
+                            parameterType = ParameterType.Number,
+                        ),
                     )
                     pIdx++
-                }
+                },
             ) {
                 Text(ADD_PARAMETER)
             }
@@ -90,10 +90,10 @@ fun BasisDialog(
         item {
             Text(COVERING_SAMPLE_PARAMETERS)
         }
-        items(coveringSampleParameters, key = {item -> item.creationId }) { item ->
+        items(coveringSampleParameters, key = { item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
-                onDelete = { coveringSampleParameters.remove(item) }
+                onDelete = { coveringSampleParameters.remove(item) },
             )
         }
         item {
@@ -103,10 +103,11 @@ fun BasisDialog(
                         ParameterBasis(
                             creationId = pIdx,
                             name = "",
-                            parameterType = ParameterType.Number)
+                            parameterType = ParameterType.Number,
+                        ),
                     )
                     pIdx++
-                }
+                },
             ) {
                 Text(ADD_PARAMETER)
             }
@@ -119,7 +120,7 @@ fun BasisDialog(
         items(labSampleParameters, key = { item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
-                onDelete = { labSampleParameters.remove(item) }
+                onDelete = { labSampleParameters.remove(item) },
             )
         }
         item {
@@ -129,10 +130,11 @@ fun BasisDialog(
                         ParameterBasis(
                             creationId = pIdx,
                             name = "",
-                            parameterType = ParameterType.Number)
+                            parameterType = ParameterType.Number,
+                        ),
                     )
                     pIdx++
-                }
+                },
             ) {
                 Text(ADD_PARAMETER)
             }
@@ -145,7 +147,7 @@ fun BasisDialog(
         items(basicLabReportParameters, key = { item -> item.creationId }) { item ->
             ParameterCreationItem(
                 item = item,
-                onDelete = { basicLabReportParameters.remove(item) }
+                onDelete = { basicLabReportParameters.remove(item) },
             )
         }
         item {
@@ -155,10 +157,11 @@ fun BasisDialog(
                         ParameterBasis(
                             creationId = pIdx,
                             name = "",
-                            parameterType = ParameterType.Number)
+                            parameterType = ParameterType.Number,
+                        ),
                     )
                     pIdx++
-                }
+                },
             ) {
                 Text(ADD_PARAMETER)
             }
@@ -173,21 +176,21 @@ fun BasisDialog(
                         basicCoveringParameters = basicCoveringParameters,
                         coveringSampleParameters = coveringSampleParameters,
                         labSampleParameters = labSampleParameters,
-                        basicLabReportParameters = basicLabReportParameters
+                        basicLabReportParameters = basicLabReportParameters,
                     )
                     viewModel.closeBasisDialog()
-                }
+                },
             ) {
                 Text(ACCEPT)
             }
         }
         item {
             CancelButton(
-                onCancel = onDismissRequest
+                onCancel = onDismissRequest,
             ) {
                 Text(
                     CANCEL,
-                    color = MaterialTheme.colorScheme.onPrimary
+                    color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         }

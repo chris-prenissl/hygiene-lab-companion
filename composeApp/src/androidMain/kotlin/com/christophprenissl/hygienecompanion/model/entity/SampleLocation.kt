@@ -5,5 +5,5 @@ data class SampleLocation(
     val description: String = "",
     val extraInfo: String = "",
     val nextHeater: String = "",
-    val address: Address?
+    val address: Address?,
 )

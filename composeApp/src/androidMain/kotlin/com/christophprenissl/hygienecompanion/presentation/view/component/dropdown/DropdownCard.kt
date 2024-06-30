@@ -11,11 +11,11 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.card.B
 fun DropdownCard(
     onClick: () -> Unit,
     menuOpen: Boolean,
-    content: @Composable (RowScope.() -> Unit)
+    content: @Composable (RowScope.() -> Unit),
 ) {
     BasicCard(
         onClick = onClick,
         indicatorIcon = if (menuOpen) Icons.Rounded.ArrowDropUp else Icons.Rounded.ArrowDropDown,
-        content = content
+        content = content,
     )
 }

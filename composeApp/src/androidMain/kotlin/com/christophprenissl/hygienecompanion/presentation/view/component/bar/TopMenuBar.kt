@@ -1,10 +1,10 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.bar
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.Logout
+import androidx.compose.material3.*
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,29 +34,29 @@ fun TopMenuBar(
                     .padding(standardPadding.dp)
                     .offset(x = iconBarOffset.dp),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_lens_blur_24),
-                    contentDescription = APP_LOGO_DESCRIPTION
+                    contentDescription = APP_LOGO_DESCRIPTION,
                 )
                 Text(
                     text = title,
                     color = titleColor,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .padding(horizontal = standardPadding.dp)
+                        .padding(horizontal = standardPadding.dp),
                 )
             }
         },
         navigationIcon = {
             if (hasBackButton) {
                 IconButton(
-                    onClick = onNavigateUp
+                    onClick = onNavigateUp,
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                        contentDescription = BACK_BUTTON_DESCRIPTION
+                        contentDescription = BACK_BUTTON_DESCRIPTION,
                     )
                 }
             }
@@ -64,14 +64,14 @@ fun TopMenuBar(
         actions = {
             if (hasLogoutButton) {
                 IconButton(
-                    onClick = onLogout
+                    onClick = onLogout,
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.Logout,
-                        contentDescription = LOGOUT
+                        contentDescription = LOGOUT,
                     )
                 }
             }
-        }
+        },
     )
 }

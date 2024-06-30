@@ -27,32 +27,32 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 @Composable
 fun ReportsView(
     navController: NavController,
-    viewModel: ReportsViewModel
-){
+    viewModel: ReportsViewModel,
+) {
     Column(
-        modifier = Modifier.padding(standardPadding.dp)
+        modifier = Modifier.padding(standardPadding.dp),
     ) {
         if (!viewModel.reportsIsEmpty()) {
             Button(
                 modifier = Modifier.align(Alignment.End),
                 onClick = {
-                viewModel.groupByNextValue()
-                viewModel.setNextGroupByValue()
-            }) {
+                    viewModel.groupByNextValue()
+                    viewModel.setNextGroupByValue()
+                },
+            ) {
                 Text(SORT_BY + " " + viewModel.nextGroupByState.value.name)
             }
         }
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             item {
                 TitleText(REPORTS)
                 Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             }
 
-            when(val response = viewModel.gotReportsState.value) {
+            when (val response = viewModel.gotReportsState.value) {
                 is Response.Success -> {
                     val groupedReports = response.data
                     groupedReports.forEach { (initial, reports) ->
@@ -65,7 +65,7 @@ fun ReportsView(
                                 onClick = {
                                     viewModel.chooseReport(it)
                                     navController.navigate(Screen.ReportDetail)
-                                }
+                                },
                             )
                         }
                     }

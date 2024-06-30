@@ -9,16 +9,15 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 fun NavGraphBuilder.coveringLettersGraph(
     navController: NavController,
 ) {
-
     navigation<Screen.CoveringLetters>(
-        startDestination = Screen.CoveringLetters
+        startDestination = Screen.CoveringLetters,
     ) {
         composable<Screen.CoveringLetters> {
             CoveringLettersView(onNavigateToDetail = {})
         }
         composable<Screen.CoveringLetterDetail> {
             CoveringLetterDetailView(
-                onNavigateUp = navController::navigateUp
+                onNavigateUp = navController::navigateUp,
             )
         }
     }

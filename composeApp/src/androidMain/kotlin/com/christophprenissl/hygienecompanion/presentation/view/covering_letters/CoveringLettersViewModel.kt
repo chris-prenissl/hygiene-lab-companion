@@ -4,12 +4,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
 import com.christophprenissl.hygienecompanion.model.entity.User
 import com.christophprenissl.hygienecompanion.model.entity.UserType
-import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import com.christophprenissl.hygienecompanion.util.DataStoreUser
 import com.google.firebase.Timestamp
@@ -19,10 +19,11 @@ import javax.inject.Inject
 
 class CoveringLettersViewModel @Inject constructor(
     private val useCases: HygieneCompanionUseCases,
-    dataStoreUser: DataStoreUser
-): ViewModel() {
+    dataStoreUser: DataStoreUser,
+) : ViewModel() {
 
-    private var _gotCoveringLettersState = mutableStateOf<Response<Map<String?, List<CoveringLetter>>>>(Response.Success(mapOf()))
+    private var _gotCoveringLettersState =
+        mutableStateOf<Response<Map<String?, List<CoveringLetter>>>>(Response.Success(mapOf()))
     val gotCoveringLettersState: State<Response<Map<String?, List<CoveringLetter>>>> = _gotCoveringLettersState
 
     private var _chosenCoveringLetter = mutableStateOf<CoveringLetter?>(null)
@@ -64,7 +65,7 @@ class CoveringLettersViewModel @Inject constructor(
     }
 
     private fun saveCoveringLetter(
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) {
         viewModelScope.launch {
             useCases.saveCoveringLetter(coveringLetter).collect {
@@ -75,16 +76,16 @@ class CoveringLettersViewModel @Inject constructor(
 
     fun sampleProgress(
         sampler: User,
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) {
         coveringLetter.samplingState = SamplingState.SamplingInProgress
         coveringLetter.sampler = sampler
         saveCoveringLetter(coveringLetter)
     }
 
-    fun labProgress (
+    fun labProgress(
         labWorker: User,
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) {
         coveringLetter.samplingState = SamplingState.LabInProgress
         coveringLetter.labWorker = labWorker
@@ -93,7 +94,7 @@ class CoveringLettersViewModel @Inject constructor(
 
     fun giveCoveringLetterToLab(
         sampler: User,
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) {
         coveringLetter.sampler = sampler
         coveringLetter.samplingState = SamplingState.InLaboratory
@@ -102,7 +103,7 @@ class CoveringLettersViewModel @Inject constructor(
     }
 
     fun rejectCoveringLetter(
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) {
         coveringLetter.labWorker = null
         coveringLetter.samplingState = SamplingState.SamplesNotAccepted
@@ -111,7 +112,7 @@ class CoveringLettersViewModel @Inject constructor(
 
     fun finishCoveringLetterInLab(
         labWorker: User,
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) {
         coveringLetter.labWorker = labWorker
         coveringLetter.samplingState = SamplingState.LaboratoryResult

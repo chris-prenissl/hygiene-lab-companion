@@ -1,6 +1,6 @@
 package com.christophprenissl.hygienecompanion.di.util
 
-object  KoinNames {
+object KoinNames {
 
     object FireStoreRefs {
         private const val base = "RefFireStore"
@@ -16,5 +16,4 @@ object  KoinNames {
         private const val base = "QueryFireStore"
         const val address = "Address$base"
     }
-
 }

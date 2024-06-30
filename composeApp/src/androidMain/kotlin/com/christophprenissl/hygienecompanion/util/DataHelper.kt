@@ -12,7 +12,7 @@ fun createCoveringLetterForSeries(
     sampleLocations: List<SampleLocation> = emptyList(),
     coveringSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
     labSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
-    date: Date?
+    date: Date?,
 ): CoveringLetter {
     return CoveringLetter(
         id = id,
@@ -28,8 +28,8 @@ fun createCoveringLetterForSeries(
                         Parameter(
                             name = it.key.name,
                             value = "",
-                            parameterType = it.key.parameterType
-                        )
+                            parameterType = it.key.parameterType,
+                        ),
                     )
                 }
             }
@@ -40,8 +40,8 @@ fun createCoveringLetterForSeries(
                         Parameter(
                             name = it.key.name,
                             value = "",
-                            parameterType = it.key.parameterType
-                        )
+                            parameterType = it.key.parameterType,
+                        ),
                     )
                 }
             }
@@ -49,10 +49,10 @@ fun createCoveringLetterForSeries(
                 id = idx.toString(),
                 coveringSampleParameters = coveringSampleParametersSample,
                 labSampleParameters = labSampleParametersSample,
-                sampleLocation = location
+                sampleLocation = location,
             )
         },
-        samplingState = SamplingState.Created
+        samplingState = SamplingState.Created,
     )
 }
 
@@ -60,7 +60,8 @@ fun ParameterBasis.mapToBlankValue(): Parameter {
     return Parameter(
         name = name,
         parameterType = parameterType,
-        value = "")
+        value = "",
+    )
 }
 
 fun Map<ParameterBasis, Boolean>.createParameterList(): List<Parameter> {
@@ -68,7 +69,7 @@ fun Map<ParameterBasis, Boolean>.createParameterList(): List<Parameter> {
     forEach {
         if (it.value) {
             parameters.add(
-                it.key.mapToBlankValue()
+                it.key.mapToBlankValue(),
             )
         }
     }
@@ -84,7 +85,7 @@ fun createCoveringLettersForSeries(
     labSampleParameters: Map<ParameterBasis, Boolean> = emptyMap(),
     startDate: Date,
     plannedEndDate: Date,
-    samplingSeriesType: SamplingSeriesType
+    samplingSeriesType: SamplingSeriesType,
 ): List<CoveringLetter> {
     val coveringLetterDates = createDates(startDate, plannedEndDate, samplingSeriesType)
     val coveringLetters = coveringLetterDates.mapIndexed { dId, date ->
@@ -98,19 +99,19 @@ fun createCoveringLettersForSeries(
             sampleLocations = sampleLocations,
             coveringSampleParameters = coveringSampleParameters,
             labSampleParameters = labSampleParameters,
-            date = date
+            date = date,
         )
     }
     return coveringLetters
 }
 
 fun Parameter.toValue(): Any {
-    return when(this.parameterType) {
+    return when (this.parameterType) {
         ParameterType.Bool -> this.value.toBoolean()
         ParameterType.Number, ParameterType.Temperature -> {
             try {
                 this.value.toFloat()
-            } catch(_: Exception) {
+            } catch (_: Exception) {
                 -1.0f
             }
         }

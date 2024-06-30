@@ -15,13 +15,15 @@ fun BasicButton(
     colors: ButtonColors = ButtonDefaults.buttonColors(),
     onClick: () -> Unit,
     enabled: Boolean = true,
-    content: @Composable() (RowScope.() -> Unit)
+    content:
+    @Composable()
+    (RowScope.() -> Unit),
 ) {
     Button(
         colors = colors,
         modifier = Modifier.padding(standardPadding.dp),
         onClick = onClick,
         enabled = enabled,
-        content = content
+        content = content,
     )
 }

@@ -26,8 +26,8 @@ class MainActivity : ComponentActivity() {
             }
             window.navigationBarColor = appBackgroundDark.toArgb()
             HygieneCompanionTheme {
-               MainView()
-           }
+                MainView()
+            }
         }
     }
 }

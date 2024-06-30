@@ -10,11 +10,12 @@ fun requestWritePermission(context: Context) {
     ActivityCompat.requestPermissions(
         context as Activity,
         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-        REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
+        REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE,
     )
 }
 
 fun writePermissionApproved(context: Context): Boolean {
     return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
-            context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        context, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    )
 }

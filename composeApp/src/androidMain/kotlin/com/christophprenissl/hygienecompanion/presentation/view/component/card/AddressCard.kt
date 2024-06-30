@@ -10,11 +10,11 @@ import com.christophprenissl.hygienecompanion.util.*
 fun AddressCard(
     address: Address,
     onClick: () -> Unit = {},
-    accessAble: Boolean = true
+    accessAble: Boolean = true,
 ) {
     BasicCard(
         onClick = onClick,
-        accessIndicator = accessAble
+        accessIndicator = accessAble,
     ) {
         Column {
             Text(address.name)

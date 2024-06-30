@@ -11,7 +11,7 @@ import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
 fun BasisDetailView(
-    viewModel: CoveringLetterBasisViewModel
+    viewModel: CoveringLetterBasisViewModel,
 ) {
     LazyColumn {
         item {

@@ -16,18 +16,18 @@ import com.christophprenissl.hygienecompanion.util.*
 @Composable
 fun SampleLocationDialog(
     viewModel: CoveringLetterBasisViewModel,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     var description by remember { mutableStateOf(TextFieldValue("")) }
     var extraInfo by remember { mutableStateOf(TextFieldValue("")) }
     var nextHeater by remember { mutableStateOf(TextFieldValue("")) }
 
-    Dialog(onDismissRequest =  onDismissRequest) {
+    Dialog(onDismissRequest = onDismissRequest) {
         Surface(
-            modifier = Modifier.fillMaxSize(0.8f)
+            modifier = Modifier.fillMaxSize(0.8f),
         ) {
             Box(
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Column(modifier = Modifier.align(Alignment.TopCenter)) {
                     Text(SAMPLE_LOCATION)
@@ -37,30 +37,30 @@ fun SampleLocationDialog(
                         value = description,
                         onValueChange = {
                             description = it
-                        }
+                        },
                     )
                     ParameterTextField(
                         labelText = EXTRA_INFO,
                         value = extraInfo,
                         onValueChange = {
                             extraInfo = it
-                        }
+                        },
                     )
                     ParameterTextField(
                         labelText = NEXT_HEATER,
                         value = nextHeater,
                         onValueChange = {
                             nextHeater = it
-                        }
+                        },
                     )
                     Button(
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                         modifier = Modifier.padding(standardPadding.dp),
-                        onClick = onDismissRequest
+                        onClick = onDismissRequest,
                     ) {
                         Text(
                             CANCEL,
-                            color = MaterialTheme.colorScheme.onPrimary
+                            color = MaterialTheme.colorScheme.onPrimary,
                         )
                     }
                     Button(
@@ -69,9 +69,11 @@ fun SampleLocationDialog(
                             viewModel.saveSampleLocation(
                                 description = description.text,
                                 extraInfo = extraInfo.text,
-                                nextHeater = nextHeater.text)
+                                nextHeater = nextHeater.text,
+                            )
                             onDismissRequest()
-                        }) {
+                        },
+                    ) {
                         Text(SAVE_LOCATION)
                     }
                 }

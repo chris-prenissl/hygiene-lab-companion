@@ -4,9 +4,9 @@ import com.christophprenissl.hygienecompanion.model.entity.CoveringLetterSeries
 import com.christophprenissl.hygienecompanion.model.repository.CoveringLetterSeriesRepo
 
 class CreateCoveringLetterSeries(
-    private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo
+    private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo,
 ) {
     suspend operator fun invoke(
-        coveringLetterSeries: CoveringLetterSeries
+        coveringLetterSeries: CoveringLetterSeries,
     ) = coveringLetterSeriesRepo.createCoveringLetterSeriesInDatabase(coveringLetterSeries)
 }

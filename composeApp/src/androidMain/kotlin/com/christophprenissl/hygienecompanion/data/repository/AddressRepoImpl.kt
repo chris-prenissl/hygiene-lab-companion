@@ -20,7 +20,7 @@ import javax.inject.Singleton
 class AddressRepoImpl @Inject constructor(
     private val addressesRef: CollectionReference,
     private val addressesQuery: Query,
-): AddressRepo {
+) : AddressRepo {
     override fun getAddressesFromDatabase() = callbackFlow {
         val snapshotListener = addressesQuery.addSnapshotListener { snapshot, e ->
             val response = if (snapshot != null) {

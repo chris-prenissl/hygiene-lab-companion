@@ -14,8 +14,8 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepoImpl @Inject constructor(
-    private val userRef: CollectionReference
-): UserRepo {
+    private val userRef: CollectionReference,
+) : UserRepo {
     override fun getUserFromDatabase(id: String) = flow {
         try {
             emit(Response.Loading)

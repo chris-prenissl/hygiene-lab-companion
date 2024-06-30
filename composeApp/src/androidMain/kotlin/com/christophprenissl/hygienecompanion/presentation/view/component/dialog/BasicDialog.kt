@@ -16,13 +16,13 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 @Composable
 fun BasicDialog(
     onDismissRequest: () -> Unit,
-    content: LazyListScope.() -> Unit
+    content: LazyListScope.() -> Unit,
 ) {
     Dialog(
         onDismissRequest = onDismissRequest,
         properties = DialogProperties(
-            dismissOnClickOutside = false
-        )
+            dismissOnClickOutside = false,
+        ),
     ) {
         BasicSurface {
             Box(contentAlignment = Alignment.Center) {
@@ -31,7 +31,7 @@ fun BasicDialog(
                     modifier = Modifier
                         .align(Alignment.TopCenter)
                         .padding(standardPadding.dp),
-                    content = content
+                    content = content,
                 )
             }
         }

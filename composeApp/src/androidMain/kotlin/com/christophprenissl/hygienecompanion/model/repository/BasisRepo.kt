@@ -13,5 +13,4 @@ interface BasisRepo {
     suspend fun saveBasisToDatabase(basis: Basis): Flow<Response<Void?>>
 
     suspend fun deleteBasisFromDatabase(basis: Basis): Flow<Response<Void?>>
-
 }

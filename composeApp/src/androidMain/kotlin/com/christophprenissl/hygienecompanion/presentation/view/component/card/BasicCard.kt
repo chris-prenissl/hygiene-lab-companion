@@ -1,11 +1,11 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.card
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowRight
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,34 +23,34 @@ fun BasicCard(
     accessIndicator: Boolean = true,
     indicatorIcon: ImageVector = Icons.AutoMirrored.Rounded.ArrowRight,
     elevation: Dp = 0.dp,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     Card(
         elevation = CardDefaults.cardElevation(elevation),
         modifier = Modifier
             .fillMaxWidth(halfSize)
             .padding(cardPadding.dp),
-        onClick = onClick
+        onClick = onClick,
     ) {
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(standardPadding.dp),
-            content = content
+            content = content,
         )
         if (accessIndicator) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             ) {
                 Icon(
                     imageVector = indicatorIcon,
                     contentDescription = indicatorIcon.name,
                     modifier = Modifier
-                        .size(iconSize.dp)
+                        .size(iconSize.dp),
                 )
             }
         }
@@ -60,20 +60,20 @@ fun BasicCard(
 @Composable
 fun BasicCard(
     elevation: Dp = 0.dp,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     Card(
         elevation = CardDefaults.cardElevation(elevation),
         modifier = Modifier
             .fillMaxWidth(halfSize)
-            .padding(cardPadding.dp)
+            .padding(cardPadding.dp),
     ) {
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(standardPadding.dp),
-            content = content
+            content = content,
         )
     }
 }

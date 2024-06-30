@@ -11,15 +11,17 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.NavItemsList
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.CoveringLetterDetailView
 import com.christophprenissl.hygienecompanion.presentation.view.covering_letters.CoveringLettersView
+import com.christophprenissl.hygienecompanion.util.doubleStandardPadding
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun LoggedInNavigation(
-    navItems: List<Screen>
+    navItems: List<Screen>,
 ) {
     val navigator = rememberListDetailPaneScaffoldNavigator<Screen>()
 
@@ -33,12 +35,15 @@ fun LoggedInNavigation(
                 directive = navigator.scaffoldDirective,
                 value = navigator.scaffoldValue,
                 listPane = {
-                    AnimatedPane {
+                    AnimatedPane(
+                        modifier = Modifier.padding(doubleStandardPadding.dp)
+                            .preferredWidth(250.dp),
+                    ) {
                         NavItemsList(
                             screenList = navItems,
                             onNavigate = { screen ->
                                 navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, screen)
-                            }
+                            },
                         )
                     }
                 },
@@ -47,8 +52,11 @@ fun LoggedInNavigation(
                         navigator.currentDestination?.content?.let {
                             CoveringLettersView(
                                 onNavigateToDetail = {
-                                    navigator.navigateTo(ListDetailPaneScaffoldRole.Extra, Screen.CoveringLetterDetail)
-                                }
+                                    navigator.navigateTo(
+                                        ListDetailPaneScaffoldRole.Extra,
+                                        Screen.CoveringLetterDetail,
+                                    )
+                                },
                             )
                         }
                     }
@@ -57,7 +65,7 @@ fun LoggedInNavigation(
                     AnimatedPane {
                         CoveringLetterDetailView(onNavigateUp = navigator::navigateBack)
                     }
-                }
+                },
             )
         }
     }

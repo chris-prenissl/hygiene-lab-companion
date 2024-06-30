@@ -7,13 +7,13 @@ import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun TitleText(
-    title: String
+    title: String,
 ) {
     Text(
         text = title,
         fontStyle = MaterialTheme.typography.headlineLarge.fontStyle,
         textAlign = TextAlign.Center,
         color = MaterialTheme.colorScheme.onBackground,
-        fontSize = MaterialTheme.typography.headlineLarge.fontSize
+        fontSize = MaterialTheme.typography.headlineLarge.fontSize,
     )
 }

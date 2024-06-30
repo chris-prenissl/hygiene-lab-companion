@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
-import com.christophprenissl.hygienecompanion.presentation.view.navigation.NavigationGraph
 import com.christophprenissl.hygienecompanion.presentation.view.component.bar.TopMenuBar
+import com.christophprenissl.hygienecompanion.presentation.view.navigation.NavigationGraph
 import com.christophprenissl.hygienecompanion.util.APP_TITLE
 import org.koin.androidx.compose.koinViewModel
 
@@ -48,9 +48,9 @@ fun MainView(mainViewViewModel: MainViewViewModel = koinViewModel()) {
                         },
                         hasBackButton = false,
                         onNavigateUp = navController::navigateUp,
-                        titleColor = userColor
+                        titleColor = userColor,
                     )
-                }
+                },
             ) { innerPadding ->
                 Box(modifier = Modifier.padding(innerPadding)) {
                     NavigationGraph(

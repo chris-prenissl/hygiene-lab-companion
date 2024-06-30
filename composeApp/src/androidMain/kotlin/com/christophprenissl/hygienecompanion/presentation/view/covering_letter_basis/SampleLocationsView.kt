@@ -12,22 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.christophprenissl.hygienecompanion.util.standardPadding
 import com.christophprenissl.hygienecompanion.model.Response
+import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.SampleLocationDialog
-import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
 import com.christophprenissl.hygienecompanion.util.NEW_SAMPLE_LOCATION
+import com.christophprenissl.hygienecompanion.util.standardPadding
 
 @Composable
 fun SampleLocationsView(
-    viewModel: CoveringLetterBasisViewModel
+    viewModel: CoveringLetterBasisViewModel,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(standardPadding.dp)
+            .padding(standardPadding.dp),
     ) {
         val address = viewModel.chosenAddress
         Text("${address.value?.name}")
@@ -36,14 +36,14 @@ fun SampleLocationsView(
         if (viewModel.openSampleLocationState.value) {
             SampleLocationDialog(
                 viewModel = viewModel,
-                onDismissRequest = { viewModel.closeSampleLocationDialog() }
+                onDismissRequest = { viewModel.closeSampleLocationDialog() },
             )
         }
 
-        when(val response = viewModel.gotSampleLocationsState.value) {
+        when (val response = viewModel.gotSampleLocationsState.value) {
             is Response.Success -> {
                 LazyColumn {
-                    items(response.data, key = {location -> location.id}) { item ->
+                    items(response.data, key = { location -> location.id }) { item ->
                         SwipeToDelete(onDelete = {
                             viewModel.deleteSampleLocation(item)
                         }) {

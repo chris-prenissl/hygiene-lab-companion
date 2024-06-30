@@ -9,5 +9,5 @@ data class Address(
     val street: String,
     val phone: String = "",
     val fax: String = "",
-    val eMail: String = ""
+    val eMail: String = "",
 )

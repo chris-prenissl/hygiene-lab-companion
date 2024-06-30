@@ -11,7 +11,7 @@ import com.christophprenissl.hygienecompanion.util.QM_SAMPLER
 
 @Composable
 fun SamplerCard(
-    user: User
+    user: User,
 ) {
     val hasCertificate = user.hasCertificate
     val isSamplerOfInstitute = user.isSamplerOfInstitute
@@ -19,15 +19,15 @@ fun SamplerCard(
         Column {
             ParameterText(
                 title = NAME,
-                value = user.name
+                value = user.name,
             )
             ParameterText(
                 title = HAS_CERTIFICATE,
-                value = hasCertificate.translation()
+                value = hasCertificate.translation(),
             )
             ParameterText(
                 title = QM_SAMPLER,
-                value = isSamplerOfInstitute.translation()
+                value = isSamplerOfInstitute.translation(),
             )
         }
     }

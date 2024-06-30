@@ -7,5 +7,5 @@ enum class SamplingSeriesType {
     Monthly,
     Quarterly,
     HalfAYear,
-    Yearly
+    Yearly,
 }

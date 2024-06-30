@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 fun BasicSurface(
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Surface(
         modifier = modifier,
         border = border,
         shape = MaterialTheme.shapes.medium,
-        content = content
+        content = content,
     )
 }

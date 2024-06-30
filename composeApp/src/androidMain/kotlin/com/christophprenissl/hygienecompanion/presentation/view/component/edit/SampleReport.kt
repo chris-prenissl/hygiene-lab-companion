@@ -16,14 +16,14 @@ import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
 fun SampleReport(
-    sample: Sample
+    sample: Sample,
 ) {
     BasicCard(
-        elevation = standardElevation.dp
+        elevation = standardElevation.dp,
     ) {
         Column(
             modifier = Modifier
-                .padding(standardPadding.dp)
+                .padding(standardPadding.dp),
         ) {
             Row {
                 Text(SAMPLE_LOCATION)

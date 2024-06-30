@@ -8,13 +8,13 @@ import com.christophprenissl.hygienecompanion.presentation.util.Screen
 
 fun NavGraphBuilder.reportsNavGraph(
     navController: NavController,
-    viewModel: ReportsViewModel
+    viewModel: ReportsViewModel,
 ) {
     navigation<Screen.Reports>(startDestination = Screen.Reports) {
         composable<Screen.Reports> {
             ReportsView(
                 viewModel = viewModel,
-                navController = navController
+                navController = navController,
             )
         }
         composable<Screen.ReportDetail> {

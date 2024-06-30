@@ -9,11 +9,11 @@ import com.christophprenissl.hygienecompanion.model.entity.Basis
 fun BasisCard(
     basis: Basis,
     onClick: () -> Unit = {},
-    accessAble: Boolean = true
+    accessAble: Boolean = true,
 ) {
     BasicCard(
         onClick = onClick,
-        accessIndicator = accessAble
+        accessIndicator = accessAble,
     ) {
         Column {
             Text(basis.description)

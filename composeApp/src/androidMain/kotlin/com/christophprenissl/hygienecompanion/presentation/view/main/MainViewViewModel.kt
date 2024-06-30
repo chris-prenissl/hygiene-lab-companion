@@ -43,15 +43,19 @@ class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStore
                     UserType.HygieneWorker -> listOf(
                         Screen.CoveringLetters,
                         Screen.CoveringLetterBasis,
-                        Screen.Reports
+                        Screen.Reports,
                     )
                     else -> emptyList()
                 },
                 initiallyLoggedIn = initiallyLoggedIn,
-                isLoading = false
+                isLoading = false,
             )
         }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), MainViewState(isLoading = true))
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            MainViewState(isLoading = true),
+        )
 
     fun onEvent(event: MainViewEvent) {
         when (event) {

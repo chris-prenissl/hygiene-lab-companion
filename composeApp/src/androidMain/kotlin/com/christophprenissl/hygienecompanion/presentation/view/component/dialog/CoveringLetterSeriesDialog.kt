@@ -16,7 +16,6 @@ import com.christophprenissl.hygienecompanion.model.entity.*
 import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicCheckBoxField
 import com.christophprenissl.hygienecompanion.presentation.view.component.BasicDivider
-import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.SwipeToDelete
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.BasicButton
@@ -24,6 +23,7 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.button
 import com.christophprenissl.hygienecompanion.presentation.view.component.button.OkButton
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.AddressCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.card.BasisCard
+import com.christophprenissl.hygienecompanion.presentation.view.component.card.SampleLocationCard
 import com.christophprenissl.hygienecompanion.presentation.view.component.dropdown.BasicDropdownItem
 import com.christophprenissl.hygienecompanion.presentation.view.component.dropdown.BasicDropdownMenu
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterTextField
@@ -34,7 +34,7 @@ import com.christophprenissl.hygienecompanion.util.*
 @Composable
 fun CoveringLetterSeriesDialog(
     viewModel: CoveringLetterBasisViewModel,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -74,7 +74,7 @@ fun CoveringLetterSeriesDialog(
         samplingLocations.clear()
     }
 
-    BasicDialog(onDismissRequest =  onDismissRequest) {
+    BasicDialog(onDismissRequest = onDismissRequest) {
         stickyHeader {
             TitleText(COVERING_LETTER_SERIES)
         }
@@ -82,13 +82,13 @@ fun CoveringLetterSeriesDialog(
         item {
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
-        item{
+        item {
             ParameterTextField(
                 labelText = DESCRIPTION,
                 value = description,
                 onValueChange = {
                     description = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -98,7 +98,7 @@ fun CoveringLetterSeriesDialog(
                 value = resultToClient,
                 onCheckedChange = {
                     resultToClient = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = doubleStandardPadding.dp))
         }
@@ -109,28 +109,28 @@ fun CoveringLetterSeriesDialog(
                     value = resultToTestingProperty,
                     onCheckedChange = {
                         resultToTestingProperty = it
-                    }
+                    },
                 )
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
-        item{
+        item {
             ParameterTextField(
                 labelText = COST_LOCATION,
                 value = costLocation,
                 onValueChange = {
                     costLocation = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
-        item{
+        item {
             ParameterTextField(
                 labelText = LAB_ID,
                 value = laboratoryId,
                 onValueChange = {
                     laboratoryId = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
             BasicDivider()
@@ -143,7 +143,8 @@ fun CoveringLetterSeriesDialog(
                 expanded = viewModel.openBasisDropDown.value && basesChoices.isNotEmpty(),
                 onDismissRequest = {
                     viewModel.closeBasesChoice()
-                }) {
+                },
+            ) {
                 basesChoices.forEach { basis ->
                     basis.norm.let {
                         BasicDropdownItem(
@@ -169,7 +170,7 @@ fun CoveringLetterSeriesDialog(
                                     basicLabReportParameters[it] = false
                                 }
                                 basicLabReportParametersKeys = basicLabReportParameters.keys.toMutableStateList()
-                            }
+                            },
                         ) {
                             Text(text = it)
                         }
@@ -202,12 +203,11 @@ fun CoveringLetterSeriesDialog(
                 it.labSampleParameters.forEach { basis ->
                     labSampleParametersKeys.remove(basis)
                     labSampleParameters.remove(basis)
-
                 }
             }) {
                 BasisCard(
                     basis = it,
-                    onClick = {}
+                    onClick = {},
                 )
             }
         }
@@ -229,7 +229,7 @@ fun CoveringLetterSeriesDialog(
                             value = value,
                             onCheckedChange = {
                                 basicCoveringParameters[basis] = it
-                            }
+                            },
                         )
                     }
                 }
@@ -249,10 +249,10 @@ fun CoveringLetterSeriesDialog(
                 coveringSampleParameters[basis]?.let { value ->
                     BasicCheckBoxField(
                         title = basis.name,
-                        value = value, 
+                        value = value,
                         onCheckedChange = {
                             coveringSampleParameters[basis] = it
-                        }
+                        },
                     )
                 }
             }
@@ -266,14 +266,14 @@ fun CoveringLetterSeriesDialog(
                 Text(LAB_SAMPLE_PARAMETERS)
             }
             items(labSampleParameters.values.count()) { idx ->
-                labSampleParametersKeys[idx].let{ basis ->
+                labSampleParametersKeys[idx].let { basis ->
                     labSampleParameters[basis]?.let { value ->
                         BasicCheckBoxField(
                             title = basis.name,
-                            value = value, 
+                            value = value,
                             onCheckedChange = {
                                 labSampleParameters[basis] = it
-                            }
+                            },
                         )
                     }
                 }
@@ -295,7 +295,7 @@ fun CoveringLetterSeriesDialog(
                             value = value,
                             onCheckedChange = {
                                 basicLabReportParameters[basis] = it
-                            } 
+                            },
                         )
                     }
                 }
@@ -311,14 +311,14 @@ fun CoveringLetterSeriesDialog(
                 SwipeToDelete(onDelete = { client = null }) {
                     AddressCard(
                         address = it,
-                        onClick = {}
+                        onClick = {},
                     )
                 }
             }
             BasicButton(
                 onClick = {
                     viewModel.openClientAddressChoice()
-                }
+                },
             ) {
                 Text(SET_CLIENT_ADDRESS)
             }
@@ -328,7 +328,8 @@ fun CoveringLetterSeriesDialog(
                 expanded = viewModel.openClientAddressDropDown.value,
                 onDismissRequest = {
                     viewModel.closeClientAddressChoice()
-                }) {
+                },
+            ) {
                 val addresses = viewModel.gotAddressState.value
                 if (addresses is Response.Success) {
                     addresses.data.forEach { address ->
@@ -350,7 +351,7 @@ fun CoveringLetterSeriesDialog(
                 SwipeToDelete(onDelete = { samplingCompany = null }) {
                     AddressCard(
                         address = it,
-                        onClick = {}
+                        onClick = {},
                     )
                 }
             }
@@ -360,7 +361,7 @@ fun CoveringLetterSeriesDialog(
             BasicButton(
                 onClick = {
                     viewModel.openSamplingCompanyAddressChoice()
-                }
+                },
             ) {
                 Text(SET_COVERING_COMPANY_ADDRESS)
             }
@@ -368,7 +369,8 @@ fun CoveringLetterSeriesDialog(
                 expanded = viewModel.openSamplingCompanyAddressDropDown.value,
                 onDismissRequest = {
                     viewModel.closeSamplingCompanyAddressChoice()
-                }) {
+                },
+            ) {
                 val addresses = viewModel.gotAddressState.value
                 if (addresses is Response.Success) {
                     addresses.data.forEach { address ->
@@ -393,7 +395,7 @@ fun CoveringLetterSeriesDialog(
                 }) {
                     AddressCard(
                         address = it,
-                        onClick = {}
+                        onClick = {},
                     )
                 }
             }
@@ -402,7 +404,7 @@ fun CoveringLetterSeriesDialog(
             BasicButton(
                 onClick = {
                     viewModel.openSampleAddressChoice()
-                }
+                },
             ) {
                 Text(SET_COVERING_ADDRESS)
             }
@@ -410,7 +412,8 @@ fun CoveringLetterSeriesDialog(
                 expanded = viewModel.openSampleAddressDropDown.value,
                 onDismissRequest = {
                     viewModel.closeSampleAddressChoice()
-                }) {
+                },
+            ) {
                 val addresses = viewModel.gotAddressState.value
                 if (addresses is Response.Success) {
                     addresses.data.forEach { address ->
@@ -427,12 +430,12 @@ fun CoveringLetterSeriesDialog(
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
-        if (costLocation.text.isNotEmpty()
-            && sampleAddress != null
-            && client != null
-            && samplingCompany != null
-            && description.text.isNotEmpty()
-            && bases.isNotEmpty()
+        if (costLocation.text.isNotEmpty() &&
+            sampleAddress != null &&
+            client != null &&
+            samplingCompany != null &&
+            description.text.isNotEmpty() &&
+            bases.isNotEmpty()
         ) {
             item {
                 BasicDivider()
@@ -447,7 +450,8 @@ fun CoveringLetterSeriesDialog(
                         expanded = viewModel.openSamplingLocationsDropDown.value,
                         onDismissRequest = {
                             viewModel.closeSamplingLocationsChoice()
-                        }) {
+                        },
+                    ) {
                         when (val locations = viewModel.gotSampleLocationsState.value) {
                             is Response.Success -> {
                                 locations.data.forEach { location ->
@@ -457,7 +461,7 @@ fun CoveringLetterSeriesDialog(
                                                 samplingLocations.add(location)
                                             }
                                             viewModel.closeSamplingLocationsChoice()
-                                        }
+                                        },
                                     ) {
                                         Text(location.description)
                                     }
@@ -482,12 +486,12 @@ fun CoveringLetterSeriesDialog(
                     onClick = {
                         viewModel.openSamplingLocationsChoice()
                     },
-                    enabled = sampleAddress != null
+                    enabled = sampleAddress != null,
                 ) {
                     Text(ADD_SAMPLE_LOCATION)
                 }
             }
-            
+
             item {
                 Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                 BasicDivider()
@@ -505,9 +509,9 @@ fun CoveringLetterSeriesDialog(
                 BasicButton(
                     onClick = {
                         viewModel.openStartDatePickerDialog(
-                            context = context
+                            context = context,
                         )
-                    }
+                    },
                 ) {
                     Text(CHOOSE_START_DATE)
                 }
@@ -523,15 +527,15 @@ fun CoveringLetterSeriesDialog(
                                 .selectable(
                                     selected = type == samplingSeriesType,
                                     onClick = { samplingSeriesType = type },
-                                    role = Role.RadioButton
+                                    role = Role.RadioButton,
                                 )
-                                .padding(vertical = standardPadding.dp)
+                                .padding(vertical = standardPadding.dp),
                         ) {
                             RadioButton(
                                 selected = type == samplingSeriesType,
                                 onClick = {
                                     samplingSeriesType = type
-                                }
+                                },
                             )
                             Text(type.name)
                         }
@@ -550,9 +554,9 @@ fun CoveringLetterSeriesDialog(
                     BasicButton(
                         onClick = {
                             viewModel.openEndDatePickerDialog(
-                                context = context
+                                context = context,
                             )
-                        }
+                        },
                     ) {
                         Text(CHOOSE_PLANNED_END)
                     }
@@ -584,21 +588,21 @@ fun CoveringLetterSeriesDialog(
                         labReportParameters = basicLabReportParameters,
                         samplingSeriesType = samplingSeriesType,
                         plannedStart = viewModel.plannedStartDate.value,
-                        plannedEnd = viewModel.plannedEndDate.value
+                        plannedEnd = viewModel.plannedEndDate.value,
                     )
                     onDismissRequest()
                 },
-                enabled = costLocation.text.isNotEmpty()
-                        && sampleAddress != null
-                        && client != null
-                        && samplingCompany != null
-                        && description.text.isNotEmpty()
-                        && bases.isNotEmpty()
+                enabled = costLocation.text.isNotEmpty() &&
+                    sampleAddress != null &&
+                    client != null &&
+                    samplingCompany != null &&
+                    description.text.isNotEmpty() &&
+                    bases.isNotEmpty(),
             ) {
                 Text(ACCEPT)
             }
             CancelButton(
-                onCancel = onDismissRequest
+                onCancel = onDismissRequest,
             ) {
                 Text(CANCEL)
             }

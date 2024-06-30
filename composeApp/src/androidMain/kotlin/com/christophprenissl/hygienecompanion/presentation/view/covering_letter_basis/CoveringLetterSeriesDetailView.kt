@@ -22,15 +22,15 @@ import com.christophprenissl.hygienecompanion.util.*
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLetterSeriesDetailView(
-    viewModel: CoveringLetterBasisViewModel
+    viewModel: CoveringLetterBasisViewModel,
 ) {
     BasicSurface(
         modifier = Modifier
             .padding(standardPadding.dp)
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             stickyHeader {
                 TitleText(COVERING_LETTER_SERIE)
@@ -39,37 +39,37 @@ fun CoveringLetterSeriesDetailView(
                 item {
                     ParameterText(
                         title = DESCRIPTION,
-                        value =  cls.description
+                        value = cls.description,
                     )
                 }
                 item {
                     ParameterText(
                         title = CREATED,
-                        value =  cls.created?.dayMonthYearString()
+                        value = cls.created?.dayMonthYearString(),
                     )
                 }
                 item {
                     ParameterText(
                         title = TO_CLIENT,
-                        value =  cls.resultToClient.translation()
+                        value = cls.resultToClient.translation(),
                     )
                 }
                 item {
                     ParameterText(
                         title = TO_COVERING_PROPERTY,
-                        value =  cls.resultToTestingProperty.translation()
+                        value = cls.resultToTestingProperty.translation(),
                     )
                 }
                 item {
                     ParameterText(
                         title = COST_LOCATION,
-                        value =  cls.costLocation
+                        value = cls.costLocation,
                     )
                 }
                 item {
                     ParameterText(
                         title = LAB_ID,
-                        value =  cls.laboratoryId
+                        value = cls.laboratoryId,
                     )
                 }
                 item {
@@ -87,7 +87,7 @@ fun CoveringLetterSeriesDetailView(
                 items(cls.bases) { item ->
                     BasisCard(
                         basis = item,
-                        accessAble = false
+                        accessAble = false,
                     )
                 }
                 item {
@@ -97,5 +97,4 @@ fun CoveringLetterSeriesDetailView(
             }
         }
     }
-
 }

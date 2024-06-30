@@ -8,13 +8,13 @@ import com.christophprenissl.hygienecompanion.util.NAME
 
 @Composable
 fun LabWorkerCard(
-    user: User
+    user: User,
 ) {
     BasicCard {
         Column {
             ParameterText(
                 title = NAME,
-                value = user.name
+                value = user.name,
             )
         }
     }

@@ -10,11 +10,11 @@ import com.christophprenissl.hygienecompanion.presentation.util.dayMonthYearStri
 fun CoveringLetterCard(
     coveringLetter: CoveringLetter,
     onClick: () -> Unit,
-    accessIndicator: Boolean = true
+    accessIndicator: Boolean = true,
 ) {
     BasicCard(
         onClick = onClick,
-        accessIndicator = accessIndicator
+        accessIndicator = accessIndicator,
     ) {
         Column {
             Text(coveringLetter.description)

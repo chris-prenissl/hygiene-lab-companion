@@ -21,19 +21,19 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CoveringLettersView(
     onNavigateToDetail: () -> Unit,
-    viewModel: CoveringLettersViewModel = koinViewModel()
-){
-    val userType  = viewModel.userTypeFlow.collectAsState(initial = null)
+    viewModel: CoveringLettersViewModel = koinViewModel(),
+) {
+    val userType = viewModel.userTypeFlow.collectAsState(initial = null)
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
             Text(NEXT_COVERING_LETTERS)
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
-        when(val response = viewModel.gotCoveringLettersState.value) {
+        when (val response = viewModel.gotCoveringLettersState.value) {
             is Response.Success -> {
                 val groupedCoveringLetters = response.data
                 groupedCoveringLetters.forEach { (initial, coveringLetters) ->
@@ -44,13 +44,14 @@ fun CoveringLettersView(
                     }
                     items(coveringLetters, key = { cl -> cl.id }) {
                         if (userType.value != null) {
-                          CoveringLetterCard(
+                            CoveringLetterCard(
                                 coveringLetter = it,
                                 onClick = {
                                     if (isUserAllowedToEnter(
                                             userType = userType.value,
-                                            samplingState = it.samplingState
-                                        )) {
+                                            samplingState = it.samplingState,
+                                        )
+                                    ) {
                                         viewModel.chooseCoveringLetter(it)
                                         if (viewModel.chosenCoveringLetter.value != null) {
                                             onNavigateToDetail()
@@ -59,8 +60,8 @@ fun CoveringLettersView(
                                 },
                                 accessIndicator = isUserAllowedToEnter(
                                     userType = userType.value,
-                                    samplingState = it.samplingState
-                                )
+                                    samplingState = it.samplingState,
+                                ),
                             )
                         }
                     }

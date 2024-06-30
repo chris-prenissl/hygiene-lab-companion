@@ -18,7 +18,7 @@ fun Date.monthYearString(): String {
 
 fun createDates(startDate: Date, endDate: Date, samplingSeriesTye: SamplingSeriesType): List<Date> {
     val dates = mutableListOf<Date>()
-    when(samplingSeriesTye) {
+    when (samplingSeriesTye) {
         SamplingSeriesType.NonPeriodic -> dates.add(startDate)
         SamplingSeriesType.Daily -> {
             dates.addPeriodicDays(startDate, endDate, 1)

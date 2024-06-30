@@ -14,7 +14,7 @@ class DataStoreUser(private val context: Context) {
 
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-            USER_PREF_STORE
+            USER_PREF_STORE,
         )
         val USER_NAME_KEY = stringPreferencesKey(USER_NAME_PREF)
         val HAS_CERTIFICATE_KEY = stringPreferencesKey(HAS_CERTIFICATE_PREF)
@@ -31,35 +31,34 @@ class DataStoreUser(private val context: Context) {
     }
 
     fun getUser(): Flow<User?> = context.dataStore.data.map { preferences ->
-            val name = preferences[USER_NAME_KEY]
-            val hasCertificate = preferences[HAS_CERTIFICATE_KEY].toBoolean()
-            val qm = preferences[QM_KEY].toBoolean()
-            val userTypeString = preferences[USER_TYPE_KEY]
-            if (name == null || userTypeString == null) {
-                null
-            } else {
-                User(
-                    name = name,
-                    hasCertificate = hasCertificate,
-                    isSamplerOfInstitute = qm,
-                    userType = UserType.valueOf(userTypeString)
-                )
-            }
-        }
-
-
-        suspend fun saveUser(user: User) {
-            context.dataStore.edit { preferences ->
-                preferences[USER_NAME_KEY] = user.name
-                preferences[HAS_CERTIFICATE_KEY] = user.hasCertificate.toString()
-                preferences[QM_KEY] = user.isSamplerOfInstitute.toString()
-                preferences[USER_TYPE_KEY] = user.userType.name
-            }
-        }
-
-        suspend fun removeUser() {
-            context.dataStore.edit { preferences ->
-                preferences.clear()
-            }
+        val name = preferences[USER_NAME_KEY]
+        val hasCertificate = preferences[HAS_CERTIFICATE_KEY].toBoolean()
+        val qm = preferences[QM_KEY].toBoolean()
+        val userTypeString = preferences[USER_TYPE_KEY]
+        if (name == null || userTypeString == null) {
+            null
+        } else {
+            User(
+                name = name,
+                hasCertificate = hasCertificate,
+                isSamplerOfInstitute = qm,
+                userType = UserType.valueOf(userTypeString),
+            )
         }
     }
+
+    suspend fun saveUser(user: User) {
+        context.dataStore.edit { preferences ->
+            preferences[USER_NAME_KEY] = user.name
+            preferences[HAS_CERTIFICATE_KEY] = user.hasCertificate.toString()
+            preferences[QM_KEY] = user.isSamplerOfInstitute.toString()
+            preferences[USER_TYPE_KEY] = user.userType.name
+        }
+    }
+
+    suspend fun removeUser() {
+        context.dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+}

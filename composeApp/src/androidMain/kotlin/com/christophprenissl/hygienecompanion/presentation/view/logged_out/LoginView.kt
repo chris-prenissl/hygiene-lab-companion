@@ -30,7 +30,7 @@ import com.christophprenissl.hygienecompanion.util.*
 fun LoginView(
     state: LoggedOutState = LoggedOutState(),
     onEvent: (LoggedOutEvent) -> Unit = {},
-    onLogin: () -> Unit = {}
+    onLogin: () -> Unit = {},
 ) {
     LazyColumn(
         modifier = Modifier
@@ -38,19 +38,19 @@ fun LoginView(
             .padding(standardPadding.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        contentPadding = PaddingValues(vertical = doubleStandardPadding.dp)
+        contentPadding = PaddingValues(vertical = doubleStandardPadding.dp),
     ) {
         stickyHeader {
             Text(LOGIN)
         }
         item {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_lens_blur_24),
                     contentDescription = APP_LOGO_DESCRIPTION,
-                    modifier = Modifier.size(titleIconSize.dp)
+                    modifier = Modifier.size(titleIconSize.dp),
                 )
                 Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
                 TitleText(title = APP_TITLE_START)
@@ -58,12 +58,12 @@ fun LoginView(
         }
         item {
             BasicSurface(
-                border = BorderStroke(basicBorderStroke.dp, MaterialTheme.colorScheme.onBackground)
+                border = BorderStroke(basicBorderStroke.dp, MaterialTheme.colorScheme.onBackground),
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(standardPadding.dp)
+                    modifier = Modifier.padding(standardPadding.dp),
                 ) {
                     ParameterTextField(
                         labelText = USER_NAME,
@@ -77,7 +77,7 @@ fun LoginView(
                             value = state.hasCertificate,
                             onCheckedChange = {
                                 onEvent(LoggedOutEvent.SetCertificateChanged(it))
-                            }
+                            },
                         )
                         Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                         BasicCheckBoxField(
@@ -85,7 +85,7 @@ fun LoginView(
                             value = state.isUserOfInstitute,
                             onCheckedChange = {
                                 onEvent(LoggedOutEvent.SetSamplerOfInstituteChanged(it))
-                            }
+                            },
                         )
                         Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
                     }
@@ -93,7 +93,7 @@ fun LoginView(
                         value = state.userType ?: UserType.Sampler,
                         onUserTypeChoose = {
                             onEvent(LoggedOutEvent.UserTypeChanged(it))
-                        }
+                        },
                     )
                 }
             }
@@ -104,7 +104,7 @@ fun LoginView(
                     onEvent(LoggedOutEvent.Login)
                     onLogin()
                 },
-                modifier = Modifier.padding(standardPadding.dp)
+                modifier = Modifier.padding(standardPadding.dp),
             ) {
                 Text(LOGIN)
             }

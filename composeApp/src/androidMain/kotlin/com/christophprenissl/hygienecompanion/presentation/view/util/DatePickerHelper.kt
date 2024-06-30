@@ -9,7 +9,7 @@ import java.util.*
 fun openDatePickerDialog(
     context: Context,
     date: MutableState<Date>,
-    onSet: ((Date) -> Unit)? = null
+    onSet: ((Date) -> Unit)? = null,
 ) {
     val currentCalendar = Calendar.getInstance()
     currentCalendar.timeInMillis = date.value.time
@@ -31,7 +31,7 @@ fun openDatePickerDialog(
         },
         cYear,
         cMonth,
-        cDay
+        cDay,
     )
     datePicker.show()
 }

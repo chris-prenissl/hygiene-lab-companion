@@ -11,17 +11,18 @@ import com.christophprenissl.hygienecompanion.util.dropDownMenuWidth
 fun BasicDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
-    content: @Composable (ColumnScope.() -> Unit)
+    content: @Composable (ColumnScope.() -> Unit),
 ) {
     Box(
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         DropdownMenu(
             modifier = Modifier.fillMaxWidth(dropDownMenuWidth),
             expanded = expanded,
             onDismissRequest = onDismissRequest,
-            content = content,)
+            content = content,
+        )
     }
 }

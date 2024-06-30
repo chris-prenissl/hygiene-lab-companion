@@ -23,7 +23,7 @@ import com.christophprenissl.hygienecompanion.util.*
 
 @Composable
 fun ReportDetailView(
-    viewModel: ReportsViewModel
+    viewModel: ReportsViewModel,
 ) {
     val context = LocalContext.current
     val report = viewModel.chosenReport.value
@@ -33,36 +33,36 @@ fun ReportDetailView(
             contentPadding = PaddingValues(vertical = standardPadding.dp),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(doubleStandardPadding.dp)
+                .padding(doubleStandardPadding.dp),
         ) {
             item {
                 ParameterText(
                     title = COVERING_LETTER,
-                    value =  report?.description
+                    value = report?.description,
                 )
             }
             item {
                 ParameterText(
                     title = PLANNED_START_DATE,
-                    value =  report?.date?.dayMonthYearString()
+                    value = report?.date?.dayMonthYearString(),
                 )
             }
             item {
                 ParameterText(
                     title = LAB_IN_DATE,
-                    value =  report?.laboratoryIn?.dayMonthYearString()
+                    value = report?.laboratoryIn?.dayMonthYearString(),
                 )
             }
             item {
                 ParameterText(
                     title = RESULT_CREATED_DATE,
-                    value =  report?.resultCreated?.dayMonthYearString()
+                    value = report?.resultCreated?.dayMonthYearString(),
                 )
             }
             item {
                 ParameterText(
                     title = LOT_ID,
-                    value = report?.lotId
+                    value = report?.lotId,
                 )
             }
             item {
@@ -88,7 +88,7 @@ fun ReportDetailView(
                 items(parameters) { parameter ->
                     ParameterText(
                         title = parameter.name,
-                        value = parameter.value
+                        value = parameter.value,
                     )
                 }
                 item {
@@ -103,7 +103,7 @@ fun ReportDetailView(
                 items(parameters) { parameter ->
                     ParameterText(
                         title = parameter.name,
-                        value = parameter.value
+                        value = parameter.value,
                     )
                 }
                 item {
@@ -112,7 +112,7 @@ fun ReportDetailView(
             }
 
             item {
-                LazyRow{
+                LazyRow {
                     report?.samples?.let { samples ->
                         items(samples) { sample ->
                             SampleReport(sample = sample)
@@ -131,9 +131,9 @@ fun ReportDetailView(
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.secondary,
                                 contentColor = contentColorFor(
-                                    backgroundColor = MaterialTheme.colorScheme.secondary
-                                )
-                            )
+                                    backgroundColor = MaterialTheme.colorScheme.secondary,
+                                ),
+                            ),
                         ) {
                             Text(SAVE_AS_EXCEL)
                         }
@@ -145,7 +145,7 @@ fun ReportDetailView(
                 BasicButton(
                     onClick = {
                         viewModel.openDatePickerForNewCoveringLetter(context = context)
-                    }
+                    },
                 ) {
                     Text(CREATE_ADDITIONAL_COVERINGS)
                 }

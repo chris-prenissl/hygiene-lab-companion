@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetterSeries
-import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.util.GroupBy
 import com.christophprenissl.hygienecompanion.presentation.util.monthYearString
 import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
@@ -17,8 +17,8 @@ import java.util.*
 import javax.inject.Inject
 
 class ReportsViewModel @Inject constructor(
-    private val useCases: HygieneCompanionUseCases
-): ViewModel() {
+    private val useCases: HygieneCompanionUseCases,
+) : ViewModel() {
 
     private var _chosenReport = mutableStateOf<CoveringLetter?>(null)
     val chosenReport: State<CoveringLetter?> = _chosenReport
@@ -29,11 +29,13 @@ class ReportsViewModel @Inject constructor(
     private var _chosenDate = mutableStateOf(Date())
     val chosenDate: State<Date> = _chosenDate
 
-    private var _createdAdditionalCoveringLettersState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    private var _createdAdditionalCoveringLettersState =
+        mutableStateOf<Response<Void?>>(Response.Success(null))
     val createdAdditionalCoveringLettersState: State<Response<Void?>> = _createdAdditionalCoveringLettersState
 
     private var _gotReportsState = mutableStateOf<Response<Map<String, List<CoveringLetter>>>>(
-        Response.Success(mapOf()))
+        Response.Success(mapOf()),
+    )
     val gotReportsState: State<Response<Map<String, List<CoveringLetter>>>> = _gotReportsState
 
     private var _groupByState = mutableStateOf(GroupBy.Month)
@@ -45,7 +47,7 @@ class ReportsViewModel @Inject constructor(
                     if (reportsResponse.data.values.isEmpty()) {
                         return
                     }
-                    val reportsGrouped = when(value) {
+                    val reportsGrouped = when (value) {
                         GroupBy.Series -> {
                             val reports = reportsResponse.data.values.reduce { acc, list -> acc + list }
                             reports.groupBy {
@@ -56,7 +58,7 @@ class ReportsViewModel @Inject constructor(
                         }
                         GroupBy.Month -> {
                             val reports = reportsResponse.data.values.reduce { acc, list -> acc + list }
-                            reports.groupBy { it.resultCreated?.monthYearString()?: EMPTY_DATE }
+                            reports.groupBy { it.resultCreated?.monthYearString() ?: EMPTY_DATE }
                         }
                     }
                     _gotReportsState.value = Response.Success(reportsGrouped)
@@ -64,7 +66,7 @@ class ReportsViewModel @Inject constructor(
                 else -> Unit
             }
         }
-    get() = _groupByState.value
+        get() = _groupByState.value
 
     private var _nextGroupByState = mutableStateOf(GroupBy.Month)
     val nextGroupByState: State<GroupBy> = _nextGroupByState
@@ -83,7 +85,7 @@ class ReportsViewModel @Inject constructor(
                         val reportsSorted = reports.sortedBy {
                             it.resultCreated
                         }
-                        val groupedReports = when(_groupByState.value) {
+                        val groupedReports = when (_groupByState.value) {
                             GroupBy.Series -> {
                                 reportsSorted.groupBy {
                                     it.seriesId
@@ -126,7 +128,7 @@ class ReportsViewModel @Inject constructor(
         if (currentIndex >= values.size - 1) {
             _nextGroupByState.value = values[0]
         } else {
-            _nextGroupByState.value = values[currentIndex+1]
+            _nextGroupByState.value = values[currentIndex + 1]
         }
     }
 
@@ -140,7 +142,7 @@ class ReportsViewModel @Inject constructor(
     }
 
     fun reportsIsEmpty(): Boolean {
-        return when(val state = _gotReportsState.value) {
+        return when (val state = _gotReportsState.value) {
             is Response.Success -> {
                 state.data.isEmpty()
             }
@@ -152,7 +154,7 @@ class ReportsViewModel @Inject constructor(
         viewModelScope.launch {
             useCases.createAdditionalCoveringLetters(
                 coveringLetter = chosenReport.value!!,
-                dates = dates
+                dates = dates,
             ).collect {
                 _createdAdditionalCoveringLettersState.value = it
             }
@@ -160,7 +162,7 @@ class ReportsViewModel @Inject constructor(
     }
 
     fun openDatePickerForNewCoveringLetter(
-        context: Context
+        context: Context,
     ) {
         _chosenDate.value = Date()
         openDatePickerDialog(
@@ -168,18 +170,18 @@ class ReportsViewModel @Inject constructor(
             date = _chosenDate,
             onSet = {
                 createAdditionalCoveringLetters(listOf(it))
-            }
+            },
         )
     }
 
     fun requestExcelOfReportSave(
-        context: Context
+        context: Context,
     ) {
         if (!writePermissionApproved(context = context)) {
             requestWritePermission(context = context)
             return
         }
-        //val path = createPdfFromReport(chosenReport.value!!, context = context)
-        //Toast.makeText(context, "$path erstellt", Toast.LENGTH_SHORT).show()
+        // val path = createPdfFromReport(chosenReport.value!!, context = context)
+        // Toast.makeText(context, "$path erstellt", Toast.LENGTH_SHORT).show()
     }
 }

@@ -10,5 +10,5 @@ data class Sample(
     var warningMessage: String = "",
     val coveringSampleParameters: List<Parameter> = emptyList(),
     val labSampleParameters: List<Parameter> = emptyList(),
-    var sampleLocation: SampleLocation
+    var sampleLocation: SampleLocation,
 )

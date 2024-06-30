@@ -15,14 +15,14 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 fun BasicCheckBoxField(
     title: String,
     value: Boolean,
-    onCheckedChange: (Boolean) -> Unit
+    onCheckedChange: (Boolean) -> Unit,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(title)
         Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
         Checkbox(
             checked = value,
-            onCheckedChange = onCheckedChange
+            onCheckedChange = onCheckedChange,
         )
     }
 }

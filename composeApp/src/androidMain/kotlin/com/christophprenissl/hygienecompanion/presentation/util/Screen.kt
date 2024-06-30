@@ -10,9 +10,9 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 sealed interface Screen : Parcelable {
-    val name : String get() = this.javaClass.simpleName
+    val name: String get() = this.javaClass.simpleName
 
-    val icon : ImageVector? get() = when (this) {
+    val icon: ImageVector? get() = when (this) {
         CoveringLetters -> Icons.Rounded.Plagiarism
         CoveringLetterBasis -> Icons.Rounded.BackupTable
         Reports -> Icons.Rounded.Summarize

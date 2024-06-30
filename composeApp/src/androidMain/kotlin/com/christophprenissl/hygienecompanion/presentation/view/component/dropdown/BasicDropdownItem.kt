@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun BasicDropdownItem(
     onClick: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     DropdownMenuItem(text = content, onClick = onClick)
 }

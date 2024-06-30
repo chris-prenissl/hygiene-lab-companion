@@ -4,7 +4,7 @@ import com.christophprenissl.hygienecompanion.model.dto.CoveringLetterDto
 import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.entity.SamplingState
 
-class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
+class CoveringLetterMapper : DataMapper<CoveringLetter, CoveringLetterDto> {
     private val userMapper = UserMapper()
     private val parameterMapper = ParameterMapper()
     private val sampleMapper = SampleMapper()
@@ -13,7 +13,7 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
         return CoveringLetter(
             id = entity.id!!,
             seriesId = entity.seriesId!!,
-            description = entity.description?: "",
+            description = entity.description ?: "",
             date = entity.date,
             lotId = entity.lotId ?: "",
             laboratoryIn = entity.laboratoryIn,
@@ -28,8 +28,8 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
             labWorker = entity.labWorker?.let { userMapper.fromEntity(it) },
             samples = entity.samples?.map {
                 sampleMapper.fromEntity(it)
-            }?: emptyList(),
-            samplingState = entity.samplingState?.let { SamplingState.valueOf(it) }
+            } ?: emptyList(),
+            samplingState = entity.samplingState?.let { SamplingState.valueOf(it) },
         )
     }
 
@@ -53,7 +53,7 @@ class CoveringLetterMapper: DataMapper<CoveringLetter, CoveringLetterDto> {
             samples = domain.samples.map {
                 sampleMapper.toEntity(it)
             },
-            samplingState = domain.samplingState?.name
+            samplingState = domain.samplingState?.name,
         )
     }
 }

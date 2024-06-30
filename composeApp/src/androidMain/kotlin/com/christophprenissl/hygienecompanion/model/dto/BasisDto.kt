@@ -9,5 +9,5 @@ data class BasisDto(
     val basicCoveringParameters: List<ParameterBasisDto>? = null,
     val coveringSampleParameters: List<ParameterBasisDto>? = null,
     val labSampleParameters: List<ParameterBasisDto>? = null,
-    val basicLabReportParameters: List<ParameterBasisDto>? = null
+    val basicLabReportParameters: List<ParameterBasisDto>? = null,
 )

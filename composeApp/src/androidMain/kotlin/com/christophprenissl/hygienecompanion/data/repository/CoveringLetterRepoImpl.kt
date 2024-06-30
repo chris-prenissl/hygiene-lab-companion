@@ -17,8 +17,8 @@ import javax.inject.Singleton
 
 @Singleton
 class CoveringLetterRepoImpl @Inject constructor(
-    private val coveringLetterRef: CollectionReference
-): CoveringLetterRepo {
+    private val coveringLetterRef: CollectionReference,
+) : CoveringLetterRepo {
 
     override fun getCoveringLettersNotEndedFromDatabase() = callbackFlow {
         val snapshotListener = coveringLetterRef
@@ -36,7 +36,7 @@ class CoveringLetterRepoImpl @Inject constructor(
                     Response.Error(e?.message ?: e.toString())
                 }
                 trySend(response).isSuccess
-        }
+            }
         awaitClose {
             snapshotListener.remove()
         }
@@ -70,7 +70,9 @@ class CoveringLetterRepoImpl @Inject constructor(
             val coveringLetterMapper = CoveringLetterMapper()
             val coveringLetterDto = coveringLetterMapper.toEntity(coveringLetter)
             if (coveringLetterDto.id != null) {
-                val saved = coveringLetterRef.document(coveringLetterDto.id).set(coveringLetterDto).await()
+                val saved = coveringLetterRef.document(
+                    coveringLetterDto.id,
+                ).set(coveringLetterDto).await()
                 emit(Response.Success(saved))
             } else {
                 emit(Response.Error("No id provided"))

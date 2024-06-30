@@ -8,11 +8,11 @@ import com.christophprenissl.hygienecompanion.model.entity.CoveringLetterSeries
 @Composable
 fun CoveringLetterSeriesCard(
     coveringLetterSeries: CoveringLetterSeries,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     BasicCard(
         onClick = onClick,
-        accessIndicator = true
+        accessIndicator = true,
     ) {
         Column {
             Text(coveringLetterSeries.description)

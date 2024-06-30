@@ -4,9 +4,9 @@ import com.christophprenissl.hygienecompanion.model.entity.CoveringLetter
 import com.christophprenissl.hygienecompanion.model.repository.CoveringLetterRepo
 
 class SaveCoveringLetter(
-    private val coveringLetterRepo: CoveringLetterRepo
+    private val coveringLetterRepo: CoveringLetterRepo,
 ) {
     suspend operator fun invoke(
-        coveringLetter: CoveringLetter
+        coveringLetter: CoveringLetter,
     ) = coveringLetterRepo.saveCoveringLetterToDatabase(coveringLetter)
 }

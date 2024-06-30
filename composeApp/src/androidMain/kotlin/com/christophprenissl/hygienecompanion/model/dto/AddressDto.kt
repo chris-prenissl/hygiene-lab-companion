@@ -12,5 +12,5 @@ data class AddressDto(
     val street: String? = null,
     val phone: String? = null,
     val fax: String? = null,
-    val eMail: String? = null
+    val eMail: String? = null,
 )

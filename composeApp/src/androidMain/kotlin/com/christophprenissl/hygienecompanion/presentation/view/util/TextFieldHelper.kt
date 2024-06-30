@@ -17,19 +17,22 @@ fun getValidNumberTextFieldValue(value: String, oldValue: String): String {
 
     run loop@{
         commaReplaced.forEachIndexed { i, c ->
-            if (c == '.' && lastPrefixedZeroIndex == i-1) {
+            if (c == '.' && lastPrefixedZeroIndex == i - 1) {
                 lastPrefixedZeroIndex--
                 return@loop
             }
-            if (c !in "0") return@loop
-            else lastPrefixedZeroIndex = i
+            if (c !in "0") {
+                return@loop
+            } else {
+                lastPrefixedZeroIndex = i
+            }
         }
     }
 
     if (lastPrefixedZeroIndex <= -1) return commaReplaced
     if (lastPrefixedZeroIndex == commaReplaced.lastIndex) return "0"
 
-    return commaReplaced.removeRange(0, lastPrefixedZeroIndex+1)
+    return commaReplaced.removeRange(0, lastPrefixedZeroIndex + 1)
 }
 
 fun getValidTemperatureTextFieldValue(value: String, oldValue: String): String {
@@ -47,8 +50,8 @@ fun getValidTemperatureTextFieldValue(value: String, oldValue: String): String {
 }
 
 fun checkIfNotEmptyAndNotCurrentDay(sample: Sample, currentDate: Date, value: String): Boolean {
-    return sample.created?.dayMonthYearString() != currentDate.dayMonthYearString()
-        && value.isNotBlank()
+    return sample.created?.dayMonthYearString() != currentDate.dayMonthYearString() &&
+        value.isNotBlank()
 }
 
 fun Boolean.translation(): String {

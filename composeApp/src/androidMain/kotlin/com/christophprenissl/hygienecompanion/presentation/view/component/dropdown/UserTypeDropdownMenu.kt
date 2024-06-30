@@ -1,6 +1,5 @@
 package com.christophprenissl.hygienecompanion.presentation.view.component.dropdown
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -13,7 +12,7 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 @Composable
 fun UserTypeDropdownMenu(
     value: UserType,
-    onUserTypeChoose: (UserType) -> Unit
+    onUserTypeChoose: (UserType) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     var expanded by remember { mutableStateOf(false) }
@@ -25,7 +24,7 @@ fun UserTypeDropdownMenu(
                 focusManager.clearFocus()
                 expanded = !expanded
             },
-            menuOpen = expanded
+            menuOpen = expanded,
         ) {
             Text(value.translation)
         }
@@ -34,14 +33,14 @@ fun UserTypeDropdownMenu(
             expanded = expanded,
             onDismissRequest = {
                 expanded = false
-            }
+            },
         ) {
             userTypes.forEach {
                 BasicDropdownItem(
                     onClick = {
                         expanded = false
                         onUserTypeChoose(it)
-                    }
+                    },
                 ) {
                     Text(it.translation)
                 }

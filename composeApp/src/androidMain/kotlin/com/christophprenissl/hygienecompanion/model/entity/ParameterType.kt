@@ -4,7 +4,7 @@ enum class ParameterType(val translation: String) {
     Number(NUMBER_TRANS),
     Temperature(TEMPERATURE_TRANS),
     Bool(BOOL_TRANS),
-    Note(NOTE_TRANS)
+    Note(NOTE_TRANS),
 }
 
 const val NUMBER_TRANS = "Zahl"

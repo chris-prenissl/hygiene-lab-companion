@@ -4,9 +4,10 @@ import com.christophprenissl.hygienecompanion.model.entity.SampleLocation
 import com.christophprenissl.hygienecompanion.model.repository.SampleLocationRepo
 
 class DeleteSampleLocation(
-    private val sampleRepo: SampleLocationRepo
+    private val sampleRepo: SampleLocationRepo,
 ) {
 
-    suspend operator fun invoke(sampleLocation: SampleLocation) = sampleRepo.deleteSampleLocationFromDatabase(sampleLocation)
-
+    suspend operator fun invoke(sampleLocation: SampleLocation) = sampleRepo.deleteSampleLocationFromDatabase(
+        sampleLocation,
+    )
 }

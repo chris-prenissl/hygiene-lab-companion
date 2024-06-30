@@ -20,7 +20,7 @@ import com.christophprenissl.hygienecompanion.util.*
 @Composable
 fun AddressDialog(
     viewModel: CoveringLetterBasisViewModel,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     var name by remember { mutableStateOf(TextFieldValue("")) }
     var cityName by remember { mutableStateOf(TextFieldValue("")) }
@@ -42,7 +42,7 @@ fun AddressDialog(
                 value = name,
                 onValueChange = {
                     name = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -52,7 +52,7 @@ fun AddressDialog(
                 value = cityName,
                 onValueChange = {
                     cityName = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -62,7 +62,7 @@ fun AddressDialog(
                 value = zip,
                 onValueChange = {
                     zip = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -72,7 +72,7 @@ fun AddressDialog(
                 value = street,
                 onValueChange = {
                     street = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -82,7 +82,7 @@ fun AddressDialog(
                 value = contactName,
                 onValueChange = {
                     contactName = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -92,7 +92,7 @@ fun AddressDialog(
                 value = phone,
                 onValueChange = {
                     phone = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -103,7 +103,7 @@ fun AddressDialog(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 onValueChange = {
                     fax = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -114,7 +114,7 @@ fun AddressDialog(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 onValueChange = {
                     eMail = it
-                }
+                },
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -122,7 +122,7 @@ fun AddressDialog(
             CancelButton(onCancel = onDismissRequest) {
                 Text(
                     CANCEL,
-                    color = MaterialTheme.colorScheme.onPrimary
+                    color = MaterialTheme.colorScheme.onPrimary,
                 )
             }
             OkButton(
@@ -135,10 +135,10 @@ fun AddressDialog(
                         phone = phone.text,
                         fax = fax.text,
                         eMail = eMail.text,
-                        contactName = contactName.text
+                        contactName = contactName.text,
                     )
                     onDismissRequest()
-                }
+                },
             ) {
                 Text(SAVE_ADDRESS)
             }

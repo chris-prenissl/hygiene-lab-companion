@@ -11,5 +11,4 @@ interface UserRepo {
     suspend fun saveUserToDatabase(user: User): Flow<Response<Void?>>
 
     suspend fun deleteUserFromDatabase(user: User): Flow<Response<Void?>>
-
 }

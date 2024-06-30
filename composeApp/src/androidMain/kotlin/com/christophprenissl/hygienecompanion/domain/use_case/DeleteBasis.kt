@@ -4,7 +4,7 @@ import com.christophprenissl.hygienecompanion.model.entity.Basis
 import com.christophprenissl.hygienecompanion.model.repository.BasisRepo
 
 class DeleteBasis(
-    private val basisRepo: BasisRepo
+    private val basisRepo: BasisRepo,
 ) {
     suspend operator fun invoke(basis: Basis) = basisRepo.deleteBasisFromDatabase(basis)
 }

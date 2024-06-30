@@ -5,9 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.model.entity.*
-import com.christophprenissl.hygienecompanion.domain.use_case.HygieneCompanionUseCases
 import com.christophprenissl.hygienecompanion.presentation.view.util.openDatePickerDialog
 import com.christophprenissl.hygienecompanion.util.createCoveringLettersForSeries
 import kotlinx.coroutines.launch
@@ -15,8 +15,8 @@ import java.util.*
 import javax.inject.Inject
 
 class CoveringLetterBasisViewModel @Inject constructor(
-    private val useCases: HygieneCompanionUseCases
-): ViewModel() {
+    private val useCases: HygieneCompanionUseCases,
+) : ViewModel() {
 
     private var _chosenAddress = mutableStateOf<Address?>(null)
     val chosenAddress = _chosenAddress
@@ -24,10 +24,12 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private val _savedSampleLocationState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedSampleLocationState: State<Response<Void?>> = _savedSampleLocationState
 
-    private val _deletedSampleLocationState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    private val _deletedSampleLocationState =
+        mutableStateOf<Response<Void?>>(Response.Success(null))
     val deletedSampleLocationState: State<Response<Void?>> = _deletedSampleLocationState
 
-    private val _gotSampleLocationsState = mutableStateOf<Response<List<SampleLocation>>>(Response.Success(listOf()))
+    private val _gotSampleLocationsState =
+        mutableStateOf<Response<List<SampleLocation>>>(Response.Success(listOf()))
     val gotSampleLocationsState: State<Response<List<SampleLocation>>> = _gotSampleLocationsState
 
     private val _openAddressDialogState = mutableStateOf(false)
@@ -42,7 +44,8 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private val _deleteAddressState = mutableStateOf<Response<Void?>>(Response.Success(null))
     val deleteAddressState: State<Response<Void?>> = _deleteAddressState
 
-    private val _gotAddressesState = mutableStateOf<Response<List<Address>>>(Response.Success(listOf()))
+    private val _gotAddressesState =
+        mutableStateOf<Response<List<Address>>>(Response.Success(listOf()))
     val gotAddressState: State<Response<List<Address>>> = _gotAddressesState
 
     private val _openBasisDialogState = mutableStateOf(false)
@@ -60,10 +63,12 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _chosenBasis = mutableStateOf<Basis?>(null)
     val chosenBasis = _chosenBasis
 
-    private var _gotCoveringLetterSeriesNotEndedState = mutableStateOf<Response<List<CoveringLetterSeries>>>(Response.Success(listOf()))
+    private var _gotCoveringLetterSeriesNotEndedState =
+        mutableStateOf<Response<List<CoveringLetterSeries>>>(Response.Success(listOf()))
     val gotCoveringLetterSeriesNotEndedState: State<Response<List<CoveringLetterSeries>>> = _gotCoveringLetterSeriesNotEndedState
 
-    private var _savedCoveringLetterSeriesState = mutableStateOf<Response<Void?>>(Response.Success(null))
+    private var _savedCoveringLetterSeriesState =
+        mutableStateOf<Response<Void?>>(Response.Success(null))
     val savedCoveringLetterSeriesState: State<Response<Void?>> = _savedCoveringLetterSeriesState
 
     private var _chosenCoveringLetterSeries = mutableStateOf<CoveringLetterSeries?>(null)
@@ -72,7 +77,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _openCoveringLetterSeriesDialog = mutableStateOf(false)
     val openCoveringLetterSeriesDialog = _openCoveringLetterSeriesDialog
 
-    //CoveringLetterSeriesDialog
+    // CoveringLetterSeriesDialog
     private var _openBasisDropDown = mutableStateOf(false)
     val openBasisDropDown = _openBasisDropDown
 
@@ -88,7 +93,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
     private var _openSamplingLocationsDropDown = mutableStateOf(false)
     val openSamplingLocationsDropDown = _openSamplingLocationsDropDown
 
-    //DatePicker
+    // DatePicker
     private var _plannedStartDate = mutableStateOf(Date())
     val plannedStartDate: State<Date> = _plannedStartDate
 
@@ -145,13 +150,13 @@ class CoveringLetterBasisViewModel @Inject constructor(
     fun saveSampleLocation(
         description: String,
         extraInfo: String,
-        nextHeater: String
+        nextHeater: String,
     ) {
         val sampleLocation = SampleLocation(
             description = description,
             extraInfo = extraInfo,
             nextHeater = nextHeater,
-            address = chosenAddress.value
+            address = chosenAddress.value,
         )
 
         viewModelScope.launch {
@@ -191,7 +196,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
         basicCoveringParameters: List<ParameterBasis>,
         coveringSampleParameters: List<ParameterBasis>,
         labSampleParameters: List<ParameterBasis>,
-        basicLabReportParameters: List<ParameterBasis>
+        basicLabReportParameters: List<ParameterBasis>,
     ) {
         val basis = Basis(
             norm = norm,
@@ -199,7 +204,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
             basicCoveringParameters = basicCoveringParameters,
             coveringSampleParameters = coveringSampleParameters,
             labSampleParameters = labSampleParameters,
-            basicLabReportParameters = basicLabReportParameters
+            basicLabReportParameters = basicLabReportParameters,
         )
         viewModelScope.launch {
             useCases.saveBasis(basis).collect { response ->
@@ -236,7 +241,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
         street: String,
         phone: String,
         fax: String,
-        eMail: String
+        eMail: String,
     ) {
         val newAddress = Address(
             name = name,
@@ -246,7 +251,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
             street = street,
             phone = phone,
             fax = fax,
-            eMail = eMail
+            eMail = eMail,
         )
         viewModelScope.launch {
             useCases.saveAddress(newAddress).collect { response ->
@@ -289,7 +294,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
         labReportParameters: Map<ParameterBasis, Boolean> = emptyMap(),
         plannedStart: Date,
         plannedEnd: Date,
-        samplingSeriesType: SamplingSeriesType
+        samplingSeriesType: SamplingSeriesType,
     ) {
         val coveringLetters = createCoveringLettersForSeries(
             description = description,
@@ -299,9 +304,12 @@ class CoveringLetterBasisViewModel @Inject constructor(
             coveringSampleParameters = coveringSampleParameters,
             labSampleParameters = labSampleParameters,
             startDate = plannedStart,
-            plannedEndDate = if (samplingSeriesType == SamplingSeriesType.NonPeriodic)
-                plannedStart else plannedEnd,
-            samplingSeriesType = samplingSeriesType
+            plannedEndDate = if (samplingSeriesType == SamplingSeriesType.NonPeriodic) {
+                plannedStart
+            } else {
+                plannedEnd
+            },
+            samplingSeriesType = samplingSeriesType,
         )
 
         val coveringLetterSeries = CoveringLetterSeries(
@@ -319,7 +327,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
             plannedEnd = plannedEnd,
             hasEnded = false,
             endedDate = null,
-            samplingSeriesType = samplingSeriesType
+            samplingSeriesType = samplingSeriesType,
         )
 
         viewModelScope.launch {
@@ -341,7 +349,7 @@ class CoveringLetterBasisViewModel @Inject constructor(
         _chosenCoveringLetterSeries.value = coveringLetterSeries
     }
 
-    //CoveringLetterSeriesDialog
+    // CoveringLetterSeriesDialog
     fun openBasesChoice() {
         _openBasisDropDown.value = true
     }
@@ -383,23 +391,23 @@ class CoveringLetterBasisViewModel @Inject constructor(
     }
 
     fun openStartDatePickerDialog(
-        context: Context
+        context: Context,
     ) {
         openDatePickerDialog(
             context = context,
-            date = _plannedStartDate
+            date = _plannedStartDate,
         )
     }
 
     fun openEndDatePickerDialog(
-        context: Context
+        context: Context,
     ) {
         if (_plannedStartDate.value.time > _plannedEndDate.value.time) {
             _plannedEndDate.value.time = _plannedStartDate.value.time
         }
         openDatePickerDialog(
             context = context,
-            date = _plannedEndDate
+            date = _plannedEndDate,
         )
     }
 }

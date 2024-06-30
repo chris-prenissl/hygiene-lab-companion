@@ -10,5 +10,5 @@ data class SampleDto(
     val warningMessage: String? = null,
     val coveringSampleParameters: List<ParameterDto>? = null,
     val labSampleParameters: List<ParameterDto>? = null,
-    val sampleLocation: SampleLocationDto? = null
+    val sampleLocation: SampleLocationDto? = null,
 )

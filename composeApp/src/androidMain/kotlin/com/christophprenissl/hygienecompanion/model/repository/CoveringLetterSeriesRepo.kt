@@ -15,12 +15,11 @@ interface CoveringLetterSeriesRepo {
     fun getCoveringLetterSeriesNotEndedFromDatabase(): Flow<Response<List<CoveringLetterSeries>>>
 
     suspend fun createCoveringLetterSeriesInDatabase(
-        coveringLetterSeries: CoveringLetterSeries
+        coveringLetterSeries: CoveringLetterSeries,
     ): Flow<Response<Void?>>
 
     suspend fun createAdditionalCoveringLettersToSeriesInDatabase(
         coveringLetter: CoveringLetter,
-        dates: List<Date>
+        dates: List<Date>,
     ): Flow<Response<Void?>>
-
 }

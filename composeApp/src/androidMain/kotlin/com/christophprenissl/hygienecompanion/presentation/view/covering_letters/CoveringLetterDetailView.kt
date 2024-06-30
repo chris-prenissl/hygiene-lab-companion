@@ -62,7 +62,7 @@ fun CoveringLetterDetailView(
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         stickyHeader {
             TitleText(title = title)
@@ -74,23 +74,23 @@ fun CoveringLetterDetailView(
         item {
             ParameterText(
                 title = PLANNED_START_DATE,
-                value = date?.dayMonthYearString()
+                value = date?.dayMonthYearString(),
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
 
-        when(samplingState) {
+        when (samplingState) {
             SamplingState.LabInProgress, SamplingState.InLaboratory -> {
                 item {
                     ParameterText(
                         title = LOT_ID,
-                        value = lotId
+                        value = lotId,
                     )
                 }
                 itemsIndexed(basicCoveringValues) { idx, pValue ->
                     ParameterText(
                         title = coveringLetter.basicCoveringParameters[idx].name,
-                        value = pValue
+                        value = pValue,
                     )
                 }
                 item {
@@ -104,11 +104,17 @@ fun CoveringLetterDetailView(
                                 labelText = parameter.name,
                                 value = basicLabReportValues[idx],
                                 onValueChange = {
-                                    val input = getValidTemperatureTextFieldValue(it, basicLabReportValues[idx])
+                                    val input =
+                                        getValidTemperatureTextFieldValue(
+                                            it,
+                                            basicLabReportValues[idx],
+                                        )
                                     parameter.value = input
                                     basicLabReportValues[idx] = input
                                 },
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Number,
+                                ),
                             )
                         }
                         ParameterType.Number -> {
@@ -116,11 +122,14 @@ fun CoveringLetterDetailView(
                                 labelText = parameter.name,
                                 value = basicLabReportValues[idx],
                                 onValueChange = {
-                                    val input = getValidNumberTextFieldValue(it, basicLabReportValues[idx])
+                                    val input =
+                                        getValidNumberTextFieldValue(it, basicLabReportValues[idx])
                                     parameter.value = input
                                     basicLabReportValues[idx] = input
                                 },
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Number,
+                                ),
                             )
                         }
                         ParameterType.Note -> {
@@ -130,7 +139,7 @@ fun CoveringLetterDetailView(
                                 onValueChange = { input ->
                                     parameter.value = input
                                     basicLabReportValues[idx] = input
-                                }
+                                },
                             )
                         }
                         ParameterType.Bool -> {
@@ -140,7 +149,7 @@ fun CoveringLetterDetailView(
                                 onCheckedChange = {
                                     basicLabReportValues[idx] = it.toString()
                                     parameter.value = it.toString()
-                                }
+                                },
                             )
                         }
                     }
@@ -154,7 +163,7 @@ fun CoveringLetterDetailView(
                         onValueChange = {
                             lotId = it
                             coveringLetter.lotId = it
-                        }
+                        },
                     )
                 }
                 itemsIndexed(basicCoveringValues) { idx, _ ->
@@ -165,11 +174,17 @@ fun CoveringLetterDetailView(
                                 labelText = parameter.name,
                                 value = basicCoveringValues[idx],
                                 onValueChange = {
-                                    val input = getValidTemperatureTextFieldValue(it, basicCoveringValues[idx])
+                                    val input =
+                                        getValidTemperatureTextFieldValue(
+                                            it,
+                                            basicCoveringValues[idx],
+                                        )
                                     parameter.value = input
                                     basicCoveringValues[idx] = input
                                 },
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Number,
+                                ),
                             )
                         }
                         ParameterType.Number -> {
@@ -177,11 +192,14 @@ fun CoveringLetterDetailView(
                                 labelText = parameter.name,
                                 value = basicCoveringValues[idx],
                                 onValueChange = {
-                                    val input = getValidNumberTextFieldValue(it, basicCoveringValues[idx])
+                                    val input =
+                                        getValidNumberTextFieldValue(it, basicCoveringValues[idx])
                                     parameter.value = input
                                     basicCoveringValues[idx] = input
                                 },
-                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                                keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Number,
+                                ),
                             )
                         }
                         ParameterType.Note -> {
@@ -191,7 +209,7 @@ fun CoveringLetterDetailView(
                                 onValueChange = { input ->
                                     parameter.value = input
                                     basicCoveringValues[idx] = input
-                                }
+                                },
                             )
                         }
                         ParameterType.Bool -> {
@@ -201,7 +219,7 @@ fun CoveringLetterDetailView(
                                 onCheckedChange = {
                                     basicCoveringValues[idx] = it.toString()
                                     parameter.value = it.toString()
-                                }
+                                },
                             )
                         }
                     }
@@ -212,12 +230,12 @@ fun CoveringLetterDetailView(
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
         item {
-            LazyRow{
+            LazyRow {
                 items(coveringLetter.samples) { sample ->
                     samplingState?.let {
                         SampleEdit(
                             samplingState = it,
-                            sample = sample
+                            sample = sample,
                         )
                     }
                 }
@@ -225,7 +243,7 @@ fun CoveringLetterDetailView(
         }
 
         item {
-            when(samplingState) {
+            when (samplingState) {
                 SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                     Button(
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
@@ -235,7 +253,7 @@ fun CoveringLetterDetailView(
                             Toast.makeText(context, SUCCESS_REJECT, Toast.LENGTH_SHORT)
                                 .show()
                             onNavigateUp()
-                        }
+                        },
                     ) {
                         Text(GIVE_BACK_COVERING_LETTER)
                     }
@@ -246,16 +264,20 @@ fun CoveringLetterDetailView(
                             if (user.value != null) {
                                 viewModel.finishCoveringLetterInLab(
                                     labWorker = user.value!!,
-                                    coveringLetter = coveringLetter
+                                    coveringLetter = coveringLetter,
                                 )
                                 Toast.makeText(context, SUCCESS_REPORT, Toast.LENGTH_SHORT)
                                     .show()
                                 onNavigateUp()
                             } else {
-                                Toast.makeText(context, NO_LAB_WORKER_REGISTERED, Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    context,
+                                    NO_LAB_WORKER_REGISTERED,
+                                    Toast.LENGTH_SHORT,
+                                )
                                     .show()
                             }
-                        }
+                        },
                     ) {
                         Text(END_REPORT)
                     }
@@ -268,7 +290,7 @@ fun CoveringLetterDetailView(
                             if (user.value != null) {
                                 viewModel.giveCoveringLetterToLab(
                                     sampler = user.value!!,
-                                    coveringLetter = coveringLetter
+                                    coveringLetter = coveringLetter,
                                 )
                                 Toast.makeText(context, SUCCESS_GIVE_TO_LAB, Toast.LENGTH_SHORT)
                                     .show()
@@ -277,7 +299,7 @@ fun CoveringLetterDetailView(
                                 Toast.makeText(context, NO_SAMPLER_REGISTERED, Toast.LENGTH_SHORT)
                                     .show()
                             }
-                        }
+                        },
                     ) {
                         Text(HAND_IN_COVERING_LETTER)
                     }
@@ -290,17 +312,21 @@ fun CoveringLetterDetailView(
             Button(
                 onClick = {
                     coveringLetter.seriesId.let {
-                        when(samplingState) {
+                        when (samplingState) {
                             SamplingState.InLaboratory, SamplingState.LabInProgress -> {
                                 if (user.value != null) {
                                     viewModel.labProgress(
                                         labWorker = user.value!!,
-                                        coveringLetter = coveringLetter
+                                        coveringLetter = coveringLetter,
                                     )
                                     Toast.makeText(context, SAVED, Toast.LENGTH_SHORT)
                                         .show()
                                 } else {
-                                    Toast.makeText(context, NO_LAB_WORKER_REGISTERED, Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        context,
+                                        NO_LAB_WORKER_REGISTERED,
+                                        Toast.LENGTH_SHORT,
+                                    )
                                         .show()
                                 }
                             }
@@ -308,18 +334,22 @@ fun CoveringLetterDetailView(
                                 if (user.value != null) {
                                     viewModel.sampleProgress(
                                         sampler = user.value!!,
-                                        coveringLetter = coveringLetter
+                                        coveringLetter = coveringLetter,
                                     )
                                     Toast.makeText(context, SAVED, Toast.LENGTH_SHORT)
                                         .show()
                                 } else {
-                                    Toast.makeText(context, NO_SAMPLER_REGISTERED, Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        context,
+                                        NO_SAMPLER_REGISTERED,
+                                        Toast.LENGTH_SHORT,
+                                    )
                                         .show()
                                 }
                             }
                         }
                     }
-                }
+                },
             ) {
                 Text(SAVE)
             }

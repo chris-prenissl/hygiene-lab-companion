@@ -6,5 +6,5 @@ data class LoggedOutState(
     val name: String? = null,
     val hasCertificate: Boolean = false,
     val isUserOfInstitute: Boolean = false,
-    val userType: UserType? = null
+    val userType: UserType? = null,
 )

@@ -6,7 +6,7 @@ enum class SamplingState(val translation: String) {
     InLaboratory(IN_LABORATORY_STATE),
     LabInProgress(LAB_IN_PROGRESS_STATE),
     SamplesNotAccepted(SAMPLES_NOT_ACCEPTED_STATE),
-    LaboratoryResult(LABORATORY_RESULT_STATE)
+    LaboratoryResult(LABORATORY_RESULT_STATE),
 }
 
 const val CREATED_STATE = "Erstellt"

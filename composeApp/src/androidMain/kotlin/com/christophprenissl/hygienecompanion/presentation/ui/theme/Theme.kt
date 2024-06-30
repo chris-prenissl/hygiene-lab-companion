@@ -23,13 +23,13 @@ private val LightColorPalette = lightColorScheme(
     secondary = appSecondaryLight,
     onSecondary = appOnSecondaryLight,
     background = appBackgroundLight,
-    onBackground = appOnBackgroundLight
+    onBackground = appOnBackgroundLight,
 )
 
 @Composable
 fun HygieneCompanionTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) {
         DarkColorPalette
@@ -41,6 +41,6 @@ fun HygieneCompanionTheme(
         colorScheme = colorScheme,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }

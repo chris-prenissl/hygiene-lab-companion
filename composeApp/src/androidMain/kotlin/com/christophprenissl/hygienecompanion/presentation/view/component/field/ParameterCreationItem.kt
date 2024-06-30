@@ -17,11 +17,10 @@ import com.christophprenissl.hygienecompanion.util.PARAMETER
 import com.christophprenissl.hygienecompanion.util.parameterCreationItemSize
 import com.christophprenissl.hygienecompanion.util.standardPadding
 
-
 @Composable
 fun ParameterCreationItem(
     item: ParameterBasis,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
 ) {
     var name by remember { mutableStateOf(item.name) }
     val options = ParameterType.entries.toTypedArray()
@@ -30,7 +29,7 @@ fun ParameterCreationItem(
     SwipeToDelete(onDelete = onDelete) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.selectableGroup()
+            modifier = Modifier.selectableGroup(),
         ) {
             ParameterTextField(
                 labelText = PARAMETER,
@@ -38,9 +37,9 @@ fun ParameterCreationItem(
                 onValueChange = {
                     name = it
                     item.name = name
-                }
+                },
             )
-            Row{
+            Row {
                 options.forEach { type ->
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,16 +48,16 @@ fun ParameterCreationItem(
                             .selectable(
                                 selected = type == checkedRadioButton,
                                 onClick = { checkedRadioButton = type },
-                                role = Role.RadioButton
+                                role = Role.RadioButton,
                             )
-                            .padding(vertical = standardPadding.dp)
+                            .padding(vertical = standardPadding.dp),
                     ) {
                         RadioButton(
                             selected = type == checkedRadioButton,
                             onClick = {
                                 checkedRadioButton = type
                                 item.parameterType = checkedRadioButton
-                            }
+                            },
                         )
                         Text(type.translation)
                     }

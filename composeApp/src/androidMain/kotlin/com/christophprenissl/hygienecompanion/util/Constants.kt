@@ -5,10 +5,10 @@ const val APP_TITLE_START = "| $APP_TITLE"
 const val APP_LOGO_DESCRIPTION = "App Logo"
 const val BACK_BUTTON_DESCRIPTION = "Zurück"
 
-//permissions
+// permissions
 const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 
-//sizes
+// sizes
 const val halfSize = 0.5f
 const val cardPadding = 4
 const val standardPadding = 8
@@ -21,13 +21,13 @@ const val iconBarOffset = iconSize.times(-halfSize)
 const val dropDownMenuWidth = 0.92f
 const val parameterCreationItemSize = 90
 
-//excel
+// excel
 const val PARAMETER = "Parametername"
 const val NAME = "Name"
 const val SAMPLER = "Probeentnehmer:in"
 const val LAB_WORKER = "Laborarbeiter:in"
 
-//string resources
+// string resources
 const val ADDRESS_NAME = "Addressbezeichnung"
 const val ZIP = "Postleitzahl"
 const val STREET = "Straße"
@@ -121,12 +121,12 @@ const val WARNING = "Warnung"
 
 const val SAVE_AS_EXCEL = "Als Exceldatei exportieren"
 
-//Register/Login
+// Register/Login
 const val LOGIN = "Login"
 
 const val LOGOUT = "Logout"
 
-//communication UI
+// communication UI
 const val LOADING = "Lädt gerade"
 const val NOT_LOADED = "nicht geladen"
 const val ERROR = "Fehler"
@@ -138,7 +138,7 @@ const val REPORTS = "Befunde"
 const val TRUE = "Wahr"
 const val FALSE = "Falsch"
 
-//firebase
+// firebase
 const val SAMPLE_LOCATIONS_FIRESTORE = "sample_locations"
 const val ADDRESSES_FIRESTORE = "addresses"
 const val BASES_FIRESTORE = "bases"
@@ -149,14 +149,14 @@ const val SAMPLING_STATE_FIELD = "samplingState"
 const val HAS_ENDED_FIELD = "hasEnded"
 const val COVERING_LETTERS_ARRAY = "coveringLetters"
 
-//time
+// time
 const val WEEK_DAYS = 7
 const val MONTH_DAYS = 30
 const val QUARTER_YEAR_DAYS = 90
 const val HALF_YEAR_DAYS = 180
 const val YEAR_DAYS = 360
 
-//data store
+// data store
 const val USER_PREF_STORE = "user"
 const val USER_NAME_PREF = "userName"
 const val HAS_CERTIFICATE_PREF = "hasCertificate"

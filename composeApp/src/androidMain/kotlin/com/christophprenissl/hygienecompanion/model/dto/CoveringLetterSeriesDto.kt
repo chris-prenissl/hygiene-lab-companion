@@ -23,5 +23,5 @@ data class CoveringLetterSeriesDto(
     val plannedEnd: Date? = null,
     val hasEnded: Boolean? = null,
     val endedDate: Date? = null,
-    val samplingSeriesType: String? = null
+    val samplingSeriesType: String? = null,
 )

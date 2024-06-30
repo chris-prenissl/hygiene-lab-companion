@@ -3,7 +3,7 @@ package com.christophprenissl.hygienecompanion.model.util.mapper
 import com.christophprenissl.hygienecompanion.model.dto.SampleDto
 import com.christophprenissl.hygienecompanion.model.entity.Sample
 
-class SampleMapper: DataMapper<Sample, SampleDto> {
+class SampleMapper : DataMapper<Sample, SampleDto> {
     override fun fromEntity(entity: SampleDto): Sample {
         val parameterMapper = ParameterMapper()
         val sampleLocationMapper = SampleLocationMapper(null)
@@ -19,7 +19,7 @@ class SampleMapper: DataMapper<Sample, SampleDto> {
             labSampleParameters = entity.labSampleParameters?.map {
                 parameterMapper.fromEntity(it)
             } ?: emptyList(),
-            sampleLocation = entity.sampleLocation?.let { sampleLocationMapper.fromEntity(it) }!!
+            sampleLocation = entity.sampleLocation?.let { sampleLocationMapper.fromEntity(it) }!!,
         )
     }
 
@@ -38,7 +38,7 @@ class SampleMapper: DataMapper<Sample, SampleDto> {
             labSampleParameters = domain.labSampleParameters.map {
                 parameterMapper.toEntity(it)
             },
-            sampleLocation = domain.sampleLocation.let { sampleLocationMapper.toEntity(it) }
+            sampleLocation = domain.sampleLocation.let { sampleLocationMapper.toEntity(it) },
         )
     }
 }

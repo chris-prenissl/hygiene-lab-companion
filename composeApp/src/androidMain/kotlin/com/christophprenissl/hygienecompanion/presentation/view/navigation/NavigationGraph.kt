@@ -32,7 +32,7 @@ fun NavigationGraph(
                             inclusive = true
                         }
                     }
-                }
+                },
             )
         }
 

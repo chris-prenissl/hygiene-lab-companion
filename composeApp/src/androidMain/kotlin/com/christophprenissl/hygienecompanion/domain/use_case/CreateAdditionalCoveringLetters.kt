@@ -5,13 +5,13 @@ import com.christophprenissl.hygienecompanion.model.repository.CoveringLetterSer
 import java.util.*
 
 class CreateAdditionalCoveringLetters(
-    private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo
+    private val coveringLetterSeriesRepo: CoveringLetterSeriesRepo,
 ) {
     suspend operator fun invoke(
         coveringLetter: CoveringLetter,
-        dates: List<Date>
+        dates: List<Date>,
     ) = coveringLetterSeriesRepo.createAdditionalCoveringLettersToSeriesInDatabase(
         coveringLetter = coveringLetter,
-        dates = dates
+        dates = dates,
     )
 }

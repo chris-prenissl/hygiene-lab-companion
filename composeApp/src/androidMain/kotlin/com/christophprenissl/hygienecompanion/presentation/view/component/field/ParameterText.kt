@@ -13,11 +13,11 @@ import com.christophprenissl.hygienecompanion.util.standardPadding
 @Composable
 fun ParameterText(
     title: String,
-    value: String?
+    value: String?,
 ) {
     Row {
         Text(title)
         Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
-        Text(value?: EMPTY)
+        Text(value ?: EMPTY)
     }
 }

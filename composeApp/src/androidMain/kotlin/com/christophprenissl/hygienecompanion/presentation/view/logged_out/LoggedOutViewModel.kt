@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoggedOutViewModel @Inject constructor(
-    private val dataStoreUser: DataStoreUser
+    private val dataStoreUser: DataStoreUser,
 ) : ViewModel() {
 
     private var _state = MutableStateFlow(LoggedOutState())
@@ -33,7 +33,7 @@ class LoggedOutViewModel @Inject constructor(
                             name = user.name,
                             hasCertificate = user.hasCertificate,
                             isUserOfInstitute = user.isSamplerOfInstitute,
-                            userType = user.userType
+                            userType = user.userType,
                         )
                     }
                 }
@@ -45,10 +45,12 @@ class LoggedOutViewModel @Inject constructor(
         when (event) {
             is LoggedOutEvent.UserNameChanged -> _state.update { it.copy(name = event.name) }
             is LoggedOutEvent.Login -> login()
-            is LoggedOutEvent.SetCertificateChanged -> _state.update { it.copy(hasCertificate = event.hasCertificate) }
+            is LoggedOutEvent.SetCertificateChanged -> _state.update {
+                it.copy(hasCertificate = event.hasCertificate)
+            }
             is LoggedOutEvent.SetSamplerOfInstituteChanged -> _state.update {
                 it.copy(
-                    isUserOfInstitute = event.isSamplerOfInstitute
+                    isUserOfInstitute = event.isSamplerOfInstitute,
                 )
             }
 
@@ -64,7 +66,7 @@ class LoggedOutViewModel @Inject constructor(
                 name = it,
                 hasCertificate = if (isNotLabWorker) _state.value.hasCertificate else false,
                 isSamplerOfInstitute = if (isNotLabWorker) _state.value.isUserOfInstitute else false,
-                userType = userType ?: UserType.Sampler
+                userType = userType ?: UserType.Sampler,
             )
             viewModelScope.launch {
                 dataStoreUser.saveUser(user)

@@ -20,7 +20,6 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.dialog
 import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.BasisDialog
 import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.CoveringLetterSeriesDialog
 import com.christophprenissl.hygienecompanion.util.*
-
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
@@ -28,17 +27,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 fun CoveringLetterBasisView(
     navController: NavController,
-    viewModel: CoveringLetterBasisViewModel
+    viewModel: CoveringLetterBasisViewModel,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         item {
             Text(
                 modifier = Modifier.padding(standardPadding.dp),
-                text = COVERING_LETTER_BASIS_DATA
+                text = COVERING_LETTER_BASIS_DATA,
             )
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
@@ -50,18 +48,18 @@ fun CoveringLetterBasisView(
         when (val addressesResponse = viewModel.gotAddressState.value) {
             is Response.Success -> {
                 val addresses = addressesResponse.data
-                items(addresses, key = {address -> address.id}) { address ->
+                items(addresses, key = { address -> address.id }) { address ->
                     SwipeToDelete(
                         onDelete = {
                             viewModel.deleteAddress(address)
-                        }
+                        },
                     ) {
                         AddressCard(
                             address = address,
                             onClick = {
                                 viewModel.chooseAddressForSampleLocations(address)
                                 navController.navigate(Screen.SampleLocations)
-                            }
+                            },
                         )
                     }
                 }
@@ -84,14 +82,14 @@ fun CoveringLetterBasisView(
                     viewModel = viewModel,
                     onDismissRequest = {
                         viewModel.closeAddressDialog()
-                    }
+                    },
                 )
                 false -> Unit
             }
         }
 
         item {
-            Button (onClick = {
+            Button(onClick = {
                 viewModel.openAddressDialog()
             }) {
                 Text(ADD_ADDRESS)
@@ -102,23 +100,23 @@ fun CoveringLetterBasisView(
         item {
             Text(
                 modifier = Modifier.padding(vertical = standardPadding.dp),
-                text = COVERING_BASIS
+                text = COVERING_BASIS,
             )
         }
 
         when (val basesResponse = viewModel.gotBasesState.value) {
             is Response.Success -> {
                 val bases = basesResponse.data
-                items(bases, key = {basis -> basis.norm}) { basis ->
+                items(bases, key = { basis -> basis.norm }) { basis ->
                     SwipeToDelete(
-                        onDelete = { viewModel.deleteBasis(basis) }
+                        onDelete = { viewModel.deleteBasis(basis) },
                     ) {
                         BasisCard(
                             basis = basis,
                             onClick = {
                                 viewModel.chooseBasis(basis)
                                 navController.navigate(Screen.BasisDetail)
-                            }
+                            },
                         )
                     }
                 }
@@ -142,12 +140,12 @@ fun CoveringLetterBasisView(
                     viewModel = viewModel,
                     onDismissRequest = {
                         viewModel.closeBasisDialog()
-                    }
+                    },
                 )
                 false -> Unit
             }
         }
-        
+
         item {
             Button(onClick = {
                 viewModel.openBasisDialog()
@@ -156,7 +154,7 @@ fun CoveringLetterBasisView(
             }
             Spacer(modifier = Modifier.padding(vertical = standardPadding.dp))
         }
-        
+
         item {
             Text(COVERING_LETTER_SERIES)
         }
@@ -164,16 +162,16 @@ fun CoveringLetterBasisView(
         when (val coveringLetterSeriesResponse = viewModel.gotCoveringLetterSeriesNotEndedState.value) {
             is Response.Success -> {
                 val coveringLetterSeries = coveringLetterSeriesResponse.data
-                items(coveringLetterSeries, key = {cs -> cs.id}) { series ->
+                items(coveringLetterSeries, key = { cs -> cs.id }) { series ->
                     SwipeToDelete(
-                        onDelete = {  }
+                        onDelete = { },
                     ) {
                         CoveringLetterSeriesCard(
                             coveringLetterSeries = series,
                             onClick = {
                                 viewModel.chooseCoveringLetterSeries(series)
                                 navController.navigate(Screen.CoveringLetterSeriesDetail)
-                            }
+                            },
                         )
                     }
                 }
@@ -197,7 +195,7 @@ fun CoveringLetterBasisView(
                     viewModel = viewModel,
                     onDismissRequest = {
                         viewModel.closeCoveringLetterSeriesDialog()
-                    }
+                    },
                 )
                 false -> Unit
             }

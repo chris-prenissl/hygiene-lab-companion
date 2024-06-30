@@ -30,7 +30,7 @@ val appModule = module {
     single(named(KoinNames.FireStoreQuery.address)) {
         get<CollectionReference>(named(KoinNames.FireStoreRefs.address)).orderBy("name")
     }
-    
+
     single(named(KoinNames.FireStoreRefs.basis)) {
         get<FirebaseFirestore>().collection(BASES_FIRESTORE)
     }
@@ -38,11 +38,11 @@ val appModule = module {
     single(named(KoinNames.FireStoreRefs.user)) {
         get<FirebaseFirestore>().collection(USERS_FIRESTORE)
     }
-    
+
     single(named(KoinNames.FireStoreRefs.coveringLetterSeries)) {
         get<FirebaseFirestore>().collection(COVERING_LETTERS_FIRESTORE)
     }
-    
+
     single(named(KoinNames.FireStoreRefs.coveringLetter)) {
         get<FirebaseFirestore>().collection(COVERING_LETTERS_FIRESTORE)
     }
@@ -50,18 +50,18 @@ val appModule = module {
     single<SampleLocationRepo> {
         SampleLocationRepoImpl(get(named(KoinNames.FireStoreRefs.sampleLocation)))
     }
-    
+
     single<AddressRepo> {
         AddressRepoImpl(
-            get(named(KoinNames.FireStoreRefs.address)), 
-            get(named(KoinNames.FireStoreQuery.address))
+            get(named(KoinNames.FireStoreRefs.address)),
+            get(named(KoinNames.FireStoreQuery.address)),
         )
     }
-    
+
     single<BasisRepo> {
         BasisRepoImpl(get(named(KoinNames.FireStoreRefs.basis)))
     }
-    
+
     single<UserRepo> {
         UserRepoImpl(get(named(KoinNames.FireStoreRefs.user)))
     }
@@ -70,13 +70,13 @@ val appModule = module {
         CoveringLetterSeriesRepoImpl(
             get(),
             get(named(KoinNames.FireStoreRefs.coveringLetter)),
-            get(named(KoinNames.FireStoreRefs.coveringLetterSeries))
+            get(named(KoinNames.FireStoreRefs.coveringLetterSeries)),
         )
     }
-    
+
     single<CoveringLetterRepo> {
         CoveringLetterRepoImpl(
-            get(named(KoinNames.FireStoreRefs.coveringLetter))
+            get(named(KoinNames.FireStoreRefs.coveringLetter)),
         )
     }
 
@@ -98,7 +98,7 @@ val appModule = module {
             getCoveringLettersNotEnded = GetCoveringLettersNotEnded(get()),
             saveCoveringLetter = SaveCoveringLetter(get()),
             getReports = GetReports(get()),
-            createAdditionalCoveringLetters = CreateAdditionalCoveringLetters(get())
+            createAdditionalCoveringLetters = CreateAdditionalCoveringLetters(get()),
         )
     }
 

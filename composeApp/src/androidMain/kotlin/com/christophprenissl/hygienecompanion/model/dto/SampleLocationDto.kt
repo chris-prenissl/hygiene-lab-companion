@@ -8,5 +8,5 @@ data class SampleLocationDto(
     val description: String? = null,
     val extraInfo: String? = null,
     val nextHeater: String? = null,
-    val addressId: String? = null
+    val addressId: String? = null,
 )

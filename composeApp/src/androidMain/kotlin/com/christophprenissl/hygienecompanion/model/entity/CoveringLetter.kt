@@ -15,5 +15,5 @@ data class CoveringLetter(
     var sampler: User? = null,
     var labWorker: User? = null,
     val samples: List<Sample> = emptyList(),
-    var samplingState: SamplingState? = null
+    var samplingState: SamplingState? = null,
 )

@@ -2,7 +2,7 @@ package com.christophprenissl.hygienecompanion.presentation.view.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -19,17 +19,21 @@ fun NavItemsList(
 ) {
     Column {
         screenList.forEach { screen ->
-            Button(onClick = { onNavigate(screen) }) {
-                Row {
-                    screen.icon?.let {
-                        Image(
-                            imageVector = it,
-                            contentDescription = it.name,
-                            modifier = Modifier.padding(end = standardPadding.dp)
-                        )
-                    }
-                    Text(text = screen.name)
+            Button(
+                onClick = { onNavigate(screen) },
+            ) {
+                screen.icon?.let {
+                    Image(
+                        imageVector = it,
+                        contentDescription = it.name,
+                        modifier = Modifier.padding(end = standardPadding.dp),
+                    )
                 }
+                Text(
+                    text = screen.name,
+                    softWrap = false,
+                    modifier = Modifier.fillMaxWidth(),
+                )
             }
         }
     }

@@ -15,8 +15,8 @@ import javax.inject.Singleton
 
 @Singleton
 class BasisRepoImpl @Inject constructor(
-     private val basisRef: CollectionReference
-): BasisRepo {
+    private val basisRef: CollectionReference,
+) : BasisRepo {
 
     override fun getBasesFromDatabase() = callbackFlow {
         val snapshotListener = basisRef.addSnapshotListener { snapshot, e ->
