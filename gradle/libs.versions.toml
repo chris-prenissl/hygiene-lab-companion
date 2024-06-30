@@ -19,6 +19,7 @@ koinCore = "3.5.3"
 kotlin = "2.0.0"
 kotlinParcelize = "2.0.20-Beta1"
 kotlinxCoroutinesPlayServices = "1.8.0"
+ktlint = "12.0.3"
 lifecycleViewmodelCompose = "2.8.2"
 multiplatform = "2.0.0"
 navigationCompose = "2.8.0-beta04"
@@ -65,6 +66,8 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "composePlugin"}
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 
 [bundles]
 koin = ["koin-android", "koin-androidx-compose", "koin-androidx-navigation", "koin-core"]

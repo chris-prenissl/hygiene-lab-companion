@@ -19,20 +19,20 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
         }
     }
-    
+
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -40,7 +40,7 @@ kotlin {
             implementation(libs.androidx.core.ktx)
             implementation(libs.androidx.lifecycle.runtime.ktx)
 
-            //Compose
+            // Compose
             val composeBom = project.dependencies.platform(libs.androidx.compose.bom)
             implementation(composeBom)
             implementation(libs.androidx.compose.material3)
@@ -55,17 +55,17 @@ kotlin {
 
             implementation(libs.androidx.compose.ui.tooling.preview)
 
-            //Koin
+            // Koin
             implementation(libs.bundles.koin)
 
-            //Firebase
+            // Firebase
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.appdistribution.gradle)
             implementation(libs.firebase.crashlytics)
             implementation(libs.firebase.firestore)
             implementation(libs.firebase.analytics)
 
-            //temporary data store
+            // temporary data store
             implementation(libs.androidx.datastore.preferences)
         }
         commonMain.dependencies {
@@ -79,6 +79,8 @@ kotlin {
         }
     }
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
 
 android {
     namespace = "com.christophprenissl.hygienecompanion.android"
@@ -117,4 +119,3 @@ android {
         debugImplementation(compose.uiTooling)
     }
 }
-
