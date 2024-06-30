@@ -9,5 +9,6 @@ data class MainViewState(
     val userType: UserType? = null,
     val userColor: Color = Color.White,
     val mainNavItems: List<Screen> = emptyList(),
-    val initiallyLoggedIn: Boolean = false
+    val initiallyLoggedIn: Boolean = false,
+    val isLoading: Boolean = true,
 )

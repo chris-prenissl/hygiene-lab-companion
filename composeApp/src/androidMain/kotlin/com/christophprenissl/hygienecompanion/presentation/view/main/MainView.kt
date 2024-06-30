@@ -21,41 +21,45 @@ fun MainView(mainViewViewModel: MainViewViewModel = koinViewModel()) {
     val navController = rememberNavController()
     val uiState = mainViewViewModel.state.collectAsStateWithLifecycle()
 
-    uiState.value?.let { stateValue ->
-        val userName = stateValue.userName
-        val userColor = stateValue.userColor
-        Scaffold(
-            topBar = {
-                TopMenuBar(
-                    title = userName ?: APP_TITLE,
-                    hasLogoutButton = stateValue.userType != null,
-                    onLogout = {
-                        mainViewViewModel.onEvent(MainViewEvent.Logout)
-                        navController.navigate(Screen.Login) {
-                            navController.currentBackStackEntry?.destination?.route?.let {
-                                popUpTo(it) {
-                                    inclusive = true
+    uiState.value.let { stateValue ->
+        if (stateValue.isLoading) {
+            Scaffold { innerPadding ->
+                Box(modifier = Modifier.padding(innerPadding)) {
+                    CircularProgressIndicator()
+                }
+            }
+        } else {
+            val userName = stateValue.userName
+            val userColor = stateValue.userColor
+            Scaffold(
+                topBar = {
+                    TopMenuBar(
+                        title = userName ?: APP_TITLE,
+                        hasLogoutButton = stateValue.userType != null,
+                        onLogout = {
+                            mainViewViewModel.onEvent(MainViewEvent.Logout)
+                            navController.navigate(Screen.Login) {
+                                navController.currentBackStackEntry?.destination?.route?.let {
+                                    popUpTo(it) {
+                                        inclusive = true
+                                    }
                                 }
                             }
-                        }
-                    },
-                    hasBackButton = false,
-                    onNavigateUp = navController::navigateUp,
-                    titleColor = userColor
-                )
+                        },
+                        hasBackButton = false,
+                        onNavigateUp = navController::navigateUp,
+                        titleColor = userColor
+                    )
+                }
+            ) { innerPadding ->
+                Box(modifier = Modifier.padding(innerPadding)) {
+                    NavigationGraph(
+                        isInitiallyLoggedIn = stateValue.initiallyLoggedIn,
+                        navItems = stateValue.mainNavItems,
+                        navController = navController,
+                    )
+                }
             }
-        ) { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) {
-                NavigationGraph(
-                    isInitiallyLoggedIn = stateValue.initiallyLoggedIn,
-                    navItems = stateValue.mainNavItems,
-                    navController = navController,
-                )
-            }
-        }
-    } ?: Scaffold { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            CircularProgressIndicator()
         }
     }
 }

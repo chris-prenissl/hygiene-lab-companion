@@ -47,10 +47,11 @@ class MainViewViewModel @Inject constructor(private val dataStoreUser: DataStore
                     )
                     else -> emptyList()
                 },
-                initiallyLoggedIn = initiallyLoggedIn
+                initiallyLoggedIn = initiallyLoggedIn,
+                isLoading = false
             )
         }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), MainViewState(isLoading = true))
 
     fun onEvent(event: MainViewEvent) {
         when (event) {
