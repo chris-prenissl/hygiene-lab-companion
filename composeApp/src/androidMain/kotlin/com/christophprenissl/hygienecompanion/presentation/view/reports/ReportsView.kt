@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.TitleText
@@ -22,12 +21,13 @@ import com.christophprenissl.hygienecompanion.util.NOT_LOADED
 import com.christophprenissl.hygienecompanion.util.REPORTS
 import com.christophprenissl.hygienecompanion.util.SORT_BY
 import com.christophprenissl.hygienecompanion.util.standardPadding
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ReportsView(
-    navController: NavController,
-    viewModel: ReportsViewModel,
+    onNavigate: (Screen) -> Unit,
+    viewModel: ReportsViewModel = koinViewModel(),
 ) {
     Column(
         modifier = Modifier.padding(standardPadding.dp),
@@ -64,7 +64,7 @@ fun ReportsView(
                                 coveringLetter = it,
                                 onClick = {
                                     viewModel.chooseReport(it)
-                                    navController.navigate(Screen.ReportDetail)
+                                    onNavigate(Screen.ReportDetail)
                                 },
                             )
                         }

@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.christophprenissl.hygienecompanion.util.*
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BasisDetailView(
-    viewModel: CoveringLetterBasisViewModel,
+    viewModel: CoveringLetterBasisViewModel = koinViewModel(),
 ) {
     LazyColumn {
         item {

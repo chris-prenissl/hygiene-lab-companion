@@ -37,7 +37,7 @@ fun NavigationGraph(
         }
 
         composable<Screen.CoveringLetters> {
-            LoggedInNavigation(navItems = navItems)
+            LoggedInNavigation(barNavItems = navItems)
         }
     }
 }

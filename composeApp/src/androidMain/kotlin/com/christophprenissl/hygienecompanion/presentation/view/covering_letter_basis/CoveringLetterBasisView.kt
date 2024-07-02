@@ -9,7 +9,6 @@ import androidx.compose.runtime.InternalComposeApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.christophprenissl.hygienecompanion.model.Response
 import com.christophprenissl.hygienecompanion.presentation.util.Screen
 import com.christophprenissl.hygienecompanion.presentation.view.component.*
@@ -21,13 +20,14 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.dialog
 import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.CoveringLetterSeriesDialog
 import com.christophprenissl.hygienecompanion.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 @InternalComposeApi
 @ExperimentalCoroutinesApi
 fun CoveringLetterBasisView(
-    navController: NavController,
-    viewModel: CoveringLetterBasisViewModel,
+    onNavigate: (Screen) -> Unit,
+    viewModel: CoveringLetterBasisViewModel = koinViewModel(),
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
@@ -58,7 +58,7 @@ fun CoveringLetterBasisView(
                             address = address,
                             onClick = {
                                 viewModel.chooseAddressForSampleLocations(address)
-                                navController.navigate(Screen.SampleLocations)
+                                onNavigate(Screen.SampleLocations)
                             },
                         )
                     }
@@ -115,7 +115,7 @@ fun CoveringLetterBasisView(
                             basis = basis,
                             onClick = {
                                 viewModel.chooseBasis(basis)
-                                navController.navigate(Screen.BasisDetail)
+                                onNavigate(Screen.BasisDetail)
                             },
                         )
                     }
@@ -170,7 +170,7 @@ fun CoveringLetterBasisView(
                             coveringLetterSeries = series,
                             onClick = {
                                 viewModel.chooseCoveringLetterSeries(series)
-                                navController.navigate(Screen.CoveringLetterSeriesDetail)
+                                onNavigate(Screen.CoveringLetterSeriesDetail)
                             },
                         )
                     }

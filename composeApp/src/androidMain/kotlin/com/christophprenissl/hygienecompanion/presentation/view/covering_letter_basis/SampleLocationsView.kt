@@ -18,10 +18,11 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.card.S
 import com.christophprenissl.hygienecompanion.presentation.view.component.dialog.SampleLocationDialog
 import com.christophprenissl.hygienecompanion.util.NEW_SAMPLE_LOCATION
 import com.christophprenissl.hygienecompanion.util.standardPadding
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SampleLocationsView(
-    viewModel: CoveringLetterBasisViewModel,
+    viewModel: CoveringLetterBasisViewModel = koinViewModel(),
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

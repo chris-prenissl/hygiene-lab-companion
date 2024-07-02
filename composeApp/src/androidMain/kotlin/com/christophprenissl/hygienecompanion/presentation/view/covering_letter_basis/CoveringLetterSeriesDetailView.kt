@@ -18,11 +18,12 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.card.B
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.presentation.view.util.translation
 import com.christophprenissl.hygienecompanion.util.*
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoveringLetterSeriesDetailView(
-    viewModel: CoveringLetterBasisViewModel,
+    viewModel: CoveringLetterBasisViewModel = koinViewModel(),
 ) {
     BasicSurface(
         modifier = Modifier

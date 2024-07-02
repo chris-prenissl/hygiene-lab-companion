@@ -20,10 +20,11 @@ import com.christophprenissl.hygienecompanion.presentation.view.component.card.S
 import com.christophprenissl.hygienecompanion.presentation.view.component.edit.SampleReport
 import com.christophprenissl.hygienecompanion.presentation.view.component.field.ParameterText
 import com.christophprenissl.hygienecompanion.util.*
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ReportDetailView(
-    viewModel: ReportsViewModel,
+    viewModel: ReportsViewModel = koinViewModel(),
 ) {
     val context = LocalContext.current
     val report = viewModel.chosenReport.value
