@@ -41,10 +41,8 @@ fun LoginView(
         contentPadding = PaddingValues(vertical = doubleStandardPadding.dp),
     ) {
         stickyHeader {
-            Text(LOGIN)
-        }
-        item {
             Row(
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
@@ -52,19 +50,21 @@ fun LoginView(
                     contentDescription = APP_LOGO_DESCRIPTION,
                     modifier = Modifier.size(titleIconSize.dp),
                 )
-                Spacer(modifier = Modifier.padding(horizontal = standardPadding.dp))
                 TitleText(title = APP_TITLE_START)
             }
         }
+
         item {
             BasicSurface(
                 border = BorderStroke(basicBorderStroke.dp, MaterialTheme.colorScheme.onBackground),
+                modifier = Modifier.padding(vertical = standardPadding.dp),
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(standardPadding.dp),
                 ) {
+                    Text("Login")
                     ParameterTextField(
                         labelText = USER_NAME,
                         value = state.name ?: "",
