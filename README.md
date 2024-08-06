@@ -9,14 +9,15 @@ Bachelor Thesis project.
 
 ## Technologies
 
-_Android_ | _Jetpack Compose_ | _Firebase App Distribution_ | _FireStore_ | _adaptive layouts_
+_Android_ | _Jetpack Compose_ | _Firebase App Distribution_ | _FireStore_ | _Koin_ | _adaptive layouts_
 
 ## Images
 
 <div style="display: 'flex'">
-   <img src="screenshots/login.png" alt="Android Screenshot" height="400"/>
-   <img src="screenshots/phone_sample.png" alt="iOS Screenshot" height="400"/>
+   <img src="screenshots/login.png" alt="Phone Login" height="400"/>
+   <img src="screenshots/phone_sample.png" alt="Phone Sample" height="400"/>
 </div>
+<img src="screenshots/desktop.png" alt="desktop" height="400"/>
 
 ## Usage
 
