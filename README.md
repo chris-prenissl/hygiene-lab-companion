@@ -4,7 +4,8 @@
 
 ## Overview
 
-A companion app to manage sample meta data for workers at the hospital hygiene laboratory.
+An Android prototype app for supporting laboratory workers at exchanging sampling data.
+Bachelor Thesis project. 
 
 ## Technologies
 
