@@ -4,7 +4,7 @@
 
 ## Overview
 
-An Android prototype app for supporting laboratory workers at exchanging sampling data.
+An Android prototype app for supporting laboratory workers at exchanging sampling data with possibility for PDF sheet creation.
 Bachelor Thesis project. 
 
 ## Technologies
